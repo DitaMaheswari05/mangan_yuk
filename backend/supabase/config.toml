@@ -1,0 +1,33 @@
+# Konfigurasi Supabase lokal. Key yang tidak ditulis memakai nilai default CLI.
+project_id = "mangan-yuk"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage"]
+
+[db]
+port = 54322
+major_version = 15
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[studio]
+enabled = true
+port = 54323
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"
+
+[storage.buckets.poi-photos]
+public = true
+allowed_mime_types = ["image/jpeg", "image/png", "image/webp"]
+objects_path = "./storage/poi-photos"
+
+[storage.buckets.poi-audio]
+public = true
+allowed_mime_types = ["audio/mpeg"]
+objects_path = "./storage/poi-audio"

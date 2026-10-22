@@ -1,0 +1,23 @@
+name: backend-ci
+
+on:
+  push:
+    paths: ['backend/**', '.github/workflows/backend-ci.yml']
+  pull_request:
+    paths: ['backend/**', '.github/workflows/backend-ci.yml']
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      # Menjalankan Postgres lokal, menerapkan semua migration + seed.sql
+      - run: supabase db start
+      - run: supabase db lint --fail-on error
