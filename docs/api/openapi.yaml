@@ -1,0 +1,435 @@
+openapi: 3.1.0
+info:
+  title: Mangan Yuk Auth API
+  version: 1.0.0
+  description: |
+    API autentikasi Mangan Yuk (AUTH-01 s.d. AUTH-09). Implementasi: `backend/src/auth/`.
+
+    **Token**
+    - Access token: JWT HS256, berlaku 15 menit. Claim: `sub` (user id), `sid` (family id sesi),
+      `jti`, `iat`, `exp`. Access token ikut tidak berlaku saat sesinya (family) di-revoke.
+    - Refresh token: string opaque 256-bit berprefiks `rt_`, berlaku 30 hari, dirotasi setiap dipakai.
+      Hanya hash SHA-256-nya yang disimpan di DB.
+    - Token reset password: opaque berprefiks `pr_`, berlaku 30 menit, sekali pakai.
+
+    **Validasi field**
+    - `email`: di-trim lalu lowercase, maksimal 254 karakter, format RFC 5322 sederhana.
+    - `password` (baru): 8–72 karakter, minimal 1 huruf dan 1 angka.
+    - `displayName`: di-trim, 2–50 karakter.
+
+    **Rate limit** (sliding window, in-memory per instance)
+    | Endpoint | Batas |
+    |---|---|
+    | login | 5 gagal / email / 15 menit, 20 gagal / IP / 15 menit (login sukses me-reset hitungan email) |
+    | register | 10 / IP / jam |
+    | password/forgot | 3 / email / jam |
+
+    Semua error memakai format seragam `ErrorResponse`.
+servers:
+  - url: https://api.manganyuk.app/v1
+    description: Produksi
+  - url: http://localhost:3000/v1
+    description: Lokal (`npm run dev` di backend/)
+tags:
+  - name: Auth
+    description: Register, login, rotasi token, logout
+  - name: Profile
+    description: Data dan akun user yang sedang login
+  - name: Password
+    description: Lupa dan reset password
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    ClientVersion:
+      name: X-Client-Version
+      in: header
+      required: false
+      schema: { type: string, example: 1.0.0 }
+
+  headers:
+    Retry-After:
+      description: Detik sampai boleh mencoba lagi.
+      schema: { type: integer, minimum: 1 }
+
+  schemas:
+    Email:
+      type: string
+      format: email
+      maxLength: 254
+      example: dita@example.com
+    NewPassword:
+      type: string
+      minLength: 8
+      maxLength: 72
+      pattern: '^(?=.*[A-Za-z])(?=.*\d).+$'
+      example: Rahasia123
+    AnyPassword:
+      type: string
+      minLength: 1
+      maxLength: 72
+      description: Password saat ini; aturan password baru tidak dicek ulang.
+    DisplayName:
+      type: string
+      minLength: 2
+      maxLength: 50
+      example: Dita
+    DeviceLabel:
+      type: string
+      maxLength: 100
+      example: Pixel 7
+
+    User:
+      type: object
+      required: [id, email, displayName, emailVerified, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        email: { $ref: '#/components/schemas/Email' }
+        displayName: { $ref: '#/components/schemas/DisplayName' }
+        emailVerified: { type: boolean, example: false }
+        createdAt: { type: string, format: date-time, example: '2026-11-04T08:00:00Z' }
+
+    Tokens:
+      type: object
+      required: [accessToken, accessTokenExpiresIn, refreshToken, refreshTokenExpiresIn]
+      properties:
+        accessToken: { type: string, example: eyJhbGciOiJIUzI1NiIs... }
+        accessTokenExpiresIn: { type: integer, description: Detik, example: 900 }
+        refreshToken: { type: string, pattern: '^rt_', example: rt_3q2-7wE... }
+        refreshTokenExpiresIn: { type: integer, description: Detik, example: 2592000 }
+
+    AuthResponse:
+      type: object
+      required: [user, tokens]
+      properties:
+        user: { $ref: '#/components/schemas/User' }
+        tokens: { $ref: '#/components/schemas/Tokens' }
+
+    ErrorCode:
+      type: string
+      enum:
+        - VALIDATION_ERROR
+        - INVALID_CREDENTIALS
+        - TOKEN_EXPIRED
+        - TOKEN_INVALID
+        - REFRESH_REUSE_DETECTED
+        - EMAIL_TAKEN
+        - NOT_FOUND
+        - RATE_LIMITED
+        - INTERNAL_ERROR
+
+    ValidationDetail:
+      type: object
+      required: [field, rule]
+      properties:
+        field: { type: string, example: password }
+        rule:
+          type: string
+          description: required | type | format | minLength | maxLength | letter | digit | json
+          example: digit
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, details]
+          properties:
+            code: { $ref: '#/components/schemas/ErrorCode' }
+            message: { type: string, example: Email atau password salah. }
+            details:
+              type: array
+              items: { $ref: '#/components/schemas/ValidationDetail' }
+
+  responses:
+    ValidationError:
+      description: 'Field tidak valid (`VALIDATION_ERROR`). Body bukan JSON → `{ field: body, rule: json }`.'
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+          example:
+            error:
+              code: VALIDATION_ERROR
+              message: Data yang dikirim tidak valid.
+              details: [{ field: password, rule: digit }]
+    InvalidCredentials:
+      description: '`INVALID_CREDENTIALS`'
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+          example:
+            error: { code: INVALID_CREDENTIALS, message: 'Email atau password salah.', details: [] }
+    Unauthorized:
+      description: '`TOKEN_EXPIRED` (access token kedaluwarsa → klien refresh) atau `TOKEN_INVALID` (rusak/revoked/akun dihapus).'
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+          examples:
+            expired:
+              value: { error: { code: TOKEN_EXPIRED, message: 'Sesi kedaluwarsa.', details: [] } }
+            invalid:
+              value: { error: { code: TOKEN_INVALID, message: 'Token tidak valid.', details: [] } }
+    RateLimited:
+      description: '`RATE_LIMITED`'
+      headers:
+        Retry-After: { $ref: '#/components/headers/Retry-After' }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+          example:
+            error: { code: RATE_LIMITED, message: 'Terlalu banyak percobaan, coba lagi nanti.', details: [] }
+    InternalError:
+      description: '`INTERNAL_ERROR`'
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+
+paths:
+  /auth/register:
+    post:
+      operationId: register
+      security: []
+      summary: AUTH-01 Daftar akun baru
+      tags: [Auth]
+      parameters: [{ $ref: '#/components/parameters/ClientVersion' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, displayName]
+              properties:
+                email: { $ref: '#/components/schemas/Email' }
+                password: { $ref: '#/components/schemas/NewPassword' }
+                displayName: { $ref: '#/components/schemas/DisplayName' }
+                deviceLabel: { $ref: '#/components/schemas/DeviceLabel' }
+      responses:
+        '201':
+          description: Akun dibuat dan sesi baru dimulai.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AuthResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '409':
+          description: '`EMAIL_TAKEN` — email sudah dipakai akun aktif.'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /auth/login:
+    post:
+      operationId: login
+      security: []
+      summary: AUTH-02 Masuk
+      description: |
+        Pesan error sama untuk email tidak terdaftar maupun password salah (anti-enumerasi),
+        dan waktu respons disamakan dengan membandingkan hash dummy.
+      tags: [Auth]
+      parameters: [{ $ref: '#/components/parameters/ClientVersion' }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { $ref: '#/components/schemas/Email' }
+                password: { $ref: '#/components/schemas/AnyPassword' }
+                deviceLabel: { $ref: '#/components/schemas/DeviceLabel' }
+      responses:
+        '200':
+          description: Login berhasil, sesi baru dimulai (family baru).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AuthResponse' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/InvalidCredentials' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /auth/refresh:
+    post:
+      operationId: refresh
+      security: []
+      summary: AUTH-03 Rotasi refresh token
+      description: |
+        Token lama ditandai `revoked_at` dan `replaced_by`. Jika token yang sudah dirotasi dipakai lagi,
+        seluruh token dalam `family_id` yang sama di-revoke dan server membalas `REFRESH_REUSE_DETECTED`.
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string, maxLength: 200, example: rt_3q2-7wE... }
+      responses:
+        '200':
+          description: Pasangan token baru.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [tokens]
+                properties:
+                  tokens: { $ref: '#/components/schemas/Tokens' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401':
+          description: |
+            `TOKEN_INVALID` — tidak dikenal, kedaluwarsa, di-revoke, atau akun dihapus.
+            `REFRESH_REUSE_DETECTED` — token lama dipakai ulang; seluruh family di-revoke.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+              example:
+                error: { code: REFRESH_REUSE_DETECTED, message: 'Sesi tidak aman terdeteksi, silakan masuk lagi.', details: [] }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /auth/logout:
+    post:
+      operationId: logout
+      summary: AUTH-04 Keluar
+      description: Me-revoke refresh token milik user ini. Idempoten — token yang sudah di-revoke atau tidak dikenal tetap 204.
+      tags: [Auth]
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string, maxLength: 200 }
+      responses:
+        '204': { description: Berhasil keluar. }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /auth/me:
+    get:
+      operationId: getMe
+      summary: AUTH-05 Data user saat ini
+      tags: [Profile]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: User aktif.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '500': { $ref: '#/components/responses/InternalError' }
+    patch:
+      operationId: updateMe
+      summary: AUTH-06 Ubah profil
+      description: Hanya `displayName` yang diproses; field lain diabaikan.
+      tags: [Profile]
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [displayName]
+              properties:
+                displayName: { $ref: '#/components/schemas/DisplayName' }
+            example: { displayName: Dita M. }
+      responses:
+        '200':
+          description: User terbaru.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/User' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '500': { $ref: '#/components/responses/InternalError' }
+    delete:
+      operationId: deleteMe
+      summary: AUTH-09 Hapus akun
+      description: Akun di-soft-delete (`deleted_at`) dan semua token di-revoke. Email bisa didaftarkan ulang.
+      tags: [Profile]
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password: { $ref: '#/components/schemas/AnyPassword' }
+      responses:
+        '204': { description: Akun dihapus. }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401':
+          description: '`INVALID_CREDENTIALS` (password salah), atau `TOKEN_EXPIRED`/`TOKEN_INVALID`.'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /auth/password/forgot:
+    post:
+      operationId: forgotPassword
+      security: []
+      summary: AUTH-07 Minta link reset password
+      description: |
+        Selalu 202 baik email terdaftar maupun tidak (anti-enumerasi). Jika terdaftar, server mengirim email
+        berisi link `manganyuk://reset?token=pr_...` yang berlaku 30 menit.
+      tags: [Password]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { $ref: '#/components/schemas/Email' }
+      responses:
+        '202': { description: Permintaan diterima. }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '500': { $ref: '#/components/responses/InternalError' }
+
+  /auth/password/reset:
+    post:
+      operationId: resetPassword
+      security: []
+      summary: AUTH-08 Set password baru
+      description: Token ditandai `used_at` dan semua refresh token user di-revoke (logout di semua perangkat).
+      tags: [Password]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token, newPassword]
+              properties:
+                token: { type: string, maxLength: 200, example: pr_Xk9... }
+                newPassword: { $ref: '#/components/schemas/NewPassword' }
+      responses:
+        '204': { description: Password diganti. }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '401':
+          description: '`TOKEN_INVALID` — token tidak dikenal, kedaluwarsa, atau sudah dipakai.'
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorResponse' }
+        '500': { $ref: '#/components/responses/InternalError' }

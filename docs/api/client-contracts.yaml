@@ -1,0 +1,190 @@
+# Kontrak service sisi klien (frontend/, Expo) — PB01 s.d. PB04 + Auth.
+# HTTP API auth ada di openapi.yaml. Dokumen ini mendeskripsikan interface TypeScript
+# yang dipanggil UI, aturan perilakunya, dan kode error yang bisa di-assert di test.
+version: 1.0.0
+
+conventions:
+  - Semua fungsi async mengembalikan Result<T> dan tidak melempar exception ke UI.
+  - Error memakai ErrorCode yang stabil sehingga bisa di-assert di test.
+
+types:
+  Result<T>: "{ ok: true; data: T } | { ok: false; error: AppError }"
+  AppError: "{ code: ErrorCode; message: string; cause?: unknown }"
+  ErrorCode:
+    core:
+      - PERMISSION_DENIED
+      - LOCATION_UNAVAILABLE
+      - LOCATION_TIMEOUT
+      - SERVICES_DISABLED
+      - STORAGE_ERROR
+      - DATASET_INVALID
+      - NOT_FOUND
+    auth:            # perluasan untuk AuthService; dipetakan dari error HTTP di openapi.yaml
+      - INVALID_CREDENTIALS
+      - EMAIL_TAKEN
+      - VALIDATION_ERROR
+      - RATE_LIMITED
+      - SESSION_EXPIRED   # refresh gagal / REFRESH_REUSE_DETECTED / TOKEN_INVALID
+      - NETWORK_ERROR     # offline, timeout, atau 5xx
+
+# ---------------------------------------------------------------------------
+PB01_navigation:
+  library: "@react-navigation/native (native-stack + bottom-tabs) atau expo-router dengan struktur setara"
+  params:
+    OnboardingStackParams:
+      Intro: undefined
+      LocationRationale: undefined
+      LocationDenied: undefined
+      NotificationPermission: undefined
+      Preference: undefined
+    AuthStackParams:
+      Welcome: undefined          # Masuk / Daftar / Lanjut sebagai Tamu
+      Login: undefined
+      Register: undefined
+      ForgotPassword: undefined
+      ResetPassword: "{ token: string }"   # deep link manganyuk://reset?token=...
+    MainTabParams:
+      Home: undefined             # UI01 Explore Map
+      TenantList: undefined
+      Passport: undefined         # placeholder (F10)
+    RootStackParams:
+      Onboarding: NavigatorScreenParams<OnboardingStackParams>
+      Auth: NavigatorScreenParams<AuthStackParams>
+      Main: NavigatorScreenParams<MainTabParams>
+      PoiDetail: "{ poiId: string }"   # UI03
+      Profile: undefined               # butuh session 'authenticated'
+  rules:
+    - Saat launch, AppStateRepository.getOnboarding() dibaca.
+    - completed=true → Main/Home; selain itu → Onboarding/{step} (resume ke langkah terakhir).
+    - PoiDetail dengan poiId yang tidak ada menampilkan "Tenant tidak ditemukan" dan tidak crash.
+    - "Alur: Intro → Auth/Welcome (Masuk / Daftar / Tamu) → LocationRationale → ..."
+    - Pilihan Tamu tidak pernah diblok; akun bisa dibuat belakangan dari Profile.
+
+# ---------------------------------------------------------------------------
+PB02_permissions_and_state:
+  PermissionService:
+    getLocationStatus: "(): Promise<PermStatus>"
+    requestLocationForeground:
+      signature: "(): Promise<Result<PermStatus>>"
+      note: Wajib dipanggil SETELAH layar LocationRationale tampil (F09-AC1).
+    requestNotification: "(): Promise<Result<PermStatus>>"
+    openAppSettings: "(): Promise<void>   # Linking.openSettings()"
+    isLocationServicesEnabled: "(): Promise<boolean>"
+  AppStateRepository:
+    getOnboarding: "(): Promise<Result<OnboardingState>>"
+    setOnboardingStep: "(step: OnboardingStep): Promise<Result<void>>"
+    completeOnboarding: "(): Promise<Result<void>>"
+    getPermissions: "(): Promise<Result<PermissionSnapshot>>"
+    savePermissions: "(p: Partial<PermissionSnapshot>): Promise<Result<void>>"
+  PreferenceRepository:
+    get: "(): Promise<Result<UserPreferences>>   # default jika kosong"
+    save: "(p: Omit<UserPreferences, 'updatedAt'>): Promise<Result<void>>"
+    skip: "(): Promise<Result<void>>             # skipped=true, tag kosong"
+  onboarding_flow:
+    - { action: Lanjut di Intro, condition: "-", result: step=locationRationale }
+    - { action: Izinkan Lokasi, condition: dialog sistem → granted, result: step=notification }
+    - { action: Izinkan Lokasi, condition: dialog sistem → denied, result: step=locationDenied }
+    - { action: Buka Pengaturan, condition: "-", result: "openAppSettings(); saat app aktif kembali, status dicek ulang" }
+    - { action: Lanjut tanpa Lokasi, condition: "-", result: "step=notification, locationForeground='denied'" }
+    - { action: Notifikasi granted/denied, condition: "-", result: "step=preference (notif ditolak tidak memblok alur)" }
+    - { action: Mulai / Lewati, condition: "-", result: "preferensi disimpan/di-skip, completeOnboarding(), ke Main/Home" }
+
+# ---------------------------------------------------------------------------
+PB03_location:
+  types:
+    UserPosition: "{ coordinate: LatLng; accuracyM: number; timestamp: number }"
+    AreaStatus: "'INSIDE' | 'OUTSIDE' | 'UNKNOWN'"
+    UserLocationState:
+      permission: PermStatus
+      position: UserPosition | null
+      areaStatus: AreaStatus
+      distanceToAreaM: "number | null   # label 'x m ke Sudirman Street Food'"
+      error: AppError | null
+  LocationService:
+    getCurrentPosition:
+      signature: "(opts?: { timeoutMs?: number }): Promise<Result<UserPosition>>"
+      note: Fix pertama; timeout default 10000 ms (F01-AC1) → LOCATION_TIMEOUT.
+    watchPosition:
+      signature: "(onUpdate: (p: UserPosition) => void, onError: (e: AppError) => void): Promise<Result<() => void>>"
+      note: "Wrapper watchPositionAsync — accuracy: High, timeInterval: 3000, distanceInterval: 5 (F01). Mengembalikan unsubscribe."
+  GeoUtils:
+    haversineM: "(a: LatLng, b: LatLng): number   # meter, R = 6371000"
+    bearingDeg: "(a: LatLng, b: LatLng): number   # 0–360°, untuk PB11"
+    computeAreaStatus:
+      signature: "(pos: UserPosition, area: AreaConfig, prev: AreaStatus): AreaStatus"
+      rules:
+        - "accuracyM > 30 → prev dipertahankan (UNKNOWN jika belum ada)"
+        - "jarak ≤ entryRadiusM → INSIDE"
+        - "jarak > entryRadiusM + exitHysteresisM → OUTSIDE"
+        - "di antaranya → prev (default OUTSIDE)"
+  hook: "useUserLocation(): UserLocationState — dikonsumsi Home"
+  home_ui_rules:
+    - Titik biru dengan lingkaran radius accuracyM.
+    - "Badge: 'Di dalam area' atau 'Di luar area · {jarak} m'."
+    - "permission !== 'granted' → peta tanpa posisi + banner mode tanpa lokasi."
+
+# ---------------------------------------------------------------------------
+PB04_poi:
+  PoiRepository:
+    load: "(): Promise<Result<PoiDataset>>   # load + validasi + derive harga; di-cache"
+    getAll: "(): Promise<Result<Poi[]>>"
+    getById: "(id: string): Promise<Result<Poi>>   # NOT_FOUND jika tidak ada"
+    getArea: "(): Promise<Result<AreaConfig>>"
+    isOpenAt: "(poi: Poi, date: Date): boolean   # mendukung jam lewat tengah malam"
+  DatasetValidator:
+    validate: "(ds: unknown, phase: 'PB04' | 'PB08'): { valid: boolean; errors: string[] }"
+  rules_PB04:
+    V1: "pois.length ≥ 10"
+    V2: "id unik, format ^P\\d{2}$; menu[].id unik"
+    V3: "latitude ∈ [-90, 90], longitude ∈ [-180, 180], haversine(poi, area.center) ≤ entryRadiusM + 50"
+    V4: "menu.length ≥ 1; priceIdr integer > 0"
+    V5: "openingHours.length ≥ 1; format HH:mm valid"
+    V6: "tasteTags.length ≥ 1 dan nilainya ada di enum; type ada di enum"
+    V7: "triggerRadiusM > 0; avgVisitMin > 0"
+  rules_PB08_additional:
+    - "photos.length ≥ 3 (food / tenant / ambience)"
+    - "audio ada, durationSec 45–90, transcript tidak kosong"
+    - "semua assetKey ada di assetMap"
+  runtime:
+    jest_ci: validator dijalankan; gagal = test gagal
+    dev_build: validator dijalankan saat load() → DATASET_INVALID
+    release_build: error dicatat di log, POI rusak disembunyikan, app tidak crash
+
+# ---------------------------------------------------------------------------
+Auth_client:
+  http: openapi.yaml
+  types:
+    AuthUser: "{ id: string; email: string; displayName: string; emailVerified: boolean; createdAt: string }"
+    SessionState: "{ status: 'loading' } | { status: 'guest' } | { status: 'authenticated'; user: AuthUser }"
+  AuthService:
+    restoreSession:
+      signature: "(): Promise<SessionState>"
+      endpoint: POST /auth/refresh
+      note: Baca refresh token dari SecureStore → refresh → set user. Gagal/offline → pakai session cache.
+    register: { signature: "(input: { email; password; displayName }): Promise<Result<AuthUser>>", endpoint: POST /auth/register }
+    login: { signature: "(input: { email; password }): Promise<Result<AuthUser>>", endpoint: POST /auth/login }
+    logout:
+      signature: "(): Promise<void>"
+      endpoint: POST /auth/logout
+      note: Hapus SecureStore + session meski request gagal/offline.
+    continueAsGuest: "(): Promise<void>"
+    getMe: { signature: "(): Promise<Result<AuthUser>>", endpoint: GET /auth/me }
+    updateProfile: { signature: "(input: { displayName }): Promise<Result<AuthUser>>", endpoint: PATCH /auth/me }
+    forgotPassword: { signature: "(email: string): Promise<Result<void>>", endpoint: POST /auth/password/forgot }
+    resetPassword: { signature: "(token: string, newPassword: string): Promise<Result<void>>", endpoint: POST /auth/password/reset }
+    deleteAccount: { signature: "(password: string): Promise<Result<void>>", endpoint: DELETE /auth/me }
+    onSessionChange: "(cb: (s: SessionState) => void): () => void"
+  http_interceptor:
+    - Sisipkan header Authorization Bearer dan X-Client-Version.
+    - "401 TOKEN_EXPIRED → refresh SEKALI (single-flight: request paralel menunggu promise refresh yang sama) → ulangi request."
+    - "Refresh gagal → logout lokal, session = guest, tampilkan 'Sesi berakhir, silakan masuk lagi' (SESSION_EXPIRED)."
+  error_mapping:   # kode HTTP API → ErrorCode klien
+    VALIDATION_ERROR: VALIDATION_ERROR
+    INVALID_CREDENTIALS: INVALID_CREDENTIALS
+    EMAIL_TAKEN: EMAIL_TAKEN
+    RATE_LIMITED: RATE_LIMITED
+    TOKEN_EXPIRED: "(ditangani interceptor; jika refresh gagal → SESSION_EXPIRED)"
+    TOKEN_INVALID: "SESSION_EXPIRED (di reset password: tampilkan 'link tidak valid/kedaluwarsa')"
+    REFRESH_REUSE_DETECTED: SESSION_EXPIRED
+    INTERNAL_ERROR: NETWORK_ERROR
+    fetch_failed: NETWORK_ERROR
