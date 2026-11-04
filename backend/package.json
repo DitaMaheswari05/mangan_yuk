@@ -8,13 +8,18 @@
     "db:reset": "supabase db reset",
     "db:new": "supabase migration new",
     "gen:types": "bash scripts/gen-types.sh",
-    "export": "tsx scripts/export-content.ts"
+    "export": "tsx scripts/export-content.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:validate": "prisma validate",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "@supabase/supabase-js": "^2.45.0",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
+    "prisma": "^6.19.3",
     "supabase": "^2.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"

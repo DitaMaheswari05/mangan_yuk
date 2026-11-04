@@ -1,0 +1,236 @@
+// Schema Prisma Mangan Yuk — cermin dari supabase/drafts/schema_v2.sql.
+// Migration tetap lewat Supabase (supabase/migrations/); Prisma hanya dipakai sebagai client
+// (`npm run prisma:generate`). Jangan jalankan `prisma migrate`, nanti bentrok dengan migration Supabase.
+//
+// Yang tidak bisa diekspresikan Prisma dan hanya ada di SQL: CHECK constraint (format ID, rentang
+// koordinat, durasi audio 45–90 detik, dsb.), trigger updated_at di level DB, dan RLS.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enum
+// ---------------------------------------------------------------------------
+
+enum Taste {
+  pedas
+  manis
+  gurih
+  segar
+  aromatik
+
+  @@map("taste")
+}
+
+enum FoodType {
+  makanan
+  minuman
+  jajanan
+
+  @@map("food_type")
+}
+
+enum PhotoKind {
+  food
+  tenant
+  ambience
+
+  @@map("photo_kind")
+}
+
+// ---------------------------------------------------------------------------
+// Kawasan (AreaConfig)
+// ---------------------------------------------------------------------------
+
+model Area {
+  id              String   @id // 'sudirman-street-food'
+  name            String
+  centerLatitude  Float    @map("center_latitude")
+  centerLongitude Float    @map("center_longitude")
+  entryRadiusM    Int      @default(100) @map("entry_radius_m")
+  exitHysteresisM Int      @default(10) @map("exit_hysteresis_m")
+  googleMapsQuery String?  @map("google_maps_query")
+  updatedAt       DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  pois Poi[]
+
+  @@map("areas")
+}
+
+// ---------------------------------------------------------------------------
+// Tenant / POI
+// ---------------------------------------------------------------------------
+
+model Poi {
+  id               String   @id // 'P01' … 'P10'
+  areaId           String   @default("sudirman-street-food") @map("area_id")
+  name             String
+  slug             String   @unique
+  foodType         FoodType @map("food_type")
+  categoryLabel    String   @map("category_label")
+  tastes           Taste[]
+  isHalal          Boolean? @map("is_halal") // null = belum diverifikasi
+  zone             String
+  latitude         Float
+  longitude        Float
+  triggerRadiusM   Int      @default(10) @map("trigger_radius_m")
+  avgVisitMin      Int      @map("avg_visit_min")
+  description      String
+  culturalStory    String?  @map("cultural_story")
+  audioPath        String?  @map("audio_path")
+  audioDurationSec Int?     @map("audio_duration_sec")
+  audioTranscript  String?  @map("audio_transcript")
+  searchKeywords   String[] @default([]) @map("search_keywords")
+  qrCode           String?  @unique @map("qr_code")
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  area           Area            @relation(fields: [areaId], references: [id])
+  photos         PoiPhoto[]
+  menuItems      MenuItem[]
+  openingHours   OpeningHour[]
+  peakHours      PeakHour[]
+  trailPois      TrailPoi[]
+  passportStamps PassportStamp[]
+
+  @@map("pois")
+}
+
+model PoiPhoto {
+  id       BigInt    @id @default(autoincrement())
+  poiId    String    @map("poi_id")
+  path     String
+  kind     PhotoKind
+  caption  String?
+  position Int       @default(0)
+
+  poi Poi @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@unique([poiId, position])
+  @@map("poi_photos")
+}
+
+model MenuItem {
+  id          String  @id // 'P01-M01'
+  poiId       String  @map("poi_id")
+  name        String
+  priceIdr    Int     @map("price_idr")
+  tastes      Taste[] @default([])
+  isSignature Boolean @default(false) @map("is_signature")
+  position    Int     @default(0)
+
+  poi Poi @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@unique([poiId, name])
+  @@map("menu_items")
+}
+
+// close_time < open_time berarti tutup lewat tengah malam. day_of_week: 0 = Minggu.
+model OpeningHour {
+  poiId     String   @map("poi_id")
+  dayOfWeek Int      @map("day_of_week") @db.SmallInt
+  openTime  DateTime @map("open_time") @db.Time(6)
+  closeTime DateTime @map("close_time") @db.Time(6)
+
+  poi Poi @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@id([poiId, dayOfWeek, openTime])
+  @@map("opening_hours")
+}
+
+model PeakHour {
+  poiId     String   @map("poi_id")
+  dayOfWeek Int      @map("day_of_week") @db.SmallInt
+  startTime DateTime @map("start_time") @db.Time(6)
+  endTime   DateTime @map("end_time") @db.Time(6)
+
+  poi Poi @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@id([poiId, dayOfWeek, startTime])
+  @@map("peak_hours")
+}
+
+// ---------------------------------------------------------------------------
+// Aturan pasangan rasa (F07)
+// ---------------------------------------------------------------------------
+
+model TastePairing {
+  id              BigInt    @id @default(autoincrement())
+  afterTaste      Taste     @map("after_taste")
+  suggestTaste    Taste?    @map("suggest_taste")
+  suggestFoodType FoodType? @map("suggest_food_type")
+  reason          String
+
+  @@map("taste_pairings")
+}
+
+// ---------------------------------------------------------------------------
+// Trail tematik Paspor Kuliner (F10)
+// ---------------------------------------------------------------------------
+
+model Trail {
+  id          String   @id
+  name        String
+  description String   @default("")
+  badgeName   String   @map("badge_name")
+  badgeIcon   String?  @map("badge_icon")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  trailPois TrailPoi[]
+
+  @@map("trails")
+}
+
+model TrailPoi {
+  trailId  String @map("trail_id")
+  poiId    String @map("poi_id")
+  position Int
+
+  trail Trail @relation(fields: [trailId], references: [id], onDelete: Cascade)
+  poi   Poi   @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@id([trailId, poiId])
+  @@unique([trailId, position])
+  @@map("trail_pois")
+}
+
+// ---------------------------------------------------------------------------
+// Data pengguna (Supabase Auth) — lihat migrations/20261104010000_auth.sql
+// ---------------------------------------------------------------------------
+
+// id = auth.users.id. Relasi ke auth.users hanya ada di SQL (skema auth tidak dipetakan ke Prisma).
+// Baris dibuat otomatis oleh trigger handle_new_user saat sign-up.
+model Profile {
+  id                 String     @id @db.Uuid
+  displayName        String?    @map("display_name")
+  avatarUrl          String?    @map("avatar_url")
+  preferredTastes    Taste[]    @default([]) @map("preferred_tastes")
+  preferredFoodTypes FoodType[] @default([]) @map("preferred_food_types")
+  halalOnly          Boolean    @default(false) @map("halal_only")
+  onboardedAt        DateTime?  @map("onboarded_at") @db.Timestamptz(6)
+  createdAt          DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime   @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  passportStamps PassportStamp[]
+
+  @@map("profiles")
+}
+
+model PassportStamp {
+  userId    String   @map("user_id") @db.Uuid
+  poiId     String   @map("poi_id")
+  stampedAt DateTime @default(now()) @map("stamped_at") @db.Timestamptz(6)
+
+  user Profile @relation(fields: [userId], references: [id], onDelete: Cascade)
+  poi  Poi     @relation(fields: [poiId], references: [id], onDelete: Cascade)
+
+  @@id([userId, poiId])
+  @@map("passport_stamps")
+}

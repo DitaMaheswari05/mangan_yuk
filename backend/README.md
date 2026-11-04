@@ -35,13 +35,26 @@ Jangan mengedit migration yang sudah di-merge ke `main`; buat migration baru.
 
 ## Tabel
 
-| Tabel        | Isi                                               |
-|--------------|---------------------------------------------------|
-| `pois`       | 10 POI: nama, koordinat, path foto & audio        |
-| `trails`     | Trail kuliner                                     |
-| `trail_pois` | Urutan POI dalam setiap trail                     |
+| Tabel            | Isi                                                        |
+|------------------|------------------------------------------------------------|
+| `areas`          | Kawasan Sudirman Street Food: titik pusat, radius entry/exit |
+| `pois`           | 10 POI: kategori, rasa, koordinat, radius trigger, cerita, audio |
+| `poi_photos`     | Foto POI (food / tenant / ambience)                        |
+| `menu_items`     | Menu & harga per POI                                       |
+| `opening_hours`  | Jam buka per hari                                          |
+| `peak_hours`     | Jam ramai hasil observasi (F07)                            |
+| `taste_pairings` | Aturan pasangan rasa untuk rekomendasi (F07)               |
+| `trails`         | Trail tematik Paspor Kuliner (F10)                         |
+| `trail_pois`     | Urutan POI dalam setiap trail                              |
+| `profiles`       | Profil + preferensi onboarding, 1:1 dengan `auth.users`    |
+| `passport_stamps`| Stempel Paspor Kuliner per pengguna (tanpa koordinat, F09) |
 
-Semua tabel publik-baca (RLS `select using (true)`); penulisan hanya lewat service role / Studio.
+Skema Prisma ([prisma/schema.prisma](prisma/schema.prisma)) mencerminkan migration dan hanya dipakai
+sebagai client; perubahan skema tetap lewat migration Supabase.
+
+Semua tabel konten publik-baca (RLS `select using (true)`); penulisan hanya lewat service role / Studio.
+`profiles` dan `passport_stamps` hanya bisa diakses pemiliknya (RLS `auth.uid()`); profil dibuat otomatis
+oleh trigger saat sign-up.
 
 ## Storage
 
