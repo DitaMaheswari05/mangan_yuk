@@ -7,7 +7,7 @@ port = 54321
 schemas = ["public", "storage"]
 
 [db]
-port = 54322
+port = 55322
 major_version = 15
 
 [db.seed]
