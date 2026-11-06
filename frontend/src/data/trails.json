@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "jejak-jajanan-sunda",
+    "name": "Jejak Jajanan Sunda",
+    "description": "Jelajahi jajanan khas di Sudirman Street Food.",
+    "badgeName": "Penjelajah Jajanan Sunda",
+    "badgeIcon": null,
+    "poiIds": []
+  },
+  {
+    "id": "manis-manis-bandung",
+    "name": "Manis-manis Bandung",
+    "description": "Kumpulkan stempel dari tenant kuliner manis.",
+    "badgeName": "Pemburu Manis Bandung",
+    "badgeIcon": null,
+    "poiIds": []
+  }
+]

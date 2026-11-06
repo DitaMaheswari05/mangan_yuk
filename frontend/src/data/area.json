@@ -1,0 +1,11 @@
+{
+  "id": "sudirman-street-food",
+  "name": "Sudirman Street Food",
+  "center": {
+    "latitude": -6.92089,
+    "longitude": 107.600574
+  },
+  "entryRadiusM": 100,
+  "exitHysteresisM": 10,
+  "googleMapsQuery": "Sudirman Street Food Bandung"
+}

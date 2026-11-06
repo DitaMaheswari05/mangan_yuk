@@ -1,0 +1,14 @@
+[
+  {
+    "afterTaste": "pedas",
+    "suggestTaste": "segar",
+    "suggestFoodType": "minuman",
+    "reason": "cocok setelah makanan pedas"
+  },
+  {
+    "afterTaste": "gurih",
+    "suggestTaste": "manis",
+    "suggestFoodType": "jajanan",
+    "reason": "pencuci mulut setelah makanan gurih"
+  }
+]

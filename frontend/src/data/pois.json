@@ -1,1 +1,6786 @@
-[]
+[
+  {
+    "id": "P01",
+    "name": "Traditional Fried Food from West Borneo",
+    "slug": "traditional-fried-food-from-west-borneo",
+    "type": "jajanan",
+    "categoryLabel": "Gorengan / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.921332,
+    "longitude": 107.60065,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 10,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P01-M01",
+        "name": "Pisang Goreng Kipas Khas Pontianak",
+        "priceIdr": 5000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P01-M02",
+        "name": "Pisang Tanduk Madu",
+        "priceIdr": 5000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P01-M03",
+        "name": "Gandasturi / Gandas Kacang Hijau",
+        "priceIdr": 5000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P01-M04",
+        "name": "Tape Goreng Madu",
+        "priceIdr": 5000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P01-M05",
+        "name": "Nanas Goreng",
+        "priceIdr": 5000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P01-M06",
+        "name": "Bom Singkong",
+        "priceIdr": 5000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P01-M07",
+        "name": "Bakwan Kuce / Bakwan Pontianak",
+        "priceIdr": 5000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P01-M08",
+        "name": "Tahu Isi Ikan",
+        "priceIdr": 5000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P01-M09",
+        "name": "Tahu Isi Ayam",
+        "priceIdr": 5000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "gorengan",
+      "pontianak",
+      "kalimantan barat",
+      "pisang goreng",
+      "pisang goreng pontianak"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P03",
+    "name": "Swike Asli JTW",
+    "slug": "swike-asli-jtw",
+    "type": "makanan",
+    "categoryLabel": "Swike / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": false,
+    "zone": "TODO",
+    "latitude": -6.921294,
+    "longitude": 107.60065,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P03-M01",
+        "name": "Swike Kuah Kodok + Kuah Tauco",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M02",
+        "name": "Kodok Goreng Mentega",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P03-M03",
+        "name": "Kodok Goreng Mentega Rica-Rica",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M04",
+        "name": "Kodok Goreng Tepung",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P03-M05",
+        "name": "Kodok Goreng Tepung Mentega",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M06",
+        "name": "Kodok Goreng Tepung Rica-Rica",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M07",
+        "name": "Kodok Goreng Asam Manis",
+        "priceIdr": 65000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M08",
+        "name": "Kodok Goreng Asam Manis Rica-Rica",
+        "priceIdr": 65000,
+        "tastes": [
+          "manis",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M09",
+        "name": "Nasi Putih",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M10",
+        "name": "Kuah Polos",
+        "priceIdr": 10000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M11",
+        "name": "Saos Mentega",
+        "priceIdr": 10000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M12",
+        "name": "Saos Mentega Rica-Rica",
+        "priceIdr": 10000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M13",
+        "name": "Saos Asam Manis",
+        "priceIdr": 10000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M14",
+        "name": "Saos Asam Manis Rica-Rica",
+        "priceIdr": 10000,
+        "tastes": [
+          "manis",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M15",
+        "name": "Juice (Alpukat, Strawberry, Melon, Sirsak, Buah Naga, Mangga, dll)",
+        "priceIdr": 20000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M16",
+        "name": "Es Jeruk",
+        "priceIdr": 20000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M17",
+        "name": "Es Campur",
+        "priceIdr": 20000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M18",
+        "name": "Sop Buah",
+        "priceIdr": 20000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P03-M19",
+        "name": "Juice Wortel",
+        "priceIdr": 15000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "swike",
+      "kodok"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P04",
+    "name": "Bebek Gober Bumbu Hitam",
+    "slug": "bebek-gober-bumbu-hitam",
+    "type": "makanan",
+    "categoryLabel": "Bebek / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.921285,
+    "longitude": 107.600602,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P04-M01",
+        "name": "Paket Nasi Bebek Bumbu Hitam Madura",
+        "priceIdr": 53900,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P04-M02",
+        "name": "Bebek Bumbu Hitam Madura (Tanpa Nasi)",
+        "priceIdr": 48900,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M03",
+        "name": "Paket Nasi Bebek Ukuran Kecil Bumbu Hitam",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M04",
+        "name": "Paket Nasi Ayam Goreng Bumbu Madura Hitam Pedas",
+        "priceIdr": 36900,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M05",
+        "name": "Ayam Goreng Bumbu Madura Hitam Pedas (Tanpa Nasi)",
+        "priceIdr": 30900,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M06",
+        "name": "Nasi Putih",
+        "priceIdr": 8500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M07",
+        "name": "Jukut Goreng",
+        "priceIdr": 10900,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M08",
+        "name": "Tahu / Tempe Goreng",
+        "priceIdr": 4000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M09",
+        "name": "Telor Dadar / Ceplok",
+        "priceIdr": 8500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M10",
+        "name": "Teh Tarik Signature",
+        "priceIdr": 15900,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P04-M11",
+        "name": "Es Teh Manis",
+        "priceIdr": 9900,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "bebek",
+      "bumbu hitam"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P05",
+    "name": "Pigbull",
+    "slug": "pigbull",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.921299,
+    "longitude": 107.600588,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P05-M01",
+        "name": "Nasi Campur Hainan",
+        "priceIdr": 82000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P05-M02",
+        "name": "Nasi Campur Putih",
+        "priceIdr": 74000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M03",
+        "name": "Nasi Hainan Samcan Crispy Sambal Matah",
+        "priceIdr": 82000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M04",
+        "name": "Nasi Putih Samcan Crispy Sambal Matah",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M05",
+        "name": "Nasi Samcan Lada Garam",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M06",
+        "name": "Nasi Goreng Pigbull",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M07",
+        "name": "Nasi Hainan Charsiu Madu",
+        "priceIdr": 75000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M08",
+        "name": "Nasi Putih Charsiu Madu",
+        "priceIdr": 69000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M09",
+        "name": "Nasi Babi Saos Asam Manis",
+        "priceIdr": 69000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M10",
+        "name": "Nasi Ayam Saos Asam Manis",
+        "priceIdr": 55000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M11",
+        "name": "Nasi Ayam + Baso Goreng",
+        "priceIdr": 37500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M12",
+        "name": "Nasi Samcan + Baso Goreng",
+        "priceIdr": 42000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M13",
+        "name": "Nasi Charsiu + Baso Goreng",
+        "priceIdr": 42000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M14",
+        "name": "Nasi Samcan Charsiu + Baso Goreng",
+        "priceIdr": 52000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M15",
+        "name": "Charsiu Madu (100 gram)",
+        "priceIdr": 72000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M16",
+        "name": "Samcan Crispy (100 gram)",
+        "priceIdr": 90000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P05-M17",
+        "name": "Baso Goreng (5 Biji)",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [],
+    "qrCode": null
+  },
+  {
+    "id": "P06",
+    "name": "Awin Kwetiau Siantar",
+    "slug": "awin-kwetiau-siantar",
+    "type": "makanan",
+    "categoryLabel": "Kwetiau / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.921044,
+    "longitude": 107.600539,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P06-M01",
+        "name": "Ayam Kampung PekCamKee (1/4 Ekor)",
+        "priceIdr": 62000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M02",
+        "name": "Ayam Kampung PekCamKee (1/2 Ekor)",
+        "priceIdr": 110000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M03",
+        "name": "Ayam Kampung PekCamKee (1 Ekor)",
+        "priceIdr": 205000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M04",
+        "name": "Chicken Rice Ayam Kampung",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M05",
+        "name": "Paket Chicken Rice Ayam Kampung (2 Orang)",
+        "priceIdr": 125000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M06",
+        "name": "Bubur Oriental Polos",
+        "priceIdr": 25000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M07",
+        "name": "Bubur Oriental Telur Phitan",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M08",
+        "name": "Bubur Oriental Babi Kecap Telur Asin",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M09",
+        "name": "Bubur Kodok Singapore",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M10",
+        "name": "Kwetiau Goreng Medan / Siantar",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P06-M11",
+        "name": "Kwetiau Siram / Bun",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M12",
+        "name": "Bakmi Goreng Khas Awin",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M13",
+        "name": "Ci Cong Fan Goreng / Siram",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P06-M14",
+        "name": "Aneka Dimsum (Siomay Babi, Hakau, dll)",
+        "priceIdr": 15000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "kwetiau",
+      "kwetiaw",
+      "siantar"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P07",
+    "name": "Sedap The Best Chinese Food",
+    "slug": "sedap-the-best-chinese-food",
+    "type": "makanan",
+    "categoryLabel": "Chinese Food / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920932,
+    "longitude": 107.600533,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P07-M01",
+        "name": "Bakmie Kepiting",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M02",
+        "name": "Mie Hokkian",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M03",
+        "name": "Mie Goreng Sapi",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M04",
+        "name": "Mie Goreng Seafood",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M05",
+        "name": "Mie Kuah Ayam",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M06",
+        "name": "Mie Ayam Jamur",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M07",
+        "name": "Mie Goreng Ayam",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M08",
+        "name": "Misua Kuah",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M09",
+        "name": "Kwetiau Goreng Seafood",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M10",
+        "name": "Kwetiau Goreng Sapi",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M11",
+        "name": "Kwetiau Siram Sapi",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M12",
+        "name": "Kwetiau Kepiting",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M13",
+        "name": "Kwetiau Goreng / Siram Ayam",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M14",
+        "name": "Bihun Goreng Sapi",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M15",
+        "name": "Bihun Goreng Seafood",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M16",
+        "name": "Bihun Goreng Ayam",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M17",
+        "name": "Kwetiau / Bihun Goreng Telur",
+        "priceIdr": 25000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M18",
+        "name": "Nasi Goreng Seafood",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M19",
+        "name": "Nasi Goreng Sapi",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M20",
+        "name": "Nasi Campur Ayam",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M21",
+        "name": "Capcay Sapi",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M22",
+        "name": "Capcay Seafood",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P07-M23",
+        "name": "Capcay Ayam",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "chinese food"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P08",
+    "name": "Gou Cheng Hiang",
+    "slug": "gou-cheng-hiang",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920928,
+    "longitude": 107.600462,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P08-M01",
+        "name": "Bakut Sayur Asin Kalimantan",
+        "priceIdr": 80000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M02",
+        "name": "Bakkut Angkhak Merah",
+        "priceIdr": 90000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M03",
+        "name": "Bakut Perut Ikan",
+        "priceIdr": 160000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M04",
+        "name": "Kolo Mie Bakkut Sarawak",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M05",
+        "name": "Pork Leg Adobo",
+        "priceIdr": 95000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M06",
+        "name": "Kaki Babi Angkhak Merah",
+        "priceIdr": 95000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M07",
+        "name": "Pata & Beans",
+        "priceIdr": 109998,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M08",
+        "name": "Nasi Telur Kecap Pontianak",
+        "priceIdr": 20000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M09",
+        "name": "ShangHai Braised Pork",
+        "priceIdr": 95000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M10",
+        "name": "Nasi Sate Kalimantan",
+        "priceIdr": 95000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M11",
+        "name": "Udang Rebus GCH",
+        "priceIdr": 135000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M12",
+        "name": "Sop Drogdog Babi Cincang",
+        "priceIdr": 120000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M13",
+        "name": "Telur Dadar",
+        "priceIdr": 15000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M14",
+        "name": "Hekeng/Gohiong Udang",
+        "priceIdr": 80000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M15",
+        "name": "Chicken Wing",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M16",
+        "name": "Bola-bola Kepiting",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M17",
+        "name": "Nasi Putih",
+        "priceIdr": 7000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M18",
+        "name": "Nasi Bawang",
+        "priceIdr": 20000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M19",
+        "name": "Sambal Ebi",
+        "priceIdr": 60000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M20",
+        "name": "Kopi Susu Warkop Aroma Pontianak",
+        "priceIdr": 25000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P08-M21",
+        "name": "Syrup Sonkit",
+        "priceIdr": 110000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [],
+    "qrCode": null
+  },
+  {
+    "id": "P09",
+    "name": "Dapur Sotoku",
+    "slug": "dapur-sotoku",
+    "type": "makanan",
+    "categoryLabel": "Makanan Berkuah / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920838,
+    "longitude": 107.600471,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "Soto khas dan gurami bakar.",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P09-M01",
+        "name": "Soto Bandung",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P09-M02",
+        "name": "Soto Lamongan",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M03",
+        "name": "Soto Betawi",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M04",
+        "name": "Sop Iga",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M05",
+        "name": "Sop Buntut",
+        "priceIdr": 52000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M06",
+        "name": "Soto Urat",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M07",
+        "name": "Soto Babat",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M08",
+        "name": "Soto Mie",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M09",
+        "name": "Gurame Pesmol",
+        "priceIdr": 50000,
+        "tastes": [
+          "manis",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M10",
+        "name": "Gurame Bakar",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M11",
+        "name": "Nasi Goreng Babat Gongso",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P09-M12",
+        "name": "Nasi Putih",
+        "priceIdr": 7000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "soto",
+      "berkuah",
+      "gurami",
+      "ikan bakar"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P10",
+    "name": "Klypot",
+    "slug": "klypot",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920782,
+    "longitude": 107.600481,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P10-M01",
+        "name": "Peach Gum Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P10-M02",
+        "name": "Chicken Claypot",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M03",
+        "name": "Beef Claypot",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M04",
+        "name": "Seafood Claypot",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M05",
+        "name": "Kimchi Claypot",
+        "priceIdr": 55000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M06",
+        "name": "Udang Pete Claypot",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M07",
+        "name": "Cumi Cabe Hijau Claypot",
+        "priceIdr": 65000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M08",
+        "name": "Chocolate Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M09",
+        "name": "Wintermelon Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M10",
+        "name": "Almond Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M11",
+        "name": "Coconut Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M12",
+        "name": "Chrysanthemum Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M13",
+        "name": "Silky Taro Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M14",
+        "name": "Macca Pudding",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P10-M15",
+        "name": "Chicken Wings (8 Pcs)",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [],
+    "qrCode": null
+  },
+  {
+    "id": "P11",
+    "name": "Umai",
+    "slug": "umai",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920673,
+    "longitude": 107.600584,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P11-M01",
+        "name": "Gyuniku Amakara Donburi",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P11-M02",
+        "name": "Salmon Amakara Donburi",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P11-M03",
+        "name": "Hibiki Gyudon",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P11-M04",
+        "name": "Salmon Shioyaki Bento / Donburi",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P11-M05",
+        "name": "Tori Katsu",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P11-M06",
+        "name": "Chicken Taru-Taru",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P11-M07",
+        "name": "Tsuya Karaage",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P11-M08",
+        "name": "Nagoya Tebasaki (8 Pcs)",
+        "priceIdr": 77000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P11-M09",
+        "name": "Tamagoyaki",
+        "priceIdr": 37500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [],
+    "qrCode": null
+  },
+  {
+    "id": "P12",
+    "name": "Hong Nam",
+    "slug": "hong-nam",
+    "type": "makanan",
+    "categoryLabel": "Asian Food / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": false,
+    "zone": "TODO",
+    "latitude": -6.920687,
+    "longitude": 107.600476,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "Olahan bak kut teh dan samcan.",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P12-M01",
+        "name": "Bak Kut Teh Pork Loin (Regular)",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M02",
+        "name": "Bak Kut Teh Singapore (Regular)",
+        "priceIdr": 85000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M03",
+        "name": "Bak Kut Sayur Asin",
+        "priceIdr": 85000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M04",
+        "name": "Mie Bak Kut Teh",
+        "priceIdr": 90000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M05",
+        "name": "Bak Kut Teh Pork Loin (Large)",
+        "priceIdr": 98000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M06",
+        "name": "Bak Kut Teh Singapore (Large)",
+        "priceIdr": 110000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M07",
+        "name": "Dry Bak Kut Teh",
+        "priceIdr": 110000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M08",
+        "name": "Pork Ribs Charsiu (Regular)",
+        "priceIdr": 85000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M09",
+        "name": "Nasi Pork Ribs Charsiu",
+        "priceIdr": 95000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M10",
+        "name": "Pork Ribs Charsiu (Large)",
+        "priceIdr": 110000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M11",
+        "name": "Sate Babi (5 Tusuk)",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M12",
+        "name": "Pork Ribs Steak",
+        "priceIdr": 165000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M13",
+        "name": "Shanghai Crispy Pork",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M14",
+        "name": "Kekian/Gohyong Babi",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M15",
+        "name": "Bak Kut Goreng Cabe Garam",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M16",
+        "name": "Bak Kut Goreng Sambal Matah",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M17",
+        "name": "Samcan Cabe Garam",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M18",
+        "name": "Samcan Sambal Matah",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P12-M19",
+        "name": "Nasi Goreng Hong / Mr. Hao",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "bak kut teh",
+      "samcan",
+      "pork ribs",
+      "babi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P13",
+    "name": "Pandu Baso Goreng Tenggiri",
+    "slug": "pandu-baso-goreng-tenggiri",
+    "type": "jajanan",
+    "categoryLabel": "Jajanan / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920687,
+    "longitude": 107.600476,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 10,
+    "description": "Bakso ikan tenggiri goreng yang krispi.",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P13-M01",
+        "name": "Baso Goreng Siap Santap (4 Pcs)",
+        "priceIdr": 25000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P13-M02",
+        "name": "Baso Goreng Siap Santap (6 Pcs)",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P13-M03",
+        "name": "Baso Goreng Siap Santap (8-10 Pcs)",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P13-M04",
+        "name": "Baso Goreng Frozen (9 Pcs + Sambal)",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "baso",
+      "bakso",
+      "basreng",
+      "tenggiri",
+      "gorengan"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P14",
+    "name": "Segulung Babi",
+    "slug": "segulung-babi",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": false,
+    "zone": "TODO",
+    "latitude": -6.920687,
+    "longitude": 107.600476,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P14-M01",
+        "name": "Nasi Segulung Babi",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P14-M02",
+        "name": "Nasi Babi Banjur Bawang",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P14-M03",
+        "name": "Bakmie Segulung Babi",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M04",
+        "name": "Nasi Babi Hong",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M05",
+        "name": "Bakmie Babi Polos",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M06",
+        "name": "Nasi Babi Pedas",
+        "priceIdr": 65000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M07",
+        "name": "Bakmie Cukiok Kaki Babi",
+        "priceIdr": 55000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M08",
+        "name": "Nasi Campur Babi 4 Musim",
+        "priceIdr": 87000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M09",
+        "name": "Sosis Siluman Babi",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M10",
+        "name": "Nasi Siluman Babi Istimewa",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M11",
+        "name": "Nasi Cukiok (Kaki Babi Coklat)",
+        "priceIdr": 65000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M12",
+        "name": "Nasi Sosis Siluman Babi",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M13",
+        "name": "Pork Steam Rice",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M14",
+        "name": "Nasi Bacon Dadar Banjur Bawang",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M15",
+        "name": "Nasi Babi Kecap",
+        "priceIdr": 65000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M16",
+        "name": "Nasi Putih",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M17",
+        "name": "Segulung Babi Per 100 Gram",
+        "priceIdr": 69000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M18",
+        "name": "Babi Banjur Bawang Tanpa Nasi",
+        "priceIdr": 69000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M19",
+        "name": "Babi Hong Tanpa Nasi",
+        "priceIdr": 72500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M20",
+        "name": "Kaki Babi Coklat Cukiok Tanpa Nasi",
+        "priceIdr": 60000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M21",
+        "name": "Topping Banjur Bawang",
+        "priceIdr": 10000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M22",
+        "name": "Extra Sambal Matah",
+        "priceIdr": 7500,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M23",
+        "name": "Babi Pedas Tanpa Nasi",
+        "priceIdr": 65000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M24",
+        "name": "Siomay Babi Hokcai (4 Pcs)",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M25",
+        "name": "Babi Hong Porsi Jumbo",
+        "priceIdr": 205000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M26",
+        "name": "Cukiok Porsi Jumbo",
+        "priceIdr": 172500,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M27",
+        "name": "Babi Kecap",
+        "priceIdr": 65000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M28",
+        "name": "Bakmie Babi Hong",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M29",
+        "name": "Bakmie 4 Musim",
+        "priceIdr": 87000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M30",
+        "name": "Bakmie Babi Item",
+        "priceIdr": 60000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M31",
+        "name": "Segulung Babi + Pork Steam Rice",
+        "priceIdr": 90000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M32",
+        "name": "Babi Hong + Pork Steam Rice",
+        "priceIdr": 100000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M33",
+        "name": "Cukiok + Pork Steam Rice",
+        "priceIdr": 90000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M34",
+        "name": "2 Porsi Nasi Babi Pedas",
+        "priceIdr": 115000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M35",
+        "name": "3 Porsi Nasi Babi Pedas",
+        "priceIdr": 165000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M36",
+        "name": "Air Mineral Gelas",
+        "priceIdr": 2500,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P14-M37",
+        "name": "Teh Pucuk Harum Botol",
+        "priceIdr": 7000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "babi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P15",
+    "name": "Bacuk Sultan Agung",
+    "slug": "bacuk-sultan-agung",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920633,
+    "longitude": 107.600575,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P15-M01",
+        "name": "Nasgor Bacuk Putih",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P15-M02",
+        "name": "Nasi Bacuk Ori",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P15-M03",
+        "name": "Nasgor Bacuk Sambal Matah",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M04",
+        "name": "Nasgor Babi Tore Sambal Matah",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M05",
+        "name": "Kwetiau Goreng Bacuk",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M06",
+        "name": "Kwetiau Goreng Babi Tore",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M07",
+        "name": "Babi Madu",
+        "priceIdr": 49000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M08",
+        "name": "Nasi Putih Babi Madu",
+        "priceIdr": 55000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M09",
+        "name": "Nasgor Babi Madu Asin",
+        "priceIdr": 49000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M10",
+        "name": "Nasgor Babi Madu Manis",
+        "priceIdr": 49000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M11",
+        "name": "Bacuk Jumbo",
+        "priceIdr": 110000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M12",
+        "name": "Bacuk Ori",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M13",
+        "name": "Babi Tore Manado",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M14",
+        "name": "Nasi Babi Tore",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M15",
+        "name": "Nasgor Bacuk Kecap",
+        "priceIdr": 58000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M16",
+        "name": "Nasgor Bacuk Cabe Ijo",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M17",
+        "name": "Nasgor Bacuk Rica",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M18",
+        "name": "Nasgor Babi Tore Putih",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M19",
+        "name": "Nasgor Babi Tore Kecap",
+        "priceIdr": 58000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M20",
+        "name": "Nasgor Babi Tore Cabe Ijo",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M21",
+        "name": "Nasgor Babi Tore Rica",
+        "priceIdr": 58000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M22",
+        "name": "Nasgor Babi Kecap",
+        "priceIdr": 40000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M23",
+        "name": "Keju Aroma Original",
+        "priceIdr": 21000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M24",
+        "name": "Nasi Putih",
+        "priceIdr": 9000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M25",
+        "name": "Telor",
+        "priceIdr": 7000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M26",
+        "name": "Caisim Goreng",
+        "priceIdr": 7000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M27",
+        "name": "Bacuk Frozen 250 gr",
+        "priceIdr": 125000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M28",
+        "name": "Bacuk Frozen 500 gr",
+        "priceIdr": 240000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M29",
+        "name": "Bacuk Daging",
+        "priceIdr": 69000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P15-M30",
+        "name": "Nasi Bacuk Daging",
+        "priceIdr": 73000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [],
+    "qrCode": null
+  },
+  {
+    "id": "P16",
+    "name": "Hau’s Tea",
+    "slug": "haus-tea",
+    "type": "minuman",
+    "categoryLabel": "Minuman / Manis",
+    "tasteTags": [
+      "manis"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920633,
+    "longitude": 107.600575,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 5,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P16-M01",
+        "name": "Cakue Original",
+        "priceIdr": 10000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P16-M02",
+        "name": "Cakue Bumbu",
+        "priceIdr": 12000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M03",
+        "name": "Cakue Rujak",
+        "priceIdr": 18000,
+        "tastes": [
+          "manis",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M04",
+        "name": "Cakue Chili-Dog",
+        "priceIdr": 20000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M05",
+        "name": "Cakue Udang",
+        "priceIdr": 20000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M06",
+        "name": "Cakue Popping",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M07",
+        "name": "Cakue Sprinkle",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M08",
+        "name": "Baso Campur",
+        "priceIdr": 29000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M09",
+        "name": "Baso Goreng",
+        "priceIdr": 9000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M10",
+        "name": "Paket Baso Goreng",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M11",
+        "name": "Chickenball",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M12",
+        "name": "Chicken Stick",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M13",
+        "name": "Paket Batagor",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M14",
+        "name": "Mie Kocok",
+        "priceIdr": 15000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P16-M15",
+        "name": "Chicken Noodle / Lo Mie",
+        "priceIdr": 22000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "teh",
+      "tea",
+      "haus"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P17",
+    "name": "Kuo Tie Kelenteng",
+    "slug": "kuo-tie-kelenteng",
+    "type": "jajanan",
+    "categoryLabel": "Kuo Tie / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920633,
+    "longitude": 107.600575,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 10,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P17-M01",
+        "name": "Kuo Tie Original (Pan Fried)",
+        "priceIdr": 7500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P17-M02",
+        "name": "Kuo Tie Crispy (Deep Fried)",
+        "priceIdr": 7500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P17-M03",
+        "name": "Kuo Tie 1 Porsi (10 Pcs)",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "kuotie",
+      "kuo tie",
+      "pangsit",
+      "dumpling"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P18",
+    "name": "Nasi Goreng Babi Samcan Crispy",
+    "slug": "nasi-goreng-babi-samcan-crispy",
+    "type": "makanan",
+    "categoryLabel": "Nasi Goreng / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": false,
+    "zone": "TODO",
+    "latitude": -6.920685,
+    "longitude": 107.600631,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P18-M01",
+        "name": "Nasi Goreng Babi Toping Chasiu",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P18-M02",
+        "name": "Nasi Goreng Babi Toping Samcan",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P18-M03",
+        "name": "Nasi Goreng Babi Chasiu Lapchong",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M04",
+        "name": "Nasi Goreng Babi Toping Samcan Chasiu Lapchong",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M05",
+        "name": "Nasi Goreng Babi",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M06",
+        "name": "Nasi Goreng Babi Yang Chou",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M07",
+        "name": "Nasi Goreng Babi Toping Lapciong",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M08",
+        "name": "Promo 2 Porsi Nasi Goreng Babi Toping Lapchong",
+        "priceIdr": 130000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M09",
+        "name": "Promo 2 Porsi Nasi Goreng Babi",
+        "priceIdr": 95000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M10",
+        "name": "Kwetiaw Goreng Babi",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M11",
+        "name": "Kwetiaw Goreng Babi Toping Chasiu",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M12",
+        "name": "Kwetiaw Goreng Babi Toping Samcan",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M13",
+        "name": "Mie Goreng Babi",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M14",
+        "name": "Mie Goreng Babi Toping Chasiu",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M15",
+        "name": "Mie Goreng Babi Toping Samcan",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M16",
+        "name": "Bihun Goreng Babi",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M17",
+        "name": "Bihun Goreng Babi Toping Chasiu",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M18",
+        "name": "Bihun Goreng Babi Toping Samcan",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M19",
+        "name": "Telur Mata Sapi",
+        "priceIdr": 13500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P18-M20",
+        "name": "Liang Teh",
+        "priceIdr": 29000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "nasi goreng",
+      "samcan",
+      "babi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P19",
+    "name": "Jazz Coffee",
+    "slug": "jazz-coffee",
+    "type": "minuman",
+    "categoryLabel": "Kopi",
+    "tasteTags": [
+      "aromatik"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920791,
+    "longitude": 107.600631,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 5,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P19-M01",
+        "name": "Jazz Coffee Latte",
+        "priceIdr": 25000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P19-M02",
+        "name": "Orange Espresso Tonic",
+        "priceIdr": 25000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P19-M03",
+        "name": "Rhum Jazz Coffee",
+        "priceIdr": 25000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M04",
+        "name": "Baileys Jazz Coffee",
+        "priceIdr": 25000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M05",
+        "name": "Hazelnut Jazz Coffee",
+        "priceIdr": 25000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M06",
+        "name": "Brown Sugar Latte",
+        "priceIdr": 23000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M07",
+        "name": "Caramel Macchiato",
+        "priceIdr": 26000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M08",
+        "name": "Ice Americano",
+        "priceIdr": 18000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M09",
+        "name": "Matcha Latte",
+        "priceIdr": 29500,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M10",
+        "name": "Stratoberi Lemonade",
+        "priceIdr": 27000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M11",
+        "name": "Lemongrass Tea",
+        "priceIdr": 19000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M12",
+        "name": "Hot Latte",
+        "priceIdr": 23000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M13",
+        "name": "Hot Cappuccino",
+        "priceIdr": 23000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M14",
+        "name": "Hot Americano",
+        "priceIdr": 20000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M15",
+        "name": "Mocha Latte",
+        "priceIdr": 22000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M16",
+        "name": "Affogato",
+        "priceIdr": 20000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M17",
+        "name": "Hot Matcha Latte",
+        "priceIdr": 28000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M18",
+        "name": "Dark Chocolate",
+        "priceIdr": 23000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M19",
+        "name": "Hot Black Tea",
+        "priceIdr": 15000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M20",
+        "name": "V60",
+        "priceIdr": 25000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P19-M21",
+        "name": "Tubruk",
+        "priceIdr": 23000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "kopi",
+      "coffee"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P20",
+    "name": "Nasi Campur Kencana99",
+    "slug": "nasi-campur-kencana99",
+    "type": "makanan",
+    "categoryLabel": "Makanan Utama / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920556,
+    "longitude": 107.601389,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "Nasi hainan atau nasi putih dengan topping lengkap.",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P20-M01",
+        "name": "Nasi Hainan Komplit",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P20-M02",
+        "name": "Nasi Putih Komplit",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P20-M03",
+        "name": "Nasi Hainan Polos",
+        "priceIdr": 14000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M04",
+        "name": "Nasi Putih",
+        "priceIdr": 9000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M05",
+        "name": "Nasi Putih + Ayam Panggang Kencana 99",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M06",
+        "name": "Nasi Hainan + Ayam Panggang Kencana 99",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M07",
+        "name": "Ayam Panggang Kencana 99",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M08",
+        "name": "Ayam Panggang Kencana 99 1/2 Ekor",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M09",
+        "name": "Ayam Panggang Kencana 99 1 Ekor",
+        "priceIdr": 135000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M10",
+        "name": "Nasi Hainan Chasiu",
+        "priceIdr": 72000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M11",
+        "name": "Nasi Putih Chasiu",
+        "priceIdr": 70000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M12",
+        "name": "Nasi Hainan Samcan",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M13",
+        "name": "Nasi Putih Samcan",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M14",
+        "name": "Telor Kecap",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M15",
+        "name": "Bakso Goreng Kencana (5 Pcs)",
+        "priceIdr": 37500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M16",
+        "name": "Bakso Goreng Babi Per Pcs",
+        "priceIdr": 8500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M17",
+        "name": "Lapceong/Sosis Babi 1 Porsi",
+        "priceIdr": 38000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M18",
+        "name": "Lapceong/Sosis Babi (Medium)",
+        "priceIdr": 85000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M19",
+        "name": "Lapceong/Sosis Babi (Large)",
+        "priceIdr": 155000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M20",
+        "name": "Siobak 1 Porsi",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M21",
+        "name": "Siobak 1/4 Kg",
+        "priceIdr": 180000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M22",
+        "name": "Siobak 1/2 Kg",
+        "priceIdr": 338000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M23",
+        "name": "Siobak 1 Kg",
+        "priceIdr": 630000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M24",
+        "name": "Chasiu 1 Porsi",
+        "priceIdr": 72000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M25",
+        "name": "Chasiu 1/4 Kg",
+        "priceIdr": 178000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M26",
+        "name": "Chasiu 1/2 Kg",
+        "priceIdr": 338000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M27",
+        "name": "Chasiu 1 Kg",
+        "priceIdr": 630000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M28",
+        "name": "Paket Murmer 1",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M29",
+        "name": "Paket Murmer 2",
+        "priceIdr": 42000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M30",
+        "name": "Paket Murmer 3",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M31",
+        "name": "Paket Murmer 5",
+        "priceIdr": 42000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M32",
+        "name": "Bakut Sayur Asin",
+        "priceIdr": 57333,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M33",
+        "name": "Nasi Hainan + Bakut Sayur Asin",
+        "priceIdr": 62667,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M34",
+        "name": "Nasi Putih + Bakut Sayur Asin",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P20-M35",
+        "name": "Menu Bertiga",
+        "priceIdr": 120000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "nasi campur",
+      "nasi hainan",
+      "nasi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P21",
+    "name": "Kuwali Kwetiaw Bakar & Nasi Goreng Samcan",
+    "slug": "kuwali-kwetiaw-bakar-nasi-goreng-samcan",
+    "type": "makanan",
+    "categoryLabel": "Kwetiau / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": false,
+    "zone": "TODO",
+    "latitude": -6.920769,
+    "longitude": 107.600645,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P21-M01",
+        "name": "Nasi Goreng Smoked Chicken",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M02",
+        "name": "Nasi Goreng YangZhou Ayam",
+        "priceIdr": 49000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M03",
+        "name": "Nasi Goreng YangZhou Babi",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M04",
+        "name": "Nasi Goreng Seafood",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M05",
+        "name": "Nasi Goreng Bacon",
+        "priceIdr": 66000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M06",
+        "name": "Nasi Goreng LapChong",
+        "priceIdr": 66000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M07",
+        "name": "Nasi Goreng Samcan",
+        "priceIdr": 76000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M08",
+        "name": "Nasi Goreng Babi Mix",
+        "priceIdr": 79000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M09",
+        "name": "Kwetiaw Goreng Ayam",
+        "priceIdr": 49000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M10",
+        "name": "Kwetiaw Goreng Seafood",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M11",
+        "name": "Kwetiaw Goreng Babi",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M12",
+        "name": "Kwetiaw Goreng Bacon",
+        "priceIdr": 66000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M13",
+        "name": "Kwetiaw Goreng Samcan",
+        "priceIdr": 76000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M14",
+        "name": "Kwetiaw Goreng Babi Mix",
+        "priceIdr": 79000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M15",
+        "name": "Bihun Goreng Ayam",
+        "priceIdr": 49000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M16",
+        "name": "Bihun Goreng Seafood",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M17",
+        "name": "Bihun Goreng Babi",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M18",
+        "name": "Bihun Goreng Bacon",
+        "priceIdr": 66000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M19",
+        "name": "Bihun Goreng Lapchong + Bacon",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M20",
+        "name": "Bihun Goreng Samcan",
+        "priceIdr": 76000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M21",
+        "name": "Bihun Goreng Babi Mix",
+        "priceIdr": 79000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M22",
+        "name": "Bakmi Goreng Ayam",
+        "priceIdr": 49000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M23",
+        "name": "Bakmi Goreng Seafood",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M24",
+        "name": "Bakmi Goreng Babi",
+        "priceIdr": 59000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M25",
+        "name": "Bakmi Goreng Bacon",
+        "priceIdr": 66000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M26",
+        "name": "Bakmi Goreng Lapchong",
+        "priceIdr": 66000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M27",
+        "name": "Bakmi Goreng Samcan",
+        "priceIdr": 76000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M28",
+        "name": "Bakmi Goreng Babi Mix",
+        "priceIdr": 79000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M29",
+        "name": "Nasi Bacon Cabe Garam",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M30",
+        "name": "Nasi Samcan Goreng Cabe Garam",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M31",
+        "name": "Kerupuk Beras",
+        "priceIdr": 12000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M32",
+        "name": "Bacon (Babi)",
+        "priceIdr": 22000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M33",
+        "name": "Dorokdok Babi",
+        "priceIdr": 30000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M34",
+        "name": "Otak-Otak Ikan Goreng",
+        "priceIdr": 29000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M35",
+        "name": "Baso Goreng / Stick Kriuk (Ikan)",
+        "priceIdr": 38000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M36",
+        "name": "Nasi Putih",
+        "priceIdr": 6000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M37",
+        "name": "Kwetiau Bakar Biasa",
+        "priceIdr": 46000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P21-M38",
+        "name": "Kwetiau Bakar Spesial Bacon",
+        "priceIdr": 54000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P21-M39",
+        "name": "Kwetiau Bakar Spesial Otak-Otak Goreng",
+        "priceIdr": 54000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "kwetiau",
+      "kwetiaw",
+      "nasi goreng",
+      "samcan",
+      "babi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P22",
+    "name": "Susu Mbok Darmi",
+    "slug": "susu-mbok-darmi",
+    "type": "minuman",
+    "categoryLabel": "Minuman / Manis",
+    "tasteTags": [
+      "manis"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920693,
+    "longitude": 107.600669,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 5,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P22-M01",
+        "name": "Darmi Lychee",
+        "priceIdr": 22000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P22-M02",
+        "name": "Darmi Greentea",
+        "priceIdr": 20000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M03",
+        "name": "Darmi Choco Oat",
+        "priceIdr": 20000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M04",
+        "name": "Darmi Regal",
+        "priceIdr": 17000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M05",
+        "name": "Darmi Cheese",
+        "priceIdr": 20000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M06",
+        "name": "Darmi Cadbury",
+        "priceIdr": 22000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M07",
+        "name": "Darmi Plain",
+        "priceIdr": 14000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M08",
+        "name": "Darmi Moka",
+        "priceIdr": 17000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M09",
+        "name": "Darmi Anggur",
+        "priceIdr": 17000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M10",
+        "name": "Darmi Cokelat",
+        "priceIdr": 18000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M11",
+        "name": "Darmi Taro",
+        "priceIdr": 20000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M12",
+        "name": "Darmi Pisang",
+        "priceIdr": 21000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M13",
+        "name": "Darmi Strawberry",
+        "priceIdr": 21000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M14",
+        "name": "Darmi Almond",
+        "priceIdr": 21000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P22-M15",
+        "name": "Darmi Mangga",
+        "priceIdr": 24000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "susu",
+      "milk"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P23",
+    "name": "D’Cheers",
+    "slug": "dcheers",
+    "type": "minuman",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "segar"
+    ],
+    "isHalal": false,
+    "zone": "TODO",
+    "latitude": -6.921202,
+    "longitude": 107.600602,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 5,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P23-M01",
+        "name": "Prost Alster Pint",
+        "priceIdr": 29000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M02",
+        "name": "Prost Quart",
+        "priceIdr": 50000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M03",
+        "name": "Prost Pint",
+        "priceIdr": 29000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M04",
+        "name": "Prost Pilsener Quart",
+        "priceIdr": 47500,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M05",
+        "name": "Mix Max Exotic Blue",
+        "priceIdr": 32500,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M06",
+        "name": "Konig Ludwig",
+        "priceIdr": 60000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M07",
+        "name": "Singaraja Pint",
+        "priceIdr": 24000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M08",
+        "name": "Singaraja Quart",
+        "priceIdr": 41000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M09",
+        "name": "Ice Land Long Island",
+        "priceIdr": 33000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M10",
+        "name": "Bintang Pint",
+        "priceIdr": 30000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M11",
+        "name": "Bintang Quart",
+        "priceIdr": 51000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M12",
+        "name": "Iceland Lecy Martini",
+        "priceIdr": 33000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M13",
+        "name": "Bintang Can 320ml",
+        "priceIdr": 30000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M14",
+        "name": "Bintang Can 500ml",
+        "priceIdr": 41000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M15",
+        "name": "Heineken Pint",
+        "priceIdr": 37000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M16",
+        "name": "Heineken Quart",
+        "priceIdr": 65000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M17",
+        "name": "Heineken Can 330ml",
+        "priceIdr": 37000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M18",
+        "name": "Heineken Can 500ml",
+        "priceIdr": 50000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M19",
+        "name": "Pu Tao Pint",
+        "priceIdr": 33000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M20",
+        "name": "Pu Tao Quart",
+        "priceIdr": 60000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M21",
+        "name": "Pu Tao Lecy Quart",
+        "priceIdr": 60000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M22",
+        "name": "Asahi",
+        "priceIdr": 65000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M23",
+        "name": "Corona",
+        "priceIdr": 75000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M24",
+        "name": "Hoegarden Witbier",
+        "priceIdr": 70000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M25",
+        "name": "Balihai Pint",
+        "priceIdr": 31000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M26",
+        "name": "Balihai Can 320ml",
+        "priceIdr": 30000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P23-M27",
+        "name": "Bintang Radler",
+        "priceIdr": 29000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "singaraja beer",
+      "singaraja",
+      "bir",
+      "beer"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P25",
+    "name": "Medan",
+    "slug": "medan",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.921155,
+    "longitude": 107.600544,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P25-M01",
+        "name": "Bakmie Medan",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P25-M02",
+        "name": "Hainan Babi",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P25-M03",
+        "name": "Kwetiau Goreng",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P25-M04",
+        "name": "Mie Goreng Medan",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P25-M05",
+        "name": "Bihun Goreng Medan",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M06",
+        "name": "Sop Iga Babi",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M07",
+        "name": "Nasi Goreng Samcan",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M08",
+        "name": "Nasi Goreng Medan",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M09",
+        "name": "Bakut Sayur Asin",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M10",
+        "name": "Bihun Medan",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M11",
+        "name": "Kwetiau Medan",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M12",
+        "name": "Nasi Goreng Lap Chiong",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M13",
+        "name": "Capcay Babi",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M14",
+        "name": "Misua Kuah",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M15",
+        "name": "Mie Hokkian",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M16",
+        "name": "Bihun Kuah",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M17",
+        "name": "Pangsit Kuah",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M18",
+        "name": "Bihun Goreng Ayam",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M19",
+        "name": "Kwetiau Goreng Ayam",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M20",
+        "name": "Bihun Goreng Seafood",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M21",
+        "name": "Kwetiau Goreng Seafood",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M22",
+        "name": "Nasi Goreng Ayam",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M23",
+        "name": "Mie Goreng Ayam",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M24",
+        "name": "Mie Goreng Seafood",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M25",
+        "name": "Kwetiau Ayam Jamur",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M26",
+        "name": "Mie Ayam Jamur",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M27",
+        "name": "Nasi Campur Singapur",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M28",
+        "name": "Samcan Goreng",
+        "priceIdr": 80000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M29",
+        "name": "Hainam Samcan Kecap",
+        "priceIdr": 100000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M30",
+        "name": "Nasi Goreng Bakut",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M31",
+        "name": "Kwetiau Goreng Bakut",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M32",
+        "name": "Bakmie Samcan",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M33",
+        "name": "Mie Tiau Medan",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M34",
+        "name": "Bakut Teh Kwetiau",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M35",
+        "name": "Bakut Teh Bihun",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P25-M36",
+        "name": "Bakut Teh Mie",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "medan"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P26",
+    "name": "Sotomie Sukabumi Ko Ricky & Happy Time",
+    "slug": "sotomie-sukabumi-ko-ricky-happy-time",
+    "type": "makanan",
+    "categoryLabel": "Mie Berkuah / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.921011,
+    "longitude": 107.600478,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P26-M01",
+        "name": "Soto Mie Sukabumi",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P26-M02",
+        "name": "Yamin Asin Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M03",
+        "name": "Yamin Manis Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M04",
+        "name": "Yamin Asin Bakso",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M05",
+        "name": "Yamin Manis Bakso",
+        "priceIdr": 50000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M06",
+        "name": "Bakmi Samcan",
+        "priceIdr": 67500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M07",
+        "name": "Bakmi Charsio",
+        "priceIdr": 67500,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M08",
+        "name": "Bakmi Campur",
+        "priceIdr": 67500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M09",
+        "name": "Bakmi Kekian",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M10",
+        "name": "Soto Bihun Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M11",
+        "name": "Yam Bihun Asin Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M12",
+        "name": "Yam Bihun Manis Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M13",
+        "name": "Yam Bihun Asin Bakso",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M14",
+        "name": "Yam Bihun Manis Bakso",
+        "priceIdr": 50000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M15",
+        "name": "Shirataki Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M16",
+        "name": "Soto Kwetiaw Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M17",
+        "name": "Yam Kwetiaw Asin Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M18",
+        "name": "Yam Kwetiaw Manis Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M19",
+        "name": "Yam Asin Kwetiaw Bakso",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M20",
+        "name": "Yam Manis Kwetiaw Bakso",
+        "priceIdr": 50000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M21",
+        "name": "Soto Bakut Lobak",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M22",
+        "name": "Dorokdok",
+        "priceIdr": 17500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M23",
+        "name": "Baso Kuah 1 Porsi",
+        "priceIdr": 54000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M24",
+        "name": "Mie Goreng Telor",
+        "priceIdr": 37000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M25",
+        "name": "Mie Goreng Babi",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M26",
+        "name": "Mie Goreng Baso",
+        "priceIdr": 42500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M27",
+        "name": "Kwetiaw Goreng Telor",
+        "priceIdr": 37000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M28",
+        "name": "Kwetiaw Goreng Babi",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M29",
+        "name": "Kwetiaw Goreng Baso",
+        "priceIdr": 42500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M30",
+        "name": "Bihun Goreng Telor",
+        "priceIdr": 32000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M31",
+        "name": "Bihun Goreng Babi",
+        "priceIdr": 52500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M32",
+        "name": "Bihun Goreng Baso",
+        "priceIdr": 42500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M33",
+        "name": "Nasi Goreng Telor",
+        "priceIdr": 32500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M34",
+        "name": "Nasi Goreng Baso",
+        "priceIdr": 39000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M35",
+        "name": "Nasi Goreng Samcan",
+        "priceIdr": 62500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M36",
+        "name": "Telor Ceplok",
+        "priceIdr": 10000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M37",
+        "name": "Nasi Goreng Pete Telor",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M38",
+        "name": "Nasi Goreng Lapciong",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M39",
+        "name": "Nasi Goreng Lapciong Pete",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M40",
+        "name": "Nasi Goreng Babi Pete",
+        "priceIdr": 57500,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M41",
+        "name": "Nasi Goreng Babi Enak Banyak",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M42",
+        "name": "Soto Mie Mentah (Masak Sendiri)",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M43",
+        "name": "Misua Kuah Bakut",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M44",
+        "name": "Misua Kuah Baso",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P26-M45",
+        "name": "Misua Kuah Telor",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "soto mie",
+      "sotomie",
+      "mie",
+      "berkuah",
+      "sukabumi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P27",
+    "name": "Rainbow Juice",
+    "slug": "rainbow-juice",
+    "type": "minuman",
+    "categoryLabel": "Jus / Segar",
+    "tasteTags": [
+      "segar",
+      "manis"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920753,
+    "longitude": 107.600549,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 5,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P27-M01",
+        "name": "Strawberry + Jeruk",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P27-M02",
+        "name": "Nanas + Jeruk",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P27-M03",
+        "name": "Es Campur",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P27-M04",
+        "name": "Couple 1 (Mango Delight + Strawberry Delight)",
+        "priceIdr": 75000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M05",
+        "name": "Couple 2 (Mango Delight + Avocado Delight)",
+        "priceIdr": 75000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M06",
+        "name": "Mango Delight",
+        "priceIdr": 35000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M07",
+        "name": "Strawberry Delight",
+        "priceIdr": 35000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M08",
+        "name": "Juice Alpukat",
+        "priceIdr": 18000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M09",
+        "name": "Juice Jambu",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M10",
+        "name": "Juice Belimbing",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M11",
+        "name": "Juice Sirsak",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M12",
+        "name": "Juice Melon",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M13",
+        "name": "Juice Strawberry",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M14",
+        "name": "Juice Semangka",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M15",
+        "name": "Juice Pisang",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M16",
+        "name": "Juice Tomat",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M17",
+        "name": "Juice Wortel",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M18",
+        "name": "Juice Mangga",
+        "priceIdr": 16500,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M19",
+        "name": "Lemon (Hot / Cold)",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M20",
+        "name": "Juice Nanas",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M21",
+        "name": "Juice Pear",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M22",
+        "name": "Juice Naga",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M23",
+        "name": "Juice Apel",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M24",
+        "name": "Juice Mix 2 Buah",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M25",
+        "name": "Juice Mix 2 Buah (dengan Mangga)",
+        "priceIdr": 16500,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M26",
+        "name": "Healthy Juice",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M27",
+        "name": "Es Jeruk Kelapa",
+        "priceIdr": 18000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M28",
+        "name": "Juice Mix 3 Buah",
+        "priceIdr": 22000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M29",
+        "name": "Paket A (2 Mango Delight + 2 Juice)",
+        "priceIdr": 110000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M30",
+        "name": "Paket B (1 Mango Delight, 1 Avocado Delight, 2 Juice)",
+        "priceIdr": 110000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M31",
+        "name": "2 Es Campur",
+        "priceIdr": 45000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M32",
+        "name": "Sop Buah",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M33",
+        "name": "Sop Kelapa Alpukat",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M34",
+        "name": "Sop Alpukat",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M35",
+        "name": "Sop Kelapa",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M36",
+        "name": "Es Lemon Tea",
+        "priceIdr": 16000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M37",
+        "name": "Es / Hot Milo",
+        "priceIdr": 16000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M38",
+        "name": "Paket Frozen 1 (4 Pempek Kapal Selam + 2 Kulit)",
+        "priceIdr": 130000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M39",
+        "name": "Paket Frozen 2 (3 Kapal Selam, 2 Lenjer, 3 Keriting)",
+        "priceIdr": 130000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M40",
+        "name": "Paket Frozen 3",
+        "priceIdr": 67000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M41",
+        "name": "Leci (Tambahan per Butir)",
+        "priceIdr": 5000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M42",
+        "name": "Lo Han Kuo (Tambahan)",
+        "priceIdr": 5000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M43",
+        "name": "Paket Pempek Lenggang + Juice",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P27-M44",
+        "name": "Paket Pempek Kulit + Juice",
+        "priceIdr": 45000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "jus",
+      "juice",
+      "buah"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P28",
+    "name": "Pempek Gochan",
+    "slug": "pempek-gochan",
+    "type": "makanan",
+    "categoryLabel": "Pempek / Gurih-Pedas",
+    "tasteTags": [
+      "gurih",
+      "pedas"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920713,
+    "longitude": 107.600607,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P28-M01",
+        "name": "Paket A (3 Kapal Selam Besar)",
+        "priceIdr": 79000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P28-M02",
+        "name": "Rame Rame 1",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M03",
+        "name": "Pempek Kapal Selam Besar",
+        "priceIdr": 24000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P28-M04",
+        "name": "Rame Rame 2",
+        "priceIdr": 120000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M05",
+        "name": "Paket Pempek Selam 1",
+        "priceIdr": 38000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M06",
+        "name": "Paket Pempek Selam 2",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M07",
+        "name": "Promo Pempek Selam + Juice Strawberry",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M08",
+        "name": "Paket Pempek Lenggang 1",
+        "priceIdr": 38000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M09",
+        "name": "Paket Pempek Lenggang 2",
+        "priceIdr": 40000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M10",
+        "name": "Pempek Adaan",
+        "priceIdr": 5000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M11",
+        "name": "Pempek Keriting",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M12",
+        "name": "Pempek Kulit",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M13",
+        "name": "Pempek Lenggang",
+        "priceIdr": 24000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M14",
+        "name": "Pempek Lenggang Spesial",
+        "priceIdr": 29000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M15",
+        "name": "Pempek Lenjer",
+        "priceIdr": 8000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M16",
+        "name": "Paket B (5 Pempek Kulit Besar)",
+        "priceIdr": 46000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M17",
+        "name": "Paket C (10 Pempek Adaan)",
+        "priceIdr": 54000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M18",
+        "name": "Promo Pempek Kulit + Juice Strawberry",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M19",
+        "name": "Promo Pempek Lenggang + Juice Strawberry",
+        "priceIdr": 48000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M20",
+        "name": "Tekwan",
+        "priceIdr": 24000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M21",
+        "name": "Paket Pempek Frozen Komplit",
+        "priceIdr": 84000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M22",
+        "name": "Paket Pempek Hemat Frozen",
+        "priceIdr": 54000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M23",
+        "name": "Rame Rame 3",
+        "priceIdr": 135000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M24",
+        "name": "Rame Rame 4",
+        "priceIdr": 140000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M25",
+        "name": "Rame Rame 5",
+        "priceIdr": 75000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M26",
+        "name": "Es Capucino",
+        "priceIdr": 15000,
+        "tastes": [
+          "aromatik"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M27",
+        "name": "Es Jeruk",
+        "priceIdr": 17000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M28",
+        "name": "Es Lemon",
+        "priceIdr": 17000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M29",
+        "name": "Es Lemon Tea",
+        "priceIdr": 15000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M30",
+        "name": "Es Milo",
+        "priceIdr": 15000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M31",
+        "name": "Es Teh Manis",
+        "priceIdr": 6000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P28-M32",
+        "name": "Juice Strawberry",
+        "priceIdr": 17000,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "pempek",
+      "empek-empek",
+      "cuko"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P29",
+    "name": "Mie Susu",
+    "slug": "mie-susu",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920656,
+    "longitude": 107.600649,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P29-M01",
+        "name": "Mie Susu Ayam Ori",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P29-M02",
+        "name": "Soto Susu Sapi + Nasi",
+        "priceIdr": 55000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P29-M03",
+        "name": "Mie Susu Udang Bakar",
+        "priceIdr": 35000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P29-M04",
+        "name": "Ronde Gula Putih",
+        "priceIdr": 23000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P29-M05",
+        "name": "Ronde Gula Merah",
+        "priceIdr": 23000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P29-M06",
+        "name": "Ronde Susu Ori",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P29-M07",
+        "name": "Ronde Susu Ubi Keju",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "mie"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P30",
+    "name": "Waroenk Laris",
+    "slug": "waroenk-laris",
+    "type": "makanan",
+    "categoryLabel": "TODO",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.920707,
+    "longitude": 107.600623,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P30-M01",
+        "name": "Paket Nasi Samcan Hemat Berdua",
+        "priceIdr": 125000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P30-M02",
+        "name": "Nasi Samcan Goreng Sambal Matah",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P30-M03",
+        "name": "Nasi Samcan Goreng Cabe Garam",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P30-M04",
+        "name": "Samcan Goreng Crispy",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M05",
+        "name": "Samcan Goreng Mentega",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M06",
+        "name": "Samcan Goreng Kecap",
+        "priceIdr": 70000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M07",
+        "name": "Samcan Goreng Telor Asin",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M08",
+        "name": "Samcan Goreng Mayonise",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M09",
+        "name": "Samcan Goreng Cabe Garam",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M10",
+        "name": "Samcan Goreng Sambal Matah",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M11",
+        "name": "Samcan Goreng Geprek",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M12",
+        "name": "Nasi Samcan Goreng Crispy",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M13",
+        "name": "Nasi Samcan Goreng Geprek",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M14",
+        "name": "Nasi Samcan Goreng Telor Asin",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M15",
+        "name": "Nasi Samcan Goreng Mentega",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M16",
+        "name": "Nasi Samcan Goreng Kecap",
+        "priceIdr": 65000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M17",
+        "name": "Nasi Samcan Goreng Mayonise",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M18",
+        "name": "Nasi Putih",
+        "priceIdr": 9000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M19",
+        "name": "Lapchiong",
+        "priceIdr": 20000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P30-M20",
+        "name": "Telor Kecap",
+        "priceIdr": 7000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "warung"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P31",
+    "name": "Bacang Babi",
+    "slug": "bacang-babi",
+    "type": "makanan",
+    "categoryLabel": "Bacang / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": false,
+    "zone": "TODO",
+    "latitude": -6.920659,
+    "longitude": 107.600662,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P31-M01",
+        "name": "Bacang Beras Babi",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P31-M02",
+        "name": "Bacang Ketan Babi",
+        "priceIdr": 50000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P31-M03",
+        "name": "Roti Baso Babi",
+        "priceIdr": 25000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M04",
+        "name": "Liang Tea",
+        "priceIdr": 17500,
+        "tastes": [
+          "segar"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M05",
+        "name": "Bapau Babi Telur Lapchong Jamur Hioko",
+        "priceIdr": 29000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M06",
+        "name": "Roti Ham Babi Keju",
+        "priceIdr": 25000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M07",
+        "name": "Roti Baso Ayam",
+        "priceIdr": 25000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M08",
+        "name": "Roti Coklat Rhum",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M09",
+        "name": "Roti Keju Susu",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M10",
+        "name": "Roti Isi Coklat",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M11",
+        "name": "Roti Susu",
+        "priceIdr": 25000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M12",
+        "name": "Bapau Tausa",
+        "priceIdr": 25000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P31-M13",
+        "name": "Bapau Enten / Kelapa Gula Merah (Isi 3)",
+        "priceIdr": 29000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "bacang",
+      "bakcang",
+      "babi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P32",
+    "name": "Sate Babi Wibisana",
+    "slug": "sate-babi-wibisana",
+    "type": "makanan",
+    "categoryLabel": "Sate / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.921199,
+    "longitude": 107.6006155,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P32-M01",
+        "name": "Sate Samcan Asin (per Tusuk)",
+        "priceIdr": 14400,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P32-M02",
+        "name": "Sate Kulit Babi (per Tusuk)",
+        "priceIdr": 14400,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M03",
+        "name": "Sate Samcan Asin Goreng",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M04",
+        "name": "Sate Samcan Shaokao Goreng",
+        "priceIdr": 78000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M05",
+        "name": "Sate Babi Manis Mini",
+        "priceIdr": 78000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M06",
+        "name": "Nasi Mix",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M07",
+        "name": "Sate Babi Besar Sambal Matah (per Tusuk)",
+        "priceIdr": 14400,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M08",
+        "name": "Sate Shaokao (per Tusuk)",
+        "priceIdr": 14400,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M09",
+        "name": "Sate Samcan Manis (per Tusuk)",
+        "priceIdr": 14400,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M10",
+        "name": "Nasi Babi Asap Sambal Matah",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M11",
+        "name": "Nasi Mix Ca Pete Sambal Matah",
+        "priceIdr": 84000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M12",
+        "name": "Nasi Samcan Bakar Sambal Matah",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M13",
+        "name": "Nasi Babi Asap Ca Pete Sambal Matah",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M14",
+        "name": "Nasi Samcan Ca Pete Sambal Matah",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M15",
+        "name": "Nasi Mix Ca Pete",
+        "priceIdr": 84000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M16",
+        "name": "Nasi Babi Crispy Sambal Matah",
+        "priceIdr": 72000,
+        "tastes": [
+          "gurih",
+          "pedas"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M17",
+        "name": "Bakut Kuah",
+        "priceIdr": 66000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M18",
+        "name": "Sayur Asin Kuah",
+        "priceIdr": 36000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M19",
+        "name": "Bakso Goreng (3 Pcs)",
+        "priceIdr": 24000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M20",
+        "name": "Nasi Putih",
+        "priceIdr": 9000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P32-M21",
+        "name": "Babi Rica",
+        "priceIdr": 66000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "sate",
+      "sate babi",
+      "samcan",
+      "babi"
+    ],
+    "qrCode": null
+  },
+  {
+    "id": "P33",
+    "name": "El Paso",
+    "slug": "el-paso",
+    "type": "makanan",
+    "categoryLabel": "Meksiko / Gurih",
+    "tasteTags": [
+      "gurih"
+    ],
+    "isHalal": null,
+    "zone": "TODO",
+    "latitude": -6.9208568,
+    "longitude": 107.6005713,
+    "triggerRadiusM": 10,
+    "avgVisitMin": 15,
+    "description": "",
+    "culturalStory": null,
+    "photos": [],
+    "audio": null,
+    "menu": [
+      {
+        "id": "P33-M01",
+        "name": "Cubanos",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P33-M02",
+        "name": "Cubanos Single",
+        "priceIdr": 43000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M03",
+        "name": "Uncle Joe's Porky Plate",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": true
+      },
+      {
+        "id": "P33-M04",
+        "name": "Uncle Joe's Feat. Babi Bali",
+        "priceIdr": 65000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M05",
+        "name": "Cheese Whiz",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M06",
+        "name": "Cheese Whiz Single",
+        "priceIdr": 43000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M07",
+        "name": "Balco Pork Asada",
+        "priceIdr": 65000,
+        "tastes": [
+          "manis"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M08",
+        "name": "Nasi Samcan Panggang Bumbu Meksiko",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M09",
+        "name": "Nasi Samcan Panggang Bumbu Sate Bali / Maranggi",
+        "priceIdr": 70000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M10",
+        "name": "Ekstra Smoked Beef",
+        "priceIdr": 5000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M11",
+        "name": "Ekstra Keju",
+        "priceIdr": 5000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M12",
+        "name": "Pork Steak",
+        "priceIdr": 78000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M13",
+        "name": "Nasi Goreng Babi Oriental",
+        "priceIdr": 60000,
+        "tastes": [
+          "gurih"
+        ],
+        "isSignature": false
+      },
+      {
+        "id": "P33-M14",
+        "name": "Nasi Goreng Babi Woku",
+        "priceIdr": 60000,
+        "tastes": [
+          "pedas"
+        ],
+        "isSignature": false
+      }
+    ],
+    "openingHours": [],
+    "peakHours": [],
+    "searchKeywords": [
+      "meksiko",
+      "cubanos",
+      "sandwich",
+      "babi"
+    ],
+    "qrCode": null
+  }
+]
