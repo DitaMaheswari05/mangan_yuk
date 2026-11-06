@@ -11,3 +11,4 @@ coverage/
 backend/supabase/.branches/
 backend/supabase/.temp/
 supabase/.temp/
+postman/

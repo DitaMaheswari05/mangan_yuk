@@ -1,0 +1,11 @@
+# Use this workspace to collaborate
+workspace:
+  id: 4fa16b57-1bcd-4ff7-8fc6-cc2c93c71a7b
+
+localResources:
+  specs:
+    - ../docs/api/openapi.yaml
+
+cloudResources:
+  collections:
+    ../postman/collections/Mangan Yuk Auth API: dd282143-e6ec-420b-bb09-f87270114534
