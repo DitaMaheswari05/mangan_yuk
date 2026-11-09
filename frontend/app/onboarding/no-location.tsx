@@ -13,7 +13,6 @@ export default function NoLocationScreen() {
   const setOnboardingStep = useAppStore((s) => s.setOnboardingStep);
   const setPermissions = useAppStore((s) => s.setPermissions);
 
-  // PB02: Saat pengguna kembali dari Pengaturan sistem, cek ulang izin lokasi
   useEffect(() => {
     const sub = AppState.addEventListener('change', async (state) => {
       if (state === 'active') {
@@ -51,7 +50,6 @@ export default function NoLocationScreen() {
   return (
     <OnboardingScaffold
       stepIndex={2}
-      badgeText="Mode Tanpa Lokasi"
       title="Lokasi Belum"
       titleAccent="Diaktifkan"
       subtitle="Tanpa izin lokasi, fitur deteksi otomatis saat mendekati tenant (Mode Jelajah) tidak dapat berjalan."
