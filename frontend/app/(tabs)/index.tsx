@@ -2,6 +2,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
+  Image,
   Modal,
   Pressable,
   StyleSheet,
@@ -17,15 +18,11 @@ import areaJson from '@/data/area.json';
 import {
   haversineM,
   useUserLocation,
-  type AreaStatus,
-  type UserPosition,
 } from '@/features/location';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
 import { getAll, getPois } from '@/features/poi';
 import { useAppStore } from '@/store/useAppStore';
 import type { Poi } from '@/types/content';
-
-type SimMode = 'gps' | 'inside' | 'outside';
 
 function formatDistanceLabel(meters: number | null): string {
   if (meters === null) return '';
@@ -41,12 +38,10 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const mapRef = useRef<MapView | null>(null);
 
-  const setOnboarded = useAppStore((s) => s.setOnboarded);
-  const setOnboardingStep = useAppStore((s) => s.setOnboardingStep);
   const setPermissions = useAppStore((s) => s.setPermissions);
 
   // State lokasi dari sensor perangkat (PB03 hook)
-  const liveLocation = useUserLocation();
+  const { permission, position, areaStatus, distanceToAreaM } = useUserLocation();
 
   // Dataset POI (PB04 repository)
   const [pois, setPois] = useState<Poi[]>(() => getPois());
@@ -56,9 +51,6 @@ export default function HomeScreen() {
   const [exploreMode, setExploreMode] = useState(false);
   const [arrivedModalVisible, setArrivedModalVisible] = useState(false);
   const hasShownArrivedModalRef = useRef(false);
-
-  // Mode simulasi dev untuk memudahkan pengetesan INSIDE / OUTSIDE di emulator
-  const [simMode, setSimMode] = useState<SimMode>('gps');
 
   useEffect(() => {
     let active = true;
@@ -72,58 +64,6 @@ export default function HomeScreen() {
       active = false;
     };
   }, []);
-
-  // Hitung state efektif (live GPS vs simulasi dev jika dipilih)
-  const effectiveLocation = useMemo<{
-    permission: typeof liveLocation.permission;
-    position: UserPosition | null;
-    areaStatus: AreaStatus;
-    distanceToAreaM: number | null;
-  }>(() => {
-    if (simMode === 'inside') {
-      const pos: UserPosition = {
-        coordinate: {
-          latitude: areaJson.center.latitude + 0.00012,
-          longitude: areaJson.center.longitude - 0.00008,
-        },
-        accuracyM: 14,
-        timestamp: Date.now(),
-      };
-      return {
-        permission: 'granted',
-        position: pos,
-        areaStatus: 'INSIDE',
-        distanceToAreaM: Math.round(haversineM(pos.coordinate, areaJson.center)),
-      };
-    }
-
-    if (simMode === 'outside') {
-      // Simulasi posisi di Jl. Tamansari (~1.3 km dari Sudirman Street Food)
-      const pos: UserPosition = {
-        coordinate: {
-          latitude: -6.9102,
-          longitude: 107.6055,
-        },
-        accuracyM: 18,
-        timestamp: Date.now(),
-      };
-      return {
-        permission: 'granted',
-        position: pos,
-        areaStatus: 'OUTSIDE',
-        distanceToAreaM: Math.round(haversineM(pos.coordinate, areaJson.center)),
-      };
-    }
-
-    return {
-      permission: liveLocation.permission,
-      position: liveLocation.position,
-      areaStatus: liveLocation.areaStatus,
-      distanceToAreaM: liveLocation.distanceToAreaM,
-    };
-  }, [liveLocation, simMode]);
-
-  const { permission, position, areaStatus, distanceToAreaM } = effectiveLocation;
 
   // Tampilkan modal sambutan saat pengguna masuk ke area SSF pertama kali (Figma Explore/Arrived)
   useEffect(() => {
@@ -185,13 +125,6 @@ export default function HomeScreen() {
     } else {
       await PermissionService.openAppSettings();
     }
-  };
-
-  const handleBackToOnboarding = async () => {
-    await AppStateRepository.resetOnboarding();
-    setOnboarded(false);
-    setOnboardingStep('intro');
-    router.replace('/onboarding/welcome');
   };
 
   const handleActivateExploreMode = () => {
@@ -371,50 +304,6 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      {/* Bar Kontrol Simulasi & Info Jumlah POI (memudahkan demo di emulator) */}
-      <View style={[styles.floatingChipsRow, { top: insets.top + 146 }]}>
-        <Pressable style={styles.poiCountChip} onPress={handleFocusSsfArea}>
-          <MaterialCommunityIcons name="storefront-outline" size={14} color="#FF8316" />
-          <Text style={styles.poiCountChipText}>{pois.length} POI Aktif</Text>
-        </Pressable>
-
-        <View style={styles.simPillGroup}>
-          <Pressable
-            onPress={() => setSimMode('gps')}
-            style={[styles.simPill, simMode === 'gps' && styles.simPillActive]}
-          >
-            <Text style={[styles.simPillText, simMode === 'gps' && styles.simPillTextActive]}>
-              GPS
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => setSimMode('inside')}
-            style={[styles.simPill, simMode === 'inside' && styles.simPillActive]}
-          >
-            <Text
-              style={[styles.simPillText, simMode === 'inside' && styles.simPillTextActive]}
-            >
-              Dalam SSF
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => setSimMode('outside')}
-            style={[styles.simPill, simMode === 'outside' && styles.simPillActive]}
-          >
-            <Text
-              style={[styles.simPillText, simMode === 'outside' && styles.simPillTextActive]}
-            >
-              Luar SSF
-            </Text>
-          </Pressable>
-        </View>
-
-        <Pressable style={styles.resetOnboardingChip} onPress={handleBackToOnboarding}>
-          <Ionicons name="refresh" size={12} color="#5A4136" />
-          <Text style={styles.resetOnboardingChipText}>Onboarding</Text>
-        </Pressable>
-      </View>
-
       {/* Area Bawah: Banner Status / Kartu POI / Tombol Mode Jelajah */}
       <View style={styles.bottomOverlay} pointerEvents="box-none">
         {/* 1. Kartu Preview POI ketika salah satu marker POI diklik (Figma Explore Trigger/Card) */}
@@ -482,9 +371,11 @@ export default function HomeScreen() {
         {/* 3. Kartu Oranye saat berada di LUAR area SSF (Figma Frame "Explore" #174:43274) */}
         {!selectedPoi && permission === 'granted' && areaStatus === 'OUTSIDE' ? (
           <View style={styles.outsideBannerCard}>
-            <View style={styles.outsideMascotBadge}>
-              <MaterialCommunityIcons name="map-marker-distance" size={38} color="#FFFFFF" />
-            </View>
+            <Image
+              source={require('@/../assets/images/illustration-location.png')}
+              style={styles.outsideIllustration}
+              resizeMode="contain"
+            />
             <View style={styles.outsideContentCol}>
               <Text style={styles.outsideBannerText}>
                 Kamu belum berada di{' '}
@@ -528,9 +419,11 @@ export default function HomeScreen() {
               <Ionicons name="close" size={22} color="#FFFFFF" />
             </Pressable>
 
-            <View style={styles.arrivedIllustrationWrap}>
-              <MaterialCommunityIcons name="food-fork-drink" size={64} color="#FFFFFF" />
-            </View>
+            <Image
+              source={require('@/../assets/images/illustration-welcome.png')}
+              style={styles.arrivedIllustrationImage}
+              resizeMode="contain"
+            />
 
             <Text style={styles.arrivedModalText}>
               Hore! Kamu sudah sampai di Sudirman Street Food. Aktifkan{' '}
@@ -683,80 +576,6 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: '#666666',
   },
-  floatingChipsRow: {
-    position: 'absolute',
-    left: 16,
-    right: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 8,
-  },
-  poiCountChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: '#FFFFFF',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.12,
-    shadowRadius: 3,
-  },
-  poiCountChipText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 12,
-    color: '#1E1E1E',
-  },
-  simPillGroup: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(255, 255, 255, 0.92)',
-    borderRadius: 999,
-    padding: 2,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.12,
-    shadowRadius: 3,
-  },
-  simPill: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 999,
-  },
-  simPillActive: {
-    backgroundColor: '#FF8316',
-  },
-  simPillText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 11,
-    color: '#5A4136',
-  },
-  simPillTextActive: {
-    color: '#FFFFFF',
-  },
-  resetOnboardingChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.92)',
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 999,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.12,
-    shadowRadius: 3,
-  },
-  resetOnboardingChipText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 11,
-    color: '#5A4136',
-  },
   bottomOverlay: {
     position: 'absolute',
     left: 16,
@@ -769,30 +588,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF8316',
     borderRadius: 20,
     paddingVertical: 16,
-    paddingHorizontal: 18,
+    paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    justifyContent: 'flex-end',
+    overflow: 'visible',
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.18,
     shadowRadius: 6,
   },
-  outsideMascotBadge: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: 'rgba(255, 255, 255, 0.18)',
-    alignItems: 'center',
-    justifyContent: 'center',
+  outsideIllustration: {
+    position: 'absolute',
+    left: -14,
+    bottom: -6,
+    width: 133,
+    height: 147,
   },
   outsideContentCol: {
-    flex: 1,
+    width: 216,
+    maxWidth: '68%',
     alignItems: 'flex-end',
     gap: 10,
   },
   outsideBannerText: {
+    width: '100%',
     fontFamily: fontFamily.regular,
     fontSize: 14,
     lineHeight: 20,
@@ -806,9 +627,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 6,
+    gap: 4,
     backgroundColor: '#FFFFFF',
-    paddingVertical: 8,
+    paddingVertical: 7,
     paddingHorizontal: 16,
     borderRadius: 20,
   },
@@ -958,7 +779,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF8316',
     borderRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 24,
+    paddingVertical: 20,
     alignItems: 'center',
     gap: 16,
     elevation: 8,
@@ -971,14 +792,11 @@ const styles = StyleSheet.create({
     height: 28,
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 2,
   },
-  arrivedIllustrationWrap: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
+  arrivedIllustrationImage: {
+    width: 227,
+    height: 165,
     marginTop: 8,
   },
   arrivedModalText: {

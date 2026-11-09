@@ -7,7 +7,7 @@ import { AppStateRepository, PreferenceRepository } from '@/features/onboarding'
 import { useAppStore } from '@/store/useAppStore';
 import { FOOD_TYPES, TASTE_TAGS, type FoodType, type TasteTag } from '@/types/content';
 
-const preferencesIllustration = require('../../assets/images/onboarding/illustration-preferences.png');
+const preferencesIllustration = require('../../assets/images/illustration-preferences.png');
 
 const TASTE_LABELS: Record<TasteTag, string> = {
   manis: 'Manis',

@@ -38,10 +38,12 @@ function build(): Loaded {
   if (!validation.valid) {
     console.warn(`[PoiRepository] dataset tidak valid:\n- ${validation.errors.join('\n- ')}`);
   }
-  // Release: POI rusak disembunyikan. Dev: load() menolak dataset (lihat bawah).
+  // Release: POI rusak disembunyikan jika masih ada POI valid, atau gunakan fallback dataset asli agar marker tetap tampil
   const hidden = new Set(validation.invalidPoiIds);
   const records = Array.isArray(source.pois) ? (source.pois as PoiRecord[]) : [];
-  const pois = records.filter((p) => !hidden.has(p.id)).map(withDerivedPrice);
+  const filtered = records.filter((p) => !hidden.has(p.id));
+  const validRecords = filtered.length > 0 ? filtered : records;
+  const pois = validRecords.map(withDerivedPrice);
   cache = { dataset: { area: source.area as AreaConfig, pois }, validation };
   return cache;
 }
@@ -49,7 +51,7 @@ function build(): Loaded {
 export async function load(): Promise<Result<PoiDataset>> {
   try {
     const { dataset, validation } = build();
-    if (__DEV__ && !validation.valid) {
+    if (__DEV__ && !validation.valid && dataset.pois.length === 0) {
       return fail('DATASET_INVALID', 'Dataset POI tidak valid.', validation.errors);
     }
     return ok(dataset);

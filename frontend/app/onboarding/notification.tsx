@@ -6,7 +6,7 @@ import { colors, typography } from '@/constants/theme';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
 import { useAppStore } from '@/store/useAppStore';
 
-const notificationIllustration = require('../../assets/images/onboarding/illustration-notification.png');
+const notificationIllustration = require('../../assets/images/illustration-notification.png');
 
 export default function NotificationScreen() {
   const router = useRouter();

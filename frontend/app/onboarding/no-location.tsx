@@ -6,7 +6,7 @@ import { colors, typography } from '@/constants/theme';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
 import { useAppStore } from '@/store/useAppStore';
 
-const locationIllustration = require('../../assets/images/onboarding/illustration-location.png');
+const locationIllustration = require('../../assets/images/illustration-location.png');
 
 export default function NoLocationScreen() {
   const router = useRouter();

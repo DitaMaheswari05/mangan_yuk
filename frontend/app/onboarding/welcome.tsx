@@ -6,7 +6,7 @@ import { colors, typography } from '@/constants/theme';
 import { AppStateRepository } from '@/features/onboarding';
 import { useAppStore } from '@/store/useAppStore';
 
-const welcomeIllustration = require('../../assets/images/onboarding/illustration-welcome.png');
+const welcomeIllustration = require('../../assets/images/illustration-welcome.png');
 
 const HIGHLIGHTS = [
   {

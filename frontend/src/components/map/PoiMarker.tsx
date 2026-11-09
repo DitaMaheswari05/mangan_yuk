@@ -26,7 +26,7 @@ export function PoiMarker({ poi, selected = false, onPress }: PoiMarkerProps) {
       description={poi.categoryLabel}
       onPress={handlePress}
       onCalloutPress={() => router.push(`/poi/${poi.id}`)}
-      tracksViewChanges={false}
+      tracksViewChanges={true}
     >
       <View style={[styles.pin, selected && styles.pinSelected]}>
         <MaterialCommunityIcons
