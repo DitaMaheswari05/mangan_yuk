@@ -1,0 +1,284 @@
+{
+  "Typography": {
+    "Headline-72": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "72px",
+        "fontWeight": "700",
+        "lineHeight": "80px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Headline-64": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "64px",
+        "fontWeight": "700",
+        "lineHeight": "72px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Headline-56": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "56px",
+        "fontWeight": "700",
+        "lineHeight": "64px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Headline-48": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "48px",
+        "fontWeight": "700",
+        "lineHeight": "56px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Headline-40": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "40px",
+        "fontWeight": "700",
+        "lineHeight": "48px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Headline-32": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "32px",
+        "fontWeight": "700",
+        "lineHeight": "40px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Sub-headline-72": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "72px",
+        "fontWeight": "600",
+        "lineHeight": "80px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Sub-headline-64": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "64px",
+        "fontWeight": "600",
+        "lineHeight": "72px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Sub-headline-56": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "56px",
+        "fontWeight": "600",
+        "lineHeight": "64px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Sub-headline-48": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "48px",
+        "fontWeight": "600",
+        "lineHeight": "56px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Sub-headline-40": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "40px",
+        "fontWeight": "600",
+        "lineHeight": "48px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Sub-headline-32": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "32px",
+        "fontWeight": "600",
+        "lineHeight": "40px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-lg-Regular": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "18px",
+        "fontWeight": "400",
+        "lineHeight": "28px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-lg-Medium": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "18px",
+        "fontWeight": "500",
+        "lineHeight": "28px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-lg-Semibold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "18px",
+        "fontWeight": "600",
+        "lineHeight": "28px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-lg-Bold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "18px",
+        "fontWeight": "700",
+        "lineHeight": "28px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-md-Regular": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "24px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-md-Medium": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "16px",
+        "fontWeight": "500",
+        "lineHeight": "24px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-md-Semibold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "lineHeight": "24px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-md-Bold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "lineHeight": "24px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-sm-Regular": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "lineHeight": "20px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-sm-Medium": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "lineHeight": "20px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-sm-Semibold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "lineHeight": "20px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-sm-Bold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "14px",
+        "fontWeight": "700",
+        "lineHeight": "20px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-xs-Regular": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "12px",
+        "fontWeight": "400",
+        "lineHeight": "16px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-xs-Medium": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "12px",
+        "fontWeight": "500",
+        "lineHeight": "16px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-xs-Semibold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "12px",
+        "fontWeight": "600",
+        "lineHeight": "16px",
+        "letterSpacing": "0px"
+      }
+    },
+    "Text-xs-Bold": {
+      "type": "typography",
+      "value": {
+        "fontFamily": "Chiron GoRound TC",
+        "fontSize": "12px",
+        "fontWeight": "700",
+        "lineHeight": "16px",
+        "letterSpacing": "0px"
+      }
+    }
+  }
+}

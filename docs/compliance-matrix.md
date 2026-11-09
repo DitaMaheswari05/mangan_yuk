@@ -10,4 +10,5 @@
 | F06 | Navigasi                        | `frontend/src/features/navigation`                    |                                   | ⬜     |
 | F07 | Rekomendasi                     | `frontend/src/features/recommendation`                |                                   | ⬜     |
 | F08 | Trail planner                   | `frontend/src/features/trail`                         |                                   | ⬜     |
+| F09 | Onboarding & izin               | `frontend/src/features/onboarding`, `app/onboarding`  | `onboarding/__tests__`            | ✅     |
 | F10 | Paspor                          | `frontend/src/features/passport`                      |                                   | ⬜     |

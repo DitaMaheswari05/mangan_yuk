@@ -1,0 +1,202 @@
+{
+  "Color": {
+    "Neutral": {
+      "surface": {
+        "type": "color",
+        "value": "#fcf9f8"
+      },
+      "surface-dim": {
+        "type": "color",
+        "value": "#dcd9d9"
+      },
+      "surface-bright": {
+        "type": "color",
+        "value": "#fcf9f8"
+      },
+      "surface-container-lowest": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "surface-container-low": {
+        "type": "color",
+        "value": "#f6f3f2"
+      },
+      "surface-container": {
+        "type": "color",
+        "value": "#f0eded"
+      },
+      "surface-container-high": {
+        "type": "color",
+        "value": "#eae7e7"
+      },
+      "surface-container-highest": {
+        "type": "color",
+        "value": "#e5e2e1"
+      },
+      "on-surface": {
+        "type": "color",
+        "value": "#1b1b1c"
+      },
+      "inverse-surface": {
+        "type": "color",
+        "value": "#303030"
+      },
+      "inverse-on-surface": {
+        "type": "color",
+        "value": "#f3f0ef"
+      },
+      "on-primary": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "on-secondary": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "on-tertiary": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "on-error": {
+        "type": "color",
+        "value": "#ffffff"
+      },
+      "background": {
+        "type": "color",
+        "value": "#fcf9f8"
+      },
+      "on-background": {
+        "type": "color",
+        "value": "#1b1b1c"
+      },
+      "surface-variant": {
+        "type": "color",
+        "value": "#e5e2e1"
+      }
+    },
+    "Red & Pink": {
+      "error": {
+        "type": "color",
+        "value": "#ba1a1a"
+      },
+      "error-container": {
+        "type": "color",
+        "value": "#ffdad6"
+      },
+      "on-error-container": {
+        "type": "color",
+        "value": "#93000a"
+      }
+    },
+    "Orange & Brown": {
+      "on-surface-variant": {
+        "type": "color",
+        "value": "#5a4136"
+      },
+      "outline": {
+        "type": "color",
+        "value": "#8e7164"
+      },
+      "outline-variant": {
+        "type": "color",
+        "value": "#e2bfb0"
+      },
+      "surface-tint": {
+        "type": "color",
+        "value": "#a14000"
+      },
+      "primary": {
+        "type": "color",
+        "value": "#a14000"
+      },
+      "primary-container": {
+        "type": "color",
+        "value": "#ff6a00"
+      },
+      "on-primary-container": {
+        "type": "color",
+        "value": "#571f00"
+      },
+      "inverse-primary": {
+        "type": "color",
+        "value": "#ffb694"
+      },
+      "primary-fixed": {
+        "type": "color",
+        "value": "#ffdbcc"
+      },
+      "primary-fixed-dim": {
+        "type": "color",
+        "value": "#ffb694"
+      },
+      "on-primary-fixed": {
+        "type": "color",
+        "value": "#351000"
+      },
+      "on-primary-fixed-variant": {
+        "type": "color",
+        "value": "#7b2f00"
+      }
+    },
+    "Yellow": {
+      "secondary": {
+        "type": "color",
+        "value": "#785a00"
+      },
+      "secondary-container": {
+        "type": "color",
+        "value": "#fec73a"
+      },
+      "on-secondary-container": {
+        "type": "color",
+        "value": "#705400"
+      },
+      "secondary-fixed": {
+        "type": "color",
+        "value": "#ffdf9b"
+      },
+      "secondary-fixed-dim": {
+        "type": "color",
+        "value": "#f5bf31"
+      },
+      "on-secondary-fixed": {
+        "type": "color",
+        "value": "#251a00"
+      },
+      "on-secondary-fixed-variant": {
+        "type": "color",
+        "value": "#5b4300"
+      }
+    },
+    "Blue": {
+      "tertiary": {
+        "type": "color",
+        "value": "#065cbb"
+      },
+      "tertiary-container": {
+        "type": "color",
+        "value": "#5d98fb"
+      },
+      "on-tertiary-container": {
+        "type": "color",
+        "value": "#002f68"
+      },
+      "tertiary-fixed": {
+        "type": "color",
+        "value": "#d7e2ff"
+      },
+      "tertiary-fixed-dim": {
+        "type": "color",
+        "value": "#acc7ff"
+      },
+      "on-tertiary-fixed": {
+        "type": "color",
+        "value": "#001b40"
+      },
+      "on-tertiary-fixed-variant": {
+        "type": "color",
+        "value": "#004590"
+      }
+    }
+  }
+}
