@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "jejak-jajanan-sunda",
+    "name": "Jejak Jajanan Sunda",
+    "description": "Jelajahi jajanan khas di Sudirman Street Food.",
+    "poiIds": []
+  },
+  {
+    "id": "manis-manis-bandung",
+    "name": "Manis-manis Bandung",
+    "description": "Kumpulkan stempel dari tenant kuliner manis.",
+    "poiIds": []
+  }
+]
