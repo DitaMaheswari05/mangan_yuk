@@ -102,7 +102,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "gorengan",
@@ -310,7 +346,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "swike",
@@ -443,7 +515,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "bebek",
@@ -628,7 +736,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [],
     "qrCode": null
@@ -780,7 +924,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "kwetiau",
@@ -1017,7 +1197,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "chinese food"
@@ -1234,7 +1450,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [],
     "qrCode": null
@@ -1369,7 +1621,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "soto",
@@ -1535,7 +1823,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [],
     "qrCode": null
@@ -1644,7 +1968,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [],
     "qrCode": null
@@ -1847,7 +2207,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "bak kut teh",
@@ -1915,7 +2311,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "baso",
@@ -2282,7 +2714,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "babi"
@@ -2586,7 +3054,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [],
     "qrCode": null
@@ -2749,7 +3253,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "teh",
@@ -2806,7 +3346,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "kuotie",
@@ -3017,7 +3593,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "nasi goreng",
@@ -3236,7 +3848,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "kopi",
@@ -3580,7 +4228,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "nasi campur",
@@ -3963,7 +4647,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "kwetiau",
@@ -4130,7 +4850,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "susu",
@@ -4402,7 +5158,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "singaraja beer",
@@ -4757,7 +5549,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "medan"
@@ -5190,7 +6018,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "soto mie",
@@ -5619,7 +6483,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "jus",
@@ -5938,7 +6838,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "pempek",
@@ -6031,7 +6967,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "mie"
@@ -6245,7 +7217,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "warung"
@@ -6390,7 +7398,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "bacang",
@@ -6616,7 +7660,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "sate",
@@ -6773,7 +7853,43 @@
         "isSignature": false
       }
     ],
-    "openingHours": [],
+    "openingHours": [
+      {
+        "day": 0,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 1,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "16:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "16:00",
+        "close": "23:00"
+      }
+    ],
     "peakHours": [],
     "searchKeywords": [
       "meksiko",
