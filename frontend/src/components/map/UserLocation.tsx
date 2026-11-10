@@ -7,6 +7,7 @@ import type { LatLng } from '@/lib/geo';
 export type UserLocationProps = {
   position: LatLng;
   accuracyM?: number;
+  exploreMode?: boolean;
 };
 
 const EARTH_RADIUS_M = 6371008.8;
@@ -25,40 +26,51 @@ function circlePolygon(center: LatLng, radiusM: number, steps = 64): GeoJSON.Fea
 }
 
 /**
- * F01 / PB03: Titik biru posisi pengguna beserta lingkaran radius akurasi (accuracyM).
+ * F01 / F02 / PB03: Titik posisi pengguna beserta lingkaran radius akurasi (accuracyM)
+ * dan radius radar Mode Jelajah saat aktif (sesuai Figma #174:43840).
  */
-export function UserLocation({ position, accuracyM = 15 }: UserLocationProps) {
-  const safeAccuracyRadius = accuracyM > 0 ? accuracyM : 10;
+export function UserLocation({
+  position,
+  accuracyM = 15,
+  exploreMode = false,
+}: UserLocationProps) {
+  const safeAccuracyRadius = accuracyM > 0 ? accuracyM : 12;
+  const displayRadius = exploreMode ? Math.max(safeAccuracyRadius, 18) : safeAccuracyRadius;
   const accuracyCircle = useMemo(
-    () => circlePolygon(position, safeAccuracyRadius),
-    [position, safeAccuracyRadius],
+    () => circlePolygon(position, displayRadius),
+    [position, displayRadius],
   );
 
   return (
     <>
-      {/* Lingkaran akurasi dalam satuan meter di peta */}
+      {/* Lingkaran akurasi / radar geofence dalam satuan meter di peta */}
       <GeoJSONSource id="user-accuracy" data={accuracyCircle}>
         <Layer
           id="user-accuracy-fill"
           type="fill"
-          paint={{ 'fill-color': 'rgba(6, 92, 187, 0.16)' }}
+          paint={{
+            'fill-color': exploreMode ? 'rgba(255, 201, 153, 0.35)' : 'rgba(6, 92, 187, 0.16)',
+          }}
         />
         <Layer
           id="user-accuracy-line"
           type="line"
-          paint={{ 'line-color': 'rgba(6, 92, 187, 0.45)', 'line-width': 1.5 }}
+          paint={{
+            'line-color': exploreMode ? '#FFA352' : 'rgba(6, 92, 187, 0.45)',
+            'line-width': 1.5,
+          }}
         />
       </GeoJSONSource>
 
-      {/* Titik biru posisi pengguna dengan ukuran piksel konsisten di segala level zoom */}
+      {/* Titik posisi pengguna */}
       <Marker
         id="user-location"
         lngLat={[position.longitude, position.latitude]}
         anchor="center"
         accessibilityLabel="Lokasi kamu saat ini"
       >
-        <View style={styles.halo}>
-          <View style={styles.dot} />
+        <View style={[styles.halo, exploreMode && styles.haloExplore]}>
+          <View style={[styles.dot, exploreMode && styles.dotExplore]} />
         </View>
       </Marker>
     </>
@@ -67,12 +79,18 @@ export function UserLocation({ position, accuracyM = 15 }: UserLocationProps) {
 
 const styles = StyleSheet.create({
   halo: {
-    width: 26,
-    height: 26,
-    borderRadius: 13,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     backgroundColor: 'rgba(6, 92, 187, 0.24)',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  haloExplore: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#FFC69D',
   },
   dot: {
     width: 16,
@@ -86,5 +104,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.25,
     shadowRadius: 2,
+  },
+  dotExplore: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#FF6B00',
+    borderWidth: 4,
+    borderColor: '#FFC69D',
   },
 });

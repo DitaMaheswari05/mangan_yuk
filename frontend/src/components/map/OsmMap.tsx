@@ -14,6 +14,7 @@ export type OsmMapProps = {
   pois?: Poi[];
   userPosition?: UserPosition | null;
   selectedPoiId?: string | null;
+  exploreMode?: boolean;
   onSelectPoi?: (poi: Poi) => void;
   onMapPress?: () => void;
   /** Ref ke kamera MapLibre (easeTo / flyTo / fitBounds). */
@@ -25,6 +26,7 @@ export function OsmMap({
   pois,
   userPosition,
   selectedPoiId,
+  exploreMode = false,
   onSelectPoi,
   onMapPress,
   mapRef,
@@ -48,6 +50,7 @@ export function OsmMap({
           <UserLocation
             position={userPosition.coordinate}
             accuracyM={userPosition.accuracyM}
+            exploreMode={exploreMode}
           />
         ) : null}
         {markerPois.map((poi) => (
