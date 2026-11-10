@@ -1,8 +1,5 @@
 import * as TaskManager from 'expo-task-manager';
-import { DEFAULT_TRIGGER_RADIUS_M } from '@/constants/config';
-import { NotificationService } from '@/features/notifications';
-import { getPois } from '@/features/poi';
-import { haversineM } from '@/lib/geo';
+import { GeofenceRuntime } from '@/features/geofence/runtime';
 
 export const BACKGROUND_LOCATION_TASK = 'background-location';
 
@@ -17,13 +14,8 @@ type BackgroundLocationPayload = {
   }>;
 };
 
-const notifiedPoiIdsInSession = new Set<string>();
-
-export function resetBackgroundGeofenceSession(): void {
-  notifiedPoiIdsInSession.clear();
-}
-
-// F02: dipanggil OS saat lokasi berubah di background ketika Mode Jelajah aktif; cek geofence di sini.
+// F02 / PB05: dipanggil OS (lewat foreground service "Mode Jelajah") saat lokasi berubah, termasuk
+// ketika app di background atau layar terkunci. Semua logika event ada di GeofenceRuntime.
 try {
   if (!TaskManager.isTaskDefined(BACKGROUND_LOCATION_TASK)) {
     TaskManager.defineTask<BackgroundLocationPayload>(
@@ -31,22 +23,15 @@ try {
       async ({ data, error }) => {
         if (error || !data?.locations?.length) return;
 
-        const latest = data.locations[data.locations.length - 1];
-        const userCoord = {
-          latitude: latest.coords.latitude,
-          longitude: latest.coords.longitude,
-        };
-
-        const pois = getPois();
-        for (const poi of pois) {
-          const poiCoord = { latitude: poi.latitude, longitude: poi.longitude };
-          const distM = haversineM(userCoord, poiCoord);
-          const radius = poi.triggerRadiusM > 0 ? poi.triggerRadiusM : DEFAULT_TRIGGER_RADIUS_M;
-
-          if (distM <= radius && !notifiedPoiIdsInSession.has(poi.id)) {
-            notifiedPoiIdsInSession.add(poi.id);
-            await NotificationService.notifyNearbyPoi(poi, Math.round(distM));
-          }
+        // OS bisa mengirim beberapa lokasi sekaligus (batch); proses berurutan agar timer dwell benar.
+        const sorted = [...data.locations].sort((a, b) => a.timestamp - b.timestamp);
+        for (const loc of sorted) {
+          await GeofenceRuntime.processPosition({
+            coordinate: { latitude: loc.coords.latitude, longitude: loc.coords.longitude },
+            // Akurasi tidak diketahui → anggap tidak akurat agar tidak memicu trigger palsu.
+            accuracyM: typeof loc.coords.accuracy === 'number' ? loc.coords.accuracy : Infinity,
+            timestamp: loc.timestamp,
+          });
         }
       },
     );

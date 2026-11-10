@@ -148,7 +148,7 @@ export async function dismissPersistentExploreNotification(): Promise<void> {
 }
 
 /**
- * Mengirim notifikasi lokal ketika pengguna masuk ke dalam radius geofence salah satu POI.
+ * F02 proximity event: pengguna masuk radius geofence tenant. Ketuk → buka kartu POI.
  */
 export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void> {
   const Notifications = getNotificationsModule();
@@ -160,13 +160,40 @@ export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void
     await Notifications.scheduleNotificationAsync({
       identifier: `poi-nearby-${poi.id}`,
       content: {
-        title: `Kamu Lagi di ${poi.name}!`,
-        body: `${poi.categoryLabel} (~${distanceM}m). Dengarkan cerita kuliner khasnya sekarang!`,
+        title: `Kamu mendekati ${poi.name}`,
+        body: `${poi.categoryLabel} · ~${distanceM} m. Mau dengar ceritanya?`,
         color: '#FF8316',
         data: {
           type: 'poi-geofence-enter',
           poiId: poi.id,
+          url: `/poi/${poi.id}`,
         },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
+/**
+ * F02 entry event: pengguna masuk radius kawasan (mis. 100 m dari pusat Sudirman Street Food).
+ */
+export async function notifyAreaEntry(areaName: string): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications) return;
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: 'area-entry',
+      content: {
+        title: `Selamat datang di ${areaName}!`,
+        body: 'Rencanakan trail kulinermu atau jelajah bebas. Kami kabari saat kamu dekat tenant.',
+        color: '#FF8316',
+        data: { type: 'area-entry', url: '/(tabs)' },
         ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
       },
       trigger: null,
@@ -181,4 +208,5 @@ export const NotificationService = {
   showPersistentExploreNotification,
   dismissPersistentExploreNotification,
   notifyNearbyPoi,
+  notifyAreaEntry,
 };

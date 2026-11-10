@@ -65,7 +65,12 @@ export const DEV_SUDIRMAN_POSITION: UserPosition = {
   timestamp: Date.now(),
 };
 
-const USE_DEV_SUDIRMAN_COORDINATE = true;
+// Koordinat palsu di Sudirman Street Food untuk testing di luar lokasi.
+// Aktifkan dengan EXPO_PUBLIC_MOCK_LOCATION=1 di .env; build rilis selalu memakai GPS asli.
+const USE_DEV_SUDIRMAN_COORDINATE = __DEV__ && process.env.EXPO_PUBLIC_MOCK_LOCATION === '1';
+
+/** true jika lokasi palsu (dev) aktif; background updates GPS asli tidak dinyalakan. */
+export const IS_MOCK_LOCATION = USE_DEV_SUDIRMAN_COORDINATE;
 
 function toUserPosition(loc: {
   coords: { latitude: number; longitude: number; accuracy: number | null };
