@@ -17,6 +17,10 @@ const config: ExpoConfig = {
       },
     ],
     'expo-notifications',
+    [
+      'expo-audio',
+      { microphonePermission: false, recordAudioAndroid: false, enableBackgroundPlayback: true },
+    ],
     '@maplibre/maplibre-react-native',
   ],
   ios: {
@@ -25,7 +29,14 @@ const config: ExpoConfig = {
   },
   android: {
     package: 'id.manganyuk.app',
-    permissions: ['ACCESS_FINE_LOCATION', 'ACCESS_BACKGROUND_LOCATION', 'FOREGROUND_SERVICE'],
+    // FOREGROUND_SERVICE_LOCATION wajib di Android 14+ agar foreground service Mode Jelajah tidak dimatikan.
+    permissions: [
+      'ACCESS_FINE_LOCATION',
+      'ACCESS_BACKGROUND_LOCATION',
+      'FOREGROUND_SERVICE',
+      'FOREGROUND_SERVICE_LOCATION',
+      'VIBRATE',
+    ],
   },
 };
 
