@@ -49,6 +49,24 @@ export type UserLocationState = {
 
 const DEFAULT_AREA: AreaConfig = areaJson as AreaConfig;
 
+/**
+ * Koordinat pengembangan (developer testing) tepat di dalam kawasan Sudirman Street Food
+ * (di sekitar P07 Sedap / P08 Gou Cheng Hiang / P09 Dapur Sotoku, Jl. Jend. Sudirman Bandung)
+ * agar tampilan INSIDE SSF & Mode Jelajah dapat langsung diuji.
+ */
+export const DEV_SUDIRMAN_COORDINATE: LatLng = {
+  latitude: -6.92089,
+  longitude: 107.600533,
+};
+
+export const DEV_SUDIRMAN_POSITION: UserPosition = {
+  coordinate: DEV_SUDIRMAN_COORDINATE,
+  accuracyM: 12,
+  timestamp: Date.now(),
+};
+
+const USE_DEV_SUDIRMAN_COORDINATE = true;
+
 function toUserPosition(loc: {
   coords: { latitude: number; longitude: number; accuracy: number | null };
   timestamp: number;
@@ -71,6 +89,14 @@ export const LocationService = {
    * Fix pertama posisi pengguna; timeout default 10000 ms (F01-AC1) → LOCATION_TIMEOUT.
    */
   async getCurrentPosition(opts?: { timeoutMs?: number }): Promise<Result<UserPosition>> {
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
+      return ok({
+        coordinate: { ...DEV_SUDIRMAN_COORDINATE },
+        accuracyM: 12,
+        timestamp: Date.now(),
+      });
+    }
+
     const timeoutMs = opts?.timeoutMs ?? FIRST_FIX_TIMEOUT_MS;
 
     const perm = await PermissionService.getLocationStatus();
@@ -122,6 +148,27 @@ export const LocationService = {
     onUpdate: (p: UserPosition) => void,
     onError: (e: AppError) => void,
   ): Promise<Result<() => void>> {
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
+      const initialPos: UserPosition = {
+        coordinate: { ...DEV_SUDIRMAN_COORDINATE },
+        accuracyM: 12,
+        timestamp: Date.now(),
+      };
+      onUpdate(initialPos);
+
+      const intervalId = setInterval(() => {
+        onUpdate({
+          coordinate: { ...DEV_SUDIRMAN_COORDINATE },
+          accuracyM: 12,
+          timestamp: Date.now(),
+        });
+      }, LOCATION_TIME_INTERVAL_MS);
+
+      return ok(() => {
+        clearInterval(intervalId);
+      });
+    }
+
     const perm = await PermissionService.getLocationStatus();
     if (perm !== 'granted') {
       const err: AppError = {
@@ -179,16 +226,32 @@ export const LocationService = {
  * Hook pelacakan lokasi pengguna & status kawasan SSF untuk dikonsumsi layar Beranda (Home).
  */
 export function useUserLocation(): UserLocationState {
-  const [state, setState] = useState<UserLocationState>({
-    permission: 'undetermined',
-    position: null,
-    areaStatus: 'UNKNOWN',
-    distanceToAreaM: null,
-    error: null,
+  const [state, setState] = useState<UserLocationState>(() => {
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
+      return {
+        permission: 'granted',
+        position: DEV_SUDIRMAN_POSITION,
+        areaStatus: 'INSIDE',
+        distanceToAreaM: Math.round(
+          haversineM(DEV_SUDIRMAN_COORDINATE, DEFAULT_AREA.center),
+        ),
+        error: null,
+      };
+    }
+
+    return {
+      permission: 'undetermined',
+      position: null,
+      areaStatus: 'UNKNOWN',
+      distanceToAreaM: null,
+      error: null,
+    };
   });
 
   const areaRef = useRef<AreaConfig>(DEFAULT_AREA);
-  const areaStatusRef = useRef<AreaStatus>('UNKNOWN');
+  const areaStatusRef = useRef<AreaStatus>(
+    USE_DEV_SUDIRMAN_COORDINATE ? 'INSIDE' : 'UNKNOWN',
+  );
   const unsubscribeRef = useRef<(() => void) | null>(null);
 
   const applyPosition = useCallback((pos: UserPosition) => {
@@ -199,6 +262,7 @@ export function useUserLocation(): UserLocationState {
 
     setState((prev) => ({
       ...prev,
+      permission: 'granted',
       position: pos,
       areaStatus: nextStatus,
       distanceToAreaM: distanceM,
@@ -221,6 +285,15 @@ export function useUserLocation(): UserLocationState {
       areaRef.current = areaRes.data;
     }
 
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
+      applyPosition({
+        coordinate: { ...DEV_SUDIRMAN_COORDINATE },
+        accuracyM: 12,
+        timestamp: Date.now(),
+      });
+      return;
+    }
+
     const perm = await PermissionService.getLocationStatus();
     if (perm !== 'granted') {
       areaStatusRef.current = 'UNKNOWN';
@@ -239,7 +312,6 @@ export function useUserLocation(): UserLocationState {
 
     setState((prev) => ({ ...prev, permission: 'granted', error: null }));
 
-    // 1. Ambil fix pertama dengan batas waktu FIRST_FIX_TIMEOUT_MS (10 detik)
     const firstFix = await LocationService.getCurrentPosition();
     if (firstFix.ok) {
       applyPosition(firstFix.data);
@@ -247,7 +319,6 @@ export function useUserLocation(): UserLocationState {
       setState((prev) => ({ ...prev, error: firstFix.error }));
     }
 
-    // 2. Pantau pembaruan lokasi secara kontinu
     const watchRes = await LocationService.watchPosition(
       (pos) => {
         applyPosition(pos);
