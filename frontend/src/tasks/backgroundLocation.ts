@@ -1,8 +1,10 @@
 import * as TaskManager from 'expo-task-manager';
-import { DEFAULT_TRIGGER_RADIUS_M } from '@/constants/config';
+import areaJson from '@/data/area.json';
+import { defaultGeofenceEngine } from '@/features/geofence/engine';
 import { NotificationService } from '@/features/notifications';
 import { getPois } from '@/features/poi';
-import { haversineM } from '@/lib/geo';
+import type { UserPosition } from '@/lib/geo';
+import type { AreaConfig } from '@/types/content';
 
 export const BACKGROUND_LOCATION_TASK = 'background-location';
 
@@ -17,13 +19,13 @@ type BackgroundLocationPayload = {
   }>;
 };
 
-const notifiedPoiIdsInSession = new Set<string>();
+const DEFAULT_AREA: AreaConfig = areaJson as AreaConfig;
 
 export function resetBackgroundGeofenceSession(): void {
-  notifiedPoiIdsInSession.clear();
+  defaultGeofenceEngine.resetSession();
 }
 
-// F02: dipanggil OS saat lokasi berubah di background ketika Mode Jelajah aktif; cek geofence di sini.
+// F02, PB-05, PB-06: dipanggil OS saat lokasi berubah di background ketika Mode Jelajah aktif.
 try {
   if (!TaskManager.isTaskDefined(BACKGROUND_LOCATION_TASK)) {
     TaskManager.defineTask<BackgroundLocationPayload>(
@@ -32,21 +34,35 @@ try {
         if (error || !data?.locations?.length) return;
 
         const latest = data.locations[data.locations.length - 1];
-        const userCoord = {
-          latitude: latest.coords.latitude,
-          longitude: latest.coords.longitude,
+        const userPosition: UserPosition = {
+          coordinate: {
+            latitude: latest.coords.latitude,
+            longitude: latest.coords.longitude,
+          },
+          accuracyM:
+            typeof latest.coords.accuracy === 'number' && latest.coords.accuracy >= 0
+              ? latest.coords.accuracy
+              : 0,
+          timestamp: latest.timestamp ?? Date.now(),
         };
 
         const pois = getPois();
-        for (const poi of pois) {
-          const poiCoord = { latitude: poi.latitude, longitude: poi.longitude };
-          const distM = haversineM(userCoord, poiCoord);
-          const radius = poi.triggerRadiusM > 0 ? poi.triggerRadiusM : DEFAULT_TRIGGER_RADIUS_M;
+        const result = defaultGeofenceEngine.processPosition(
+          userPosition,
+          DEFAULT_AREA,
+          pois,
+        );
 
-          if (distM <= radius && !notifiedPoiIdsInSession.has(poi.id)) {
-            notifiedPoiIdsInSession.add(poi.id);
-            await NotificationService.notifyNearbyPoi(poi, Math.round(distM));
-          }
+        if (result.discarded) return;
+
+        // Pemicu Entry Event kawasan saat di background
+        if (result.areaEvent === 'ENTRY') {
+          await NotificationService.notifyAreaEntry(DEFAULT_AREA.name);
+        }
+
+        // Pemicu Proximity Event tenant saat di background
+        for (const item of result.proximityPois) {
+          await NotificationService.notifyNearbyPoi(item.poi, item.distanceM);
         }
       },
     );

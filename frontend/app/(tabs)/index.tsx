@@ -54,7 +54,31 @@ export default function HomeScreen() {
   const [arrivedModalVisible, setArrivedModalVisible] = useState(false);
   const [poiSheetExpanded, setPoiSheetExpanded] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [locationAddress, setLocationAddress] = useState<string | null>(null);
   const hasShownArrivedModalRef = useRef(false);
+
+  // Reverse geocoding aman untuk menampilkan nama jalan / distrik riil posisi pengguna
+  useEffect(() => {
+    let active = true;
+    if (position?.coordinate) {
+      (async () => {
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
+          const Location = require('expo-location') as typeof import('expo-location');
+          const [geo] = await Location.reverseGeocodeAsync(position.coordinate);
+          if (active && geo) {
+            const addr = geo.street || geo.name || geo.district || geo.city;
+            if (addr) setLocationAddress(addr);
+          }
+        } catch {
+          // Abaikan jika offline / reverse geocoding tidak tersedia
+        }
+      })();
+    }
+    return () => {
+      active = false;
+    };
+  }, [position?.coordinate.latitude, position?.coordinate.longitude]);
 
   useEffect(() => {
     let active = true;
@@ -145,6 +169,18 @@ export default function HomeScreen() {
       onEnterPoiGeofence: (poi) => {
         setSelectedPoi((prev) => prev ?? poi);
       },
+      onPoiProximity: (poi) => {
+        setSelectedPoi(poi);
+      },
+      onPoiDwell: (poi, dwellMs) => {
+        console.log(`[Dwell] Kunjungan tenant ${poi.name} tercatat (${Math.round(dwellMs / 1000)}s)`);
+      },
+      onPoiExit: (poi) => {
+        console.log(`[Exit] Keluar dari area tenant ${poi.name}`);
+      },
+      onAreaEntry: () => {
+        setArrivedModalVisible(true);
+      },
     });
   }, [handleRecenterMap, pois, position]);
 
@@ -225,7 +261,7 @@ export default function HomeScreen() {
           <View style={styles.locationTextCol}>
             <Text style={styles.locationLabel}>Lokasimu</Text>
             <Text style={styles.locationValue} numberOfLines={1}>
-              Jl. Sudirman
+              {locationAddress || 'Kawasan Sudirman Street Food'}
             </Text>
           </View>
           <View style={[styles.statusBadge, styles.statusBadgeInside]}>
@@ -243,7 +279,7 @@ export default function HomeScreen() {
           <View style={styles.locationTextCol}>
             <Text style={styles.locationLabel}>Lokasimu</Text>
             <Text style={styles.locationValue} numberOfLines={1}>
-              Jl. Tamansari
+              {locationAddress || 'Di luar area SSF'}
             </Text>
           </View>
           <View style={styles.distanceRightCol}>

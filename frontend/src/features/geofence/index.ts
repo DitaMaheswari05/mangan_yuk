@@ -4,6 +4,7 @@ import {
   LOCATION_DISTANCE_INTERVAL_M,
   LOCATION_TIME_INTERVAL_MS,
 } from '@/constants/config';
+import areaJson from '@/data/area.json';
 import { LocationService, type UserPosition } from '@/features/location';
 import { NotificationService } from '@/features/notifications';
 import { getPois } from '@/features/poi';
@@ -12,7 +13,15 @@ import {
   BACKGROUND_LOCATION_TASK,
   resetBackgroundGeofenceSession,
 } from '@/tasks/backgroundLocation';
-import type { Poi } from '@/types/content';
+import type { AreaConfig, Poi } from '@/types/content';
+import {
+  defaultGeofenceEngine,
+  GeofenceEngine,
+  type GeofenceCallbacks,
+  type GeofenceProcessResult,
+} from './engine';
+
+export * from './engine';
 
 export type NearbyPoiItem = {
   poi: Poi;
@@ -53,7 +62,21 @@ export function getNearbyPoisSorted(
 
 let activeForegroundUnsubscribe: (() => void) | null = null;
 let exploreSessionActive = false;
-const notifiedForegroundPoiIds = new Set<string>();
+
+const DEFAULT_AREA: AreaConfig = areaJson as AreaConfig;
+
+export type ExploreStartOptions = {
+  initialPosition?: UserPosition | null;
+  pois?: Poi[];
+  area?: AreaConfig;
+  onPositionUpdate?: (pos: UserPosition) => void;
+  onEnterPoiGeofence?: (poi: Poi, distanceM: number) => void;
+  onPoiProximity?: (poi: Poi, distanceM: number) => void;
+  onPoiDwell?: (poi: Poi, dwellDurationMs: number) => void;
+  onPoiExit?: (poi: Poi, distanceM: number) => void;
+  onAreaEntry?: (area: AreaConfig, distanceM: number) => void;
+  onAreaExit?: (area: AreaConfig, distanceM: number) => void;
+};
 
 export const ExploreModeController = {
   isActive(): boolean {
@@ -64,22 +87,40 @@ export const ExploreModeController = {
    * Mengaktifkan Mode Jelajah:
    * 1. Menampilkan notifikasi permanen/sticky "Mode Jelajah Aktif"
    * 2. Memulai pelacakan lokasi aktif (foreground watch + opsional background updates)
-   * 3. Memicu callback saat pengguna masuk radius geofence POI
+   * 3. Menjalankan mesin Geofence Engine (Entry 100m, Proximity <15m, Dwell ≥3m, Exit +10m hysteresis)
    */
-  async start(opts?: {
-    initialPosition?: UserPosition | null;
-    pois?: Poi[];
-    onPositionUpdate?: (pos: UserPosition) => void;
-    onEnterPoiGeofence?: (poi: Poi, distanceM: number) => void;
-  }): Promise<void> {
+  async start(opts?: ExploreStartOptions): Promise<void> {
     // Pastikan sesi lama dibersihkan terlebih dahulu
     await this.stop();
 
     exploreSessionActive = true;
-    notifiedForegroundPoiIds.clear();
+    defaultGeofenceEngine.resetSession();
     resetBackgroundGeofenceSession();
 
     const poiList = opts?.pois?.length ? opts.pois : getPois();
+    const area = opts?.area ?? DEFAULT_AREA;
+
+    // Daftarkan listener geofence engine
+    defaultGeofenceEngine.setCallbacks({
+      onPositionUpdate: opts?.onPositionUpdate,
+      onAreaEntry: (a, dist) => {
+        opts?.onAreaEntry?.(a, dist);
+      },
+      onAreaExit: (a, dist) => {
+        opts?.onAreaExit?.(a, dist);
+      },
+      onPoiProximity: (poi, dist) => {
+        opts?.onPoiProximity?.(poi, dist);
+        opts?.onEnterPoiGeofence?.(poi, dist);
+      },
+      onPoiDwell: (poi, dwellMs) => {
+        opts?.onPoiDwell?.(poi, dwellMs);
+      },
+      onPoiExit: (poi, dist) => {
+        opts?.onPoiExit?.(poi, dist);
+      },
+    });
+
     let initialNearest: { nearestPoiName?: string; distanceM?: number } | undefined;
 
     if (opts?.initialPosition && poiList.length > 0) {
@@ -99,11 +140,14 @@ export const ExploreModeController = {
     const watchRes = await LocationService.watchPosition(
       async (pos) => {
         if (!exploreSessionActive) return;
-        opts?.onPositionUpdate?.(pos);
 
-        const sorted = getNearbyPoisSorted(pos.coordinate, poiList, 5);
+        // Jalankan Geofence Engine
+        const result = defaultGeofenceEngine.processPosition(pos, area, poiList);
+        if (result.discarded) return;
+
+        // Perbarui notifikasi sticky dengan tenant terdekat
+        const sorted = getNearbyPoisSorted(pos.coordinate, poiList, 1);
         const closest = sorted[0];
-
         if (closest) {
           await NotificationService.showPersistentExploreNotification({
             nearestPoiName: closest.poi.name,
@@ -111,12 +155,9 @@ export const ExploreModeController = {
           });
         }
 
-        for (const item of sorted) {
-          if (item.insideGeofence && !notifiedForegroundPoiIds.has(item.poi.id)) {
-            notifiedForegroundPoiIds.add(item.poi.id);
-            opts?.onEnterPoiGeofence?.(item.poi, item.distanceM);
-            await NotificationService.notifyNearbyPoi(item.poi, item.distanceM);
-          }
+        // Jika ada Proximity Event, kirim notifikasi lokal jika dibutuhkan
+        for (const item of result.proximityPois) {
+          await NotificationService.notifyNearbyPoi(item.poi, item.distanceM);
         }
       },
       () => {
@@ -164,7 +205,8 @@ export const ExploreModeController = {
    */
   async stop(): Promise<void> {
     exploreSessionActive = false;
-    notifiedForegroundPoiIds.clear();
+    defaultGeofenceEngine.clearCallbacks();
+    defaultGeofenceEngine.resetSession();
     resetBackgroundGeofenceSession();
 
     // 1. Hentikan pelacakan lokasi foreground

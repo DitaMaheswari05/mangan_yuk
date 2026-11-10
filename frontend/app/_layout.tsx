@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import { Stack } from 'expo-router';
+import '@/tasks/backgroundLocation';
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);

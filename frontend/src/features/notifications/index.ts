@@ -176,9 +176,38 @@ export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void
   }
 }
 
+/**
+ * Mengirim notifikasi lokal selamat datang saat pengguna memasuki kawasan kuliner (Entry event 100 m).
+ */
+export async function notifyAreaEntry(areaName = 'Sudirman Street Food'): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications) return;
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: 'area-entry-welcome',
+      content: {
+        title: `Selamat Datang di ${areaName}!`,
+        body: 'Kamu telah memasuki kawasan Sudirman Street Food. Aktifkan Mode Jelajah untuk mendengar cerita kuliner!',
+        color: '#FF8316',
+        data: {
+          type: 'area-entry-welcome',
+        },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
 export const NotificationService = {
   ensureNotificationSetup,
   showPersistentExploreNotification,
   dismissPersistentExploreNotification,
   notifyNearbyPoi,
+  notifyAreaEntry,
 };
