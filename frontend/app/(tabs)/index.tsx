@@ -13,6 +13,7 @@ import {
 import type { CameraRef } from '@maplibre/maplibre-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { OsmMap } from '@/components/map/OsmMap';
+import { NarrationPlayer } from '@/components/poi/NarrationPlayer';
 import { INITIAL_CAMERA, RECENTER_ZOOM } from '@/constants/map';
 import { colors, fontFamily, typography } from '@/constants/theme';
 import areaJson from '@/data/area.json';
@@ -20,6 +21,7 @@ import { ExploreModeController, getNearbyPoisSorted } from '@/features/geofence'
 import { haversineM, useUserLocation } from '@/features/location';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
 import { getAll, getPois } from '@/features/poi';
+import { useVisitedPoiIds } from '@/features/visits';
 import { useAppStore } from '@/store/useAppStore';
 import type { Poi } from '@/types/content';
 
@@ -47,14 +49,16 @@ export default function HomeScreen() {
   // Dataset POI (PB04 repository)
   const [pois, setPois] = useState<Poi[]>(() => getPois());
   const [selectedPoi, setSelectedPoi] = useState<Poi | null>(null);
+  const visitedPoiIds = useVisitedPoiIds();
 
   // State Mode Jelajah & Modal Sambutan (Figma Section pb3 #174:80571)
   const [exploreMode, setExploreMode] = useState(false);
   const [persistentNotifActive, setPersistentNotifActive] = useState(false);
   const [arrivedModalVisible, setArrivedModalVisible] = useState(false);
   const [poiSheetExpanded, setPoiSheetExpanded] = useState(false);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const hasShownArrivedModalRef = useRef(false);
+  const exploreModeRef = useRef(exploreMode);
+  exploreModeRef.current = exploreMode;
 
   useEffect(() => {
     let active = true;
@@ -88,18 +92,16 @@ export default function HomeScreen() {
   useEffect(() => {
     if (areaStatus === 'INSIDE' && !hasShownArrivedModalRef.current) {
       hasShownArrivedModalRef.current = true;
-      setArrivedModalVisible(true);
+      // Kalau Mode Jelajah masih aktif (pengguna keluar lalu masuk lagi), tawaran tidak perlu muncul.
+      if (!exploreModeRef.current) setArrivedModalVisible(true);
     } else if (areaStatus === 'OUTSIDE') {
       hasShownArrivedModalRef.current = false;
       setArrivedModalVisible(false);
-      if (exploreMode) {
-        setExploreMode(false);
-        setPersistentNotifActive(false);
-        setSelectedPoi(null);
-        void ExploreModeController.stop();
-      }
+      // Mode Jelajah sengaja tidak dimatikan di luar kawasan: pelacakan tetap jalan supaya entry
+      // event (notifikasi sambutan) muncul saat pengguna kembali masuk, termasuk di background (F02-AC1).
+      setSelectedPoi(null);
     }
-  }, [areaStatus, exploreMode]);
+  }, [areaStatus]);
 
   const handleRecenterMap = useCallback(() => {
     const target = position?.coordinate ?? areaJson.center;
@@ -159,7 +161,6 @@ export default function HomeScreen() {
     setPersistentNotifActive(false);
     setSelectedPoi(null);
     setPoiSheetExpanded(false);
-    setIsPlayingAudio(false);
 
     await ExploreModeController.stop();
   }, []);
@@ -280,6 +281,7 @@ export default function HomeScreen() {
         pois={pois}
         userPosition={permission === 'granted' ? position : null}
         selectedPoiId={selectedPoi?.id ?? null}
+        visitedPoiIds={visitedPoiIds}
         exploreMode={exploreMode}
         onSelectPoi={(poi) => {
           setSelectedPoi(poi);
@@ -408,30 +410,8 @@ export default function HomeScreen() {
               </View>
             </View>
 
-            {/* Audio Player Bar (Figma #174:43668 / #174:43478) */}
-            <View style={styles.audioPlayerBar}>
-              <Pressable
-                onPress={() => setIsPlayingAudio((p) => !p)}
-                style={styles.audioPlayBtn}
-                accessibilityRole="button"
-                accessibilityLabel={isPlayingAudio ? 'Jeda cerita audio' : 'Putar cerita audio'}
-              >
-                <Ionicons
-                  name={isPlayingAudio ? 'pause-circle' : 'play-circle'}
-                  size={36}
-                  color="#FF8316"
-                />
-              </Pressable>
-              <View style={styles.audioTrackBg}>
-                <View
-                  style={[
-                    styles.audioTrackFill,
-                    { width: isPlayingAudio ? '55%' : '32%' },
-                  ]}
-                />
-              </View>
-              <Text style={styles.audioDurationText}>1:00</Text>
-            </View>
+            {/* Audio narasi (Figma #174:43668 / #174:43478); key → player baru per tenant */}
+            <NarrationPlayer key={selectedPoi.id} poi={selectedPoi} />
 
             {/* Konten Expanded sesuai Figma "Kartu POI Aktif" (#174:43413) */}
             {poiSheetExpanded ? (
@@ -1166,36 +1146,6 @@ const styles = StyleSheet.create({
   },
   sheetCloseIcon: {
     padding: 2,
-  },
-  audioPlayerBar: {
-    height: 58,
-    borderRadius: 12,
-    backgroundColor: '#FFF4EA',
-    paddingHorizontal: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  audioPlayBtn: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  audioTrackBg: {
-    flex: 1,
-    height: 6,
-    borderRadius: 100,
-    backgroundColor: '#FFFFFF',
-    overflow: 'hidden',
-  },
-  audioTrackFill: {
-    height: '100%',
-    borderRadius: 100,
-    backgroundColor: '#FF8316',
-  },
-  audioDurationText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 12,
-    color: '#FF8316',
   },
   sheetCollapsedFooter: {
     flexDirection: 'row',
