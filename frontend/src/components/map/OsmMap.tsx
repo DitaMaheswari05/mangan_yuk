@@ -1,7 +1,7 @@
+import { Camera, type CameraRef, Map } from '@maplibre/maplibre-react-native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import MapView, { UrlTile } from 'react-native-maps';
-import { INITIAL_REGION, OSM_TILE_URL } from '@/constants/map';
+import { INITIAL_CAMERA, MAP_STYLE } from '@/constants/map';
 import type { UserPosition } from '@/features/location';
 import { getPois } from '@/features/poi';
 import type { Poi } from '@/types/content';
@@ -16,9 +16,11 @@ export type OsmMapProps = {
   selectedPoiId?: string | null;
   onSelectPoi?: (poi: Poi) => void;
   onMapPress?: () => void;
-  mapRef?: React.RefObject<MapView | null>;
+  /** Ref ke kamera MapLibre (easeTo / flyTo / fitBounds). */
+  mapRef?: React.Ref<CameraRef>;
 };
 
+// Peta MapLibre dengan basemap tile OpenStreetMap.
 export function OsmMap({
   pois,
   userPosition,
@@ -31,18 +33,23 @@ export function OsmMap({
 
   return (
     <View style={styles.container}>
-      <MapView
-        ref={mapRef}
+      <Map
         style={styles.map}
-        initialRegion={INITIAL_REGION}
-        showsUserLocation={false}
-        showsMyLocationButton={false}
-        showsCompass={false}
-        toolbarEnabled={false}
+        mapStyle={MAP_STYLE}
+        compass={false}
+        logo={false}
+        attribution={false}
+        touchPitch={false}
         onPress={onMapPress}
       >
-        <UrlTile urlTemplate={OSM_TILE_URL} maximumZ={19} flipY={false} />
+        <Camera ref={mapRef} initialViewState={INITIAL_CAMERA} maxZoom={19} />
         <AreaOverlay />
+        {userPosition ? (
+          <UserLocation
+            position={userPosition.coordinate}
+            accuracyM={userPosition.accuracyM}
+          />
+        ) : null}
         {markerPois.map((poi) => (
           <PoiMarker
             key={poi.id}
@@ -51,13 +58,7 @@ export function OsmMap({
             onPress={onSelectPoi}
           />
         ))}
-        {userPosition ? (
-          <UserLocation
-            position={userPosition.coordinate}
-            accuracyM={userPosition.accuracyM}
-          />
-        ) : null}
-      </MapView>
+      </Map>
       <MapAttribution />
     </View>
   );

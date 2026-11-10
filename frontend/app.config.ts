@@ -17,6 +17,7 @@ const config: ExpoConfig = {
       },
     ],
     'expo-notifications',
+    '@maplibre/maplibre-react-native',
   ],
   ios: {
     bundleIdentifier: 'id.manganyuk.app',

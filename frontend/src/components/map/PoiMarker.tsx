@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import { Marker } from 'react-native-maps';
+import { Marker } from '@maplibre/maplibre-react-native';
 import type { Poi } from '@/types/content';
 
 export type PoiMarkerProps = {
@@ -21,12 +21,11 @@ export function PoiMarker({ poi, selected = false, onPress }: PoiMarkerProps) {
 
   return (
     <Marker
-      coordinate={{ latitude: poi.latitude, longitude: poi.longitude }}
-      title={poi.name}
-      description={poi.categoryLabel}
+      id={`poi-${poi.id}`}
+      lngLat={[poi.longitude, poi.latitude]}
+      anchor="center"
       onPress={handlePress}
-      onCalloutPress={() => router.push(`/poi/${poi.id}`)}
-      tracksViewChanges={true}
+      accessibilityLabel={`${poi.name}, ${poi.categoryLabel}`}
     >
       <View style={[styles.pin, selected && styles.pinSelected]}>
         <MaterialCommunityIcons

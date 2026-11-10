@@ -9,10 +9,10 @@ import {
   Text,
   View,
 } from 'react-native';
-import type MapView from 'react-native-maps';
+import type { CameraRef } from '@maplibre/maplibre-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { OsmMap } from '@/components/map/OsmMap';
-import { INITIAL_REGION } from '@/constants/map';
+import { INITIAL_CAMERA, RECENTER_ZOOM } from '@/constants/map';
 import { colors, fontFamily, typography } from '@/constants/theme';
 import areaJson from '@/data/area.json';
 import {
@@ -36,7 +36,7 @@ function formatDistanceLabel(meters: number | null): string {
 // status "Di dalam / di luar area SSF", dan marker POI dari dataset.
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
-  const mapRef = useRef<MapView | null>(null);
+  const mapRef = useRef<CameraRef | null>(null);
 
   const setPermissions = useAppStore((s) => s.setPermissions);
 
@@ -102,19 +102,15 @@ export default function HomeScreen() {
 
   const handleRecenterMap = () => {
     const target = position?.coordinate ?? areaJson.center;
-    mapRef.current?.animateToRegion(
-      {
-        latitude: target.latitude,
-        longitude: target.longitude,
-        latitudeDelta: 0.0025,
-        longitudeDelta: 0.0025,
-      },
-      450,
-    );
+    mapRef.current?.easeTo({
+      center: [target.longitude, target.latitude],
+      zoom: RECENTER_ZOOM,
+      duration: 450,
+    });
   };
 
   const handleFocusSsfArea = () => {
-    mapRef.current?.animateToRegion(INITIAL_REGION, 500);
+    mapRef.current?.easeTo({ ...INITIAL_CAMERA, duration: 500 });
   };
 
   const handleEnableLocation = async () => {
