@@ -7,7 +7,6 @@ import {
   FIRST_FIX_TIMEOUT_MS,
   LOCATION_DISTANCE_INTERVAL_M,
   LOCATION_TIME_INTERVAL_MS,
-  MAX_ACCURACY_M,
 } from '@/constants/config';
 import areaJson from '@/data/area.json';
 import { PermissionService, type PermStatus } from '@/features/onboarding';
@@ -66,21 +65,12 @@ export const DEV_SUDIRMAN_POSITION: UserPosition = {
   timestamp: Date.now(),
 };
 
-/**
- * Mode pengujian dev: jika true, memaksa koordinat pengguna berada di Sudirman Street Food.
- * Nilai default FALSE agar aplikasi selalu membaca posisi GPS riil perangkat pengguna.
- */
-let useDevSudirmanCoordinate = false;
+// Koordinat palsu di Sudirman Street Food untuk testing di luar lokasi.
+// Aktifkan dengan EXPO_PUBLIC_MOCK_LOCATION=1 di .env; build rilis selalu memakai GPS asli.
+const USE_DEV_SUDIRMAN_COORDINATE = __DEV__ && process.env.EXPO_PUBLIC_MOCK_LOCATION === '1';
 
-export function setUseDevSudirmanCoordinate(enabled: boolean): void {
-  useDevSudirmanCoordinate = enabled;
-}
-
-export function isUsingDevSudirmanCoordinate(): boolean {
-  return useDevSudirmanCoordinate;
-}
-
-export const USE_DEV_SUDIRMAN_COORDINATE = false;
+/** true jika lokasi palsu (dev) aktif; background updates GPS asli tidak dinyalakan. */
+export const IS_MOCK_LOCATION = USE_DEV_SUDIRMAN_COORDINATE;
 
 function toUserPosition(loc: {
   coords: { latitude: number; longitude: number; accuracy: number | null };
@@ -104,7 +94,7 @@ export const LocationService = {
    * Fix pertama posisi pengguna; timeout default 10000 ms (F01-AC1) → LOCATION_TIMEOUT.
    */
   async getCurrentPosition(opts?: { timeoutMs?: number }): Promise<Result<UserPosition>> {
-    if (useDevSudirmanCoordinate) {
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
       return ok({
         coordinate: { ...DEV_SUDIRMAN_COORDINATE },
         accuracyM: 12,
@@ -163,7 +153,7 @@ export const LocationService = {
     onUpdate: (p: UserPosition) => void,
     onError: (e: AppError) => void,
   ): Promise<Result<() => void>> {
-    if (useDevSudirmanCoordinate) {
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
       const initialPos: UserPosition = {
         coordinate: { ...DEV_SUDIRMAN_COORDINATE },
         accuracyM: 12,
@@ -214,13 +204,6 @@ export const LocationService = {
           distanceInterval: LOCATION_DISTANCE_INTERVAL_M,
         },
         (loc) => {
-          // Filter GPS jitter (SB-2.2 / PRD F02: abaikan akurasi >30 m)
-          if (
-            typeof loc.coords.accuracy === 'number' &&
-            loc.coords.accuracy > MAX_ACCURACY_M
-          ) {
-            return;
-          }
           onUpdate(toUserPosition(loc));
         },
       );
@@ -249,7 +232,7 @@ export const LocationService = {
  */
 export function useUserLocation(): UserLocationState {
   const [state, setState] = useState<UserLocationState>(() => {
-    if (useDevSudirmanCoordinate) {
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
       return {
         permission: 'granted',
         position: DEV_SUDIRMAN_POSITION,
@@ -272,7 +255,7 @@ export function useUserLocation(): UserLocationState {
 
   const areaRef = useRef<AreaConfig>(DEFAULT_AREA);
   const areaStatusRef = useRef<AreaStatus>(
-    useDevSudirmanCoordinate ? 'INSIDE' : 'UNKNOWN',
+    USE_DEV_SUDIRMAN_COORDINATE ? 'INSIDE' : 'UNKNOWN',
   );
   const unsubscribeRef = useRef<(() => void) | null>(null);
 
@@ -307,7 +290,7 @@ export function useUserLocation(): UserLocationState {
       areaRef.current = areaRes.data;
     }
 
-    if (useDevSudirmanCoordinate) {
+    if (USE_DEV_SUDIRMAN_COORDINATE) {
       applyPosition({
         coordinate: { ...DEV_SUDIRMAN_COORDINATE },
         accuracyM: 12,

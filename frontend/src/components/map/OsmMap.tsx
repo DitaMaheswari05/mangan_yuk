@@ -14,6 +14,8 @@ export type OsmMapProps = {
   pois?: Poi[];
   userPosition?: UserPosition | null;
   selectedPoiId?: string | null;
+  /** ID POI yang sudah dikunjungi (dwell event) → marker hijau. */
+  visitedPoiIds?: ReadonlySet<string>;
   exploreMode?: boolean;
   onSelectPoi?: (poi: Poi) => void;
   onMapPress?: () => void;
@@ -26,6 +28,7 @@ export function OsmMap({
   pois,
   userPosition,
   selectedPoiId,
+  visitedPoiIds,
   exploreMode = false,
   onSelectPoi,
   onMapPress,
@@ -58,6 +61,7 @@ export function OsmMap({
             key={poi.id}
             poi={poi}
             selected={selectedPoiId === poi.id}
+            visited={visitedPoiIds?.has(poi.id) ?? false}
             onPress={onSelectPoi}
           />
         ))}

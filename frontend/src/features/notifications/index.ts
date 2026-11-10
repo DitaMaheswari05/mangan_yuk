@@ -148,7 +148,7 @@ export async function dismissPersistentExploreNotification(): Promise<void> {
 }
 
 /**
- * Mengirim notifikasi lokal ketika pengguna masuk ke dalam radius geofence salah satu POI.
+ * F02 proximity event: pengguna masuk radius geofence tenant. Ketuk → buka kartu POI.
  */
 export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void> {
   const Notifications = getNotificationsModule();
@@ -160,12 +160,13 @@ export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void
     await Notifications.scheduleNotificationAsync({
       identifier: `poi-nearby-${poi.id}`,
       content: {
-        title: `Kamu Lagi di ${poi.name}!`,
-        body: `${poi.categoryLabel} (~${distanceM}m). Dengarkan cerita kuliner khasnya sekarang!`,
+        title: `Kamu mendekati ${poi.name}`,
+        body: `${poi.categoryLabel} · ~${distanceM} m. Mau dengar ceritanya?`,
         color: '#FF8316',
         data: {
           type: 'poi-geofence-enter',
           poiId: poi.id,
+          url: `/poi/${poi.id}`,
         },
         ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
       },
@@ -177,9 +178,9 @@ export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void
 }
 
 /**
- * Mengirim notifikasi lokal selamat datang saat pengguna memasuki kawasan kuliner (Entry event 100 m).
+ * F02 entry event: pengguna masuk radius kawasan (mis. 100 m dari pusat Sudirman Street Food).
  */
-export async function notifyAreaEntry(areaName = 'Sudirman Street Food'): Promise<void> {
+export async function notifyAreaEntry(areaName: string): Promise<void> {
   const Notifications = getNotificationsModule();
   if (!Notifications) return;
 
@@ -187,14 +188,12 @@ export async function notifyAreaEntry(areaName = 'Sudirman Street Food'): Promis
     await ensureNotificationSetup();
 
     await Notifications.scheduleNotificationAsync({
-      identifier: 'area-entry-welcome',
+      identifier: 'area-entry',
       content: {
-        title: `Selamat Datang di ${areaName}!`,
-        body: 'Kamu telah memasuki kawasan Sudirman Street Food. Aktifkan Mode Jelajah untuk mendengar cerita kuliner!',
+        title: `Selamat datang di ${areaName}!`,
+        body: 'Rencanakan trail kulinermu atau jelajah bebas. Kami kabari saat kamu dekat tenant.',
         color: '#FF8316',
-        data: {
-          type: 'area-entry-welcome',
-        },
+        data: { type: 'area-entry', url: '/(tabs)' },
         ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
       },
       trigger: null,

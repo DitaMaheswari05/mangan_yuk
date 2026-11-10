@@ -1,10 +1,5 @@
 import * as TaskManager from 'expo-task-manager';
-import areaJson from '@/data/area.json';
-import { defaultGeofenceEngine } from '@/features/geofence/engine';
-import { NotificationService } from '@/features/notifications';
-import { getPois } from '@/features/poi';
-import type { UserPosition } from '@/lib/geo';
-import type { AreaConfig } from '@/types/content';
+import { GeofenceRuntime } from '@/features/geofence/runtime';
 
 export const BACKGROUND_LOCATION_TASK = 'background-location';
 
@@ -19,13 +14,8 @@ type BackgroundLocationPayload = {
   }>;
 };
 
-const DEFAULT_AREA: AreaConfig = areaJson as AreaConfig;
-
-export function resetBackgroundGeofenceSession(): void {
-  defaultGeofenceEngine.resetSession();
-}
-
-// F02, PB-05, PB-06: dipanggil OS saat lokasi berubah di background ketika Mode Jelajah aktif.
+// F02 / PB05: dipanggil OS (lewat foreground service "Mode Jelajah") saat lokasi berubah, termasuk
+// ketika app di background atau layar terkunci. Semua logika event ada di GeofenceRuntime.
 try {
   if (!TaskManager.isTaskDefined(BACKGROUND_LOCATION_TASK)) {
     TaskManager.defineTask<BackgroundLocationPayload>(
@@ -33,36 +23,15 @@ try {
       async ({ data, error }) => {
         if (error || !data?.locations?.length) return;
 
-        const latest = data.locations[data.locations.length - 1];
-        const userPosition: UserPosition = {
-          coordinate: {
-            latitude: latest.coords.latitude,
-            longitude: latest.coords.longitude,
-          },
-          accuracyM:
-            typeof latest.coords.accuracy === 'number' && latest.coords.accuracy >= 0
-              ? latest.coords.accuracy
-              : 0,
-          timestamp: latest.timestamp ?? Date.now(),
-        };
-
-        const pois = getPois();
-        const result = defaultGeofenceEngine.processPosition(
-          userPosition,
-          DEFAULT_AREA,
-          pois,
-        );
-
-        if (result.discarded) return;
-
-        // Pemicu Entry Event kawasan saat di background
-        if (result.areaEvent === 'ENTRY') {
-          await NotificationService.notifyAreaEntry(DEFAULT_AREA.name);
-        }
-
-        // Pemicu Proximity Event tenant saat di background
-        for (const item of result.proximityPois) {
-          await NotificationService.notifyNearbyPoi(item.poi, item.distanceM);
+        // OS bisa mengirim beberapa lokasi sekaligus (batch); proses berurutan agar timer dwell benar.
+        const sorted = [...data.locations].sort((a, b) => a.timestamp - b.timestamp);
+        for (const loc of sorted) {
+          await GeofenceRuntime.processPosition({
+            coordinate: { latitude: loc.coords.latitude, longitude: loc.coords.longitude },
+            // Akurasi tidak diketahui → anggap tidak akurat agar tidak memicu trigger palsu.
+            accuracyM: typeof loc.coords.accuracy === 'number' ? loc.coords.accuracy : Infinity,
+            timestamp: loc.timestamp,
+          });
         }
       },
     );

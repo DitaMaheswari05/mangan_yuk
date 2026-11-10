@@ -26,12 +26,39 @@ function getStorage(): SupabaseClient {
   return storage;
 }
 
+const ASSET_MAP_FILE = path.join(DATA_DIR, 'assets.ts');
+const downloadedAssetKeys: string[] = [];
+
 async function download(bucket: string, objectPath: string) {
   const { data, error } = await getStorage().storage.from(bucket).download(objectPath);
   if (error) throw new Error(`${bucket}/${objectPath}: ${error.message}`);
   const dest = path.join(ASSET_DIR, bucket, objectPath);
   await mkdir(path.dirname(dest), { recursive: true });
   await writeFile(dest, Buffer.from(await data.arrayBuffer()));
+  downloadedAssetKeys.push(`${bucket}/${objectPath}`);
+}
+
+/** Metro hanya bisa membundel aset lewat require() statis → tulis peta assetKey → modul. */
+async function writeAssetMap() {
+  const lines = [...downloadedAssetKeys]
+    .sort()
+    .map((key) => `  '${key}': require('../../assets/content/${key}'),`);
+  const body = lines.length ? `{
+${lines.join('
+')}
+}` : '{}';
+  await writeFile(
+    ASSET_MAP_FILE,
+    [
+      '// ⚙️ Dihasilkan oleh backend/scripts/export-content.ts — jangan diedit manual.',
+      '// Metro hanya bisa membundel aset lewat require() statis, jadi peta assetKey → modul ada di sini.',
+      '/* eslint-disable @typescript-eslint/no-require-imports */',
+      '',
+      `export const CONTENT_ASSETS: Record<string, number> = ${body};`,
+      '',
+    ].join('
+'),
+  );
 }
 
 /** Lingkaran radius `radiusM` di sekitar pusat, sebagai polygon GeoJSON untuk overlay peta. */
@@ -76,6 +103,7 @@ async function main() {
   }
 
   await mkdir(DATA_DIR, { recursive: true });
+  await writeAssetMap();
 
   await write('area.json', {
     id: area.id,

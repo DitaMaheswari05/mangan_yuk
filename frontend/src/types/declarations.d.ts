@@ -45,9 +45,32 @@ declare module 'react-native-svg' {
 }
 
 declare module '@expo/vector-icons' {
-  import type React from 'react';
-  export const Ionicons: React.ComponentType<any>;
-  export const MaterialCommunityIcons: React.ComponentType<any>;
-  export const FontAwesome: React.ComponentType<any>;
-  export const Feather: React.ComponentType<any>;
+  export const Ionicons: any;
+  export const MaterialCommunityIcons: any;
+  export const FontAwesome: any;
+  export const Feather: any;
+}
+
+declare module 'expo-haptics' {
+  export enum ImpactFeedbackStyle {
+    Light = 'light',
+    Medium = 'medium',
+    Heavy = 'heavy',
+  }
+  export enum NotificationFeedbackType {
+    Success = 'success',
+    Warning = 'warning',
+    Error = 'error',
+  }
+  export function impactAsync(style?: ImpactFeedbackStyle): Promise<void>;
+  export function notificationAsync(type?: NotificationFeedbackType): Promise<void>;
+  export function selectionAsync(): Promise<void>;
+}
+
+declare module 'expo-audio' {
+  export const useAudioPlayer: any;
+  export const useAudioPlayerStatus: any;
+  export const AudioSource: any;
+  export const AudioPlayer: any;
+  export function setAudioModeAsync(mode: any): Promise<void>;
 }
