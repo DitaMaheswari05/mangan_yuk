@@ -25,6 +25,7 @@
     "expo-router": "~58.0.30",
     "expo-status-bar": "*",
     "expo-task-manager": "~58.0.13",
+    "fuse.js": "^7.5.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-native": "0.88.1",
@@ -34,6 +35,7 @@
     "zustand": "*"
   },
   "devDependencies": {
+    "@react-native/jest-preset": "*",
     "@types/geojson": "^7946.0.16",
     "@types/jest": "*",
     "@types/react": "*",
