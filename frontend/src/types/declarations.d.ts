@@ -66,11 +66,3 @@ declare module 'expo-haptics' {
   export function notificationAsync(type?: NotificationFeedbackType): Promise<void>;
   export function selectionAsync(): Promise<void>;
 }
-
-declare module 'expo-audio' {
-  export const useAudioPlayer: any;
-  export const useAudioPlayerStatus: any;
-  export const AudioSource: any;
-  export const AudioPlayer: any;
-  export function setAudioModeAsync(mode: any): Promise<void>;
-}

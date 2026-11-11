@@ -1,7 +1,13 @@
 // F03 / PB08 – Pemutar audio narasi POI (offline, dari aset bundel).
 // Pemutaran berlanjut saat app di background / layar terkunci (SB-2.6).
 
-import { setAudioModeAsync, useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
+import {
+  createAudioPlayer,
+  setAudioModeAsync,
+  useAudioPlayer,
+  useAudioPlayerStatus,
+  type AudioPlayer,
+} from 'expo-audio';
 import { useCallback, useEffect } from 'react';
 import { CONTENT_ASSETS } from '@/data/assets';
 import type { Poi } from '@/types/content';
@@ -93,6 +99,58 @@ export function useNarration(poi: Pick<Poi, 'name' | 'audio'> | null | undefined
   );
 
   return { available, playing: status.playing, positionSec, durationSec, toggle, seekTo, seekBy };
+}
+
+// F04 – Pemutar di luar komponen React, untuk tombol "Dengar" di notifikasi (lock screen /
+// background task) saat UI kartu POI tidak terbuka. Hanya satu narasi aktif dalam satu waktu.
+let detachedPlayer: AudioPlayer | null = null;
+let detachedSub: { remove: () => void } | null = null;
+
+export function stopNarration(): void {
+  detachedSub?.remove();
+  detachedSub = null;
+  if (!detachedPlayer) return;
+  const player = detachedPlayer;
+  detachedPlayer = null;
+  try {
+    player.clearLockScreenControls();
+  } catch {
+    // abaikan
+  }
+  try {
+    player.pause();
+    player.release();
+  } catch {
+    // abaikan
+  }
+}
+
+/** Putar narasi POI tanpa UI. false jika POI belum punya audio di bundel. */
+export async function playNarration(poi: Pick<Poi, 'name' | 'audio'>): Promise<boolean> {
+  const source = resolveAsset(poi.audio?.assetKey);
+  if (source === null) return false;
+
+  await configureAudioSession();
+  stopNarration();
+
+  const player = createAudioPlayer(source, { updateInterval: 1000 });
+  detachedPlayer = player;
+  detachedSub = player.addListener('playbackStatusUpdate', (s) => {
+    if (s.didJustFinish && detachedPlayer === player) stopNarration();
+  });
+
+  // Wajib di Android agar audio tidak dihentikan OS saat app di background / layar terkunci.
+  try {
+    player.setActiveForLockScreen(true, {
+      title: poi.name,
+      artist: 'Mangan Yuk · Sudirman Street Food',
+    });
+  } catch {
+    // abaikan di platform tanpa dukungan
+  }
+
+  player.play();
+  return true;
 }
 
 /** 75 → '1:15' */
