@@ -1,7 +1,7 @@
 // F04 – Respons tombol notifikasi proximity (Dengar / Lewati), dipakai bersama oleh listener di
 // root layout (app terbuka) dan background notification task (app di background / di-kill, Android).
 import * as Notifications from 'expo-notifications';
-import { playNarration } from '@/features/audio';
+import { AudioQueue, playNarration } from '@/features/audio';
 import { getPoiById } from '@/features/poi';
 import { ACTION_LISTEN, ACTION_SKIP } from './index';
 
@@ -48,7 +48,10 @@ export async function handleNotificationResponse(
     await dismiss(response);
     if (!poiId) return { kind: 'ignored' };
 
-    if (action === ACTION_SKIP) return { kind: 'skip', poiId };
+    if (action === ACTION_SKIP) {
+      await AudioQueue.stop();
+      return { kind: 'skip', poiId };
+    }
 
     const poi = getPoiById(poiId);
     if (poi) await playNarration(poi);

@@ -172,24 +172,33 @@ export async function dismissPersistentExploreNotification(): Promise<void> {
 /**
  * F02 proximity event: pengguna masuk radius geofence tenant. Ketuk → buka kartu POI.
  */
-export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void> {
+export async function notifyNearbyPoi(
+  poi: Poi,
+  distanceM: number,
+  options?: { autoPlaying?: boolean },
+): Promise<void> {
   const Notifications = getNotificationsModule();
   if (!Notifications) return;
 
   try {
     await ensureNotificationSetup();
 
+    const bodyText = options?.autoPlaying
+      ? `${poi.categoryLabel} · ~${distanceM} m. Memutar narasi otomatis (Mode Jalan).`
+      : `${poi.categoryLabel} · ~${distanceM} m. Mau dengar ceritanya?`;
+
     await Notifications.scheduleNotificationAsync({
       identifier: `poi-nearby-${poi.id}`,
       content: {
         title: `Kamu mendekati ${poi.name}`,
-        body: `${poi.categoryLabel} · ~${distanceM} m. Mau dengar ceritanya?`,
+        body: bodyText,
         color: '#FF8316',
         categoryIdentifier: POI_PROXIMITY_CATEGORY,
         data: {
           type: 'poi-geofence-enter',
           poiId: poi.id,
           url: `/poi/${poi.id}`,
+          autoPlaying: options?.autoPlaying ?? false,
         },
         ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
       },

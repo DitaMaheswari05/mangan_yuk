@@ -9,6 +9,9 @@ jest.mock('expo-notifications', () => ({
 
 jest.mock('@/features/audio', () => ({
   playNarration: jest.fn(async () => true),
+  AudioQueue: {
+    stop: jest.fn(async () => {}),
+  },
 }));
 
 jest.mock('@/features/poi', () => ({
