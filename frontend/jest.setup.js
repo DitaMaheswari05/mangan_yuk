@@ -24,3 +24,12 @@ jest.mock('expo-audio', () => ({
     didJustFinish: false,
   })),
 }));
+jest.mock(
+  'expo-speech',
+  () => ({
+    speak: jest.fn((text, opts) => opts?.onDone?.()),
+    stop: jest.fn(),
+    isSpeakingAsync: jest.fn(async () => false),
+  }),
+  { virtual: true }
+);

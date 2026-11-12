@@ -42,6 +42,8 @@ export default function HomeScreen() {
   const mapRef = useRef<CameraRef | null>(null);
 
   const setPermissions = useAppStore((s) => s.setPermissions);
+  const walkMode = useAppStore((s) => s.walkMode);
+  const toggleWalkMode = useAppStore((s) => s.toggleWalkMode);
 
   // State lokasi pengguna (saat ini di-set ke Sudirman Street Food untuk testing dev)
   const { permission, position, areaStatus, distanceToAreaM } = useUserLocation();
@@ -342,20 +344,55 @@ export default function HomeScreen() {
                 Notifikasi Permanen · Mode Jelajah Aktif
               </Text>
               <Text style={styles.persistentNotifSubtitle} numberOfLines={1}>
-                {nearestPoiInfo
-                  ? `Dekat ${nearestPoiInfo.poi.name} (~${nearestPoiInfo.distanceM}m)`
-                  : 'Melacak posisi & kuliner terdekat di SSF'}
+                {walkMode
+                  ? nearestPoiInfo
+                    ? `Dekat ${nearestPoiInfo.poi.name} · Mode Jalan (Auto Audio)`
+                    : 'Mode Jalan aktif · Audio berputar otomatis'
+                  : nearestPoiInfo
+                    ? `Dekat ${nearestPoiInfo.poi.name} (~${nearestPoiInfo.distanceM}m)`
+                    : 'Melacak posisi & kuliner terdekat di SSF'}
               </Text>
             </View>
           </View>
-          <Pressable
-            style={styles.persistentStopChip}
-            onPress={handleDeactivateExploreMode}
-            accessibilityRole="button"
-            accessibilityLabel="Matikan Mode Jelajah dan hapus notifikasi"
-          >
-            <Text style={styles.persistentStopChipText}>Matikan</Text>
-          </Pressable>
+          <View style={styles.persistentActionsRow}>
+            <Pressable
+              style={[
+                styles.walkModeToggleChip,
+                walkMode
+                  ? styles.walkModeToggleChipActive
+                  : styles.walkModeToggleChipInactive,
+              ]}
+              onPress={toggleWalkMode}
+              accessibilityRole="switch"
+              accessibilityState={{ checked: walkMode }}
+              accessibilityLabel={`Mode Jalan ${walkMode ? 'Aktif' : 'Nonaktif'}`}
+            >
+              <Ionicons
+                name="walk"
+                size={14}
+                color={walkMode ? '#FFFFFF' : '#FF8316'}
+              />
+              <Text
+                style={[
+                  styles.walkModeToggleText,
+                  walkMode
+                    ? styles.walkModeToggleTextActive
+                    : styles.walkModeToggleTextInactive,
+                ]}
+              >
+                {walkMode ? 'Jalan ON' : 'Jalan OFF'}
+              </Text>
+            </Pressable>
+
+            <Pressable
+              style={styles.persistentStopChip}
+              onPress={handleDeactivateExploreMode}
+              accessibilityRole="button"
+              accessibilityLabel="Matikan Mode Jelajah dan hapus notifikasi"
+            >
+              <Text style={styles.persistentStopChipText}>Matikan</Text>
+            </Pressable>
+          </View>
         </View>
       ) : null}
 
@@ -860,9 +897,42 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     color: '#E5E2E1',
   },
-  persistentStopChip: {
+  persistentActionsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  walkModeToggleChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 999,
+    borderWidth: 1,
+  },
+  walkModeToggleChipActive: {
     backgroundColor: '#FF8316',
-    paddingHorizontal: 12,
+    borderColor: '#FF8316',
+  },
+  walkModeToggleChipInactive: {
+    backgroundColor: 'transparent',
+    borderColor: '#FF8316',
+  },
+  walkModeToggleText: {
+    fontFamily: fontFamily.medium,
+    fontSize: 11,
+    lineHeight: 14,
+  },
+  walkModeToggleTextActive: {
+    color: '#FFFFFF',
+  },
+  walkModeToggleTextInactive: {
+    color: '#FF8316',
+  },
+  persistentStopChip: {
+    backgroundColor: '#707070',
+    paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 999,
   },

@@ -23,6 +23,7 @@
     "expo-location": "~58.0.20",
     "expo-notifications": "~58.1.8",
     "expo-router": "~58.0.30",
+    "expo-speech": "^58.0.4",
     "expo-status-bar": "*",
     "expo-task-manager": "~58.0.13",
     "fuse.js": "^7.5.0",
@@ -35,7 +36,7 @@
     "zustand": "*"
   },
   "devDependencies": {
-    "@react-native/jest-preset": "*",
+    "@react-native/jest-preset": "^0.88.1",
     "@types/geojson": "^7946.0.16",
     "@types/jest": "*",
     "@types/react": "*",
