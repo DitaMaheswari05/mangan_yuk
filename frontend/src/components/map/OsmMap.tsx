@@ -4,10 +4,12 @@ import { StyleSheet, View } from 'react-native';
 import { INITIAL_CAMERA, MAP_STYLE } from '@/constants/map';
 import type { UserPosition } from '@/features/location';
 import { getPois } from '@/features/poi';
+import type { LatLng } from '@/lib/geo';
 import type { Poi } from '@/types/content';
 import { AreaOverlay } from './AreaOverlay';
 import { MapAttribution } from './MapAttribution';
 import { PoiMarker } from './PoiMarker';
+import { RouteLine } from './RouteLine';
 import { UserLocation } from './UserLocation';
 
 export type OsmMapProps = {
@@ -21,6 +23,8 @@ export type OsmMapProps = {
   onMapPress?: () => void;
   /** Ref ke kamera MapLibre (easeTo / flyTo / fitBounds). */
   mapRef?: React.Ref<CameraRef>;
+  /** Titik rute navigasi aktif [userPosition, targetPoi] */
+  routePoints?: LatLng[];
 };
 
 // Peta MapLibre dengan basemap tile OpenStreetMap.
@@ -33,6 +37,7 @@ export function OsmMap({
   onSelectPoi,
   onMapPress,
   mapRef,
+  routePoints,
 }: OsmMapProps) {
   const markerPois = pois ?? getPois();
 
@@ -49,6 +54,9 @@ export function OsmMap({
       >
         <Camera ref={mapRef} initialViewState={INITIAL_CAMERA} maxZoom={19} />
         <AreaOverlay />
+        {routePoints && routePoints.length >= 2 ? (
+          <RouteLine points={routePoints} />
+        ) : null}
         {userPosition ? (
           <UserLocation
             position={userPosition.coordinate}
