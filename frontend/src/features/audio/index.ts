@@ -126,7 +126,10 @@ export function stopNarration(): void {
 }
 
 /** Putar narasi POI tanpa UI. false jika POI belum punya audio di bundel. */
-export async function playNarration(poi: Pick<Poi, 'name' | 'audio'>): Promise<boolean> {
+export async function playNarration(
+  poi: Pick<Poi, 'name' | 'audio'>,
+  onFinish?: () => void,
+): Promise<boolean> {
   const source = resolveAsset(poi.audio?.assetKey);
   if (source === null) return false;
 
@@ -136,7 +139,10 @@ export async function playNarration(poi: Pick<Poi, 'name' | 'audio'>): Promise<b
   const player = createAudioPlayer(source, { updateInterval: 1000 });
   detachedPlayer = player;
   detachedSub = player.addListener('playbackStatusUpdate', (s) => {
-    if (s.didJustFinish && detachedPlayer === player) stopNarration();
+    if (s.didJustFinish && detachedPlayer === player) {
+      stopNarration();
+      onFinish?.();
+    }
   });
 
   // Wajib di Android agar audio tidak dihentikan OS saat app di background / layar terkunci.
@@ -158,3 +164,8 @@ export function formatClock(totalSec: number): string {
   const s = Math.max(0, Math.floor(totalSec));
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 }
+
+export * from './tts';
+export * from './queue';
+export * from './walkMode';
+
