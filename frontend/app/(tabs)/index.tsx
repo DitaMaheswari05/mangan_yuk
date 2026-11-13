@@ -58,9 +58,26 @@ export default function HomeScreen() {
   const [persistentNotifActive, setPersistentNotifActive] = useState(false);
   const [arrivedModalVisible, setArrivedModalVisible] = useState(false);
   const [poiSheetExpanded, setPoiSheetExpanded] = useState(false);
-  const hasShownArrivedModalRef = useRef(false);
-  const exploreModeRef = useRef(exploreMode);
-  exploreModeRef.current = exploreMode;
+  const [hasShownArrivedModal, setHasShownArrivedModal] = useState(false);
+  const [prevAreaStatus, setPrevAreaStatus] = useState<typeof areaStatus | null>(null);
+
+  // Tampilkan modal sambutan saat pertama kali berada di dalam area SSF.
+  // Disesuaikan saat render (bukan di useEffect) ketika areaStatus berubah,
+  // lihat https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  if (areaStatus !== prevAreaStatus) {
+    setPrevAreaStatus(areaStatus);
+    if (areaStatus === 'INSIDE' && !hasShownArrivedModal) {
+      setHasShownArrivedModal(true);
+      // Kalau Mode Jelajah masih aktif (pengguna keluar lalu masuk lagi), tawaran tidak perlu muncul.
+      if (!exploreMode) setArrivedModalVisible(true);
+    } else if (areaStatus === 'OUTSIDE') {
+      setHasShownArrivedModal(false);
+      setArrivedModalVisible(false);
+      // Mode Jelajah sengaja tidak dimatikan di luar kawasan: pelacakan tetap jalan supaya entry
+      // event (notifikasi sambutan) muncul saat pengguna kembali masuk, termasuk di background (F02-AC1).
+      setSelectedPoi(null);
+    }
+  }
 
   useEffect(() => {
     let active = true;
@@ -89,21 +106,6 @@ export default function HomeScreen() {
       void ExploreModeController.stop();
     };
   }, []);
-
-  // Tampilkan modal sambutan saat pertama kali berada di dalam area SSF
-  useEffect(() => {
-    if (areaStatus === 'INSIDE' && !hasShownArrivedModalRef.current) {
-      hasShownArrivedModalRef.current = true;
-      // Kalau Mode Jelajah masih aktif (pengguna keluar lalu masuk lagi), tawaran tidak perlu muncul.
-      if (!exploreModeRef.current) setArrivedModalVisible(true);
-    } else if (areaStatus === 'OUTSIDE') {
-      hasShownArrivedModalRef.current = false;
-      setArrivedModalVisible(false);
-      // Mode Jelajah sengaja tidak dimatikan di luar kawasan: pelacakan tetap jalan supaya entry
-      // event (notifikasi sambutan) muncul saat pengguna kembali masuk, termasuk di background (F02-AC1).
-      setSelectedPoi(null);
-    }
-  }, [areaStatus]);
 
   const handleRecenterMap = useCallback(() => {
     const target = position?.coordinate ?? areaJson.center;

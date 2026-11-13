@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { OnboardingScaffold } from '@/components/ui/OnboardingScaffold';
@@ -14,7 +14,7 @@ export default function NotificationScreen() {
   const setOnboardingStep = useAppStore((s) => s.setOnboardingStep);
   const setPermissions = useAppStore((s) => s.setPermissions);
 
-  const bounceAnim = useRef(new Animated.Value(0)).current;
+  const [bounceAnim] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     const enterAnimation = Animated.spring(bounceAnim, {
