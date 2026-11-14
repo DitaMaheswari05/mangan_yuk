@@ -18,7 +18,18 @@
     "avgVisitMin": 10,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p01/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Traditional Fried Food from West Borneo"
+      },
+      {
+        "assetKey": "poi-photos/p01/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Traditional Fried Food from West Borneo"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p01.mp3",
       "durationSec": 72,
@@ -219,7 +230,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p03/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Swike Asli JTW"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p03.mp3",
       "durationSec": 66,
@@ -562,7 +579,18 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p04/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Bebek Gober Bumbu Hitam"
+      },
+      {
+        "assetKey": "poi-photos/p04/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Bebek Gober Bumbu Hitam"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p04.mp3",
       "durationSec": 65,
@@ -793,7 +821,18 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p05/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Pigbull"
+      },
+      {
+        "assetKey": "poi-photos/p05/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Pigbull"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p05.mp3",
       "durationSec": 55,
@@ -1107,7 +1146,18 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p06/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Awin Kwetiau Siantar"
+      },
+      {
+        "assetKey": "poi-photos/p06/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Awin Kwetiau Siantar"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p06.mp3",
       "durationSec": 68,
@@ -1378,7 +1428,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p07/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Sedap The Best Chinese Food"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p07.mp3",
       "durationSec": 72,
@@ -1773,7 +1829,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p08/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Gou Cheng Hiang"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p08.mp3",
       "durationSec": 72,
@@ -2141,7 +2203,13 @@
     "avgVisitMin": 15,
     "description": "Soto khas dan gurami bakar.",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p09/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Dapur Sotoku"
+      }
+    ],
     "audio": {
       "assetKey": "poi-audio/p09.mp3",
       "durationSec": 70,
@@ -2385,7 +2453,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p10/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Klypot"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -2664,7 +2738,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p11/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Umai"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -2863,7 +2943,13 @@
     "avgVisitMin": 15,
     "description": "Olahan bak kut teh dan samcan.",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p12/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Hong Nam"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -3203,7 +3289,13 @@
     "avgVisitMin": 10,
     "description": "Bakso ikan tenggiri goreng yang krispi.",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p13/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Pandu Baso Goreng Tenggiri"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -3329,7 +3421,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p14/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Segulung Babi"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -3918,7 +4016,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p15/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Bacuk Sultan Agung"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -4413,7 +4517,23 @@
     "avgVisitMin": 10,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p16/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Hau’s Tea"
+      },
+      {
+        "assetKey": "poi-photos/p16/2.jpg",
+        "kind": "food",
+        "caption": "Menu Hau’s Tea"
+      },
+      {
+        "assetKey": "poi-photos/p16/3.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Hau’s Tea"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -4694,7 +4814,13 @@
     "avgVisitMin": 10,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p17/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Kuo Tie Kelenteng"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -4803,7 +4929,18 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p18/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Nasi Goreng Babi Samcan Crispy"
+      },
+      {
+        "assetKey": "poi-photos/p18/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Nasi Goreng Babi Samcan Crispy"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -5143,7 +5280,18 @@
     "avgVisitMin": 5,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p19/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Jazz Coffee"
+      },
+      {
+        "assetKey": "poi-photos/p19/2.jpg",
+        "kind": "ambience",
+        "caption": "Panggung live music dekat Jazz Coffee"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -5506,7 +5654,18 @@
     "avgVisitMin": 15,
     "description": "Nasi hainan atau nasi putih dengan topping lengkap.",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p20/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Nasi Campur Kencana99"
+      },
+      {
+        "assetKey": "poi-photos/p20/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Nasi Campur Kencana99"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -6066,7 +6225,18 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p21/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Kuwali Kwetiaw Bakar & Nasi Goreng Samcan"
+      },
+      {
+        "assetKey": "poi-photos/p21/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Kuwali Kwetiaw Bakar & Nasi Goreng Samcan"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -6684,7 +6854,13 @@
     "avgVisitMin": 5,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p22/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Susu Mbok Darmi"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -6959,7 +7135,18 @@
     "avgVisitMin": 5,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p23/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand D’Cheers"
+      },
+      {
+        "assetKey": "poi-photos/p23/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana D’Cheers"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -7408,7 +7595,28 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p25/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Kwetiau Medan"
+      },
+      {
+        "assetKey": "poi-photos/p25/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Kwetiau Medan"
+      },
+      {
+        "assetKey": "poi-photos/p25/3.jpg",
+        "kind": "ambience",
+        "caption": "Area makan Kwetiau Medan"
+      },
+      {
+        "assetKey": "poi-photos/p25/4.jpg",
+        "kind": "ambience",
+        "caption": "Suasana sekitar Kwetiau Medan"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -7981,7 +8189,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p26/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Sotomie Sukabumi Ko Ricky & Happy Time"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -9367,7 +9581,13 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p28/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Pempek Gochan"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -9885,7 +10105,18 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p29/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Mie Susu"
+      },
+      {
+        "assetKey": "poi-photos/p29/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Mie Susu"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -10408,7 +10639,13 @@
     "avgVisitMin": 10,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p31/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Bacang Babi"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -10660,7 +10897,23 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p32/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand Sate Babi Wibisana"
+      },
+      {
+        "assetKey": "poi-photos/p32/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana Sate Babi Wibisana"
+      },
+      {
+        "assetKey": "poi-photos/p32/3.jpg",
+        "kind": "ambience",
+        "caption": "Area makan Sate Babi Wibisana"
+      }
+    ],
     "audio": null,
     "menu": [
       {
@@ -11029,7 +11282,18 @@
     "avgVisitMin": 15,
     "description": "",
     "culturalStory": null,
-    "photos": [],
+    "photos": [
+      {
+        "assetKey": "poi-photos/p33/1.jpg",
+        "kind": "tenant",
+        "caption": "Stand El Paso"
+      },
+      {
+        "assetKey": "poi-photos/p33/2.jpg",
+        "kind": "ambience",
+        "caption": "Suasana El Paso"
+      }
+    ],
     "audio": null,
     "menu": [
       {
