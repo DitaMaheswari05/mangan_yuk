@@ -37,7 +37,7 @@ export function __setSourceForTest(next?: { area: unknown; pois: unknown }) {
 function build(): Loaded {
   if (cache) return cache;
   const validation = validate(source, 'PB04');
-  if (!validation.valid) {
+  if (__DEV__ && !validation.valid) {
     console.warn(`[PoiRepository] dataset tidak valid:\n- ${validation.errors.join('\n- ')}`);
   }
   // Release: POI rusak disembunyikan jika masih ada POI valid, atau gunakan fallback dataset asli agar marker tetap tampil

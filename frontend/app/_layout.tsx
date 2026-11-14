@@ -22,7 +22,9 @@ export default function RootLayout() {
           'ChironGoRoundTC-Bold': require('../assets/fonts/ChironGoRoundTC-Bold.ttf'),
         });
       } catch (e) {
-        console.warn('[RootLayout] Gagal memuat font Chiron GoRound TC:', e);
+        if (__DEV__) {
+          console.warn('[RootLayout] Gagal memuat font Chiron GoRound TC:', e);
+        }
       } finally {
         if (mounted) {
           setFontsLoaded(true);
