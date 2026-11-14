@@ -18,11 +18,44 @@ export type HHmm = string;
 /** day: 0 = Minggu … 6 = Sabtu (sama dengan Date.getDay()). close < open berarti lewat tengah malam. */
 export type TimeSlot = { day: number; open: HHmm; close: HHmm };
 
+/** Jenis hidangan per menu (filter F05). Harus sama dengan enum dish_category di migration menu_filters. */
+export const DISH_CATEGORIES = [
+  'nasi',
+  'mie',
+  'kwetiau-bihun',
+  'bubur',
+  'soto-sup',
+  'sate',
+  'lauk',
+  'pempek',
+  'gorengan',
+  'dimsum-bakpao',
+  'roti-sandwich',
+  'dessert',
+  'kopi',
+  'teh',
+  'susu',
+  'jus-es-buah',
+  'alkohol',
+  'minuman-lain',
+  'pelengkap',
+] as const;
+export type DishCategory = (typeof DISH_CATEGORIES)[number];
+
+/** Rentang harga per menu: murah < 25rb ≤ sedang < 50rb ≤ mahal < 100rb ≤ premium. Beda dari PriceBucket tenant. */
+export type MenuPriceBucket = 'murah' | 'sedang' | 'mahal' | 'premium';
+
 export type MenuItem = {
   id: string; // 'P01-M01'
+  poiId: string; // tenant pemilik menu, untuk membuka detail tenant dari hasil filter
   name: string;
   priceIdr: number;
+  priceBucket: MenuPriceBucket;
   tastes: TasteTag[];
+  type: FoodType; // jenis per menu (Es Teh di tenant makanan = 'minuman')
+  dishCategory: DishCategory;
+  /** false = tidak halal (menu atau dapur tenant), null = belum diverifikasi. */
+  isHalal: boolean | null;
   isSignature: boolean;
 };
 

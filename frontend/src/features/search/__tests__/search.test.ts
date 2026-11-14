@@ -21,8 +21,8 @@ const TEST_POIS: Poi[] = [
     photos: [],
     audio: null,
     menu: [
-      { id: 'M01', name: 'Pukis Cokelat Keju', priceIdr: 12000, tastes: ['manis'], isSignature: true },
-      { id: 'M02', name: 'Pukis Pandan Wangi', priceIdr: 10000, tastes: ['manis'], isSignature: false },
+      { id: 'M01', name: 'Pukis Cokelat Keju', priceIdr: 12000, tastes: ['manis'], isSignature: true, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
+      { id: 'M02', name: 'Pukis Pandan Wangi', priceIdr: 10000, tastes: ['manis'], isSignature: false, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
     ],
     openingHours: [{ day: 1, open: '10:00', close: '22:00' }], // Buka Senin jam 10-22
     peakHours: [],
@@ -50,8 +50,8 @@ const TEST_POIS: Poi[] = [
     photos: [],
     audio: null,
     menu: [
-      { id: 'M03', name: 'Soto Ayam Kuah Bening', priceIdr: 25000, tastes: ['gurih', 'segar'], isSignature: true },
-      { id: 'M04', name: 'Soto Babat Santan', priceIdr: 32000, tastes: ['gurih'], isSignature: false },
+      { id: 'M03', name: 'Soto Ayam Kuah Bening', priceIdr: 25000, tastes: ['gurih', 'segar'], isSignature: true, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
+      { id: 'M04', name: 'Soto Babat Santan', priceIdr: 32000, tastes: ['gurih'], isSignature: false, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
     ],
     openingHours: [{ day: 1, open: '16:00', close: '23:00' }],
     peakHours: [],
@@ -79,8 +79,8 @@ const TEST_POIS: Poi[] = [
     photos: [],
     audio: null,
     menu: [
-      { id: 'M05', name: 'Batagor Spesial Kuah Kacang', priceIdr: 20000, tastes: ['gurih', 'pedas'], isSignature: true },
-      { id: 'M06', name: 'Baso Goreng Crispy', priceIdr: 10000, tastes: ['gurih'], isSignature: false },
+      { id: 'M05', name: 'Batagor Spesial Kuah Kacang', priceIdr: 20000, tastes: ['gurih', 'pedas'], isSignature: true, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
+      { id: 'M06', name: 'Baso Goreng Crispy', priceIdr: 10000, tastes: ['gurih'], isSignature: false, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
     ],
     openingHours: [{ day: 1, open: '12:00', close: '21:00' }],
     peakHours: [],
@@ -108,7 +108,7 @@ const TEST_POIS: Poi[] = [
     photos: [],
     audio: null,
     menu: [
-      { id: 'M07', name: 'Kepiting Saus Padang Super', priceIdr: 120000, tastes: ['pedas'], isSignature: true },
+      { id: 'M07', name: 'Kepiting Saus Padang Super', priceIdr: 120000, tastes: ['pedas'], isSignature: true, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
     ],
     openingHours: [{ day: 1, open: '17:00', close: '23:30' }],
     peakHours: [],

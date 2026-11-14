@@ -35,7 +35,7 @@ const makeTestPoi = (idNum: number, metersNorth: number, priceMinIdr: number, av
     culturalStory: null,
     photos: [],
     audio: null,
-    menu: [{ id: `${id}-M1`, name: 'Menu', priceIdr: priceMinIdr, tastes: ['gurih'], isSignature: true }],
+    menu: [{ id: `${id}-M1`, name: 'Menu', priceIdr: priceMinIdr, tastes: ['gurih'], isSignature: true, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null }],
     openingHours: [{ day: 5, open: '15:00', close: '23:00' }],
     peakHours: [],
     searchKeywords: [],

@@ -4,9 +4,9 @@
 
 import Fuse, { type IFuseOptions } from 'fuse.js';
 import { haversineM } from '@/features/location';
-import { isOpenAt } from '@/features/poi';
+import { getAllMenuItems, getPoiById, isOpenAt } from '@/features/poi';
 import type { LatLng } from '@/lib/geo';
-import type { FoodType, Poi, PriceBucket, TasteTag } from '@/types/content';
+import type { DishCategory, FoodType, MenuItem, MenuPriceBucket, Poi, PriceBucket, TasteTag } from '@/types/content';
 
 export const DEFAULT_FUSE_OPTIONS: IFuseOptions<Poi> = {
   keys: [
@@ -189,4 +189,37 @@ export function searchPois(
     total: resultsWithDistance.length,
     executionTimeMs,
   };
+}
+
+// ── Filter per menu (F05) ────────────────────────────────────────────────────
+
+export type MenuFilterOptions = {
+  query?: string;
+  tastes?: TasteTag[];
+  type?: FoodType;
+  dishCategory?: DishCategory;
+  priceBucket?: MenuPriceBucket;
+  isHalalOnly?: boolean;
+};
+
+export type MenuItemWithPoi = MenuItem & { poi?: Poi };
+
+/**
+ * Filter dan cari item menu berdasarkan rasa, jenis, jenis hidangan, halal, harga, dan nama.
+ * Menyertakan POI (tenant) agar UI bisa langsung bernavigasi ke tenant saat menu diklik.
+ */
+export function filterMenuItems(options: MenuFilterOptions = {}): MenuItemWithPoi[] {
+  const q = options.query?.toLowerCase().trim();
+  return getAllMenuItems()
+    .filter((item) => {
+      if (q && !item.name.toLowerCase().includes(q)) return false;
+      // Cocok jika menu punya minimal salah satu rasa yang dipilih.
+      if (options.tastes?.length && !options.tastes.some((t) => item.tastes.includes(t))) return false;
+      if (options.type && item.type !== options.type) return false;
+      if (options.dishCategory && item.dishCategory !== options.dishCategory) return false;
+      if (options.priceBucket && item.priceBucket !== options.priceBucket) return false;
+      if (options.isHalalOnly && item.isHalal === false) return false;
+      return true;
+    })
+    .map((item) => ({ ...item, poi: getPoiById(item.poiId) }));
 }

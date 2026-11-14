@@ -28,7 +28,7 @@ export function makePoi(n: number, overrides: Partial<PoiRecord> = {}): PoiRecor
     culturalStory: null,
     photos: [],
     audio: null,
-    menu: [{ id: `${id}-M01`, name: 'Menu', priceIdr: 20000, tastes: ['gurih'], isSignature: true }],
+    menu: [{ id: `${id}-M01`, name: 'Menu', priceIdr: 20000, tastes: ['gurih'], isSignature: true, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null }],
     openingHours: [{ day: 6, open: '17:00', close: '23:00' }],
     peakHours: [],
     searchKeywords: [],

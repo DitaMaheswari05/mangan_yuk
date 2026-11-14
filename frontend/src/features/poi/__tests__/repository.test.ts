@@ -62,8 +62,8 @@ describe('harga turunan', () => {
     const p = withDerivedPrice(
       makePoi(1, {
         menu: [
-          { id: 'P01-M01', name: 'A', priceIdr: 35_000, tastes: [], isSignature: true },
-          { id: 'P01-M02', name: 'B', priceIdr: 12_000, tastes: [], isSignature: false },
+          { id: 'P01-M01', name: 'A', priceIdr: 35_000, tastes: [], isSignature: true, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
+          { id: 'P01-M02', name: 'B', priceIdr: 12_000, tastes: [], isSignature: false, poiId: 'P00', priceBucket: 'murah', type: 'makanan', dishCategory: 'lauk', isHalal: null },
         ],
       }),
     );

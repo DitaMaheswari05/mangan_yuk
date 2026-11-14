@@ -37,6 +37,31 @@ enum FoodType {
   @@map("food_type")
 }
 
+// Migration 20261109000000_menu_filters.sql. Nilai berstrip dipetakan lewat @map.
+enum DishCategory {
+  nasi
+  mie
+  kwetiau_bihun @map("kwetiau-bihun")
+  bubur
+  soto_sup      @map("soto-sup")
+  sate
+  lauk
+  pempek
+  gorengan
+  dimsum_bakpao @map("dimsum-bakpao")
+  roti_sandwich @map("roti-sandwich")
+  dessert
+  kopi
+  teh
+  susu
+  jus_es_buah   @map("jus-es-buah")
+  alkohol
+  minuman_lain  @map("minuman-lain")
+  pelengkap
+
+  @@map("dish_category")
+}
+
 enum PhotoKind {
   food
   tenant
@@ -118,13 +143,16 @@ model PoiPhoto {
 }
 
 model MenuItem {
-  id          String  @id // 'P01-M01'
-  poiId       String  @map("poi_id")
-  name        String
-  priceIdr    Int     @map("price_idr")
-  tastes      Taste[] @default([])
-  isSignature Boolean @default(false) @map("is_signature")
-  position    Int     @default(0)
+  id           String        @id // 'P01-M01'
+  poiId        String        @map("poi_id")
+  name         String
+  priceIdr     Int           @map("price_idr")
+  tastes       Taste[]       @default([])
+  foodType     FoodType?     @map("food_type") // jenis per menu; diisi seed, wajib saat export
+  dishCategory DishCategory? @map("dish_category")
+  isHalal      Boolean?      @map("is_halal") // null = belum diverifikasi; export mewarisi dari tenant
+  isSignature  Boolean       @default(false) @map("is_signature")
+  position     Int           @default(0)
 
   poi Poi @relation(fields: [poiId], references: [id], onDelete: Cascade)
 
