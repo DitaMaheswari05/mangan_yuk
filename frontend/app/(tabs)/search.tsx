@@ -3,6 +3,7 @@ import { router } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import {
   FlatList,
+  Image,
   Modal,
   Pressable,
   ScrollView,
@@ -15,6 +16,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { colors, fontFamily } from '@/constants/theme';
 import { useUserLocation } from '@/features/location';
 import { getPois } from '@/features/poi';
+import { getPoiThumbnail } from '@/features/poi/thumbnail';
 import { searchPois, type SearchResultItem } from '@/features/search';
 import type { FoodType, PriceBucket, TasteTag } from '@/types/content';
 
@@ -85,6 +87,7 @@ export default function SearchScreen() {
 
   const renderResultItem = ({ item }: { item: SearchResultItem }) => {
     const { poi, distanceM, matchedMenuNames } = item;
+    const thumbnail = getPoiThumbnail(poi);
 
     return (
       <Pressable
@@ -95,7 +98,11 @@ export default function SearchScreen() {
       >
         <View style={styles.cardHeader}>
           <View style={styles.iconCircle}>
-            <MaterialCommunityIcons name="storefront-outline" size={24} color="#FF8316" />
+            {thumbnail ? (
+              <Image source={thumbnail} style={styles.thumbnail} resizeMode="cover" />
+            ) : (
+              <MaterialCommunityIcons name="storefront-outline" size={24} color="#FF8316" />
+            )}
           </View>
 
           <View style={styles.cardTitleCol}>
@@ -549,6 +556,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF4EA',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  thumbnail: {
+    width: '100%',
+    height: '100%',
   },
   cardTitleCol: {
     flex: 1,

@@ -21,6 +21,7 @@ import { ExploreModeController, getNearbyPoisSorted } from '@/features/geofence'
 import { haversineM, useUserLocation } from '@/features/location';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
 import { getAll, getPois } from '@/features/poi';
+import { getPoiThumbnail } from '@/features/poi/thumbnail';
 import { useVisitedPoiIds } from '@/features/visits';
 import { useAppStore } from '@/store/useAppStore';
 import type { Poi } from '@/types/content';
@@ -541,11 +542,20 @@ export default function HomeScreen() {
                 }}
               >
                 <View style={styles.triggerPoiImagePlaceholder}>
-                  <MaterialCommunityIcons
-                    name="storefront-outline"
-                    size={40}
-                    color="#FF8316"
-                  />
+                  {getPoiThumbnail(poi) ? (
+                    <Image
+                      source={getPoiThumbnail(poi)!}
+                      style={styles.triggerPoiImage}
+                      resizeMode="cover"
+                      accessibilityLabel={`Foto ${poi.name}`}
+                    />
+                  ) : (
+                    <MaterialCommunityIcons
+                      name="storefront-outline"
+                      size={40}
+                      color="#FF8316"
+                    />
+                  )}
                   <View style={styles.triggerRatingBadge}>
                     <Ionicons name="star" size={12} color="#FFCC24" />
                     <Text style={styles.triggerRatingText}>4.5</Text>
@@ -581,7 +591,15 @@ export default function HomeScreen() {
           <View style={styles.poiPreviewCard}>
             <View style={styles.poiPreviewHeader}>
               <View style={styles.poiPreviewIconWrap}>
-                <MaterialCommunityIcons name="storefront" size={24} color="#FF8316" />
+                {getPoiThumbnail(selectedPoi) ? (
+                  <Image
+                    source={getPoiThumbnail(selectedPoi)!}
+                    style={styles.poiPreviewImage}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <MaterialCommunityIcons name="storefront" size={24} color="#FF8316" />
+                )}
               </View>
               <View style={styles.poiPreviewTitleCol}>
                 <Text style={styles.poiPreviewTitle} numberOfLines={1}>
@@ -1082,6 +1100,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
+    overflow: 'hidden',
+  },
+  triggerPoiImage: {
+    width: '100%',
+    height: '100%',
   },
   triggerRatingBadge: {
     position: 'absolute',
@@ -1321,6 +1344,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF4EA',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  poiPreviewImage: {
+    width: '100%',
+    height: '100%',
   },
   poiPreviewTitleCol: {
     flex: 1,
