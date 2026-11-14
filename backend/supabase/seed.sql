@@ -1060,6 +1060,59 @@ insert into public.opening_hours (poi_id, day_of_week, open_time, close_time) va
   ('P33', 5, '16:00', '22:00'),
   ('P33', 6, '16:00', '22:00');
 
+-- ---------------------------------------------------------------------------
+-- Foto POI (F03)
+-- ---------------------------------------------------------------------------
+
+insert into public.poi_photos (poi_id, path, kind, caption, position) values
+  ('P01', 'p01/1.jpg', 'tenant', 'Stand Traditional Fried Food from West Borneo', 0),
+  ('P01', 'p01/2.jpg', 'ambience', 'Suasana Traditional Fried Food from West Borneo', 1),
+  ('P03', 'p03/1.jpg', 'tenant', 'Stand Swike Asli JTW', 0),
+  ('P04', 'p04/1.jpg', 'tenant', 'Stand Bebek Gober Bumbu Hitam', 0),
+  ('P04', 'p04/2.jpg', 'ambience', 'Suasana Bebek Gober Bumbu Hitam', 1),
+  ('P05', 'p05/1.jpg', 'tenant', 'Stand Pigbull', 0),
+  ('P05', 'p05/2.jpg', 'ambience', 'Suasana Pigbull', 1),
+  ('P06', 'p06/1.jpg', 'tenant', 'Stand Awin Kwetiau Siantar', 0),
+  ('P06', 'p06/2.jpg', 'ambience', 'Suasana Awin Kwetiau Siantar', 1),
+  ('P07', 'p07/1.jpg', 'tenant', 'Stand Sedap The Best Chinese Food', 0),
+  ('P08', 'p08/1.jpg', 'tenant', 'Stand Gou Cheng Hiang', 0),
+  ('P09', 'p09/1.jpg', 'tenant', 'Stand Dapur Sotoku', 0),
+  ('P10', 'p10/1.jpg', 'tenant', 'Stand Klypot', 0),
+  ('P11', 'p11/1.jpg', 'tenant', 'Stand Umai', 0),
+  ('P12', 'p12/1.jpg', 'tenant', 'Stand Hong Nam', 0),
+  ('P13', 'p13/1.jpg', 'tenant', 'Stand Pandu Baso Goreng Tenggiri', 0),
+  ('P14', 'p14/1.jpg', 'tenant', 'Stand Segulung Babi', 0),
+  ('P15', 'p15/1.jpg', 'tenant', 'Stand Bacuk Sultan Agung', 0),
+  ('P16', 'p16/1.jpg', 'tenant', 'Stand Hau’s Tea', 0),
+  ('P16', 'p16/2.jpg', 'food', 'Menu Hau’s Tea', 1),
+  ('P16', 'p16/3.jpg', 'ambience', 'Suasana Hau’s Tea', 2),
+  ('P17', 'p17/1.jpg', 'tenant', 'Stand Kuo Tie Kelenteng', 0),
+  ('P18', 'p18/1.jpg', 'tenant', 'Stand Nasi Goreng Babi Samcan Crispy', 0),
+  ('P18', 'p18/2.jpg', 'ambience', 'Suasana Nasi Goreng Babi Samcan Crispy', 1),
+  ('P19', 'p19/1.jpg', 'tenant', 'Stand Jazz Coffee', 0),
+  ('P19', 'p19/2.jpg', 'ambience', 'Panggung live music dekat Jazz Coffee', 1),
+  ('P20', 'p20/1.jpg', 'tenant', 'Stand Nasi Campur Kencana99', 0),
+  ('P20', 'p20/2.jpg', 'ambience', 'Suasana Nasi Campur Kencana99', 1),
+  ('P21', 'p21/1.jpg', 'tenant', 'Stand Kuwali Kwetiaw Bakar & Nasi Goreng Samcan', 0),
+  ('P21', 'p21/2.jpg', 'ambience', 'Suasana Kuwali Kwetiaw Bakar & Nasi Goreng Samcan', 1),
+  ('P22', 'p22/1.jpg', 'tenant', 'Stand Susu Mbok Darmi', 0),
+  ('P23', 'p23/1.jpg', 'tenant', 'Stand D’Cheers', 0),
+  ('P23', 'p23/2.jpg', 'ambience', 'Suasana D’Cheers', 1),
+  ('P25', 'p25/1.jpg', 'tenant', 'Stand Kwetiau Medan', 0),
+  ('P25', 'p25/2.jpg', 'ambience', 'Suasana Kwetiau Medan', 1),
+  ('P25', 'p25/3.jpg', 'ambience', 'Area makan Kwetiau Medan', 2),
+  ('P25', 'p25/4.jpg', 'ambience', 'Suasana sekitar Kwetiau Medan', 3),
+  ('P26', 'p26/1.jpg', 'tenant', 'Stand Sotomie Sukabumi Ko Ricky & Happy Time', 0),
+  ('P28', 'p28/1.jpg', 'tenant', 'Stand Pempek Gochan', 0),
+  ('P29', 'p29/1.jpg', 'tenant', 'Stand Mie Susu', 0),
+  ('P29', 'p29/2.jpg', 'ambience', 'Suasana Mie Susu', 1),
+  ('P31', 'p31/1.jpg', 'tenant', 'Stand Bacang Babi', 0),
+  ('P32', 'p32/1.jpg', 'tenant', 'Stand Sate Babi Wibisana', 0),
+  ('P32', 'p32/2.jpg', 'ambience', 'Suasana Sate Babi Wibisana', 1),
+  ('P32', 'p32/3.jpg', 'ambience', 'Area makan Sate Babi Wibisana', 2),
+  ('P33', 'p33/1.jpg', 'tenant', 'Stand El Paso', 0),
+  ('P33', 'p33/2.jpg', 'ambience', 'Suasana El Paso', 1);
+
 -- insert into public.peak_hours (poi_id, day_of_week, start_time, end_time) values
 --   ('P01', 6, '18:00', '21:00');
 
