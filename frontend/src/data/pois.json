@@ -19,7 +19,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p01.mp3",
+      "durationSec": 72,
+      "transcript": "Selamat datang di Traditional Fried Food from West Borneo, kedai gorengan yang membawa rasa Pontianak, Kalimantan Barat, ke tengah kota Bandung. Andalannya adalah pisang goreng kipas khas Pontianak. Pisangnya diiris tipis tanpa putus sehingga terbuka seperti kipas, lalu digoreng dengan adonan tepung yang renyah. Hasilnya garing di luar dan legit di dalam. Coba juga bakwan Pontianak, pasangan yang pas untuk pisang goreng tadi. Selain itu ada pisang tanduk madu, tape goreng madu, nanas goreng, bom singkong, dan tahu isi. Ada juga gandasturi, gorengan isi kacang hijau yang sudah lama akrab di lidah orang Jawa Barat. Di Indonesia, gorengan lebih dari sekadar camilan. Ia teman mengobrol, teman minum teh, dan teman menunggu hujan reda. Harganya bersahabat, jadi kamu bisa mencicipi beberapa sekaligus. Pilih yang masih hangat, karena gorengan paling enak dinikmati selagi baru diangkat dari wajan."
+    },
     "menu": [
       {
         "id": "P01-M01",
@@ -216,7 +220,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p03.mp3",
+      "durationSec": 66,
+      "transcript": "Ini Swike Asli JTW. Swike adalah masakan peranakan Tionghoa berbahan kodok. Namanya berasal dari bahasa Hokkien, sui ke, yang berarti ayam air, sebutan halus untuk kodok. Di Jawa Tengah, swike terkenal dari daerah Purwodadi dan biasanya disajikan dalam kuah tauco yang gurih. Tauco adalah olahan kedelai fermentasi, dan di Jawa Barat, tauco Cianjur sudah dikenal sejak lama. Di kedai ini, menu andalannya justru kodok goreng. Ada kodok goreng mentega yang harum dan kodok goreng tepung yang renyah. Kalau ingin rasa yang lebih berani, pilih varian rica-rica atau asam manis. Untuk versi klasik, coba swike kuah tauco. Teksturnya mirip daging ayam, tapi lebih lembut. Kalau kamu belum pernah mencobanya, ini kesempatan untuk mengenal salah satu hidangan peranakan yang cukup unik di Indonesia. Sebagai informasi, menu di sini berbahan kodok, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P03-M01",
@@ -555,7 +563,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p04.mp3",
+      "durationSec": 65,
+      "transcript": "Kamu sedang berada di Bebek Gober Bumbu Hitam. Menu andalannya adalah paket nasi bebek bumbu hitam khas Madura. Bebek ala Madura dikenal dengan bumbunya yang gelap dan pekat, hasil racikan rempah yang dimasak lama hingga warnanya menghitam dan aromanya kuat. Bumbu inilah yang membuat daging bebek terasa gurih, sedikit pedas, dan meresap sampai ke dalam. Dagingnya digoreng hingga kulitnya kering, tapi bagian dalamnya tetap empuk. Kalau ingin porsi lebih ringan, ada paket bebek ukuran kecil. Kalau kurang suka bebek, tersedia juga ayam goreng dengan bumbu hitam yang sama, termasuk versi pedas. Nikmati dengan nasi hangat dan sambal, lalu siapkan tisu, karena hidangan seperti ini paling nikmat disantap pakai tangan. Bebek Madura kini mudah ditemukan di banyak kota. Ia menjadi contoh bagaimana masakan daerah bisa merantau dan dicintai di mana-mana, termasuk di Bandung."
+    },
     "menu": [
       {
         "id": "P04-M01",
@@ -782,7 +794,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p05.mp3",
+      "durationSec": 55,
+      "transcript": "Selamat datang di Pigbull, kedai nasi campur yang jadi favorit pencinta olahan babi. Menu andalannya adalah nasi campur hainan. Nasi hainan dimasak dengan kaldu, jahe, dan bawang putih, sehingga lebih harum dan gurih dibanding nasi putih biasa. Di atasnya ada beragam lauk, seperti samcan dan charsiu. Samcan adalah daging perut babi dengan tiga lapisan, yaitu kulit, lemak, dan daging. Namanya berasal dari bahasa Hokkien yang berarti tiga lapis. Charsiu adalah daging babi panggang khas Kanton dengan bumbu manis dan warna merah yang khas. Kalau suka yang renyah, coba nasi samcan crispy dengan sambal matah, perpaduan gaya Tionghoa dan Bali yang segar dan pedas. Ada juga nasi samcan lada garam dan nasi goreng Pigbull. Nasi campur seperti ini adalah bagian dari warisan kuliner peranakan yang kuat di Indonesia. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P05-M01",
@@ -1092,7 +1108,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p06.mp3",
+      "durationSec": 68,
+      "transcript": "Ini Awin Kwetiau Siantar. Pematang Siantar adalah kota di Sumatera Utara yang terkenal dengan kwetiau gorengnya. Kwetiau adalah mi pipih dari tepung beras. Di Siantar dan Medan, kwetiau digoreng di atas api besar sehingga muncul aroma smoky yang khas, yang sering disebut wok hei atau napas wajan. Menu andalan di sini adalah kwetiau goreng Medan atau Siantar. Selain kwetiau, ada ayam kampung pek cam ke, yaitu ayam rebus ala Tionghoa dengan kulit lembut dan daging yang juicy, biasanya dimakan dengan saus jahe. Tersedia juga chicken rice ayam kampung, bubur, dan dimsum. Kalau datang beramai-ramai, ayamnya bisa dipesan setengah hingga satu ekor untuk dibagi bersama. Sumatera Utara punya komunitas Tionghoa yang besar, dan dari sanalah banyak hidangan seperti ini menyebar ke seluruh Indonesia. Sebagai informasi, beberapa menu di sini mengandung babi, seperti bubur dan siomay, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P06-M01",
@@ -1359,7 +1379,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p07.mp3",
+      "durationSec": 72,
+      "transcript": "Kamu sedang berada di Sedap The Best Chinese Food. Kedai ini menyajikan Chinese food ala Indonesia, yang biasa kita temui di restoran keluarga maupun warung pinggir jalan. Pilihannya banyak, mulai dari bakmie kepiting, mie hokkian, mie goreng seafood, kwetiau goreng, dan bihun, hingga capcay dan nasi goreng. Mie hokkian, misalnya, berasal dari tradisi masak orang Hokkien, kelompok perantau Tionghoa yang banyak datang ke Nusantara. Ada juga misua kuah, mi tipis halus dengan kuah hangat yang menenangkan. Chinese food Indonesia adalah hasil perpaduan panjang antara resep Tionghoa dengan bahan dan selera lokal. Kecap manis, cabai, dan bawang goreng adalah sentuhan khas Nusantara yang membuatnya berbeda dari masakan di negeri asalnya. Kalau bingung memilih, mulailah dari mie atau kwetiau goreng, lalu tambahkan capcay supaya ada sayurnya. Hidangan di sini cocok dinikmati bersama, jadi ajak teman dan pesan beberapa menu untuk dibagi."
+    },
     "menu": [
       {
         "id": "P07-M01",
@@ -1750,7 +1774,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p08.mp3",
+      "durationSec": 72,
+      "transcript": "Selamat datang di Gou Cheng Hiang. Kedai ini menyajikan bak kut teh dan olahan babi bergaya Kalimantan. Bak kut teh berasal dari bahasa Hokkien yang berarti teh tulang daging. Meski namanya mengandung kata teh, sup ini sebenarnya tidak berisi teh. Namanya merujuk pada kebiasaan menikmatinya bersama teh panas. Isinya iga babi yang direbus lama dengan rempah dan herbal, menghasilkan kuah gurih yang hangat. Di sini ada beberapa pilihan, seperti bakut sayur asin khas Kalimantan, bakut perut ikan, dan bak kut angkhak merah. Angkhak adalah beras ragi merah yang memberi warna merah alami dan aroma khas. Ada juga kolo mie bakut ala Sarawak, mi kering yang kenyal, serta kaki babi angkhak merah. Hidangan-hidangan ini menunjukkan eratnya hubungan kuliner antara Kalimantan Barat, Sarawak, dan Semenanjung Malaya. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P08-M01",
@@ -2114,7 +2142,11 @@
     "description": "Soto khas dan gurami bakar.",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p09.mp3",
+      "durationSec": 70,
+      "transcript": "Kamu sedang berada di Dapur Sotoku, kedai soto dan sop dari berbagai daerah. Menu andalannya adalah soto Bandung, pilihan yang pas untuk mengenal kuliner Sunda. Soto Bandung punya kuah bening yang ringan, dengan potongan daging sapi, irisan lobak, dan taburan kacang kedelai goreng yang renyah. Lobak memberi rasa segar dan sedikit manis, sehingga kuahnya terasa bersih di lidah. Kalau ingin membandingkan, di sini juga ada soto Lamongan dari Jawa Timur dan soto Betawi dari Jakarta yang kuahnya bersantan. Untuk yang ingin lebih mengenyangkan, ada sop iga dan sop buntut. Jangan lewatkan gurame pesmol, masakan ikan khas Sunda dengan bumbu kuning yang sedikit asam. Ada juga gurame bakar bagi yang suka aroma panggang. Soto adalah salah satu hidangan paling beragam di Indonesia, dan hampir setiap daerah punya versinya sendiri. Di sini, kamu bisa mencicipi kekayaan rasa Nusantara dalam satu mangkuk."
+    },
     "menu": [
       {
         "id": "P09-M01",

@@ -13,6 +13,8 @@
     "db:new": "supabase migration new",
     "gen:types": "bash scripts/gen-types.sh",
     "export": "tsx scripts/export-content.ts",
+    "gen:audio": "tsx scripts/generate-audio.ts",
+    "upload:audio": "tsx scripts/upload-audio.ts",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
     "prisma:studio": "prisma studio"
