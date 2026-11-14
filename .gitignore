@@ -4,7 +4,9 @@ dist/
 web-build/
 *.log
 .env
+.env.*
 .env.local
+.env.*.local
 .idea/
 .DS_Store
 coverage/
