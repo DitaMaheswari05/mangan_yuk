@@ -28,7 +28,13 @@ export function verifyAccessToken(secret: string, token: string, now: Date): Acc
   } catch (e) {
     throw new ApiError(e instanceof jwt.TokenExpiredError ? 'TOKEN_EXPIRED' : 'TOKEN_INVALID');
   }
-  if (typeof claims === 'string' || !claims.sub || typeof claims.sid !== 'string') {
+  // OWASP M3: Wajib memastikan claims bukan string, memiliki sub, sid, dan exp eksplisit bertipe number.
+  if (
+    typeof claims === 'string' ||
+    !claims.sub ||
+    typeof claims.sid !== 'string' ||
+    typeof claims.exp !== 'number'
+  ) {
     throw new ApiError('TOKEN_INVALID');
   }
   return claims as AccessClaims;
