@@ -6,6 +6,7 @@ import * as Notifications from 'expo-notifications';
 import '@/tasks/backgroundLocation';
 import '@/tasks/notificationActions';
 import { handleNotificationResponse } from '@/features/notifications/actions';
+import { isValidInternalRoute } from '@/lib/validation';
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -46,7 +47,9 @@ export default function RootLayout() {
       allowActions: boolean,
     ) => {
       const res = await handleNotificationResponse(response, { allowActions });
-      if (res.kind === 'open') router.push(res.url as never);
+      if (res.kind === 'open' && isValidInternalRoute(res.url)) {
+        router.push(res.url as never);
+      }
     };
     try {
       // Respons terakhir saat cold start: aksi tombol sudah ditangani background task, jadi

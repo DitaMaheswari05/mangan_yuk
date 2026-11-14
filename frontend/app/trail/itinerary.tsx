@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, fontFamily } from '@/constants/theme';
+import { sanitizeNumber, sanitizeTastes } from '@/lib/validation';
 import { useUserLocation } from '@/features/location';
 import { getPois } from '@/features/poi';
 import {
@@ -35,9 +36,9 @@ export default function TrailItineraryScreen() {
     preferredTastes?: string;
   }>();
 
-  const durationMin = parseInt(params.durationMin || '60', 10);
-  const budget = parseInt(params.budget || '50000', 10);
-  const preferredTastes = (params.preferredTastes ? params.preferredTastes.split(',') : ['gurih']) as TasteTag[];
+  const durationMin = sanitizeNumber(params.durationMin, 60, 15, 360);
+  const budget = sanitizeNumber(params.budget, 50000, 15000, 2000000);
+  const preferredTastes = sanitizeTastes(params.preferredTastes, ['gurih']);
 
   const pois = useMemo(() => getPois(), []);
   const userCoord = position?.coordinate ?? {

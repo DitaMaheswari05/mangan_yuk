@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, fontFamily } from '@/constants/theme';
+import { sanitizeNumber } from '@/lib/validation';
 
 function formatRupiah(val: number): string {
   return `Rp${val.toLocaleString('id-ID')}`;
@@ -23,9 +24,9 @@ export default function TrailSummaryScreen() {
     visitedCount?: string;
   }>();
 
-  const totalCost = parseInt(params.totalCost || '45000', 10);
-  const totalMin = parseInt(params.totalMin || '50', 10);
-  const visitedCount = parseInt(params.visitedCount || '3', 10);
+  const totalCost = sanitizeNumber(params.totalCost, 45000, 0, 5000000);
+  const totalMin = sanitizeNumber(params.totalMin, 50, 0, 1440);
+  const visitedCount = sanitizeNumber(params.visitedCount, 3, 0, 100);
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>

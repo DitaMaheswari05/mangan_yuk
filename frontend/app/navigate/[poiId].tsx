@@ -24,6 +24,7 @@ import {
   useWalkingRoute,
 } from '@/features/navigation';
 import { getPoiById } from '@/features/poi';
+import { sanitizePoiId } from '@/lib/validation';
 import { useVisitedPoiIds } from '@/features/visits';
 import type { LatLng } from '@/lib/geo';
 
@@ -32,7 +33,8 @@ export default function NavigateScreen() {
   const insets = useSafeAreaInsets();
   const mapRef = useRef<CameraRef | null>(null);
 
-  const targetPoi = useMemo(() => (poiId ? getPoiById(poiId) : undefined), [poiId]);
+  const cleanPoiId = useMemo(() => sanitizePoiId(poiId), [poiId]);
+  const targetPoi = useMemo(() => (cleanPoiId ? getPoiById(cleanPoiId) : undefined), [cleanPoiId]);
   const visitedPoiIds = useVisitedPoiIds();
 
   // Lokasi & Heading Kompas

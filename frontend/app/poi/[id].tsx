@@ -7,6 +7,7 @@ import { NarrationPlayer } from '@/components/poi/NarrationPlayer';
 import { colors, fontFamily } from '@/constants/theme';
 import { resolveAsset } from '@/features/audio';
 import { getPoiById, isOpenAt } from '@/features/poi';
+import { sanitizePoiId } from '@/lib/validation';
 import { useVisitedPoiIds } from '@/features/visits';
 import type { PhotoKind, Poi, TimeSlot } from '@/types/content';
 
@@ -34,7 +35,8 @@ function hoursByDay(slots: TimeSlot[]): { day: string; hours: string }[] {
 // F03 / PB08: Kartu detail POI multimodal (3 foto, menu & harga, jam buka, audio + transkrip), offline.
 export default function PoiDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const poi = id ? getPoiById(id) : undefined;
+  const cleanId = sanitizePoiId(id);
+  const poi = cleanId ? getPoiById(cleanId) : undefined;
   const insets = useSafeAreaInsets();
 
   if (!poi) {

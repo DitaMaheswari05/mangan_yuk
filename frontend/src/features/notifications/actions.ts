@@ -3,6 +3,7 @@
 import * as Notifications from 'expo-notifications';
 import { AudioQueue, playNarration } from '@/features/audio';
 import { getPoiById } from '@/features/poi';
+import { isValidInternalRoute, sanitizePoiId } from '@/lib/validation';
 import { ACTION_LISTEN, ACTION_SKIP } from './index';
 
 export type NotificationResponseResult =
@@ -44,7 +45,7 @@ export async function handleNotificationResponse(
     handled.add(key);
     if (handled.size > MAX_HANDLED) handled.delete(handled.values().next().value as string);
 
-    const poiId = typeof data.poiId === 'string' ? data.poiId : null;
+    const poiId = sanitizePoiId(data.poiId);
     await dismiss(response);
     if (!poiId) return { kind: 'ignored' };
 
@@ -58,7 +59,7 @@ export async function handleNotificationResponse(
     return { kind: 'listen', poiId };
   }
 
-  if (action === Notifications.DEFAULT_ACTION_IDENTIFIER && typeof data.url === 'string') {
+  if (action === Notifications.DEFAULT_ACTION_IDENTIFIER && isValidInternalRoute(data.url)) {
     return { kind: 'open', url: data.url };
   }
   return { kind: 'ignored' };
