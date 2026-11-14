@@ -17,8 +17,11 @@ import { TtsService } from '@/features/audio/tts';
 import { useUserLocation } from '@/features/location';
 import {
   computeNavigationStatus,
+  computeRouteNavigationStatus,
+  remainingRoute,
   shouldTriggerDistanceAudioCue,
   useCompassHeading,
+  useWalkingRoute,
 } from '@/features/navigation';
 import { getPoiById } from '@/features/poi';
 import { useVisitedPoiIds } from '@/features/visits';
@@ -44,20 +47,37 @@ export default function NavigateScreen() {
   // Animasi rotasi panah kompas
   const rotateAnim = useRef(new Animated.Value(0)).current;
 
+  const targetCoord = useMemo<LatLng | null>(
+    () =>
+      targetPoi ? { latitude: targetPoi.latitude, longitude: targetPoi.longitude } : null,
+    [targetPoi],
+  );
+
+  // Rute jalan kaki mengikuti jalan (OSRM); null → fallback garis lurus.
+  const { route: walkingRoute } = useWalkingRoute(position?.coordinate ?? null, targetCoord);
+
+  // Titik polyline rute: sisa rute jalan dari posisi user, atau garis lurus jika rute belum ada.
+  const routePoints = useMemo(() => {
+    if (!position || !targetCoord) return [];
+    if (walkingRoute) return remainingRoute(walkingRoute, position.coordinate);
+    return [position.coordinate, targetCoord];
+  }, [position, targetCoord, walkingRoute]);
+
   // Hitung status navigasi (jarak, bearing, deviasi)
   const navStatus = useMemo(() => {
-    if (!position || !targetPoi) return null;
-    const targetCoord: LatLng = {
-      latitude: targetPoi.latitude,
-      longitude: targetPoi.longitude,
-    };
-    return computeNavigationStatus(
-      position.coordinate,
-      headingDeg,
-      targetCoord,
-      { arrivalThresholdM: 10, targetToleranceDeg: 30 }
-    );
-  }, [position, targetPoi, headingDeg]);
+    if (!position || !targetCoord) return null;
+    const opts = { arrivalThresholdM: 10, targetToleranceDeg: 30 };
+    if (walkingRoute) {
+      return computeRouteNavigationStatus(
+        position.coordinate,
+        headingDeg,
+        targetCoord,
+        routePoints,
+        opts,
+      );
+    }
+    return computeNavigationStatus(position.coordinate, headingDeg, targetCoord, opts);
+  }, [position, targetCoord, headingDeg, walkingRoute, routePoints]);
 
   // Efek rotasi panah kompas (menghadap ke target)
   // Deviasi = bearing - heading. Jika heading=0 dan bearing=90, deviasi = 90 (panah mengarah ke kanan)
@@ -103,22 +123,13 @@ export default function NavigateScreen() {
 
   // Center kamera ke posisi user dan target
   const handleRecenter = useCallback(() => {
-    if (position && targetPoi && mapRef.current) {
-      mapRef.current.setCamera({
-        centerCoordinate: [position.coordinate.longitude, position.coordinate.latitude],
-        zoomLevel: 18,
-        animationDuration: 800,
+    if (position && targetPoi) {
+      mapRef.current?.easeTo({
+        center: [position.coordinate.longitude, position.coordinate.latitude],
+        zoom: 18,
+        duration: 800,
       });
     }
-  }, [position, targetPoi]);
-
-  // Titik polyline rute
-  const routePoints = useMemo(() => {
-    if (!position || !targetPoi) return [];
-    return [
-      position.coordinate,
-      { latitude: targetPoi.latitude, longitude: targetPoi.longitude },
-    ];
   }, [position, targetPoi]);
 
   if (!targetPoi) {

@@ -23,7 +23,7 @@ export type OsmMapProps = {
   onMapPress?: () => void;
   /** Ref ke kamera MapLibre (easeTo / flyTo / fitBounds). */
   mapRef?: React.Ref<CameraRef>;
-  /** Titik rute navigasi aktif [userPosition, targetPoi] */
+  /** Titik rute navigasi aktif (mengikuti jalan, atau [userPosition, targetPoi] sebagai fallback). */
   routePoints?: LatLng[];
 };
 

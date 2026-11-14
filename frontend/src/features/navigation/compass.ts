@@ -38,7 +38,15 @@ export function useCompassHeading(): { headingDeg: number; isAvailable: boolean 
       }
 
       try {
-        subscription = await Location.watchHeadingAsync((data) => {
+        // Tanpa izin lokasi, expo-location menolak removeWatchAsync saat cleanup
+        // (promise rejection yang tidak bisa ditangkap) → jangan mulai watcher.
+        const perm = await Location.getForegroundPermissionsAsync();
+        if (perm.status !== 'granted') {
+          if (active) setIsAvailable(false);
+          return;
+        }
+
+        const sub = await Location.watchHeadingAsync((data) => {
           if (!active) return;
           // trueHeading didukung di beberapa perangkat, fallback ke magHeading
           const current = data.trueHeading >= 0 ? data.trueHeading : data.magHeading;
@@ -49,7 +57,13 @@ export function useCompassHeading(): { headingDeg: number; isAvailable: boolean 
             setIsAvailable(true);
           }
         });
-      } catch (err) {
+        // Layar sudah ditutup sebelum watcher siap → langsung lepas.
+        if (!active) {
+          sub.remove();
+          return;
+        }
+        subscription = sub;
+      } catch {
         if (active) {
           setIsAvailable(false);
         }

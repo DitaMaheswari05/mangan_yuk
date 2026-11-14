@@ -9,7 +9,6 @@ declare module '@maplibre/maplibre-react-native' {
       pitch?: number;
       heading?: number;
     }) => void;
-    setCamera: (config: Record<string, unknown>) => void;
   }
 
   export type LngLat = [number, number];
