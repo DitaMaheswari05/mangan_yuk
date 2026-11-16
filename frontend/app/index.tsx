@@ -5,10 +5,13 @@ import { colors } from '@/constants/theme';
 import { stepToHref } from '@/features/onboarding';
 import { useAppStore } from '@/store/useAppStore';
 
-// Entry point (PB01): baca AppStateRepository.getOnboarding() saat launch.
-// completed=true → /(tabs); selain itu → /onboarding/{step} (resume ke langkah terakhir).
+// Entry point: cek sesi autentikasi dan onboarding saat launch.
+// 1. Belum login → /auth/login
+// 2. Sudah login tapi belum selesai onboarding → /onboarding/{step}
+// 3. Sudah login dan sudah selesai onboarding → /(tabs)
 export default function Index() {
   const hydrated = useAppStore((s) => s.hydrated);
+  const user = useAppStore((s) => s.user);
   const onboarded = useAppStore((s) => s.onboarded);
   const onboardingStep = useAppStore((s) => s.onboardingStep);
   const hydrate = useAppStore((s) => s.hydrate);
@@ -25,6 +28,10 @@ export default function Index() {
         <ActivityIndicator size="large" color={colors.primaryContainer} />
       </View>
     );
+  }
+
+  if (!user) {
+    return <Redirect href="/auth/login" />;
   }
 
   return <Redirect href={onboarded ? '/(tabs)' : stepToHref(onboardingStep)} />;

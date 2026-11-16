@@ -141,6 +141,22 @@ describe('Kategori 3: Kepatuhan Batasan Keras (Budget & Waktu)', () => {
     expect(result.isValid).toBe(true);
     expect(result.totalEstimatedMin).toBeLessThanOrEqual(userDurationMin);
   });
+
+  it('berhasil merencanakan rute meskipun pengguna berada jauh di luar kawasan kuliner (misal dari rumah/kantor)', () => {
+    // Koordinat Tamansari / luar kawasan (~6.4 km dari startPos)
+    const outsidePosition: LatLng = { latitude: -6.892, longitude: 107.610 };
+    const result = planTrail({
+      userPosition: outsidePosition,
+      pois,
+      durationMin: 30,
+      budget: 50000,
+      referenceTime: testTime,
+    });
+
+    expect(result.isValid).toBe(true);
+    expect(result.steps.length).toBeGreaterThanOrEqual(1);
+    expect(result.totalEstimatedMin).toBeLessThanOrEqual(30);
+  });
 });
 
 describe('Kategori 4: Pengingat Batas Waktu Kunjungan (Dwell Time Alert)', () => {
@@ -173,5 +189,20 @@ describe('Kategori 5: Penanganan Lewati Tenant (Skip Step / Re-Plan)', () => {
 
     const rePlanned = skipTrailStep(initialPlan, 'P01', pois, startPos, testTime);
     expect(rePlanned.steps.some((s) => s.poi.id === 'P01')).toBe(false);
+  });
+
+  it('menggunakan fallback jam operasional normal jika waktu pengujian berada di luar jam operasional (misal jam 23:15)', () => {
+    // Waktu di luar jam operasional (Jumat 23:45)
+    const lateNightTime = new Date('2026-11-06T23:45:00');
+    const plan = planTrail({
+      userPosition: startPos,
+      pois,
+      durationMin: 60,
+      budget: 50000,
+      referenceTime: lateNightTime,
+    });
+
+    expect(plan.isValid).toBe(true);
+    expect(plan.steps.length).toBeGreaterThanOrEqual(1);
   });
 });

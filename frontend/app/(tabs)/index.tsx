@@ -642,7 +642,7 @@ export default function HomeScreen() {
         {!selectedPoi && permission === 'granted' && areaStatus === 'OUTSIDE' ? (
           <View style={styles.outsideBannerCard}>
             <Image
-              source={require('@/../assets/images/illustration-location.png')}
+              source={require('@/../assets/images/rocket.png')}
               style={styles.outsideIllustration}
               resizeMode="contain"
             />
@@ -662,9 +662,9 @@ export default function HomeScreen() {
 
         {/* 4. Tombol Floating "Mode Jelajah" saat di DALAM area SSF (Figma Frame #174:43354) */}
         {!selectedPoi &&
-        permission === 'granted' &&
-        areaStatus === 'INSIDE' &&
-        !exploreMode ? (
+          permission === 'granted' &&
+          areaStatus === 'INSIDE' &&
+          !exploreMode ? (
           <Pressable
             style={styles.exploreModeFab}
             onPress={handleActivateExploreMode}
@@ -695,7 +695,7 @@ export default function HomeScreen() {
             </Pressable>
 
             <Image
-              source={require('@/../assets/images/illustration-welcome.png')}
+              source={require('@/../assets/images/search.png')}
               style={styles.arrivedIllustrationImage}
               resizeMode="contain"
             />

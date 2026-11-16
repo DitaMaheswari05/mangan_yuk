@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors, typography } from '@/constants/theme';
+import { colors, fontFamily, typography } from '@/constants/theme';
 
 export type OnboardingScaffoldProps = {
   /** Indeks langkah aktif (1..4) untuk indikator progres di bagian atas */
@@ -73,7 +73,7 @@ export function OnboardingScaffold({
                 accessibilityLabel="Kembali"
               >
                 <Text style={styles.backArrow}>←</Text>
-                <Text style={styles.backText}>Kembali</Text>
+                <Text style={styles.backText} numberOfLines={1}>Kembali</Text>
               </Pressable>
             ) : null}
           </View>
@@ -103,7 +103,7 @@ export function OnboardingScaffold({
                 accessibilityRole="button"
                 accessibilityLabel="Lewati"
               >
-                <Text style={styles.skipText}>Lewati</Text>
+                <Text style={styles.skipText} numberOfLines={1}>Lewati</Text>
               </Pressable>
             ) : null}
           </View>
@@ -162,7 +162,7 @@ export function OnboardingScaffold({
             accessibilityRole="button"
             accessibilityLabel={primaryLabel}
           >
-            <Text style={styles.primaryButtonText}>
+            <Text style={styles.primaryButtonText} numberOfLines={1}>
               {primaryLoading ? 'Memproses...' : primaryLabel}
             </Text>
             {!primaryLoading ? <Text style={styles.primaryButtonArrow}>→</Text> : null}
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     minHeight: 48,
   },
   topBarSide: {
-    minWidth: 84,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -223,12 +223,18 @@ const styles = StyleSheet.create({
     color: colors.onSurface,
   },
   backText: {
-    ...typography.textSmRegular,
+    fontFamily: fontFamily.regular,
+    fontSize: 14,
+    lineHeight: 20,
     color: colors.onSurface,
+    includeFontPadding: false,
   },
   skipText: {
-    ...typography.textSmRegular,
+    fontFamily: fontFamily.regular,
+    fontSize: 14,
+    lineHeight: 20,
     color: colors.onSurface,
+    includeFontPadding: false,
   },
   progressRow: {
     flexDirection: 'row',
@@ -313,14 +319,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   primaryButton: {
-    height: 48,
+    minHeight: 48,
     borderRadius: 30,
     backgroundColor: colors.primaryContainer,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.12,
@@ -328,8 +335,12 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   primaryButtonText: {
-    ...typography.textMdSemibold,
+    fontFamily: fontFamily.semibold,
+    fontSize: 16,
+    lineHeight: 22,
     color: colors.onPrimary,
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   primaryButtonArrow: {
     ...typography.textLgSemibold,

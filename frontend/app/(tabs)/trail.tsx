@@ -14,10 +14,12 @@ import {
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, fontFamily } from '@/constants/theme';
-import { useUserLocation } from '@/features/location';
+import { DEV_SUDIRMAN_COORDINATE, haversineM, useUserLocation } from '@/features/location';
 import { getPois } from '@/features/poi';
 import { planTrail } from '@/features/trail';
 import type { TasteTag } from '@/types/content';
+
+const unicornBanner = require('../../assets/images/happy.png');
 
 const DURATION_OPTIONS = [
   { value: 30, label: '30 menit' },
@@ -27,19 +29,17 @@ const DURATION_OPTIONS = [
 
 const TASTE_OPTIONS: { id: TasteTag; label: string }[] = [
   { id: 'manis', label: 'Manis' },
-  { id: 'pedas', label: 'Pedas' },
+  { id: 'pedas', label: 'Asin' }, // Di Figma ditampilkan sebagai "Asin"
   { id: 'gurih', label: 'Gurih' },
-  { id: 'segar', label: 'Segar' },
-  { id: 'aromatik', label: 'Aromatik' },
 ];
 
 export default function TrailScreen() {
   const insets = useSafeAreaInsets();
   const { position } = useUserLocation();
 
-  const [durationMin, setDurationMin] = useState<number>(60);
-  const [budgetText, setBudgetText] = useState<string>('50000');
-  const [selectedTastes, setSelectedTastes] = useState<TasteTag[]>(['gurih']);
+  const [durationMin, setDurationMin] = useState<number>(30);
+  const [budgetText, setBudgetText] = useState<string>('100000');
+  const [selectedTastes, setSelectedTastes] = useState<TasteTag[]>(['manis']);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const toggleTaste = (taste: TasteTag) => {
@@ -58,10 +58,11 @@ export default function TrailScreen() {
     }
 
     const pois = getPois();
-    const userCoord = position?.coordinate ?? {
-      latitude: -6.92089,
-      longitude: 107.600533,
-    };
+    const rawCoord = position?.coordinate ?? DEV_SUDIRMAN_COORDINATE;
+    // Jika posisi pengguna > 300m dari pusat Sudirman Street Food (mis. merencanakan dari rumah/luar kawasan),
+    // gunakan titik masuk Sudirman Street Food agar waktu tempuh dari luar kawasan tidak menghabiskan durasi trail.
+    const isFarFromSSF = haversineM(rawCoord, DEV_SUDIRMAN_COORDINATE) > 300;
+    const userCoord = isFarFromSSF ? DEV_SUDIRMAN_COORDINATE : rawCoord;
 
     const result = planTrail({
       userPosition: userCoord,
@@ -102,7 +103,7 @@ export default function TrailScreen() {
           ]}
           showsVerticalScrollIndicator={false}
         >
-          {/* Header Ilustrasi sesuai Figma #85:37684 */}
+          {/* Header Ilustrasi sesuai Figma #251:80251 */}
           <View style={styles.headerCard}>
             <View style={styles.headerTextCol}>
               <Text style={styles.headerTitle}>Buat Rute Kulinermu!</Text>
@@ -110,12 +111,16 @@ export default function TrailScreen() {
                 Punya waktu dan budget terbatas? Pilih preferensimu dan dapatkan rute tenant yang bisa kamu kunjungi!
               </Text>
             </View>
-            <View style={styles.headerIllustrationCircle}>
-              <MaterialCommunityIcons name="compass-rose" size={60} color="#FF8316" />
+            <View style={styles.headerUnicornContainer}>
+              <Image
+                source={unicornBanner}
+                style={[styles.headerUnicornImage, { width: 160, height: 160 }]}
+                resizeMode="contain"
+              />
             </View>
           </View>
 
-          {/* Form Seksi 1: Durasi Waktu (Figma #90:36902) */}
+          {/* Form Seksi 1: Durasi Waktu (Figma #251:80256) */}
           <View style={styles.sectionCard}>
             <Text style={styles.sectionLabel}>Berapa lama waktu yang kamu punya?</Text>
             <View style={styles.durationOptionsRow}>
@@ -124,7 +129,7 @@ export default function TrailScreen() {
                 return (
                   <Pressable
                     key={opt.value}
-                    style={[styles.durationChip, active && styles.durationChipActive]}
+                    style={[styles.durationChip, active ? styles.durationChipActive : styles.durationChipInactive]}
                     onPress={() => setDurationMin(opt.value)}
                     accessibilityRole="radio"
                     accessibilityState={{ checked: active }}
@@ -132,7 +137,7 @@ export default function TrailScreen() {
                     <Text
                       style={[
                         styles.durationChipText,
-                        active && styles.durationChipTextActive,
+                        active ? styles.durationChipTextActive : styles.durationChipTextInactive,
                       ]}
                     >
                       {opt.label}
@@ -143,42 +148,42 @@ export default function TrailScreen() {
             </View>
           </View>
 
-          {/* Form Seksi 2: Budget Maksimal (Figma #86:37717) */}
+          {/* Form Seksi 2: Budget Maksimal (Figma #251:80265) */}
           <View style={styles.sectionCard}>
             <Text style={styles.sectionLabel}>Budget maksimal kamu</Text>
             <View style={styles.budgetInputContainer}>
-              <MaterialCommunityIcons name="cash-multiple" size={22} color="#FF8316" />
+              <Ionicons name="wallet-outline" size={20} color="#8E7164" />
               <Text style={styles.currencyPrefix}>Rp</Text>
               <TextInput
                 style={styles.budgetInput}
                 keyboardType="numeric"
                 value={budgetText}
                 onChangeText={(text) => setBudgetText(text.replace(/\D/g, ''))}
-                placeholder="Contoh: 50000"
-                placeholderTextColor="#A08C82"
+                placeholder="Contoh: Rp100.000"
+                placeholderTextColor="#A6A6A6"
               />
             </View>
-            <Text style={styles.budgetHint}>
-              Estimasi pengeluaran untuk 2–3 tenant kuliner di Sudirman Street Food.
-            </Text>
           </View>
 
-          {/* Form Seksi 3: Preferensi Rasa (Figma #87:37890) */}
+          {/* Form Seksi 3: Preferensi Rasa (Figma #251:80279) */}
           <View style={styles.sectionCard}>
             <Text style={styles.sectionLabel}>Preferensi Rasa</Text>
-            <View style={styles.tasteChipsRow}>
+            <View style={styles.durationOptionsRow}>
               {TASTE_OPTIONS.map((opt) => {
                 const active = selectedTastes.includes(opt.id);
                 return (
                   <Pressable
                     key={opt.id}
-                    style={[styles.tasteChip, active && styles.tasteChipActive]}
+                    style={[styles.durationChip, active ? styles.durationChipActive : styles.durationChipInactive]}
                     onPress={() => toggleTaste(opt.id)}
                     accessibilityRole="checkbox"
                     accessibilityState={{ checked: active }}
                   >
                     <Text
-                      style={[styles.tasteChipText, active && styles.tasteChipTextActive]}
+                      style={[
+                        styles.durationChipText,
+                        active ? styles.durationChipTextActive : styles.durationChipTextInactive,
+                      ]}
                     >
                       {opt.label}
                     </Text>
@@ -196,7 +201,7 @@ export default function TrailScreen() {
             </View>
           ) : null}
 
-          {/* Tombol Mulai Rencanakan (Figma #89:37900) */}
+          {/* Tombol Mulai Rencanakan (Figma #251:80289) */}
           <Pressable
             style={styles.planButton}
             onPress={handlePlanTrail}
@@ -215,22 +220,19 @@ export default function TrailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FCF9F8',
+    backgroundColor: '#FFFFFF',
   },
   scrollContent: {
     paddingHorizontal: 20,
-    paddingTop: 12,
-    gap: 18,
+    paddingTop: 8,
+    gap: 24,
   },
   headerCard: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#FFF4EA',
-    borderRadius: 24,
-    padding: 18,
-    borderWidth: 1,
-    borderColor: '#FFDBCC',
+    minHeight: 140,
+    paddingTop: 8,
   },
   headerTextCol: {
     flex: 1,
@@ -238,120 +240,90 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontFamily: fontFamily.bold,
-    fontSize: 20,
-    color: '#351000',
-    marginBottom: 6,
+    fontSize: 30,
+    lineHeight: 34,
+    color: '#404040',
+    marginBottom: 8,
   },
   headerSubtitle: {
     fontFamily: fontFamily.regular,
     fontSize: 12,
-    color: '#8E7164',
-    lineHeight: 17,
+    lineHeight: 16,
+    color: '#A6A6A6',
   },
-  headerIllustrationCircle: {
-    width: 76,
-    height: 76,
-    borderRadius: 38,
-    backgroundColor: '#FFFFFF',
+  headerUnicornContainer: {
+    width: 130,
+    height: 130,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+  },
+  headerUnicornImage: {
+    width: 130,
+    height: 130,
   },
   sectionCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 18,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#E5E2E1',
-    gap: 12,
+    gap: 10,
   },
   sectionLabel: {
-    fontFamily: fontFamily.semibold,
+    fontFamily: fontFamily.medium,
     fontSize: 14,
-    color: '#1B1B1C',
+    lineHeight: 20,
+    color: '#404040',
   },
   durationOptionsRow: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 6,
+    height: 40,
   },
   durationChip: {
     flex: 1,
-    paddingVertical: 12,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#E5E2E1',
-    backgroundColor: '#FCF9F8',
+    height: 40,
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 10,
   },
   durationChipActive: {
-    backgroundColor: '#FF8316',
-    borderColor: '#FF8316',
+    backgroundColor: '#FFF0DC',
+    borderWidth: 1,
+    borderColor: '#FFC17E',
+  },
+  durationChipInactive: {
+    backgroundColor: '#E6E6E6',
   },
   durationChipText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 13,
-    color: '#5A4136',
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    lineHeight: 16,
+    textAlign: 'center',
   },
   durationChipTextActive: {
+    color: '#E66B00',
+    fontFamily: fontFamily.medium,
+  },
+  durationChipTextInactive: {
     color: '#FFFFFF',
   },
   budgetInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#E5E2E1',
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    backgroundColor: '#FCF9F8',
-    gap: 8,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    height: 48,
+    backgroundColor: '#F5F5F5',
+    gap: 10,
   },
   currencyPrefix: {
-    fontFamily: fontFamily.bold,
-    fontSize: 16,
-    color: '#FF8316',
+    fontFamily: fontFamily.medium,
+    fontSize: 14,
+    color: '#404040',
   },
   budgetInput: {
     flex: 1,
-    fontFamily: fontFamily.bold,
-    fontSize: 16,
-    color: '#1B1B1C',
-    paddingVertical: 0,
-  },
-  budgetHint: {
     fontFamily: fontFamily.regular,
-    fontSize: 11,
-    color: '#8E7164',
-  },
-  tasteChipsRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  tasteChip: {
-    paddingHorizontal: 16,
-    paddingVertical: 9,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#E5E2E1',
-    backgroundColor: '#FCF9F8',
-  },
-  tasteChipActive: {
-    backgroundColor: '#FF8316',
-    borderColor: '#FF8316',
-  },
-  tasteChipText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 13,
-    color: '#5A4136',
-  },
-  tasteChipTextActive: {
-    color: '#FFFFFF',
+    fontSize: 14,
+    color: '#404040',
+    paddingVertical: 0,
   },
   errorBanner: {
     flexDirection: 'row',
@@ -371,20 +343,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 10,
+    gap: 8,
     backgroundColor: '#FF8316',
-    borderRadius: 28,
-    paddingVertical: 15,
-    marginTop: 8,
-    elevation: 3,
+    borderRadius: 30,
+    height: 48,
+    marginTop: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.1,
     shadowRadius: 4,
+    elevation: 2,
   },
   planButtonText: {
-    fontFamily: fontFamily.bold,
-    fontSize: 15,
+    fontFamily: fontFamily.medium,
+    fontSize: 16,
+    lineHeight: 24,
     color: '#FFFFFF',
   },
 });

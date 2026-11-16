@@ -11,6 +11,7 @@ const ALLOWED_INTERNAL_ROUTE_PATTERNS = [
   /^\/navigate\/P[0-9]{2}$/i,
   /^\/trail\/(itinerary|planner|summary)$/,
   /^\/onboarding\/(welcome|location|no-location|notification|preferences)$/,
+  /^\/auth\/(login|register)$/,
 ];
 
 const VALID_TASTES: Set<TasteTag> = new Set(['pedas', 'manis', 'gurih', 'segar', 'aromatik']);
