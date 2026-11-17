@@ -474,11 +474,11 @@ export default function HomeScreen() {
                   `Temukan cita rasa khas dari ${selectedPoi.name} (${selectedPoi.categoryLabel}) yang menjadi salah satu kuliner favorit di kawasan Sudirman Street Food!`}
               </Text>
 
-              {/* 3. List Menu (Tanpa gambar, seperti di halaman detail POI) */}
+              {/* 3. List Menu (Ambil 3 menu teratas, menu lengkap di halaman detail) */}
               {selectedPoi.menu && selectedPoi.menu.length > 0 ? (
                 <View style={styles.sheetMenuSection}>
-                  <Text style={styles.sheetMenuHeading}>Menu & Harga</Text>
-                  {selectedPoi.menu.map((item) => (
+                  <Text style={styles.sheetMenuHeading}>Menu Unggulan</Text>
+                  {selectedPoi.menu.slice(0, 3).map((item) => (
                     <View key={item.id} style={styles.sheetMenuListRow}>
                       <View style={styles.sheetMenuNameCol}>
                         <Text style={styles.sheetMenuNameText}>
