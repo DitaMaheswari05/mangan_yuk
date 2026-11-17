@@ -11,7 +11,7 @@
       "pedas"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921332,
     "longitude": 107.60065,
     "triggerRadiusM": 10,
@@ -32,7 +32,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p01.mp3",
-      "durationSec": 72,
+      "durationSec": 56,
       "transcript": "Selamat datang di Traditional Fried Food from West Borneo, kedai gorengan yang membawa rasa Pontianak, Kalimantan Barat, ke tengah kota Bandung. Andalannya adalah pisang goreng kipas khas Pontianak. Pisangnya diiris tipis tanpa putus sehingga terbuka seperti kipas, lalu digoreng dengan adonan tepung yang renyah. Hasilnya garing di luar dan legit di dalam. Coba juga bakwan Pontianak, pasangan yang pas untuk pisang goreng tadi. Selain itu ada pisang tanduk madu, tape goreng madu, nanas goreng, bom singkong, dan tahu isi. Ada juga gandasturi, gorengan isi kacang hijau yang sudah lama akrab di lidah orang Jawa Barat. Di Indonesia, gorengan lebih dari sekadar camilan. Ia teman mengobrol, teman minum teh, dan teman menunggu hujan reda. Harganya bersahabat, jadi kamu bisa mencicipi beberapa sekaligus. Pilih yang masih hangat, karena gorengan paling enak dinikmati selagi baru diangkat dari wajan."
     },
     "menu": [
@@ -223,7 +223,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921294,
     "longitude": 107.60065,
     "triggerRadiusM": 10,
@@ -239,7 +239,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p03.mp3",
-      "durationSec": 66,
+      "durationSec": 53,
       "transcript": "Ini Swike Asli JTW. Swike adalah masakan peranakan Tionghoa berbahan kodok. Namanya berasal dari bahasa Hokkien, sui ke, yang berarti ayam air, sebutan halus untuk kodok. Di Jawa Tengah, swike terkenal dari daerah Purwodadi dan biasanya disajikan dalam kuah tauco yang gurih. Tauco adalah olahan kedelai fermentasi, dan di Jawa Barat, tauco Cianjur sudah dikenal sejak lama. Di kedai ini, menu andalannya justru kodok goreng. Ada kodok goreng mentega yang harum dan kodok goreng tepung yang renyah. Kalau ingin rasa yang lebih berani, pilih varian rica-rica atau asam manis. Untuk versi klasik, coba swike kuah tauco. Teksturnya mirip daging ayam, tapi lebih lembut. Kalau kamu belum pernah mencobanya, ini kesempatan untuk mengenal salah satu hidangan peranakan yang cukup unik di Indonesia. Sebagai informasi, menu di sini berbahan kodok, sehingga tidak halal."
     },
     "menu": [
@@ -572,7 +572,7 @@
       "pedas"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921285,
     "longitude": 107.600602,
     "triggerRadiusM": 10,
@@ -593,7 +593,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p04.mp3",
-      "durationSec": 65,
+      "durationSec": 54,
       "transcript": "Kamu sedang berada di Bebek Gober Bumbu Hitam. Menu andalannya adalah paket nasi bebek bumbu hitam khas Madura. Bebek ala Madura dikenal dengan bumbunya yang gelap dan pekat, hasil racikan rempah yang dimasak lama hingga warnanya menghitam dan aromanya kuat. Bumbu inilah yang membuat daging bebek terasa gurih, sedikit pedas, dan meresap sampai ke dalam. Dagingnya digoreng hingga kulitnya kering, tapi bagian dalamnya tetap empuk. Kalau ingin porsi lebih ringan, ada paket bebek ukuran kecil. Kalau kurang suka bebek, tersedia juga ayam goreng dengan bumbu hitam yang sama, termasuk versi pedas. Nikmati dengan nasi hangat dan sambal, lalu siapkan tisu, karena hidangan seperti ini paling nikmat disantap pakai tangan. Bebek Madura kini mudah ditemukan di banyak kota. Ia menjadi contoh bagaimana masakan daerah bisa merantau dan dicintai di mana-mana, termasuk di Bandung."
     },
     "menu": [
@@ -814,7 +814,7 @@
       "manis"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921299,
     "longitude": 107.600588,
     "triggerRadiusM": 10,
@@ -835,7 +835,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p05.mp3",
-      "durationSec": 55,
+      "durationSec": 60,
       "transcript": "Selamat datang di Pigbull, kedai nasi campur yang jadi favorit pencinta olahan babi. Menu andalannya adalah nasi campur hainan. Nasi hainan dimasak dengan kaldu, jahe, dan bawang putih, sehingga lebih harum dan gurih dibanding nasi putih biasa. Di atasnya ada beragam lauk, seperti samcan dan charsiu. Samcan adalah daging perut babi dengan tiga lapisan, yaitu kulit, lemak, dan daging. Namanya berasal dari bahasa Hokkien yang berarti tiga lapis. Charsiu adalah daging babi panggang khas Kanton dengan bumbu manis dan warna merah yang khas. Kalau suka yang renyah, coba nasi samcan crispy dengan sambal matah, perpaduan gaya Tionghoa dan Bali yang segar dan pedas. Ada juga nasi samcan lada garam dan nasi goreng Pigbull. Nasi campur seperti ini adalah bagian dari warisan kuliner peranakan yang kuat di Indonesia. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
     },
     "menu": [
@@ -1139,7 +1139,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921044,
     "longitude": 107.600539,
     "triggerRadiusM": 10,
@@ -1160,7 +1160,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p06.mp3",
-      "durationSec": 68,
+      "durationSec": 55,
       "transcript": "Ini Awin Kwetiau Siantar. Pematang Siantar adalah kota di Sumatera Utara yang terkenal dengan kwetiau gorengnya. Kwetiau adalah mi pipih dari tepung beras. Di Siantar dan Medan, kwetiau digoreng di atas api besar sehingga muncul aroma smoky yang khas, yang sering disebut wok hei atau napas wajan. Menu andalan di sini adalah kwetiau goreng Medan atau Siantar. Selain kwetiau, ada ayam kampung pek cam ke, yaitu ayam rebus ala Tionghoa dengan kulit lembut dan daging yang juicy, biasanya dimakan dengan saus jahe. Tersedia juga chicken rice ayam kampung, bubur, dan dimsum. Kalau datang beramai-ramai, ayamnya bisa dipesan setengah hingga satu ekor untuk dibagi bersama. Sumatera Utara punya komunitas Tionghoa yang besar, dan dari sanalah banyak hidangan seperti ini menyebar ke seluruh Indonesia. Sebagai informasi, beberapa menu di sini mengandung babi, seperti bubur dan siomay, sehingga tidak halal."
     },
     "menu": [
@@ -1421,7 +1421,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920932,
     "longitude": 107.600533,
     "triggerRadiusM": 10,
@@ -1437,7 +1437,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p07.mp3",
-      "durationSec": 72,
+      "durationSec": 63,
       "transcript": "Kamu sedang berada di Sedap The Best Chinese Food. Kedai ini menyajikan Chinese food ala Indonesia, yang biasa kita temui di restoran keluarga maupun warung pinggir jalan. Pilihannya banyak, mulai dari bakmie kepiting, mie hokkian, mie goreng seafood, kwetiau goreng, dan bihun, hingga capcay dan nasi goreng. Mie hokkian, misalnya, berasal dari tradisi masak orang Hokkien, kelompok perantau Tionghoa yang banyak datang ke Nusantara. Ada juga misua kuah, mi tipis halus dengan kuah hangat yang menenangkan. Chinese food Indonesia adalah hasil perpaduan panjang antara resep Tionghoa dengan bahan dan selera lokal. Kecap manis, cabai, dan bawang goreng adalah sentuhan khas Nusantara yang membuatnya berbeda dari masakan di negeri asalnya. Kalau bingung memilih, mulailah dari mie atau kwetiau goreng, lalu tambahkan capcay supaya ada sayurnya. Hidangan di sini cocok dinikmati bersama, jadi ajak teman dan pesan beberapa menu untuk dibagi."
     },
     "menu": [
@@ -1822,7 +1822,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920928,
     "longitude": 107.600462,
     "triggerRadiusM": 10,
@@ -1838,7 +1838,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p08.mp3",
-      "durationSec": 72,
+      "durationSec": 59,
       "transcript": "Selamat datang di Gou Cheng Hiang. Kedai ini menyajikan bak kut teh dan olahan babi bergaya Kalimantan. Bak kut teh berasal dari bahasa Hokkien yang berarti teh tulang daging. Meski namanya mengandung kata teh, sup ini sebenarnya tidak berisi teh. Namanya merujuk pada kebiasaan menikmatinya bersama teh panas. Isinya iga babi yang direbus lama dengan rempah dan herbal, menghasilkan kuah gurih yang hangat. Di sini ada beberapa pilihan, seperti bakut sayur asin khas Kalimantan, bakut perut ikan, dan bak kut angkhak merah. Angkhak adalah beras ragi merah yang memberi warna merah alami dan aroma khas. Ada juga kolo mie bakut ala Sarawak, mi kering yang kenyal, serta kaki babi angkhak merah. Hidangan-hidangan ini menunjukkan eratnya hubungan kuliner antara Kalimantan Barat, Sarawak, dan Semenanjung Malaya. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
     },
     "menu": [
@@ -2196,7 +2196,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920838,
     "longitude": 107.600471,
     "triggerRadiusM": 10,
@@ -2212,7 +2212,7 @@
     ],
     "audio": {
       "assetKey": "poi-audio/p09.mp3",
-      "durationSec": 70,
+      "durationSec": 57,
       "transcript": "Kamu sedang berada di Dapur Sotoku, kedai soto dan sop dari berbagai daerah. Menu andalannya adalah soto Bandung, pilihan yang pas untuk mengenal kuliner Sunda. Soto Bandung punya kuah bening yang ringan, dengan potongan daging sapi, irisan lobak, dan taburan kacang kedelai goreng yang renyah. Lobak memberi rasa segar dan sedikit manis, sehingga kuahnya terasa bersih di lidah. Kalau ingin membandingkan, di sini juga ada soto Lamongan dari Jawa Timur dan soto Betawi dari Jakarta yang kuahnya bersantan. Untuk yang ingin lebih mengenyangkan, ada sop iga dan sop buntut. Jangan lewatkan gurame pesmol, masakan ikan khas Sunda dengan bumbu kuning yang sedikit asam. Ada juga gurame bakar bagi yang suka aroma panggang. Soto adalah salah satu hidangan paling beragam di Indonesia, dan hampir setiap daerah punya versinya sendiri. Di sini, kamu bisa mencicipi kekayaan rasa Nusantara dalam satu mangkuk."
     },
     "menu": [
@@ -2446,7 +2446,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920782,
     "longitude": 107.600481,
     "triggerRadiusM": 10,
@@ -2460,7 +2460,11 @@
         "caption": "Stand Klypot"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p10.mp3",
+      "durationSec": 60,
+      "transcript": "Selamat datang di Klypot. Seperti namanya, kedai ini menyajikan hidangan claypot, yaitu masakan yang dimasak dan disajikan dalam panci tanah liat. Panci tanah liat menyimpan panas lebih lama, sehingga makanan tetap hangat sampai suapan terakhir. Pilihannya beragam, mulai dari chicken claypot, beef claypot, seafood claypot, dan kimchi claypot, sampai yang bernuansa lokal seperti udang pete dan cumi cabe hijau. Namun, yang menjadi andalan di sini justru hidangan penutupnya, yaitu peach gum pudding. Peach gum adalah getah alami dari pohon persik yang sudah lama dipakai dalam hidangan manis Tionghoa. Setelah direndam, teksturnya berubah menjadi bening dan kenyal seperti jeli. Selain itu, ada puding cokelat, puding wintermelon, dan puding almond. Perpaduan hidangan gurih yang hangat dan puding yang lembut membuat kedai ini cocok untuk makan lengkap, dari hidangan utama sampai pencuci mulut."
+    },
     "menu": [
       {
         "id": "P10-M01",
@@ -2731,7 +2735,7 @@
       "pedas"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920673,
     "longitude": 107.600584,
     "triggerRadiusM": 10,
@@ -2745,7 +2749,11 @@
         "caption": "Stand Umai"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p11.mp3",
+      "durationSec": 62,
+      "transcript": "Kamu sedang berada di Umai, kedai masakan Jepang. Menu andalannya adalah gyuniku amakara donburi. Donburi adalah semangkuk nasi dengan lauk di atasnya, salah satu hidangan sehari-hari paling populer di Jepang. Gyuniku berarti daging sapi, sedangkan amakara berarti manis dan pedas. Jadi, bayangkan irisan daging sapi berbumbu manis pedas di atas nasi hangat. Kalau lebih suka ikan, ada salmon amakara donburi dan salmon shioyaki, yaitu salmon panggang dengan garam. Ada juga hibiki gyudon, tori katsu atau ayam goreng tepung roti, dan tsuya karaage, ayam goreng ala Jepang yang renyah. Untuk camilan, coba nagoya tebasaki, sayap ayam goreng khas kota Nagoya, atau tamagoyaki, telur dadar gulung yang lembut dan sedikit manis. Masakan Jepang punya banyak penggemar di Bandung, dan kehadirannya di kawasan ini menambah warna di antara kedai-kedai peranakan di sekitarnya."
+    },
     "menu": [
       {
         "id": "P11-M01",
@@ -2936,7 +2944,7 @@
       "pedas"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920687,
     "longitude": 107.600476,
     "triggerRadiusM": 10,
@@ -2950,7 +2958,11 @@
         "caption": "Stand Hong Nam"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p12.mp3",
+      "durationSec": 51,
+      "transcript": "Selamat datang di Hong Nam. Kedai ini mengkhususkan diri pada bak kut teh dan samcan. Ada dua gaya bak kut teh yang terkenal. Gaya Malaysia biasanya berkuah gelap dengan aroma herbal yang kuat, sedangkan gaya Singapura berkuah lebih bening dengan rasa lada putih yang hangat dan menggigit. Di Hong Nam, kamu bisa mencoba bak kut teh Singapore, juga bak kut teh pork loin yang dagingnya lebih banyak dan lemaknya lebih sedikit. Tersedia ukuran reguler dan besar, cocok kalau ingin makan bersama. Ada juga bak kut sayur asin, yang memadukan kuah gurih dengan sayur asin yang segar, serta mie bak kut teh bagi yang ingin menikmati kuahnya bersama mi. Sup panas seperti ini terasa pas sekali di udara malam Bandung yang sejuk. Kalau baru pertama mencoba, pilih ukuran reguler dulu, lalu seruput kuahnya pelan-pelan selagi panas. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P12-M01",
@@ -3282,7 +3294,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920687,
     "longitude": 107.600476,
     "triggerRadiusM": 10,
@@ -3296,7 +3308,11 @@
         "caption": "Stand Pandu Baso Goreng Tenggiri"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p13.mp3",
+      "durationSec": 53,
+      "transcript": "Kamu sedang berada di Pandu Baso Goreng Tenggiri. Menu andalannya adalah baso goreng siap santap. Baso goreng di sini dibuat dari ikan tenggiri, ikan laut yang dagingnya padat dan gurih. Dagingnya dihaluskan, dibentuk, lalu digoreng hingga bagian luarnya renyah dan bagian dalamnya tetap lembut. Kamu bisa memesan isi empat, enam, atau delapan sampai sepuluh biji, tergantung seberapa lapar kamu atau seberapa ramai rombonganmu. Baso goreng sangat akrab dengan orang Bandung. Camilan serupa yang sering disebut basreng mudah ditemukan di Jawa Barat dan sering dibawa pulang sebagai oleh-oleh. Di sini juga tersedia baso goreng beku lengkap dengan sambal, jadi kamu bisa menggorengnya lagi di rumah. Nikmati selagi hangat, dan cocol dengan sambal untuk rasa yang lebih nendang. Camilan sederhana ini cocok jadi pembuka sebelum kamu lanjut berkeliling mencari hidangan utama."
+    },
     "menu": [
       {
         "id": "P13-M01",
@@ -3414,7 +3430,7 @@
       "pedas"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920687,
     "longitude": 107.600476,
     "triggerRadiusM": 10,
@@ -3428,7 +3444,11 @@
         "caption": "Stand Segulung Babi"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p14.mp3",
+      "durationSec": 58,
+      "transcript": "Selamat datang di Segulung Babi, kedai yang menyajikan beragam olahan nasi dan bakmie babi. Ada dua menu andalan di sini. Yang pertama adalah nasi segulung babi, menu yang menjadi nama kedai ini. Yang kedua adalah nasi babi banjur bawang. Dalam bahasa Sunda maupun Jawa, banjur berarti disiram. Jadi, bayangkan daging babi yang disiram minyak bawang yang harum. Pilihan lainnya juga banyak, seperti nasi babi hong, yaitu babi masak kecap ala peranakan yang manis dan gurih. Ada bakmie babi, nasi babi pedas, bakmie cukiok kaki babi, sampai nasi campur babi empat musim. Kalau ingin yang unik, coba sosis siluman babi. Olahan babi seperti ini adalah bagian dari tradisi kuliner Tionghoa peranakan yang sudah lama hidup di Bandung. Dengan lebih dari tiga puluh pilihan menu, kamu bisa kembali beberapa kali dan selalu menemukan rasa baru. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P14-M01",
@@ -4009,7 +4029,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920633,
     "longitude": 107.600575,
     "triggerRadiusM": 10,
@@ -4023,7 +4043,11 @@
         "caption": "Stand Bacuk Sultan Agung"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p15.mp3",
+      "durationSec": 54,
+      "transcript": "Kamu sedang berada di Bacuk Sultan Agung. Menu andalannya adalah nasi goreng bacuk putih dan nasi bacuk original. Bacuk adalah olahan babi cincang yang dimasak dengan bumbu gurih, lalu disajikan bersama nasi putih atau diolah menjadi nasi goreng. Selain bacuk, kedai ini juga punya babi tore, olahan babi yang dikenal dalam kuliner Manado, Sulawesi Utara. Kamu bisa mencobanya dalam nasi goreng babi tore dengan sambal matah, perpaduan gurih dengan kesegaran irisan bawang merah, serai, dan cabai mentah. Kalau suka rasa manis, ada babi madu, juga nasi goreng babi madu asin. Bagi yang lebih suka mi, tersedia kwetiau goreng bacuk dan kwetiau goreng babi tore. Menu di sini memperlihatkan bagaimana rasa dari berbagai daerah, dari Manado sampai Bali, bisa bertemu dalam satu kedai. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P15-M01",
@@ -4510,7 +4534,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920633,
     "longitude": 107.600575,
     "triggerRadiusM": 10,
@@ -4534,7 +4558,11 @@
         "caption": "Suasana Hau’s Tea"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p16.mp3",
+      "durationSec": 55,
+      "transcript": "Selamat datang di Hau's Tea. Walaupun namanya terdengar seperti kedai minuman, menu andalannya justru cakue original. Cakue adalah adonan tepung terigu berbentuk dua batang yang menempel, lalu digoreng hingga mengembang, renyah di luar, dan berongga di dalam. Camilan ini berasal dari Tiongkok dan punya legenda yang menarik. Konon, dua batang adonan itu melambangkan Qin Hui dan istrinya, pejabat yang dianggap pengkhianat oleh rakyat. Menggoreng adonan itu menjadi cara rakyat melampiaskan kekesalan mereka. Di sini, cakue hadir dalam banyak variasi, seperti cakue bumbu, cakue rujak, cakue udang, cakue chili dog, sampai cakue sprinkle yang manis. Selain cakue, ada baso campur, baso goreng, chickenball, dan chicken stick. Cakue paling enak dinikmati hangat, dicocol saus asam manis atau saus sambal. Camilan ini cocok kamu nikmati sambil menunggu teman memilih makanan."
+    },
     "menu": [
       {
         "id": "P16-M01",
@@ -4807,7 +4835,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920633,
     "longitude": 107.600575,
     "triggerRadiusM": 10,
@@ -4821,7 +4849,11 @@
         "caption": "Stand Kuo Tie Kelenteng"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p17.mp3",
+      "durationSec": 56,
+      "transcript": "Kamu sedang berada di Kuo Tie Kelenteng. Kuo tie, atau guotie dalam bahasa Mandarin, adalah pangsit isi yang dimasak di wajan datar. Namanya berarti menempel di wajan, karena bagian bawahnya dibiarkan menempel hingga kecokelatan, sementara bagian atasnya tetap lembut karena matang oleh uap. Ada dua menu andalan di sini. Yang pertama adalah kuo tie original yang dimasak dengan cara pan fried, dengan dasar renyah dan kulit atas yang lembut. Yang kedua adalah kuo tie crispy yang digoreng dalam minyak banyak, sehingga seluruh kulitnya garing. Kalau datang bersama teman, pesan satu porsi isi sepuluh untuk dibagi. Kuo tie paling nikmat dicocol saus cuka atau sambal. Hidangan sederhana ini sering dijumpai di kawasan pecinan, dan nama kelenteng pada kedai ini mengingatkan kita pada rumah ibadah Tionghoa yang sejak dulu menjadi pusat kehidupan komunitasnya."
+    },
     "menu": [
       {
         "id": "P17-M01",
@@ -4922,7 +4954,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920685,
     "longitude": 107.600631,
     "triggerRadiusM": 10,
@@ -4941,7 +4973,11 @@
         "caption": "Suasana Nasi Goreng Babi Samcan Crispy"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p18.mp3",
+      "durationSec": 53,
+      "transcript": "Selamat datang di Nasi Goreng Babi Samcan Crispy. Sesuai namanya, kedai ini fokus pada nasi goreng babi dengan berbagai topping. Ada dua menu andalan, yaitu nasi goreng babi topping chasiu dan nasi goreng babi topping samcan. Chasiu adalah daging babi panggang khas Kanton yang berbumbu manis dengan warna merah, sedangkan samcan adalah perut babi tiga lapis yang di sini digoreng hingga kulitnya renyah. Kalau ingin semuanya sekaligus, pilih topping samcan, chasiu, dan lapchiong. Lapchiong adalah sosis khas Tionghoa yang manis dan gurih. Ada juga nasi goreng yang chou, gaya nasi goreng dari kota Yangzhou di Tiongkok, yang warnanya terang karena tidak memakai banyak kecap. Nasi goreng mungkin terasa sebagai hidangan paling Indonesia, tapi akarnya juga erat dengan teknik menggoreng nasi dari dapur Tionghoa. Di sini, kamu bisa merasakan keduanya bertemu. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P18-M01",
@@ -5273,7 +5309,7 @@
       "segar"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920791,
     "longitude": 107.600631,
     "triggerRadiusM": 10,
@@ -5292,7 +5328,11 @@
         "caption": "Panggung live music dekat Jazz Coffee"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p19.mp3",
+      "durationSec": 59,
+      "transcript": "Kamu sedang berada di Jazz Coffee. Setelah mencicipi banyak makanan, ini tempat yang pas untuk menyegarkan diri. Menu andalannya adalah Jazz Coffee Latte dan Orange Espresso Tonic. Orange espresso tonic memadukan espresso dengan air tonik dan jeruk, sehingga rasa pahit, asam, dan segar hadir dalam satu gelas. Selain itu, ada hazelnut jazz coffee, brown sugar latte, caramel macchiato, americano, dan matcha latte. Bagi yang tidak minum kopi, ada lemonade stroberi dan minuman serai. Tahukah kamu, Jawa Barat punya sejarah kopi yang panjang. Pada masa kolonial, kopi dari dataran tinggi Priangan dikenal di pasar dunia dengan nama Java Preanger. Jadi, menikmati kopi di Bandung adalah bagian dari cerita yang sudah berjalan ratusan tahun. Sebagai informasi, beberapa menu di sini mengandung alkohol, seperti Rhum Jazz Coffee dan Baileys Jazz Coffee. Tanyakan ke penjual kalau kamu ingin menghindarinya."
+    },
     "menu": [
       {
         "id": "P19-M01",
@@ -5647,7 +5687,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920556,
     "longitude": 107.601389,
     "triggerRadiusM": 10,
@@ -5666,7 +5706,11 @@
         "caption": "Suasana Nasi Campur Kencana99"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p20.mp3",
+      "durationSec": 59,
+      "transcript": "Selamat datang di Nasi Campur Kencana99. Menu andalannya adalah nasi hainan komplit dan nasi putih komplit. Kamu bisa memilih jenis nasinya, lalu menikmati topping lengkap di atasnya, seperti ayam panggang, chasiu, siobak, dan lapchiong. Siobak adalah daging babi panggang dengan kulit yang renyah seperti kerupuk, sedangkan chasiu adalah babi panggang manis berwarna merah ala Kanton. Nasi hainan sendiri dimasak dengan kaldu, jahe, dan bawang putih sehingga lebih harum. Kedai ini juga punya ayam panggang Kencana 99 yang bisa dipesan bersama nasi, atau dibeli terpisah untuk dibawa pulang dan dinikmati bersama keluarga. Nasi campur adalah cara paling mudah untuk mencicipi banyak lauk sekaligus. Dalam satu piring, kamu sudah mendapat gambaran yang cukup lengkap tentang dapur peranakan Tionghoa di Indonesia. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P20-M01",
@@ -6218,7 +6262,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920769,
     "longitude": 107.600645,
     "triggerRadiusM": 10,
@@ -6237,7 +6281,11 @@
         "caption": "Suasana Kuwali Kwetiaw Bakar & Nasi Goreng Samcan"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p21.mp3",
+      "durationSec": 62,
+      "transcript": "Kamu sedang berada di Kuwali Kwetiaw Bakar dan Nasi Goreng Samcan. Menu andalannya adalah kwetiau bakar biasa. Kwetiau bakar dimasak hingga muncul aroma bakar yang khas, sehingga rasanya lebih smoky dibanding kwetiau goreng biasa. Nama kuwali sendiri mengingatkan pada kuali, wajan besar yang menjadi andalan di dapur Tionghoa maupun Nusantara. Pilihan menu di sini sangat banyak, terutama nasi goreng. Ada nasi goreng smoked chicken, nasi goreng Yangzhou dengan ayam atau babi, nasi goreng seafood, nasi goreng bacon, nasi goreng lapchiong, sampai nasi goreng samcan. Jadi, kamu bisa datang berkali-kali dan selalu mencoba rasa yang berbeda. Kalau berdua, pesan satu kwetiau bakar dan satu nasi goreng samcan untuk dibagi, supaya bisa mencicipi dua andalan sekaligus. Sebagai informasi, beberapa menu di sini mengandung babi, sehingga tidak halal. Tersedia juga pilihan ayam dan seafood, tapi tetap tanyakan ke penjual soal dapurnya."
+    },
     "menu": [
       {
         "id": "P21-M01",
@@ -6847,7 +6895,7 @@
       "manis"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920693,
     "longitude": 107.600669,
     "triggerRadiusM": 10,
@@ -6861,7 +6909,11 @@
         "caption": "Stand Susu Mbok Darmi"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p22.mp3",
+      "durationSec": 56,
+      "transcript": "Selamat datang di Susu Mbok Darmi. Di sini kamu bisa menikmati minuman susu dengan banyak pilihan rasa. Menu andalannya adalah Darmi Lychee, susu dengan rasa leci yang manis dan segar. Pilihan lainnya juga beragam, ada green tea, choco oat, regal, keju, cadbury, moka, anggur, taro, pisang, dan tentu saja susu plain bagi yang suka rasa susu murni. Bandung punya hubungan yang dekat dengan susu. Di utara kota ada Lembang, daerah sejuk di kaki gunung yang sudah lama dikenal sebagai sentra peternakan sapi perah di Jawa Barat. Itu sebabnya minuman susu begitu mudah ditemukan di berbagai sudut Bandung. Segelas susu dingin juga cocok jadi penutup setelah menyantap makanan gurih dan pedas, karena bisa membantu meredakan rasa pedas di lidah. Kalau datang bersama teman, coba pesan rasa yang berbeda-beda, lalu saling mencicipi."
+    },
     "menu": [
       {
         "id": "P22-M01",
@@ -7128,7 +7180,7 @@
       "segar"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921202,
     "longitude": 107.600602,
     "triggerRadiusM": 10,
@@ -7147,7 +7199,11 @@
         "caption": "Suasana D’Cheers"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p23.mp3",
+      "durationSec": 58,
+      "transcript": "Kamu sedang berada di D'Cheers, kedai bir dan koktail di kawasan ini. Kedai ini menawarkan berbagai pilihan bir, mulai dari bir lokal seperti Bintang hingga bir impor seperti Heineken dan König Ludwig, dalam ukuran pint maupun quart. Ada juga koktail seperti Long Island dan minuman campuran berwarna cerah. Suasana kuliner malam di Sudirman Street Food memang cocok untuk bersantai dan mengobrol, dan kedai ini menjadi tempat untuk menikmatinya dengan minuman dingin. Kalau kamu baru mencoba, mulailah dari bir yang rasanya ringan, lalu nikmati pelan-pelan sambil menyantap camilan dari kedai di sekitarnya. Penting diperhatikan, menu di sini adalah minuman beralkohol, sehingga tidak halal dan hanya untuk pengunjung berusia dua puluh satu tahun ke atas. Minumlah secukupnya, dan jangan berkendara setelah minum alkohol. Kalau kamu tidak minum alkohol, kedai jus, susu, dan kopi di kawasan ini bisa jadi pilihan yang menyegarkan."
+    },
     "menu": [
       {
         "id": "P23-M01",
@@ -7588,7 +7644,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921155,
     "longitude": 107.600544,
     "triggerRadiusM": 10,
@@ -7617,7 +7673,11 @@
         "caption": "Suasana sekitar Kwetiau Medan"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p25.mp3",
+      "durationSec": 59,
+      "transcript": "Selamat datang di kedai Medan. Seperti namanya, kedai ini membawa cita rasa kota Medan, Sumatera Utara, yang terkenal dengan kulinernya. Ada empat menu andalan di sini, yaitu bakmie Medan, hainan babi, kwetiau goreng, dan mie goreng Medan. Bakmie Medan biasanya disajikan dengan mi yang kenyal, topping daging, dan kuah terpisah, sehingga kamu bisa menikmati mi dan kuahnya bergantian. Kwetiau dan mie goreng ala Medan dimasak di atas api besar sehingga aromanya harum dan sedikit smoky. Selain itu, ada bihun goreng Medan, sop iga babi, bakut sayur asin, capcay babi, dan berbagai nasi goreng, termasuk nasi goreng samcan dan lapchiong. Medan dikenal sebagai salah satu surga kuliner di Indonesia, terutama untuk hidangan peranakan Tionghoa. Jadi, kalau belum sempat ke Medan, kamu bisa mencicipi rasanya di sini dulu. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P25-M01",
@@ -8182,7 +8242,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921011,
     "longitude": 107.600478,
     "triggerRadiusM": 10,
@@ -8196,7 +8256,11 @@
         "caption": "Stand Sotomie Sukabumi Ko Ricky & Happy Time"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p26.mp3",
+      "durationSec": 50,
+      "transcript": "Kamu sedang berada di Sotomie Sukabumi Ko Ricky dan Happy Time. Menu andalannya adalah soto mie Sukabumi. Sukabumi adalah kota di Jawa Barat, sama seperti Bandung, sehingga hidangan ini masih bagian dari keluarga kuliner tatar Sunda. Soto mie berisi mi kuning, irisan kol, tomat, dan daging, disiram kuah kaldu yang gurih dan hangat. Di sini juga ada mie yamin, yaitu mi kering berbumbu dengan pilihan rasa asin atau manis, dan kuah yang disajikan terpisah. Mie yamin sangat populer di Bandung dan menjadi santapan favorit banyak orang. Kamu bisa memilih topping bakut, bakso, samcan, atau charsiu. Ada juga bakmi campur, bakmi kekian, dan soto bihun. Dengan lebih dari empat puluh pilihan menu, kedai ini cocok untuk kamu yang suka mencoba banyak variasi mi. Sebagai informasi, beberapa menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P26-M01",
@@ -8890,7 +8954,7 @@
       "manis"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920753,
     "longitude": 107.600549,
     "triggerRadiusM": 10,
@@ -8898,7 +8962,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p27.mp3",
+      "durationSec": 57,
+      "transcript": "Selamat datang di Rainbow Juice. Setelah menyantap makanan gurih, segelas jus segar bisa jadi penyeimbang yang pas. Ada tiga menu andalan di sini, yaitu jus stroberi jeruk, jus nanas jeruk, dan es campur. Perpaduan buah dengan jeruk membuat rasanya lebih segar dan sedikit asam. Pilihan lainnya sangat banyak, mulai dari jus alpukat, jambu, dan mangga, hingga paket couple untuk dua orang, seperti mango delight dan strawberry delight. Es campur adalah minuman penutup khas Indonesia yang berisi berbagai potongan buah, jeli, dan sirup, lalu disajikan dengan es serut. Indonesia punya buah tropis yang melimpah sepanjang tahun, dan kedai jus seperti ini adalah cara sederhana untuk menikmatinya. Kalau datang berdua, paket couple bisa jadi pilihan supaya kalian bisa mencicipi dua rasa sekaligus. Pilih rasa favoritmu, atau coba kombinasi baru yang belum pernah kamu cicipi."
+    },
     "menu": [
       {
         "id": "P27-M01",
@@ -9574,7 +9642,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920713,
     "longitude": 107.600607,
     "triggerRadiusM": 10,
@@ -9588,7 +9656,11 @@
         "caption": "Stand Pempek Gochan"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p28.mp3",
+      "durationSec": 58,
+      "transcript": "Kamu sedang berada di Pempek Gochan. Pempek adalah makanan khas Palembang, Sumatera Selatan, yang terbuat dari ikan giling dan tepung sagu. Menu andalan di sini adalah pempek kapal selam besar. Disebut kapal selam karena di dalamnya ada telur utuh yang tersembunyi, seperti kapal yang menyelam. Kalau ingin lebih puas, ada paket A berisi tiga kapal selam besar. Kunci kenikmatan pempek ada pada cuko, kuah hitam yang terbuat dari gula merah, cuka, cabai, dan bawang putih. Rasanya manis, asam, dan pedas sekaligus. Selain kapal selam, ada pempek lenggang, yaitu pempek yang dicampur telur lalu dipanggang atau digoreng, serta tekwan, bola-bola ikan kecil dalam kuah bening. Untuk rombongan, coba paket rame rame supaya bisa mencicipi banyak jenis. Pempek kini dicintai di seluruh Indonesia, termasuk di Bandung. Saat makan, coba seruput sedikit cukonya, seperti kebiasaan orang Palembang."
+    },
     "menu": [
       {
         "id": "P28-M01",
@@ -10098,7 +10170,7 @@
       "gurih"
     ],
     "isHalal": null,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920656,
     "longitude": 107.600649,
     "triggerRadiusM": 10,
@@ -10117,7 +10189,11 @@
         "caption": "Suasana Mie Susu"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p29.mp3",
+      "durationSec": 56,
+      "transcript": "Selamat datang di Mie Susu. Menu andalannya adalah mie susu ayam original, yaitu mi dengan kuah berbahan susu yang lembut dan gurih, disajikan bersama ayam. Kuah susu membuat rasanya lebih creamy dibanding mi berkuah kaldu biasa. Kalau suka seafood, ada mie susu udang bakar. Ada juga soto susu sapi dengan nasi, yang mengingatkan pada soto Betawi yang kuahnya memakai susu atau santan. Untuk penutup, jangan lewatkan ronde. Ronde adalah bola-bola tepung ketan berisi kacang, disajikan dalam kuah jahe hangat. Hidangan ini berasal dari tradisi Tionghoa yang dikenal dengan nama tangyuan. Di Jawa, ia menjadi wedang ronde, minuman hangat yang cocok dinikmati di malam hari. Di sini ada ronde gula putih, ronde gula merah, ronde susu original, dan ronde susu ubi keju. Malam Bandung yang sejuk paling pas ditemani semangkuk ronde hangat."
+    },
     "menu": [
       {
         "id": "P29-M01",
@@ -10276,7 +10352,7 @@
       "pedas"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920707,
     "longitude": 107.600623,
     "triggerRadiusM": 10,
@@ -10284,7 +10360,11 @@
     "description": "",
     "culturalStory": null,
     "photos": [],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p30.mp3",
+      "durationSec": 67,
+      "transcript": "Kamu sedang berada di Waroenk Laris, kedai yang menjadikan samcan sebagai bintang utama. Samcan adalah daging perut babi tiga lapis, yaitu kulit, lemak, dan daging. Di sini, samcan digoreng hingga renyah, lalu disajikan dengan berbagai bumbu. Ada tiga menu andalan, yaitu nasi samcan goreng sambal matah, nasi samcan goreng cabe garam, dan paket nasi samcan hemat untuk berdua. Sambal matah adalah sambal mentah khas Bali dari irisan bawang merah, serai, cabai rawit, dan minyak, yang rasanya segar dan harum. Sementara itu, cabe garam memberi rasa pedas asin yang lebih kering dan menggigit. Kalau ingin variasi lain, coba samcan goreng mentega, kecap, telur asin, atau mayones. Paket berdua cocok kalau kamu datang bersama teman atau pasangan, karena porsinya pas untuk dibagi. Pilih bumbu sesuai seleramu, dan jangan lupa siapkan minuman dingin untuk menemani pedasnya. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P30-M01",
@@ -10632,7 +10712,7 @@
       "manis"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.920659,
     "longitude": 107.600662,
     "triggerRadiusM": 10,
@@ -10646,7 +10726,11 @@
         "caption": "Stand Bacang Babi"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p31.mp3",
+      "durationSec": 57,
+      "transcript": "Selamat datang di Bacang Babi. Bacang adalah nasi atau ketan berisi daging yang dibungkus daun bambu, dibentuk seperti limas, lalu direbus hingga matang. Ada dua menu andalan di sini, yaitu bacang beras babi dan bacang ketan babi. Bacang ketan lebih lengket dan kenyal, sedangkan bacang beras lebih pulen dan ringan. Bacang punya cerita yang panjang. Dalam tradisi Tionghoa, bacang disantap saat perayaan Peh Cun, atau festival perahu naga, untuk mengenang Qu Yuan, seorang penyair dan pejabat dari Tiongkok kuno. Konon, rakyat melemparkan nasi ke sungai agar ikan tidak memakan jasadnya. Selain bacang, kedai ini juga menjual bakpao babi berisi telur, lapchiong, dan jamur hioko, serta berbagai roti, seperti roti baso, roti ham keju, dan roti keju susu. Untuk minumnya, ada liang tea, teh herbal yang menyegarkan. Sebagai informasi, banyak menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P31-M01",
@@ -10890,7 +10974,7 @@
       "pedas"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.921199,
     "longitude": 107.6006155,
     "triggerRadiusM": 10,
@@ -10914,7 +10998,11 @@
         "caption": "Area makan Sate Babi Wibisana"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p32.mp3",
+      "durationSec": 60,
+      "transcript": "Kamu sedang berada di Sate Babi Wibisana. Sate adalah salah satu hidangan paling khas Indonesia, yaitu daging yang ditusuk lalu dibakar di atas bara. Di sini, sate dibuat dari daging babi dengan banyak variasi. Menu andalannya adalah sate samcan asin, yang dijual per tusuk. Potongan perut babi tiga lapis ini dibakar hingga lemaknya meleleh dan bagian luarnya sedikit garing. Kamu juga bisa mencoba sate kulit babi yang renyah, sate babi manis mini, dan sate babi besar dengan sambal matah yang segar. Ada pula sate samcan shaokao. Shaokao adalah sebutan untuk sate jalanan ala Tiongkok, yang biasanya dibumbui jintan dan cabai kering. Karena dijual per tusuk, kamu bisa memilih dan mencampur sesuai selera. Kalau lapar, lengkapi dengan nasi mix. Asap dan aroma sate yang dibakar di malam hari adalah suasana khas kuliner jalanan Indonesia. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P32-M01",
@@ -11275,7 +11363,7 @@
       "gurih"
     ],
     "isHalal": false,
-    "zone": "TODO",
+    "zone": "Sudirman Street Food",
     "latitude": -6.9208568,
     "longitude": 107.6005713,
     "triggerRadiusM": 10,
@@ -11294,7 +11382,11 @@
         "caption": "Suasana El Paso"
       }
     ],
-    "audio": null,
+    "audio": {
+      "assetKey": "poi-audio/p33.mp3",
+      "durationSec": 56,
+      "transcript": "Selamat datang di El Paso, kedai bernuansa Meksiko dan Amerika Latin. Ada dua menu andalan di sini, yaitu cubanos dan Uncle Joe's Porky Plate. Cubano adalah sandwich yang lahir dari komunitas imigran Kuba di Florida, Amerika Serikat. Isinya biasanya daging babi panggang, ham, keju, acar, dan mustard, lalu rotinya dipanggang sambil ditekan sehingga renyah dan padat. Sementara itu, Uncle Joe's Porky Plate adalah sepiring olahan babi yang mengenyangkan. Ada juga versi Uncle Joe's yang dipadukan dengan babi Bali, serta cheese whiz bagi pencinta keju. Yang menarik, ada nasi samcan panggang dengan bumbu Meksiko, perpaduan rasa Amerika Latin dengan kebiasaan makan orang Indonesia yang tetap ingin ada nasi. Kehadiran kedai seperti ini menunjukkan bahwa kuliner Bandung terbuka pada rasa dari mana saja. Sebagai informasi, menu di sini mengandung babi, sehingga tidak halal."
+    },
     "menu": [
       {
         "id": "P33-M01",
