@@ -186,8 +186,8 @@ export default function SearchScreen() {
       distanceM !== undefined
         ? Math.max(1, Math.ceil(distanceM / 60))
         : poi.avgVisitMin
-        ? Math.min(5, Math.ceil(poi.avgVisitMin / 5))
-        : 3;
+          ? Math.min(5, Math.ceil(poi.avgVisitMin / 5))
+          : 3;
 
     return (
       <Pressable
@@ -346,7 +346,7 @@ export default function SearchScreen() {
           Ditemukan <Text style={styles.statusCountBold}>{filteredResults.length}</Text> tenant
         </Text>
         <Text style={styles.statusSpeed}>
-          ⚡ {searchResponse.executionTimeMs}ms (offline)
+          {searchResponse.executionTimeMs}ms (offline)
         </Text>
       </View>
 
@@ -491,15 +491,16 @@ const styles = StyleSheet.create({
   },
   headerBlock: {
     paddingHorizontal: 16,
-    paddingTop: 6,
-    paddingBottom: 4,
-    gap: 8,
+    paddingTop: 8,
+    paddingBottom: 6,
+    gap: 12,
   },
   pageTitle: {
     fontFamily: fontFamily.bold,
     fontSize: 26,
     lineHeight: 30,
     color: '#404040',
+    marginBottom: 2,
   },
   categoryChipsScroll: {
     flexDirection: 'row',
@@ -803,24 +804,24 @@ const styles = StyleSheet.create({
     color: '#404040',
   },
   modalBody: {
-    paddingVertical: 12,
+    paddingVertical: 6,
   },
   filterSectionTitle: {
     fontFamily: fontFamily.medium,
     fontSize: 13,
     color: '#404040',
-    marginBottom: 8,
-    marginTop: 10,
+    marginBottom: 6,
+    marginTop: 8,
   },
   filterOptionsGrid: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 6,
   },
   modalOptionCard: {
     flex: 1,
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-    borderRadius: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 6,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E6E6E6',
     alignItems: 'center',
@@ -842,7 +843,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     fontSize: 9,
     color: '#A6A6A6',
-    marginTop: 2,
+    marginTop: 1,
   },
   modalOptionSubActive: {
     color: '#FF8316',
@@ -850,12 +851,12 @@ const styles = StyleSheet.create({
   tasteChipsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 6,
   },
   tasteChip: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: '#E6E6E6',
     backgroundColor: '#F9F9F9',
@@ -866,7 +867,7 @@ const styles = StyleSheet.create({
   },
   tasteChipText: {
     fontFamily: fontFamily.medium,
-    fontSize: 12,
+    fontSize: 11.5,
     color: '#707070',
   },
   tasteChipTextActive: {
@@ -876,13 +877,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E6E6E6',
     backgroundColor: '#F9F9F9',
-    marginTop: 4,
+    marginTop: 2,
   },
   openNowRowActive: {
     borderColor: '#FF8316',
@@ -893,14 +894,14 @@ const styles = StyleSheet.create({
   },
   openNowTitle: {
     fontFamily: fontFamily.medium,
-    fontSize: 13,
+    fontSize: 12.5,
     color: '#404040',
   },
   openNowSubtitle: {
     fontFamily: fontFamily.regular,
-    fontSize: 11,
+    fontSize: 10.5,
     color: '#A6A6A6',
-    marginTop: 2,
+    marginTop: 1,
   },
   modalFooter: {
     flexDirection: 'row',
