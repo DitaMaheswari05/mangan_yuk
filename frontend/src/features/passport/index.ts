@@ -1,5 +1,5 @@
-// F10 / PB-16 – Paspor Kuliner & Gamifikasi: stempel digital, progres trail, dan badge penghargaan.
-import type { Trail } from '@/types/content';
+// F10 / PB-16 – Paspor Kuliner & Gamifikasi: stempel digital, progres trail, badge penghargaan, & ulasan tenant.
+import type { MenuItem, Poi, Trail } from '@/types/content';
 
 export type StampRecord = {
   poiId: string;
@@ -15,6 +15,7 @@ export type StampRecord = {
 export type PoiReview = {
   id: string;
   userId?: string;
+  userDisplayName?: string;
   poiId: string;
   rating: 1 | 2 | 3 | 4 | 5;
   reviewText: string | null;
@@ -24,6 +25,27 @@ export type PoiReview = {
   menuItemIds: string[];
   createdAt: string;
   updatedAt: string;
+};
+
+export type PopularMenuStat = {
+  menuItemId: string;
+  name: string;
+  priceIdr: number;
+  isSignature: boolean;
+  reviewCount: number;
+};
+
+export type PoiReviewStats = {
+  totalReviews: number;
+  averageRating: number;
+  ratingBreakdown: {
+    1: number;
+    2: number;
+    3: number;
+    4: number;
+    5: number;
+  };
+  popularMenus: PopularMenuStat[];
 };
 
 export type PassportState = {
@@ -52,6 +74,7 @@ export type UnlockedBadge = {
 export const INITIAL_PASSPORT_STATE: PassportState = {
   stamps: {},
   unlockedBadgeIds: [],
+  reviews: [],
 };
 
 /**
@@ -161,12 +184,35 @@ export function evaluateBadges(
 export type CreatePoiReviewInput = {
   id?: string;
   userId?: string;
+  userDisplayName?: string;
   poiId: string;
   rating: 1 | 2 | 3 | 4 | 5;
   reviewText?: string | null;
   photoPath?: string | null;
   menuItemIds?: string[];
 };
+
+export type UpdatePoiReviewInput = {
+  rating?: 1 | 2 | 3 | 4 | 5;
+  reviewText?: string | null;
+  photoPath?: string | null;
+  menuItemIds?: string[];
+};
+
+/**
+ * Memvalidasi bahwa seluruh `menuItemIds` yang dipilih benar-benar milik `poi` yang sedang direview.
+ */
+export function validateReviewMenuItems(
+  poi: Pick<Poi, 'id' | 'menu'>,
+  menuItemIds: string[],
+): { valid: boolean; invalidMenuItemIds: string[] } {
+  const allowedIds = new Set(poi.menu.map((m) => m.id));
+  const invalidMenuItemIds = menuItemIds.filter((id) => !allowedIds.has(id));
+  return {
+    valid: invalidMenuItemIds.length === 0,
+    invalidMenuItemIds,
+  };
+}
 
 /**
  * Mencatat ulasan (review) beserta daftar menu yang dimakan dari suatu tenant,
@@ -183,10 +229,11 @@ export function recordReview(
   const review: PoiReview = {
     id: input.id ?? `rev-${input.poiId}-${timestampMs}`,
     userId: input.userId,
+    userDisplayName: input.userDisplayName ?? 'Kuliner Explorer',
     poiId: input.poiId,
     rating: input.rating,
     reviewText: input.reviewText?.trim() ? input.reviewText.trim() : null,
-    photoPath: input.photoPath ?? null,
+    photoPath: input.photoPath?.trim() ? input.photoPath.trim() : null,
     menuItemIds: input.menuItemIds ? Array.from(new Set(input.menuItemIds)) : [],
     createdAt: iso,
     updatedAt: iso,
@@ -202,3 +249,54 @@ export function recordReview(
     review,
   };
 }
+
+/**
+ * Menghitung statistik agregat ulasan suatu tenant (rata-rata 1 desimal, breakdown bintang 1..5, menu populer).
+ * Selaras dengan `computePoiReviewStats` di backend (`backend/src/reviews/service.ts`).
+ */
+export function computePoiReviewStats(
+  reviews: PoiReview[],
+  menuCatalog: Pick<MenuItem, 'id' | 'name' | 'priceIdr' | 'isSignature'>[] = [],
+): PoiReviewStats {
+  const breakdown: PoiReviewStats['ratingBreakdown'] = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  let sum = 0;
+  const menuCounts = new Map<string, number>();
+
+  for (const r of reviews) {
+    if (breakdown[r.rating] !== undefined) {
+      breakdown[r.rating] += 1;
+    }
+    sum += r.rating;
+
+    for (const menuId of r.menuItemIds) {
+      menuCounts.set(menuId, (menuCounts.get(menuId) ?? 0) + 1);
+    }
+  }
+
+  const totalReviews = reviews.length;
+  const averageRating = totalReviews > 0 ? Math.round((sum / totalReviews) * 10) / 10 : 0;
+  const catalogMap = new Map(menuCatalog.map((m) => [m.id, m]));
+  const popularMenus: PopularMenuStat[] = [];
+
+  for (const [menuItemId, reviewCount] of menuCounts.entries()) {
+    const info = catalogMap.get(menuItemId);
+    popularMenus.push({
+      menuItemId,
+      name: info?.name ?? menuItemId,
+      priceIdr: info?.priceIdr ?? 0,
+      isSignature: info?.isSignature ?? false,
+      reviewCount,
+    });
+  }
+
+  popularMenus.sort((a, b) => b.reviewCount - a.reviewCount || a.menuItemId.localeCompare(b.menuItemId));
+
+  return {
+    totalReviews,
+    averageRating,
+    ratingBreakdown: breakdown,
+    popularMenus,
+  };
+}
+
+export * from './api';

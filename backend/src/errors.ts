@@ -5,6 +5,7 @@ export type ApiErrorCode =
   | 'TOKEN_INVALID'
   | 'REFRESH_REUSE_DETECTED'
   | 'EMAIL_TAKEN'
+  | 'FORBIDDEN'
   | 'NOT_FOUND'
   | 'RATE_LIMITED'
   | 'INTERNAL_ERROR';
@@ -20,6 +21,7 @@ const STATUS: Record<ApiErrorCode, number> = {
   TOKEN_EXPIRED: 401,
   TOKEN_INVALID: 401,
   REFRESH_REUSE_DETECTED: 401,
+  FORBIDDEN: 403,
   NOT_FOUND: 404,
   EMAIL_TAKEN: 409,
   RATE_LIMITED: 429,
@@ -32,6 +34,7 @@ const MESSAGE: Record<ApiErrorCode, string> = {
   TOKEN_EXPIRED: 'Sesi kedaluwarsa.',
   TOKEN_INVALID: 'Token tidak valid.',
   REFRESH_REUSE_DETECTED: 'Sesi tidak aman terdeteksi, silakan masuk lagi.',
+  FORBIDDEN: 'Anda tidak memiliki akses untuk melakukan aksi ini.',
   NOT_FOUND: 'Endpoint tidak ditemukan.',
   EMAIL_TAKEN: 'Email sudah terdaftar.',
   RATE_LIMITED: 'Terlalu banyak percobaan, coba lagi nanti.',

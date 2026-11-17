@@ -10,6 +10,7 @@ import areaJson from '@/data/area.json';
 import { WalkModeService } from '@/features/audio';
 import { NotificationService } from '@/features/notifications';
 import { getPoiById, getPois } from '@/features/poi';
+import { completeTrailStep, findTrailOverstay, markOverstayNotified, TrailSessionStore } from '@/features/trail';
 import { VisitRepository } from '@/features/visits';
 import type { UserPosition } from '@/lib/geo';
 import { load, save } from '@/storage';
@@ -74,12 +75,24 @@ async function runSideEffects(e: GeofenceEvent): Promise<void> {
     }
     case 'DWELL':
       await VisitRepository.markVisited(e.poiId, e.at);
+      await TrailSessionStore.update((s) => completeTrailStep(s, e.poiId, e.at));
       return;
     case 'EXIT':
     case 'AREA_EXIT':
       // Rekomendasi saat exit (F07) dikerjakan di Sprint 4; pendengar UI tetap menerima event-nya.
       return;
   }
+}
+
+async function remindTrailOverstay(now: number): Promise<void> {
+  const session = await TrailSessionStore.get();
+  if (!session) return;
+  const enteredAt: Record<string, number | null> = {};
+  for (const [id, p] of Object.entries(state.pois)) enteredAt[id] = p.inside ? p.enteredAt : null;
+  const alert = findTrailOverstay(session, enteredAt, now);
+  if (!alert) return;
+  await TrailSessionStore.update((s) => markOverstayNotified(s, alert.poiId));
+  await NotificationService.notifyTrailOverstay(alert);
 }
 
 async function processOne(pos: UserPosition, now: number): Promise<GeofenceEvent[]> {
@@ -97,6 +110,12 @@ async function processOne(pos: UserPosition, now: number): Promise<GeofenceEvent
       // Satu efek gagal (mis. notifikasi ditolak) tidak boleh menghentikan event lain.
     }
     listeners.forEach((l) => l(e));
+  }
+
+  try {
+    await remindTrailOverstay(now);
+  } catch {
+    // Pengingat gagal tidak boleh menghentikan pemrosesan lokasi.
   }
   return res.events;
 }
