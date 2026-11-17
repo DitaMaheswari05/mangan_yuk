@@ -8,9 +8,28 @@ export type StampRecord = {
   visitCount: number;
 };
 
+/**
+ * Data ulasan (review) tenant pada Paspor Kuliner & Gamifikasi.
+ * Selaras dengan tabel `public.reviews` dan `public.review_menu_items` di Supabase/Prisma.
+ */
+export type PoiReview = {
+  id: string;
+  userId?: string;
+  poiId: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  reviewText: string | null;
+  /** Path atau URI gambar dokumentasi yang diunggah pengguna (opsional). */
+  photoPath: string | null;
+  /** Daftar ID menu dari tenant tersebut yang dimakan oleh pengguna (mis. ['P01-M01', 'P01-M02']). */
+  menuItemIds: string[];
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type PassportState = {
   stamps: Record<string, StampRecord>;
   unlockedBadgeIds: string[];
+  reviews?: PoiReview[];
 };
 
 export type TrailProgress = {
@@ -136,5 +155,50 @@ export function evaluateBadges(
       unlockedBadgeIds: [...currentUnlocked],
     },
     newlyUnlockedBadges,
+  };
+}
+
+export type CreatePoiReviewInput = {
+  id?: string;
+  userId?: string;
+  poiId: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  reviewText?: string | null;
+  photoPath?: string | null;
+  menuItemIds?: string[];
+};
+
+/**
+ * Mencatat ulasan (review) beserta daftar menu yang dimakan dari suatu tenant,
+ * sekaligus otomatis mencatat/memperbarui stempel kunjungan di Paspor Kuliner.
+ */
+export function recordReview(
+  state: PassportState,
+  input: CreatePoiReviewInput,
+  timestampMs: number = Date.now(),
+): { updatedState: PassportState; review: PoiReview } {
+  const iso = new Date(timestampMs).toISOString();
+  const stampedState = recordStamp(state, input.poiId, timestampMs);
+
+  const review: PoiReview = {
+    id: input.id ?? `rev-${input.poiId}-${timestampMs}`,
+    userId: input.userId,
+    poiId: input.poiId,
+    rating: input.rating,
+    reviewText: input.reviewText?.trim() ? input.reviewText.trim() : null,
+    photoPath: input.photoPath ?? null,
+    menuItemIds: input.menuItemIds ? Array.from(new Set(input.menuItemIds)) : [],
+    createdAt: iso,
+    updatedAt: iso,
+  };
+
+  const existingReviews = stampedState.reviews ?? [];
+
+  return {
+    updatedState: {
+      ...stampedState,
+      reviews: [review, ...existingReviews],
+    },
+    review,
   };
 }
