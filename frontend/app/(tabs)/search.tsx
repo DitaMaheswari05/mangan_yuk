@@ -254,7 +254,7 @@ export default function SearchScreen() {
             {matchedMenuNames && matchedMenuNames.length > 0 ? (
               <View style={styles.matchedTag}>
                 <Ionicons name="sparkles" size={10} color="#FF8316" />
-                <Text style={styles.matchedTagText} numberOfLines={1}>
+                <Text style={styles.matchedTagText} numberOfLines={1} ellipsizeMode="tail">
                   {matchedMenuNames[0]}
                 </Text>
               </View>
@@ -710,17 +710,19 @@ const styles = StyleSheet.create({
   distanceWalkRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 8,
   },
   distanceText: {
     fontFamily: fontFamily.regular,
     fontSize: 11,
     color: '#A6A6A6',
+    flexShrink: 0,
   },
   walkMetaBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 2,
+    flexShrink: 0,
   },
   walkMinutesText: {
     fontFamily: fontFamily.regular,
@@ -730,17 +732,18 @@ const styles = StyleSheet.create({
   matchedTag: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 3,
+    gap: 4,
     backgroundColor: '#FFF0DC',
-    paddingHorizontal: 6,
-    paddingVertical: 1,
-    borderRadius: 6,
-    maxWidth: 100,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 100,
+    flexShrink: 1,
   },
   matchedTagText: {
     fontFamily: fontFamily.medium,
     fontSize: 10,
     color: '#FF8316',
+    flexShrink: 1,
   },
   emptyContainer: {
     alignItems: 'center',
