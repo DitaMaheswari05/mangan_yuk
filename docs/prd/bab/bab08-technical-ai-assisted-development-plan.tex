@@ -16,14 +16,15 @@
 Application & React Native + Expo (TypeScript), dibangun dengan Expo Development Build / EAS Build & Pengembangan aplikasi mobile Android dan pembuatan APK untuk perangkat uji \\ \hline
 Location & expo-location + expo-task-manager & Membaca lokasi akurasi tinggi (\(\pm\)3 detik / \(\ge\)5 m), pelacakan background melalui foreground service saat Mode Jelajah aktif \\ \hline
 Geofence Logic & Modul TypeScript internal (haversine, hysteresis, cooldown) & Mendeteksi entry, proximity, dwell, dan exit event serta mengabaikan pembacaan dengan akurasi \textgreater{}30 m \\ \hline
-Map/Navigation & react-native-maps dengan tile OpenStreetMap + overlay denah kawasan; Linking (intent Google Maps) & Menampilkan posisi pengguna, marker POI, garis rute ke tenant, dan navigasi menuju kawasan \\ \hline
+Map/Navigation & MapLibre React Native dengan tile OpenStreetMap + overlay batas kawasan (GeoJSON); OSRM publik (profil pejalan kaki) untuk rute; Linking (intent Google Maps) & Menampilkan posisi pengguna, marker POI, rute jalan kaki ke tenant (fallback garis lurus saat offline), dan navigasi menuju kawasan \\ \hline
 Compass & expo-location (watchHeadingAsync) & Menentukan arah panah navigasi menuju tenant \\ \hline
-Data & JSON lokal (dibundel di APK) + AsyncStorage & Menyimpan data POI dan konten secara offline, serta preferensi, riwayat kunjungan, dan progres trail di perangkat \\ \hline
+Data & JSON lokal (dibundel di APK) + AsyncStorage + expo-secure-store; state dengan Zustand & Menyimpan data POI dan konten secara offline, preferensi, riwayat kunjungan, progres trail, dan sesi akun lokal di perangkat \\ \hline
 Audio/Multimedia & expo-audio, expo-speech (TTS), expo-haptics & Memutar narasi audio, panduan suara navigasi, dan getar saat trigger \\ \hline
 Notification & expo-notifications (notification category dengan tombol aksi) & Notifikasi entry/proximity, tombol Dengar/Lewati di lock screen, dan pengingat sisa waktu \\ \hline
 Search & Fuse.js & Pencarian toleran typo berdasarkan nama tenant, menu, dan kategori \\ \hline
+Content Pipeline & Backend Node.js (Express + Prisma) dengan Supabase (Postgres + Storage); skrip ekspor konten dan generator audio TTS & Mengelola data tenant, menu, foto, dan audio narasi, lalu mengekspornya menjadi JSON dan aset yang dibundel ke APK. Aplikasi tidak memanggil backend saat runtime \\ \hline
 AI Development Tool & Claude, Claude Code, ChatGPT, Antigravity & Membantu perencanaan, coding, debugging, dan penyusunan test case \\ \hline
-Other & expo-camera (QR, opsional untuk F10), Jest + React Native Testing Library, Android Emulator (mock location), Git/GitHub & Scan QR Paspor Kuliner, unit test logika, simulasi pergerakan lokasi, dan version control \\ \hline
+Other & Expo Router, Jest, Android Emulator (mock location), Git/GitHub + GitHub Actions & Navigasi antarhalaman, unit test logika, simulasi pergerakan lokasi, version control, dan CI \\ \hline
 \end{longtable}
 
 \section{AI-Assisted Development Plan}

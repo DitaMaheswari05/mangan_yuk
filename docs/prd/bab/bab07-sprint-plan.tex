@@ -1,112 +1,105 @@
 % Bab 7: Sprint Plan
+% Sumber: docs/scrum-document.md (2.3 Release Planning dan Tabel Sprint Backlog 1-5)
 \chapter{Sprint Plan}
 \label{bab:sprint-plan}
 \textit{Sprint berlangsung satu minggu. Sprint plan awal dapat disesuaikan selama proyek, tetapi perubahan backlog/requirement harus dapat ditelusuri.}
 
+\newcommand{\sprinthead}{%
+\cellcolor[HTML]{D9EAF7}\textbf{ID Task} & \cellcolor[HTML]{D9EAF7}\textbf{Rincian Task} & \cellcolor[HTML]{D9EAF7}\textbf{Est. (Jam)} & \cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{PIC} \\ \hline}
+\newenvironment{sprinttable}[1]{%
+\begin{longtable}{|L{0.11}|L{0.50}|L{0.09}|L{0.11}|L{0.19}|}
+\caption{#1}\\
+\hline
+\sprinthead
+\endfirsthead
+\hline
+\sprinthead
+\endhead}{\end{longtable}}
+
 \section*{Sprint 1 - Week 10}
 \addcontentsline{toc}{section}{Sprint 1 - Week 10}
 
-Sprint Goal: Membangun fondasi aplikasi dan location awareness.
+\textbf{Periode:} 23 Februari -- 1 Maret 2026\\
+\textbf{Sprint Goal:} Membangun fondasi arsitektur aplikasi, menyelesaikan onboarding dan edukasi privasi lokasi, menampilkan posisi GPS pengguna di peta OSM secara real-time, serta membundel dataset POI Sudirman Street Food.\\
+\textbf{Target Increment:} Aplikasi dapat dijalankan di perangkat uji, onboarding dan izin lokasi berjalan, posisi pengguna dan status di dalam/di luar area tampil di peta, dan marker POI terbaca dari dataset lokal.\\
+\textbf{Backlog:} PB01, PB02, PB03, PB04 (estimasi 48 jam tim)
 
-Target Increment: \rule{7cm}{0.4pt}
-
-\begin{longtable}{|L{0.256}|L{0.744}|}
-\caption{Sprint 1 - Week 10}\\
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endfirsthead
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endhead
-\cellcolor[HTML]{F2F2F2}\textit{PB01, PB02} & \cellcolor[HTML]{F2F2F2}\textit{Aplikasi dapat dijalankan dan current location terbaca} \\ \hline
-\cellcolor[HTML]{F2F2F2}\textit{PB03} & \cellcolor[HTML]{F2F2F2}\textit{Dataset POI tersedia dan dapat dibaca aplikasi} \\ \hline
- &  \\ \hline
- &  \\ \hline
-\end{longtable}
+\begin{sprinttable}{Sprint Backlog 1 - Week 10}
+SB-1.1 & Inisialisasi project React Native Expo (TypeScript), struktur folder modular, konfigurasi ESLint, Prettier, dan navigasi stack/tab. & 8 & PB01 & Samantha \\ \hline
+SB-1.2 & Perancangan UI onboarding, dialog transparansi privasi lokasi (F09), dan penanganan penolakan izin lokasi. & 8 & PB02 & Anggita \\ \hline
+SB-1.3 & Implementasi alur permintaan izin lokasi foreground dan notifikasi dengan fallback mode tanpa lokasi. & 6 & PB02 & Samantha \\ \hline
+SB-1.4 & Integrasi peta (MapLibre) dengan tile OpenStreetMap dan poligon batas kawasan Sudirman Street Food. & 10 & PB03 & Samantha \\ \hline
+SB-1.5 & Implementasi pembacaan GPS akurasi tinggi (\texttt{watchPositionAsync}), titik biru pengguna, dan kalkulasi status di dalam/di luar area. & 8 & PB03 & Dita \\ \hline
+SB-1.6 & Survei, kurasi, dan penyusunan JSON dataset POI tenant kuliner (nama, koordinat, menu, harga, kategori, rasa). & 8 & PB04 & Theresia, Anggita \\ \hline
+\end{sprinttable}
 
 \section*{Sprint 2 - Week 11}
 \addcontentsline{toc}{section}{Sprint 2 - Week 11}
 
-Sprint Goal: Membangun POI, location logic, dan location-based trigger.
+\textbf{Periode:} 2 -- 8 Maret 2026\\
+\textbf{Sprint Goal:} Mengimplementasikan pelacakan lokasi background (Mode Jelajah melalui foreground service), mesin geofence (entry, proximity, dwell, exit) dengan pencegahan trigger palsu, serta kartu POI multimodal offline dengan pemutar audio narasi.\\
+\textbf{Target Increment:} Trigger geofence berjalan di background, kunjungan tercatat otomatis lewat dwell event, dan kartu POI beserta audio narasi dapat dibuka tanpa internet.\\
+\textbf{Backlog:} PB05, PB06, PB07, PB08 (estimasi 54 jam tim)
 
-Target Increment: \rule{7cm}{0.4pt}
-
-\begin{longtable}{|L{0.256}|L{0.744}|}
-\caption{Sprint 2 - Week 11}\\
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endfirsthead
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endhead
-\cellcolor[HTML]{F2F2F2}\textit{PB06} & \cellcolor[HTML]{F2F2F2}\textit{Informasi visual dan audio terintegrasi dalam core exploration flow} \\ \hline
- &  \\ \hline
- &  \\ \hline
- &  \\ \hline
-\end{longtable}
+\begin{sprinttable}{Sprint Backlog 2 - Week 11}
+SB-2.1 & Implementasi pelacakan lokasi background menggunakan \texttt{expo-task-manager} dan foreground service dengan notifikasi persisten (Mode Jelajah). & 12 & PB05 & Dita \\ \hline
+SB-2.2 & Pembuatan kalkulator jarak haversine, filter GPS jitter (abaikan akurasi \textgreater{}30 m), dan cooldown per POI (30 menit). & 10 & PB06 & Dita \\ \hline
+SB-2.3 & Implementasi entry event kawasan (radius 100 m) dan proximity event tenant (radius 10 m) yang memicu kartu POI. & 8 & PB06 & Samantha, Dita \\ \hline
+SB-2.4 & Implementasi dwell event (\(\ge\)3 menit di tenant) dan exit event (keluar radius + hysteresis 10 m). & 8 & PB07 & Theresia \\ \hline
+SB-2.5 & Pembuatan komponen UI kartu POI multimodal (foto, menu \& harga, jam buka, transkrip narasi). & 8 & PB08 & Samantha, Anggita \\ \hline
+SB-2.6 & Integrasi pemutar audio lokal (\texttt{expo-audio}) dengan kontrol play, pause, seek, dan pemutaran di background. & 8 & PB08 & Theresia \\ \hline
+\end{sprinttable}
 
 \section*{Sprint 3 - Week 12}
 \addcontentsline{toc}{section}{Sprint 3 - Week 12}
 
-Sprint Goal: Mengintegrasikan core location-based exploration experience dan menyiapkan Major Progress Review.
+\textbf{Periode:} 9 -- 15 Maret 2026\\
+\textbf{Sprint Goal:} Mengimplementasikan interaksi eyes-free (tombol aksi audio di notifikasi lock screen), pencarian toleran typo, navigasi berbasis kompas, serta integrasi skenario end-to-end untuk Major Progress Review.\\
+\textbf{Target Increment:} Satu siklus kunjungan POI (lokasi \(\rightarrow\) trigger \(\rightarrow\) kartu POI \(\rightarrow\) narasi \(\rightarrow\) navigasi) dapat didemokan end-to-end di perangkat uji.\\
+\textbf{Backlog:} PB09, PB10, PB11, PB12 (estimasi 52 jam tim)
 
-Target Increment: \rule{7cm}{0.4pt}
-
-\begin{longtable}{|L{0.271}|L{0.729}|}
-\caption{Sprint 3 - Week 12}\\
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endfirsthead
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endhead
- &  \\ \hline
- &  \\ \hline
- &  \\ \hline
- &  \\ \hline
-\end{longtable}
+\begin{sprinttable}{Sprint Backlog 3 - Week 12}
+SB-3.1 & Implementasi notifikasi interaktif \texttt{expo-notifications} dengan tombol aksi (Dengar / Lewati) yang dapat diakses dari lock screen. & 10 & PB09 & Dita \\ \hline
+SB-3.2 & Implementasi Mode Jalan (narasi otomatis saat trigger) serta text-to-speech dan antrean audio. & 8 & PB09 & Theresia \\ \hline
+SB-3.3 & Integrasi pencarian lokal toleran typo (Fuse.js) berdasarkan nama tenant, nama menu, dan kategori. & 8 & PB10 & Theresia \\ \hline
+SB-3.4 & Pembuatan UI filter (rentang harga, rasa, jenis, status buka) dan pengurutan hasil berdasarkan jarak. & 8 & PB10 & Samantha \\ \hline
+SB-3.5 & Integrasi kompas (\texttt{watchHeadingAsync}), garis rute menuju tenant tujuan, dan deteksi kedatangan (\(\le\)10 m). & 10 & PB11 & Samantha, Dita \\ \hline
+SB-3.6 & Integrasi alur inti eksplorasi (lokasi \(\rightarrow\) geofence \(\rightarrow\) audio \(\rightarrow\) navigasi) dan skenario demo Major Progress Review. & 8 & PB12 & Raka, semua \\ \hline
+\end{sprinttable}
 
 \section*{Sprint 4 - Week 13}
 \addcontentsline{toc}{section}{Sprint 4 - Week 13}
 
-Sprint Goal: Menyelesaikan fitur utama dan integrasi. Feature Freeze pada akhir Week 13.
+\textbf{Periode:} 16 -- 22 Maret 2026\\
+\textbf{Sprint Goal:} Menyelesaikan Smart Culinary Trail Planner (nearest neighbor), rekomendasi kontekstual berbasis aturan, dan Paspor Kuliner. Feature Freeze pada akhir Week 13.\\
+\textbf{Target Increment:} Trail planner menghasilkan itinerary sesuai durasi dan budget, rekomendasi muncul saat exit event, dan stempel paspor tercatat dari dwell event.\\
+\textbf{Backlog:} PB13, PB14, PB15, PB16 (estimasi 50 jam tim)
 
-Target Increment: \rule{7cm}{0.4pt}
-
-\begin{longtable}{|L{0.271}|L{0.729}|}
-\caption{Sprint 4 - Week 13}\\
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endfirsthead
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endhead
- &  \\ \hline
- &  \\ \hline
- &  \\ \hline
- &  \\ \hline
-\end{longtable}
+\begin{sprinttable}{Sprint Backlog 4 - Week 13}
+SB-4.1 & Implementasi form Trail Planner (durasi 30/60/90 menit, budget, preferensi rasa) dan validasi input. & 8 & PB14 & Samantha \\ \hline
+SB-4.2 & Implementasi algoritma rute nearest neighbor berbasis budget, rata-rata durasi kunjungan, dan jarak antar-tenant. & 12 & PB14 & Theresia \\ \hline
+SB-4.3 & Implementasi progres trail (tandai selesai lewat dwell event) dan pengingat sisa waktu. & 8 & PB15 & Dita, Theresia \\ \hline
+SB-4.4 & Implementasi fitur Lewati Tenant dan susun ulang itinerary jika tenant tutup atau dilewati. & 6 & PB15 & Samantha, Theresia \\ \hline
+SB-4.5 & Implementasi rekomendasi kontekstual berbasis aturan saat exit event (jarak, sisa budget, pasangan rasa). & 8 & PB13 & Theresia \\ \hline
+SB-4.6 & Implementasi Paspor Kuliner: stempel digital otomatis setelah dwell event, trail tematik, dan penyimpanan badge lokal. & 8 & PB16 & Samantha, Anggita \\ \hline
+\end{sprinttable}
 
 \section*{Sprint 5 - Week 14}
 \addcontentsline{toc}{section}{Sprint 5 - Week 14}
 
-Sprint Goal: Menguji acceptance criteria, memperbaiki defect, retest, dan menstabilkan produk.
+\textbf{Periode:} 23 -- 29 Maret 2026\\
+\textbf{Sprint Goal:} Menguji acceptance criteria (uji lapangan di Sudirman Street Food, usability test eyes-free, verifikasi privasi lokasi), memperbaiki defect, retest, dan menghasilkan build APK final.\\
+\textbf{Target Increment:} Laporan pengujian acceptance criteria F01--F11, seluruh defect prioritas tinggi tertutup, dan APK rilis final berjalan tanpa crash.\\
+\textbf{Backlog:} PB17, PB18 (estimasi 44 jam tim)
 
-Target Increment: \rule{7cm}{0.4pt}
-
-\begin{longtable}{|L{0.271}|L{0.729}|}
-\caption{Sprint 5 - Week 14}\\
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endfirsthead
-\hline
-\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Target Output / Evidence} \\ \hline
-\endhead
- &  \\ \hline
- &  \\ \hline
- &  \\ \hline
- &  \\ \hline
-\end{longtable}
+\begin{sprinttable}{Sprint Backlog 5 - Week 14}
+SB-5.1 & Uji lapangan di Sudirman Street Food: evaluasi akurasi proximity trigger pada tenant kuliner. & 10 & PB17 & Semua \\ \hline
+SB-5.2 & Usability test interaksi eyes-free bersama 5 responden di area studi kasus. & 8 & PB17 & Anggita, Raka \\ \hline
+SB-5.3 & Audit log jaringan (network inspector) untuk memastikan koordinat hanya dikirim ke layanan rute OSRM saat navigasi dan tidak ke server lain (F09). & 6 & PB17 & Dita \\ \hline
+SB-5.4 & Perbaikan defect hasil uji lapangan: penyesuaian threshold hysteresis dan kompensasi sinyal GPS di bawah kanopi lorong. & 8 & PB18 & Dita, Samantha \\ \hline
+SB-5.5 & Optimasi performa: audit memori, pencegahan frame drop, dan waktu buka aplikasi (cold start \textless{}2 detik). & 6 & PB18 & Theresia \\ \hline
+SB-5.6 & Build APK rilis final via EAS Build, uji instalasi mandiri, dan penyusunan berkas deliverable. & 6 & PB18 & Samantha, Raka \\ \hline
+\end{sprinttable}
 
 \section*{Week 12 - Major Progress Review}
 \addcontentsline{toc}{section}{Week 12 - Major Progress Review}
@@ -121,9 +114,9 @@ Target Increment: \rule{7cm}{0.4pt}
 \hline
 \cellcolor[HTML]{D9EAF7}\textbf{Item} & \cellcolor[HTML]{D9EAF7}\textbf{Isi} \\ \hline
 \endhead
-Sprint Goal & \cellcolor[HTML]{F2F2F2}\textit{Core location-based exploration dapat didemonstrasikan.} \\ \hline
-Planned Backlog & \cellcolor[HTML]{F2F2F2}\textit{PB04, PB05, PB06} \\ \hline
-Completed Backlog & \cellcolor[HTML]{F2F2F2}\textit{PB04 dan PB05} \\ \hline
+Sprint Goal & Core location-based exploration dapat didemonstrasikan end-to-end di perangkat Android. \\ \hline
+Planned Backlog & PB09, PB10, PB11, PB12 \\ \hline
+Completed Backlog &  \\ \hline
 Not Done &  \\ \hline
 Evidence/Demo &  \\ \hline
 Blocker \& Recovery Plan &  \\ \hline

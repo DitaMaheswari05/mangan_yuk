@@ -3,7 +3,7 @@
 \label{bab:low-fidelity-prototype}
 \section{Screen/State List}
 
-\textit{Contoh pengisian screen/state:}
+Daftar layar sesuai implementasi di \texttt{frontend/app}.
 
 \begin{longtable}{|L{0.092}|L{0.184}|L{0.507}|L{0.217}|}
 \caption{Screen/State List}\\
@@ -13,14 +13,22 @@
 \hline
 \cellcolor[HTML]{D9EAF7}\textbf{ID} & \cellcolor[HTML]{D9EAF7}\textbf{Screen/State} & \cellcolor[HTML]{D9EAF7}\textbf{Tujuan} & \cellcolor[HTML]{D9EAF7}\textbf{Related Requirement} \\ \hline
 \endhead
-\cellcolor[HTML]{F2F2F2}\textit{UI01} & \cellcolor[HTML]{F2F2F2}\textit{Explore Map} & \cellcolor[HTML]{F2F2F2}\textit{Menampilkan posisi pengguna dan POI di sekitar} & \cellcolor[HTML]{F2F2F2}\textit{F01, F02} \\ \hline
-\cellcolor[HTML]{F2F2F2}\textit{UI02} & \cellcolor[HTML]{F2F2F2}\textit{POI Trigger Notification} & \cellcolor[HTML]{F2F2F2}\textit{Memberi tahu pengguna bahwa ia telah mendekati koleksi} & \cellcolor[HTML]{F2F2F2}\textit{F02} \\ \hline
-\cellcolor[HTML]{F2F2F2}\textit{UI03} & \cellcolor[HTML]{F2F2F2}\textit{POI Detail} & \cellcolor[HTML]{F2F2F2}\textit{Menampilkan informasi visual dan audio koleksi} & \cellcolor[HTML]{F2F2F2}\textit{F03, F04} \\ \hline
- &  &  &  \\ \hline
- &  &  &  \\ \hline
- &  &  &  \\ \hline
- &  &  &  \\ \hline
- &  &  &  \\ \hline
+UI01 & Login \& Registrasi (\texttt{auth/login}, \texttt{auth/register}) & Masuk atau membuat akun lokal sebelum memakai aplikasi & F11 \\ \hline
+UI02 & Onboarding: Welcome & Memperkenalkan aplikasi: jelajah kuliner, cerita budaya, culinary trail & F09 \\ \hline
+UI03 & Onboarding: Izin Lokasi & Menjelaskan pemakaian lokasi lalu meminta izin sistem & F01, F09 \\ \hline
+UI04 & Onboarding: Tanpa Lokasi & Menjelaskan fitur yang tidak tersedia jika izin lokasi ditolak & F01, F09 \\ \hline
+UI05 & Onboarding: Izin Notifikasi & Meminta izin notifikasi untuk trigger dan pengingat & F02, F04 \\ \hline
+UI06 & Onboarding: Preferensi & Memilih preferensi rasa dan jenis kuliner & F07, F08 \\ \hline
+UI07 & Explore (Beranda/Peta) & Menampilkan posisi pengguna, batas kawasan, marker POI, status area, Mode Jelajah, dan tombol Buka di Google Maps & F01, F02, F06, F09 \\ \hline
+UI08 & POI Trigger Notification & Notifikasi entry/proximity dengan tombol Dengar / Lewati di lock screen & F02, F04 \\ \hline
+UI09 & POI Detail (\texttt{poi/[id]}) & Menampilkan foto, menu dan harga, jam buka, audio narasi, dan transkrip & F03, F04 \\ \hline
+UI10 & Search & Pencarian toleran typo dengan filter harga, rasa, jenis, dan status buka & F05 \\ \hline
+UI11 & Navigasi (\texttt{navigate/[poiId]}) & Rute jalan kaki, jarak, panah kompas, panduan audio, dan deteksi kedatangan & F04, F06 \\ \hline
+UI12 & Trail Planner & Input durasi, budget, dan preferensi rasa untuk membuat trail & F08 \\ \hline
+UI13 & Trail Itinerary & Urutan tenant, estimasi biaya dan waktu, progres, serta Lewati Tenant & F07, F08 \\ \hline
+UI14 & Trail Summary & Ringkasan trail: jumlah tenant, total belanja, durasi, dan jarak & F08 \\ \hline
+UI15 & Paspor Kuliner & Trail tematik, stempel digital, progres, dan badge & F10 \\ \hline
+UI16 & Profil \& Pengaturan & Data akun, edit preferensi, akses paspor, pengaturan, dan keluar akun & F09, F11 \\ \hline
 \end{longtable}
 
 \section{Wireframe}

@@ -17,7 +17,6 @@
 
 % ---------- Tata letak ----------
 \usepackage[letterpaper,margin=2.5cm]{geometry}
-\IfFileExists{pdflscape.sty}{\usepackage{pdflscape}}{\usepackage{lscape}}
 \usepackage{setspace}
 \setstretch{1.15}
 \setlength{\parindent}{0pt}
@@ -65,6 +64,32 @@
   pdftitle={PRD Mangan Yuk! - Kelompok 6},
   pdfsubject={II4011 Transformasi Digital},
 }
+
+% ---------- Halaman landscape (kertas diputar, isi tetap tegak) ----------
+% Pakai: \begin{landscapepage} ... \end{landscapepage}
+\makeatletter
+\newlength{\PortraitPaperW}\newlength{\PortraitPaperH}
+\newlength{\PortraitTextW}\newlength{\PortraitTextH}
+\AtBeginDocument{%
+  \setlength{\PortraitPaperW}{\paperwidth}\setlength{\PortraitPaperH}{\paperheight}%
+  \setlength{\PortraitTextW}{\textwidth}\setlength{\PortraitTextH}{\textheight}}
+\newcommand{\@setpagelayout}[4]{% paperW, paperH, textW, textH
+  \setlength{\paperwidth}{#1}\setlength{\paperheight}{#2}%
+  \ifdefined\pdfpagewidth \pdfpagewidth=#1 \pdfpageheight=#2 \fi
+  \setlength{\textwidth}{#3}\setlength{\textheight}{#4}%
+  \setlength{\hsize}{\textwidth}\setlength{\columnwidth}{\textwidth}%
+  \setlength{\linewidth}{\textwidth}\setlength{\headwidth}{\textwidth}%
+  \global\@colht\textheight\global\@colroom\textheight\global\vsize\textheight}
+\newenvironment{landscapepage}{%
+  \clearpage
+  \@setpagelayout{\PortraitPaperH}{\PortraitPaperW}%
+    {\dimexpr\PortraitTextW+\PortraitPaperH-\PortraitPaperW\relax}%
+    {\dimexpr\PortraitTextH-\PortraitPaperH+\PortraitPaperW\relax}%
+}{%
+  \clearpage
+  \@setpagelayout{\PortraitPaperW}{\PortraitPaperH}{\PortraitTextW}{\PortraitTextH}%
+}
+\makeatother
 
 \begin{document}
 
