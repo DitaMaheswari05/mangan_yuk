@@ -1,0 +1,30 @@
+% Bab 6: Product Backlog
+\chapter{Product Backlog}
+\label{bab:product-backlog}
+\begin{longtable}{|L{0.118}|L{0.281}|L{0.172}|L{0.107}|L{0.208}|L{0.114}|}
+\caption{Product Backlog}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Product Backlog Item} & \cellcolor[HTML]{D9EAF7}\textbf{Related Req.} & \cellcolor[HTML]{D9EAF7}\textbf{Priority} & \cellcolor[HTML]{D9EAF7}\textbf{Acceptance / Done Criteria} & \cellcolor[HTML]{D9EAF7}\textbf{Target Sprint} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Backlog ID} & \cellcolor[HTML]{D9EAF7}\textbf{Product Backlog Item} & \cellcolor[HTML]{D9EAF7}\textbf{Related Req.} & \cellcolor[HTML]{D9EAF7}\textbf{Priority} & \cellcolor[HTML]{D9EAF7}\textbf{Acceptance / Done Criteria} & \cellcolor[HTML]{D9EAF7}\textbf{Target Sprint} \\ \hline
+\endhead
+PB01 & Menyiapkan project aplikasi dan struktur navigasi halaman yang dapat dijalankan pada perangkat uji & - & Must & Aplikasi berhasil dibuka tanpa crash dan perpindahan antarhalaman utama berjalan & S1 \\ \hline
+PB02 & Mengimplementasikan onboarding, penjelasan privasi lokasi, serta permintaan izin lokasi dan notifikasi & F09, F01 & Must & Penjelasan tampil sebelum dialog izin sistem; jika izin ditolak, aplikasi masuk mode tanpa lokasi & S1 \\ \hline
+PB03 & Mengimplementasikan pembacaan lokasi pengguna dan menampilkannya di peta beserta status di dalam/di luar area & F01 & Must & Posisi tampil \(\le\)10 detik, diperbarui saat berpindah \(\ge\)5 m, dan status area berubah dengan benar & S1 \\ \hline
+PB04 & Menyusun dataset minimal 10 POI (koordinat, menu, harga, jam buka, rasa, kategori) & F01, F02, F03 & Must & Data 10 POI dapat dibaca aplikasi dan ditampilkan sebagai marker di peta & S1 \\ \hline
+PB05 & Mengimplementasikan Mode Jelajah dengan pelacakan lokasi di background & F02, F09 & Must & Notifikasi permanen muncul saat Mode Jelajah aktif dan pelacakan berhenti saat dimatikan & S2 \\ \hline
+PB06 & Mengimplementasikan geofence entry event dan proximity event, termasuk pencegahan trigger palsu & F02 & Must & Notifikasi entry \(\le\)15 detik; kartu POI \(\le\)10 detik; akurasi \textgreater{}30 m diabaikan; trigger tidak berulang (cooldown 30 menit) & S2 \\ \hline
+PB07 & Mengimplementasikan dwell event dan exit event untuk pencatatan kunjungan otomatis & F02 & Must & Kunjungan tercatat setelah \(\ge\)3 menit di geofence; pengguna yang hanya lewat tidak tercatat; exit menggunakan hysteresis & S2 \\ \hline
+PB08 & Membuat kartu POI multimodal (foto, deskripsi, cerita budaya, menu \& harga, audio narasi + transkrip) yang dapat diakses offline & F03 & Must & 10/10 POI memiliki konten lengkap, konten terbuka \(\le\)2 detik, dan audio dapat diputar/dijeda tanpa internet & S2 \\ \hline
+PB09 & Mengimplementasikan interaksi eyes-free: prompt suara, getar, tombol Dengar/Lewati di notifikasi, dan Mode Jalan & F04 & Must & Narasi dapat diputar dari lock screen; dalam Mode Jalan, narasi mulai \(\le\)3 detik setelah trigger & S3 \\ \hline
+PB10 & Mengimplementasikan pencarian toleran typo dan filter tenant (harga, rasa, jenis, status buka) & F05 & Must & Hasil muncul \(\le\)1 detik secara offline; ``batagr'' menampilkan tenant batagor; kombinasi filter sesuai & S3 \\ \hline
+PB11 & Mengimplementasikan navigasi menuju kawasan (Google Maps) dan di dalam kawasan (garis rute, jarak, kompas, panduan audio) & F06, F04 & Must & Panah deviasi \(\le\)30\textdegree{}; panduan audio tiap 20 m; kedatangan \(\le\)10 m membuka kartu POI; navigasi berhasil ke 10/10 POI & S3 \\ \hline
+PB12 & Mengintegrasikan alur eksplorasi utama (lokasi \(\rightarrow\) trigger \(\rightarrow\) kartu POI \(\rightarrow\) navigasi) untuk Major Progress Review & F01--F06 & Must & Satu skenario kunjungan POI dapat didemokan end-to-end di perangkat uji & S3 \\ \hline
+PB13 & Mengimplementasikan rekomendasi kontekstual berbasis aturan (rule-based scoring) & F07 & Must & Muncul \(\le\)1 detik setelah exit event; menampilkan 3 tenant beserta alasan; tidak memuat tenant tutup/sudah dikunjungi; hasil deterministik & S4 \\ \hline
+PB14 & Mengimplementasikan Smart Culinary Trail Planner (input durasi, budget, rasa \(\rightarrow\) itinerary nearest neighbor) & F08 & Must & Input 60 menit \& Rp50.000 menghasilkan \(\ge\)2 tenant dengan biaya \(\le\) budget, waktu \(\le\) durasi, dan rute tidak bolak-balik & S4 \\ \hline
+PB15 & Mengimplementasikan progres trail, pengingat sisa waktu, serta fitur lewati tenant/susun ulang trail & F08, F02 & Must & Tenant ditandai selesai setelah dwell; notifikasi muncul saat dwell melebihi alokasi + 5 menit; trail dapat disusun ulang & S4 \\ \hline
+PB16 & Mengimplementasikan Paspor Kuliner (stempel digital, trail tematik, badge) & F10 & Could & Stempel tidak terduplikasi; progres tampil (misalnya 3/5); badge muncul; data tetap ada setelah aplikasi dibuka ulang & S4 \\ \hline
+PB17 & Melakukan pengujian acceptance criteria (uji lapangan, usability test, verifikasi log jaringan) & F01--F10 & Must & Trigger berhasil \(\ge\)8/10 percobaan; \(\ge\)4/5 penguji menyelesaikan kunjungan tanpa melihat layar; tidak ada request berisi data lokasi & S5 \\ \hline
+PB18 & Memperbaiki defect, melakukan retest, dan menstabilkan build akhir & - & Must & Seluruh defect prioritas tinggi tertutup, retest lulus, dan build final berjalan tanpa crash & S5 \\ \hline
+\end{longtable}
