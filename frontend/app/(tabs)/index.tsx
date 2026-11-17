@@ -2,14 +2,18 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
+  Animated,
+  Dimensions,
   Image,
   Modal,
+  PanResponder,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
 import type { CameraRef } from '@maplibre/maplibre-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { OsmMap } from '@/components/map/OsmMap';
@@ -17,6 +21,7 @@ import { NarrationPlayer } from '@/components/poi/NarrationPlayer';
 import { INITIAL_CAMERA, RECENTER_ZOOM } from '@/constants/map';
 import { colors, fontFamily, typography } from '@/constants/theme';
 import areaJson from '@/data/area.json';
+import { CONTENT_ASSETS } from '@/data/assets';
 import { ExploreModeController, getNearbyPoisSorted } from '@/features/geofence';
 import { haversineM, useUserLocation } from '@/features/location';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
@@ -24,6 +29,13 @@ import { getAll, getPois } from '@/features/poi';
 import { useVisitedPoiIds } from '@/features/visits';
 import { useAppStore } from '@/store/useAppStore';
 import type { Poi } from '@/types/content';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const CAROUSEL_CARD_WIDTH = 189;
+const CAROUSEL_CARD_GAP = 16;
+const CAROUSEL_ITEM_SIZE = CAROUSEL_CARD_WIDTH + CAROUSEL_CARD_GAP;
+const CAROUSEL_SIDE_SPACING = (SCREEN_WIDTH - CAROUSEL_CARD_WIDTH) / 2;
 
 function formatDistanceLabel(meters: number | null): string {
   if (meters === null) return '';
@@ -57,8 +69,8 @@ export default function HomeScreen() {
   const [exploreMode, setExploreMode] = useState(false);
   const [persistentNotifActive, setPersistentNotifActive] = useState(false);
   const [arrivedModalVisible, setArrivedModalVisible] = useState(false);
-  const [poiSheetExpanded, setPoiSheetExpanded] = useState(false);
   const hasShownArrivedModalRef = useRef(false);
+  const carouselScrollX = useRef(new Animated.Value(0)).current;
   const exploreModeRef = useRef(exploreMode);
   exploreModeRef.current = exploreMode;
 
@@ -139,7 +151,6 @@ export default function HomeScreen() {
     setExploreMode(true);
     setPersistentNotifActive(true);
     setSelectedPoi(null);
-    setPoiSheetExpanded(false);
 
     handleRecenterMap();
 
@@ -162,7 +173,6 @@ export default function HomeScreen() {
     setExploreMode(false);
     setPersistentNotifActive(false);
     setSelectedPoi(null);
-    setPoiSheetExpanded(false);
 
     await ExploreModeController.stop();
   }, []);
@@ -233,7 +243,7 @@ export default function HomeScreen() {
           </View>
           <View style={[styles.statusBadge, styles.statusBadgeInside]}>
             <View style={styles.statusDotInside} />
-            <Text style={styles.statusBadgeTextInside}>Di dalam area SSF</Text>
+            <Text style={styles.statusBadgeTextInside}>Di Dalam Area</Text>
           </View>
         </>
       );
@@ -287,11 +297,9 @@ export default function HomeScreen() {
         exploreMode={exploreMode}
         onSelectPoi={(poi) => {
           setSelectedPoi(poi);
-          setPoiSheetExpanded(false);
         }}
         onMapPress={() => {
           setSelectedPoi(null);
-          setPoiSheetExpanded(false);
         }}
       />
 
@@ -312,47 +320,46 @@ export default function HomeScreen() {
             {renderLocationHeaderContent()}
           </View>
 
-          {/* Baris 2: Search Bar + Tombol Filter */}
-          <View style={styles.searchBarRow}>
-            <Pressable
-              style={styles.searchBarInput}
-              onPress={() => router.push('/(tabs)/search')}
-              accessibilityRole="search"
-            >
-              <Ionicons name="search-outline" size={18} color="#666666" />
-              <Text style={styles.searchPlaceholder}>Cari tenant atau menu</Text>
-            </Pressable>
-            <Pressable
-              onPress={() => router.push('/(tabs)/search')}
-              hitSlop={8}
-              accessibilityRole="button"
-              accessibilityLabel="Filter tenant"
-            >
-              <Ionicons name="options-outline" size={21} color="#1E1E1E" />
-            </Pressable>
-          </View>
+          {/* Baris 2: Search Bar + Tombol Filter (hanya ditampilkan saat Mode Jelajah OFF) */}
+          {!exploreMode ? (
+            <View style={styles.searchBarRow}>
+              <Pressable
+                style={styles.searchBarInput}
+                onPress={() => router.push('/(tabs)/search')}
+                accessibilityRole="search"
+              >
+                <Ionicons name="search-outline" size={18} color="#666666" />
+                <Text style={styles.searchPlaceholder}>Cari tenant atau menu</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => router.push('/(tabs)/search')}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel="Filter tenant"
+              >
+                <Ionicons name="options-outline" size={21} color="#1E1E1E" />
+              </Pressable>
+            </View>
+          ) : null}
         </View>
       </View>
 
       {/* Indikator Notifikasi Permanen saat Mode Jelajah Aktif */}
       {exploreMode && persistentNotifActive ? (
-        <View style={[styles.persistentNotifBanner, { top: insets.top + 138 }]}>
-          <View style={styles.persistentNotifLeft}>
-            <View style={styles.persistentPulseDot} />
-            <View style={styles.persistentNotifTextCol}>
-              <Text style={styles.persistentNotifTitle} numberOfLines={1}>
-                Notifikasi Permanen · Mode Jelajah Aktif
-              </Text>
-              <Text style={styles.persistentNotifSubtitle} numberOfLines={1}>
-                {walkMode
-                  ? nearestPoiInfo
-                    ? `Dekat ${nearestPoiInfo.poi.name} · Mode Jalan (Auto Audio)`
-                    : 'Mode Jalan aktif · Audio berputar otomatis'
-                  : nearestPoiInfo
-                    ? `Dekat ${nearestPoiInfo.poi.name} (~${nearestPoiInfo.distanceM}m)`
-                    : 'Melacak posisi & kuliner terdekat di SSF'}
-              </Text>
-            </View>
+        <View style={[styles.persistentNotifBanner, { top: insets.top + 76 }]}>
+          <View style={styles.persistentNotifTextCol}>
+            <Text style={styles.persistentNotifTitle} numberOfLines={1}>
+              Notifikasi Permanen
+            </Text>
+            <Text style={styles.persistentNotifSubtitle} numberOfLines={1}>
+              {walkMode
+                ? nearestPoiInfo
+                  ? `Nyalakan audio untuk mendengar`
+                  : 'Auto Audio aktif'
+                : nearestPoiInfo
+                  ? `Dekat ${nearestPoiInfo.poi.name}`
+                  : 'Melacak posisi di SSF'}
+            </Text>
           </View>
           <View style={styles.persistentActionsRow}>
             <Pressable
@@ -373,6 +380,7 @@ export default function HomeScreen() {
                 color={walkMode ? '#FFFFFF' : '#FF8316'}
               />
               <Text
+                numberOfLines={1}
                 style={[
                   styles.walkModeToggleText,
                   walkMode
@@ -382,15 +390,6 @@ export default function HomeScreen() {
               >
                 {walkMode ? 'Jalan ON' : 'Jalan OFF'}
               </Text>
-            </Pressable>
-
-            <Pressable
-              style={styles.persistentStopChip}
-              onPress={handleDeactivateExploreMode}
-              accessibilityRole="button"
-              accessibilityLabel="Matikan Mode Jelajah dan hapus notifikasi"
-            >
-              <Text style={styles.persistentStopChipText}>Matikan</Text>
             </Pressable>
           </View>
         </View>
@@ -404,23 +403,16 @@ export default function HomeScreen() {
         ]}
         pointerEvents="box-none"
       >
-        {/* 1A. Saat Mode Jelajah AKTIF & POI dipilih → Bottom Sheet "Kamu Lagi di {POI}!" (Figma #174:43619 & #174:43413) */}
+        {/* 1A. Saat Mode Jelajah AKTIF & POI dipilih → Bottom Sheet "Kamu Lagi di {POI}!" */}
         {exploreMode && selectedPoi ? (
           <View style={styles.explorePoiSheet}>
-            <Pressable
-              style={styles.sheetDragHandleArea}
-              onPress={() => setPoiSheetExpanded((prev) => !prev)}
-              accessibilityRole="button"
-              accessibilityLabel={
-                poiSheetExpanded ? 'Ciutkan kartu POI' : 'Perluas kartu POI'
-              }
-            >
+            <View style={styles.sheetDragHandleArea}>
               <View style={styles.sheetDragHandle} />
-            </Pressable>
+            </View>
 
             <View style={styles.sheetHeaderRow}>
               <View style={styles.sheetTitleCol}>
-                <Text style={styles.sheetHeadingText} numberOfLines={1}>
+                <Text style={styles.sheetHeadingText}>
                   Kamu Lagi di{' '}
                   <Text style={styles.sheetHeadingBold}>{selectedPoi.name}</Text>!
                 </Text>
@@ -435,10 +427,7 @@ export default function HomeScreen() {
                   <Text style={styles.ratingPillText}>4.5</Text>
                 </View>
                 <Pressable
-                  onPress={() => {
-                    setSelectedPoi(null);
-                    setPoiSheetExpanded(false);
-                  }}
+                  onPress={() => setSelectedPoi(null)}
                   hitSlop={8}
                   style={styles.sheetCloseIcon}
                 >
@@ -447,133 +436,211 @@ export default function HomeScreen() {
               </View>
             </View>
 
-            {/* Audio narasi (Figma #174:43668 / #174:43478); key → player baru per tenant */}
-            <NarrationPlayer key={selectedPoi.id} poi={selectedPoi} />
+            {/* Konten Scrollable: Audio narasi -> Gambar Tenant -> Deskripsi -> List Menu -> Tombol Aksi */}
+            <ScrollView
+              style={styles.sheetScrollArea}
+              contentContainerStyle={styles.sheetScrollContent}
+              showsVerticalScrollIndicator={false}
+            >
+              {/* Audio narasi */}
+              <NarrationPlayer key={selectedPoi.id} poi={selectedPoi} />
 
-            {/* Konten Expanded sesuai Figma "Kartu POI Aktif" (#174:43413) */}
-            {poiSheetExpanded ? (
-              <View style={styles.sheetExpandedContent}>
-                <Text style={styles.sheetStoryText}>
-                  {selectedPoi.culturalStory ||
-                    selectedPoi.description ||
-                    `Temukan cita rasa khas dari ${selectedPoi.name} (${selectedPoi.categoryLabel}) yang menjadi salah satu kuliner favorit di kawasan Sudirman Street Food!`}
-                </Text>
+              {/* 1. Gambar Tenant */}
+              {(() => {
+                const firstPhotoKey =
+                  selectedPoi.photos && selectedPoi.photos.length > 0
+                    ? selectedPoi.photos[0].assetKey
+                    : null;
+                const photoSource = firstPhotoKey ? CONTENT_ASSETS[firstPhotoKey] : null;
 
-                {selectedPoi.menu && selectedPoi.menu.length > 0 ? (
-                  <View style={styles.sheetMenuSection}>
-                    <Text style={styles.sheetMenuHeading}>Menu</Text>
-                    <View style={styles.sheetMenuRow}>
-                      {selectedPoi.menu.slice(0, 3).map((item) => (
-                        <View key={item.id} style={styles.sheetMenuCard}>
-                          <View style={styles.sheetMenuThumb}>
-                            <MaterialCommunityIcons
-                              name="food"
-                              size={24}
-                              color="#FF8316"
-                            />
-                          </View>
-                          <Text style={styles.sheetMenuItemName} numberOfLines={2}>
-                            {item.name}
-                          </Text>
-                          <Text style={styles.sheetMenuItemPrice}>
-                            {formatRupiah(item.priceIdr)}
-                          </Text>
-                        </View>
-                      ))}
+                if (photoSource) {
+                  return (
+                    <View style={styles.sheetBannerImageWrapper}>
+                      <Image
+                        source={photoSource}
+                        style={styles.sheetBannerImage}
+                        resizeMode="cover"
+                      />
                     </View>
-                  </View>
-                ) : null}
+                  );
+                }
+                return null;
+              })()}
 
-                <View style={styles.poiPreviewActions}>
-                  <Pressable
-                    style={styles.poiSecondaryButton}
-                    onPress={() => router.push(`/poi/${selectedPoi.id}`)}
-                  >
-                    <Text style={styles.poiSecondaryButtonText}>Lihat Detail</Text>
-                  </Pressable>
-                  <Pressable
-                    style={styles.poiPrimaryButton}
-                    onPress={() => router.push(`/navigate/${selectedPoi.id}`)}
-                  >
-                    <Text style={styles.poiPrimaryButtonText}>Navigasi</Text>
-                    <Ionicons name="paper-plane-outline" size={16} color="#FFFFFF" />
-                  </Pressable>
+              {/* 2. Deskripsi */}
+              <Text style={styles.sheetStoryText}>
+                {selectedPoi.culturalStory ||
+                  selectedPoi.description ||
+                  `Temukan cita rasa khas dari ${selectedPoi.name} (${selectedPoi.categoryLabel}) yang menjadi salah satu kuliner favorit di kawasan Sudirman Street Food!`}
+              </Text>
+
+              {/* 3. List Menu (Tanpa gambar, seperti di halaman detail POI) */}
+              {selectedPoi.menu && selectedPoi.menu.length > 0 ? (
+                <View style={styles.sheetMenuSection}>
+                  <Text style={styles.sheetMenuHeading}>Menu & Harga</Text>
+                  {selectedPoi.menu.map((item) => (
+                    <View key={item.id} style={styles.sheetMenuListRow}>
+                      <View style={styles.sheetMenuNameCol}>
+                        <Text style={styles.sheetMenuNameText}>
+                          {item.name}
+                          {item.isSignature ? '  ' : ''}
+                          {item.isSignature ? (
+                            <Ionicons name="star" size={12} color="#FFB800" />
+                          ) : null}
+                        </Text>
+                        {item.tastes && item.tastes.length > 0 ? (
+                          <Text style={styles.sheetMenuTastesText}>
+                            {item.tastes.join(' · ')}
+                          </Text>
+                        ) : null}
+                      </View>
+                      <Text style={styles.sheetMenuPriceText}>
+                        {formatRupiah(item.priceIdr)}
+                      </Text>
+                    </View>
+                  ))}
                 </View>
-              </View>
-            ) : (
-              <View style={styles.sheetCollapsedFooter}>
+              ) : null}
+
+              {/* 4. Tombol Aksi */}
+              <View style={styles.poiPreviewActions}>
                 <Pressable
-                  style={styles.sheetExpandHintBtn}
-                  onPress={() => setPoiSheetExpanded(true)}
+                  style={styles.poiSecondaryButton}
+                  onPress={() => router.push(`/poi/${selectedPoi.id}`)}
                 >
-                  <Text style={styles.sheetExpandHintText}>
-                    Lihat cerita & menu lengkap
-                  </Text>
-                  <Ionicons name="chevron-up" size={16} color="#FF8316" />
+                  <Text style={styles.poiSecondaryButtonText}>Lihat Detail</Text>
                 </Pressable>
                 <Pressable
-                  style={styles.sheetQuickNavBtn}
+                  style={styles.poiPrimaryButton}
                   onPress={() => router.push(`/navigate/${selectedPoi.id}`)}
                 >
-                  <Text style={styles.sheetQuickNavBtnText}>Navigasi</Text>
-                  <Ionicons name="paper-plane-outline" size={14} color="#FFFFFF" />
+                  <Text style={styles.poiPrimaryButtonText}>Navigasi</Text>
+                  <Ionicons name="paper-plane-outline" size={16} color="#FFFFFF" />
                 </Pressable>
               </View>
-            )}
+            </ScrollView>
           </View>
         ) : null}
 
-        {/* 1B. Saat Mode Jelajah AKTIF & belum ada POI tunggal dibuka → Carousel Kartu Trigger POI (Figma #174:43799) */}
+        {/* 1B. Saat Mode Jelajah AKTIF & belum ada POI tunggal dibuka → Carousel Kartu Trigger POI (Figma #174:43799 / #57:55848) */}
         {exploreMode && !selectedPoi && nearbyPois.length > 0 ? (
-          <ScrollView
+          <Animated.ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
+            snapToInterval={CAROUSEL_ITEM_SIZE}
+            decelerationRate="fast"
             contentContainerStyle={styles.triggerCarouselContent}
             style={styles.triggerCarouselScroll}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: carouselScrollX } } }],
+              { useNativeDriver: true }
+            )}
+            scrollEventThrottle={16}
           >
-            {nearbyPois.map(({ poi, distanceM }) => (
-              <Pressable
-                key={poi.id}
-                style={styles.triggerPoiCard}
-                onPress={() => {
-                  setSelectedPoi(poi);
-                  setPoiSheetExpanded(false);
-                }}
-              >
-                <View style={styles.triggerPoiImagePlaceholder}>
-                  <MaterialCommunityIcons
-                    name="storefront-outline"
-                    size={40}
-                    color="#FF8316"
-                  />
-                  <View style={styles.triggerRatingBadge}>
-                    <Ionicons name="star" size={12} color="#FFCC24" />
-                    <Text style={styles.triggerRatingText}>4.5</Text>
-                  </View>
-                </View>
+            {nearbyPois.map(({ poi, distanceM }, index) => {
+              const firstPhotoKey = poi.photos && poi.photos.length > 0 ? poi.photos[0].assetKey : null;
+              const photoSource = firstPhotoKey ? CONTENT_ASSETS[firstPhotoKey] : null;
 
-                <View style={styles.triggerPoiInfoRow}>
-                  <View style={styles.triggerPoiTextCol}>
-                    <Text style={styles.triggerPoiName} numberOfLines={1}>
-                      {poi.name}
-                    </Text>
-                    <Text style={styles.triggerPoiCategory} numberOfLines={1}>
-                      {poi.categoryLabel}
-                    </Text>
-                  </View>
-                  <Text style={styles.triggerPoiDistance}>~{distanceM}m</Text>
-                </View>
+              const inputRange = [
+                (index - 1) * CAROUSEL_ITEM_SIZE,
+                index * CAROUSEL_ITEM_SIZE,
+                (index + 1) * CAROUSEL_ITEM_SIZE,
+              ];
 
-                <Pressable
-                  style={styles.triggerNavButton}
-                  onPress={() => router.push(`/navigate/${poi.id}`)}
+              // Efek lengkungan circular sesuai Figma #57:55848:
+              // Kartu tengah berukuran 1.0 (w=189), kartu samping mengecil ke ~0.71 (w=133.7)
+              const scale = carouselScrollX.interpolate({
+                inputRange,
+                outputRange: [0.72, 1, 0.72],
+                extrapolate: 'clamp',
+              });
+
+              // Kartu samping agak terangkat/melengkung dan berotasi halus mengikuti busur circular
+              const translateY = carouselScrollX.interpolate({
+                inputRange,
+                outputRange: [18, 0, 18],
+                extrapolate: 'clamp',
+              });
+
+              const rotate = carouselScrollX.interpolate({
+                inputRange,
+                outputRange: ['-6deg', '0deg', '6deg'],
+                extrapolate: 'clamp',
+              });
+
+              const opacity = carouselScrollX.interpolate({
+                inputRange,
+                outputRange: [0.82, 1, 0.82],
+                extrapolate: 'clamp',
+              });
+
+              return (
+                <Animated.View
+                  key={poi.id}
+                  style={[
+                    styles.triggerPoiCardWrapper,
+                    {
+                      transform: [{ translateY }, { scale }, { rotate }],
+                      opacity,
+                    },
+                  ]}
                 >
-                  <Text style={styles.triggerNavButtonText}>Navigasi</Text>
-                  <Ionicons name="paper-plane-outline" size={15} color="#FFFFFF" />
-                </Pressable>
-              </Pressable>
-            ))}
-          </ScrollView>
+                  <Pressable
+                    style={styles.triggerPoiCard}
+                    onPress={() => {
+                      setSelectedPoi(poi);
+                    }}
+                  >
+                    <View style={styles.triggerPoiImageContainer}>
+                      {photoSource ? (
+                        <Image source={photoSource} style={styles.triggerPoiImage} resizeMode="cover" />
+                      ) : (
+                        <View style={styles.triggerPoiImagePlaceholder}>
+                          <MaterialCommunityIcons
+                            name="storefront-outline"
+                            size={40}
+                            color="#FF8316"
+                          />
+                        </View>
+                      )}
+                      <View style={styles.triggerRatingBadge}>
+                        <Ionicons name="star" size={13} color="#FFCC24" />
+                        <Text style={styles.triggerRatingText}>4.5</Text>
+                      </View>
+                    </View>
+
+                    <View style={styles.triggerPoiInfoRow}>
+                      <View style={styles.triggerPoiTextCol}>
+                        <Text style={styles.triggerPoiName} numberOfLines={1}>
+                          {poi.name}
+                        </Text>
+                        <Text style={styles.triggerPoiCategory} numberOfLines={1}>
+                          {poi.categoryLabel}
+                        </Text>
+                      </View>
+                      <Text style={styles.triggerPoiDistance}>~{distanceM}m</Text>
+                    </View>
+
+                    <Pressable
+                      style={styles.triggerNavButton}
+                      onPress={() => router.push(`/navigate/${poi.id}`)}
+                    >
+                      <Text style={styles.triggerNavButtonText}>Navigasi</Text>
+                      <Svg width={16} height={16} viewBox="0 0 18 18" fill="none">
+                        <Path
+                          d="M5.07071 1.11099C2.55686 -0.170245 -0.176385 2.41873 1.09425 4.87516L2.57514 7.73806C2.9865 8.5333 2.9865 9.46993 2.57514 10.2652L1.09425 13.1281C-0.176385 15.5845 2.55686 18.1646 5.07071 16.8922L15.6655 11.5022C17.7497 10.4419 17.7497 7.56133 15.6655 6.501L9.29398 3.25816"
+                          stroke="#FFFFFF"
+                          strokeWidth={1.54}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </Svg>
+                    </Pressable>
+                  </Pressable>
+                </Animated.View>
+              );
+            })}
+          </Animated.ScrollView>
         ) : null}
 
         {/* 1C. Kartu Preview POI ketika Mode Jelajah OFF tapi salah satu marker POI diklik */}
@@ -855,61 +922,50 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 16,
     right: 16,
-    backgroundColor: '#303030',
+    backgroundColor: '#262626',
     borderRadius: 16,
-    paddingVertical: 10,
-    paddingHorizontal: 14,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 10,
+    gap: 12,
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
-  persistentNotifLeft: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  persistentPulseDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: '#FF8316',
-  },
   persistentNotifTextCol: {
     flex: 1,
-    gap: 1,
+    gap: 4,
   },
   persistentNotifTitle: {
     fontFamily: fontFamily.semibold,
-    fontSize: 12,
+    fontSize: 14,
     lineHeight: 16,
     color: '#FFFFFF',
   },
   persistentNotifSubtitle: {
     fontFamily: fontFamily.regular,
-    fontSize: 11,
+    fontSize: 12,
     lineHeight: 15,
-    color: '#E5E2E1',
+    color: '#CCCCCC',
   },
   persistentActionsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    flexShrink: 0,
   },
   walkModeToggleChip: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
-    paddingHorizontal: 10,
+    gap: 6,
+    paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 999,
     borderWidth: 1,
+    flexShrink: 0,
   },
   walkModeToggleChipActive: {
     backgroundColor: '#FF8316',
@@ -921,25 +977,16 @@ const styles = StyleSheet.create({
   },
   walkModeToggleText: {
     fontFamily: fontFamily.medium,
-    fontSize: 11,
-    lineHeight: 14,
+    fontSize: 12,
+    lineHeight: 16,
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   walkModeToggleTextActive: {
     color: '#FFFFFF',
   },
   walkModeToggleTextInactive: {
     color: '#FF8316',
-  },
-  persistentStopChip: {
-    backgroundColor: '#707070',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
-  },
-  persistentStopChipText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 12,
-    color: '#FFFFFF',
   },
   bottomOverlay: {
     position: 'absolute',
@@ -1055,12 +1102,17 @@ const styles = StyleSheet.create({
   },
   triggerCarouselScroll: {
     width: '100%',
+    overflow: 'visible',
   },
   triggerCarouselContent: {
-    paddingHorizontal: 4,
-    paddingVertical: 6,
-    gap: 14,
+    paddingHorizontal: CAROUSEL_SIDE_SPACING,
+    paddingTop: 12,
+    paddingBottom: 24,
     alignItems: 'center',
+  },
+  triggerPoiCardWrapper: {
+    width: CAROUSEL_CARD_WIDTH,
+    marginRight: CAROUSEL_CARD_GAP,
   },
   triggerPoiCard: {
     width: 189,
@@ -1074,31 +1126,50 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 5,
   },
+  triggerPoiImageContainer: {
+    width: '100%',
+    height: 131,
+    borderRadius: 14,
+    overflow: 'hidden',
+    position: 'relative',
+    backgroundColor: '#FFF4EA',
+  },
+  triggerPoiImage: {
+    width: '100%',
+    height: '100%',
+  },
   triggerPoiImagePlaceholder: {
     width: '100%',
-    height: 118,
-    borderRadius: 14,
-    backgroundColor: '#FFF4EA',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative',
   },
   triggerRatingBadge: {
     position: 'absolute',
-    top: 8,
-    right: 8,
+    top: 6,
+    right: 6,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 3,
+    justifyContent: 'center',
+    gap: 4,
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 8,
+    paddingVertical: 3,
     height: 22,
     borderRadius: 100,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   triggerRatingText: {
     fontFamily: fontFamily.regular,
     fontSize: 12,
+    lineHeight: 16,
     color: '#1E1E1E',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   triggerPoiInfoRow: {
     flexDirection: 'row',
@@ -1130,34 +1201,45 @@ const styles = StyleSheet.create({
     color: '#707070',
   },
   triggerNavButton: {
-    width: '100%',
+    width: 177,
     height: 40,
     borderRadius: 30,
     backgroundColor: '#FF8316',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: 10,
+    alignSelf: 'center',
   },
   triggerNavButtonText: {
     fontFamily: fontFamily.medium,
-    fontSize: 15,
+    fontSize: 16,
+    lineHeight: 24,
     color: '#FFFFFF',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   explorePoiSheet: {
     width: '100%',
+    maxHeight: SCREEN_HEIGHT * 0.70,
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingTop: 8,
-    paddingBottom: 112,
-    gap: 14,
+    gap: 12,
     elevation: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -3 },
     shadowOpacity: 0.18,
     shadowRadius: 8,
+  },
+  sheetScrollArea: {
+    width: '100%',
+  },
+  sheetScrollContent: {
+    gap: 14,
+    paddingBottom: 110,
   },
   sheetDragHandleArea: {
     alignItems: 'center',
@@ -1177,7 +1259,7 @@ const styles = StyleSheet.create({
   },
   sheetTitleCol: {
     flex: 1,
-    gap: 2,
+    gap: 3,
   },
   sheetHeadingText: {
     fontFamily: fontFamily.regular,
@@ -1203,98 +1285,77 @@ const styles = StyleSheet.create({
   ratingPill: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: 4,
     backgroundColor: '#FFF8EC',
     paddingHorizontal: 8,
+    paddingVertical: 3,
     height: 24,
     borderRadius: 100,
   },
   ratingPillText: {
     fontFamily: fontFamily.medium,
     fontSize: 12,
+    lineHeight: 16,
     color: '#404040',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
   sheetCloseIcon: {
     padding: 2,
   },
-  sheetCollapsedFooter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 10,
+  sheetBannerImageWrapper: {
+    width: '100%',
+    height: 160,
+    borderRadius: 14,
+    overflow: 'hidden',
+    backgroundColor: '#FFF4EA',
   },
-  sheetExpandHintBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingVertical: 6,
-  },
-  sheetExpandHintText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 13,
-    color: '#FF8316',
-  },
-  sheetQuickNavBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: '#FF8316',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
-  },
-  sheetQuickNavBtnText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 13,
-    color: '#FFFFFF',
-  },
-  sheetExpandedContent: {
-    gap: 14,
+  sheetBannerImage: {
+    width: '100%',
+    height: '100%',
   },
   sheetStoryText: {
     fontFamily: fontFamily.regular,
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 13,
+    lineHeight: 20,
     color: '#666666',
   },
   sheetMenuSection: {
-    gap: 8,
+    gap: 10,
+    marginTop: 4,
   },
   sheetMenuHeading: {
     fontFamily: fontFamily.bold,
-    fontSize: 18,
-    lineHeight: 24,
+    fontSize: 16,
+    lineHeight: 22,
     color: '#FF8316',
   },
-  sheetMenuRow: {
+  sheetMenuListRow: {
     flexDirection: 'row',
-    gap: 8,
-  },
-  sheetMenuCard: {
-    flex: 1,
-    backgroundColor: '#FCF9F8',
-    borderRadius: 10,
-    padding: 8,
-    gap: 4,
-    borderWidth: 1,
-    borderColor: '#F0EDED',
-  },
-  sheetMenuThumb: {
-    height: 54,
-    borderRadius: 8,
-    backgroundColor: '#FFF4EA',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#F0EDED',
+    gap: 12,
   },
-  sheetMenuItemName: {
+  sheetMenuNameCol: {
+    flex: 1,
+  },
+  sheetMenuNameText: {
     fontFamily: fontFamily.medium,
-    fontSize: 11,
-    lineHeight: 15,
+    fontSize: 14,
     color: '#1E1E1E',
   },
-  sheetMenuItemPrice: {
+  sheetMenuTastesText: {
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    color: '#8A8A8A',
+    marginTop: 2,
+  },
+  sheetMenuPriceText: {
     fontFamily: fontFamily.semibold,
-    fontSize: 11,
+    fontSize: 14,
     color: '#FF8316',
   },
   poiPreviewCard: {

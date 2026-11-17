@@ -89,11 +89,11 @@ const styles = StyleSheet.create({
   bar: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 12,
     backgroundColor: '#FFF4EA',
-    borderRadius: 999,
-    paddingVertical: 6,
-    paddingHorizontal: 10,
+    borderRadius: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
   barDisabled: {
     backgroundColor: colors.surfaceContainerLow,

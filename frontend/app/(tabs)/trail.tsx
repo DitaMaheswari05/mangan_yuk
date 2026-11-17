@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontFamily: fontFamily.bold,
-    fontSize: 30,
+    fontSize: 26,
     lineHeight: 34,
     color: '#404040',
     marginBottom: 8,
