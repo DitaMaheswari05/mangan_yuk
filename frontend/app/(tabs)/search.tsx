@@ -592,8 +592,8 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: 16,
-    paddingTop: 4,
-    gap: 8,
+    paddingTop: 6,
+    gap: 12,
   },
   poiCard: {
     flexDirection: 'row',
