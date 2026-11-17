@@ -1,5 +1,9 @@
 // F06 / PB-11 – Navigasi rute, kompas, deviasi arah, dan deteksi kedatangan.
 import { bearingDeg, haversineM, type LatLng } from '@/lib/geo';
+import { pointAlongRoute, routeLengthM } from './routing';
+
+export * from './compass';
+export * from './routing';
 
 export type NavigationTarget = {
   poiId: string;
@@ -17,7 +21,7 @@ export type NavigationStatus = {
 
 /**
  * Menghitung deviasi sudut antara arah hadap pengguna (heading) dan bearing target.
- * Rentang hasil: -180° s.d. +180° (negatif = belok kiri, positif = belok kanan).
+ * Rentang hasil: -180° s.d. +180° (negatif = target di sebelah kiri, positif = target di sebelah kanan).
  */
 export function calculateHeadingDeviation(userHeadingDeg: number, targetBearingDeg: number): number {
   let diff = (targetBearingDeg - userHeadingDeg) % 360;
@@ -77,5 +81,37 @@ export function computeNavigationStatus(
     deviationDeg,
     isOnTarget,
     hasArrived,
+  };
+}
+
+/** Jarak "lihat ke depan" di sepanjang rute untuk arah panah kompas. */
+export const ROUTE_LOOKAHEAD_M = 15;
+
+/**
+ * Status navigasi saat mengikuti rute jalan:
+ * - jarak = sisa panjang rute (bukan jarak lurus),
+ * - panah kompas menunjuk titik ±15 m ke depan di rute (ikut belokan jalan),
+ * - kedatangan tetap berdasar jarak lurus ke tenant (≤10 m, AC F06-3).
+ * `remaining` adalah hasil remainingRoute(route, userCoord).
+ */
+export function computeRouteNavigationStatus(
+  userCoord: LatLng,
+  userHeadingDeg: number,
+  targetCoord: LatLng,
+  remaining: LatLng[],
+  options?: { arrivalThresholdM?: number; targetToleranceDeg?: number },
+): NavigationStatus {
+  const base = computeNavigationStatus(userCoord, userHeadingDeg, targetCoord, options);
+  if (remaining.length < 2 || base.hasArrived) return base;
+
+  const guide = pointAlongRoute(remaining, ROUTE_LOOKAHEAD_M);
+  const bearing = Math.round(bearingDeg(userCoord, guide));
+  const deviationDeg = Math.round(calculateHeadingDeviation(userHeadingDeg, bearing));
+  return {
+    distanceM: Math.max(base.distanceM, Math.round(routeLengthM(remaining))),
+    bearingDeg: bearing,
+    deviationDeg,
+    isOnTarget: isHeadingOnTarget(deviationDeg, options?.targetToleranceDeg ?? 30),
+    hasArrived: base.hasArrived,
   };
 }

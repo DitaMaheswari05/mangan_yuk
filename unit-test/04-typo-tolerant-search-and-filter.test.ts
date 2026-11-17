@@ -4,9 +4,8 @@
 // ============================================================================
 
 import {
-  filterPois,
-  fuzzyMatch,
-  levenshteinDistance,
+  applyFilters,
+  DEFAULT_FUSE_OPTIONS,
   searchPois,
   type SearchFilters,
 } from '@/features/search';
@@ -161,111 +160,101 @@ const samplePois: Poi[] = [
   },
 ];
 
-describe('Kategori 1: Kalkulasi Jarak Edit (Levenshtein Distance)', () => {
-  it('menghitung distance 0 untuk kata yang identik', () => {
-    expect(levenshteinDistance('pandu', 'pandu')).toBe(0);
-    expect(levenshteinDistance('Soto', 'soto')).toBe(0); // case insensitive
+// Helper: pencarian via mesin Fuse.js milik aplikasi, dikembalikan sebagai daftar POI.
+const search = (query: string): Poi[] =>
+  searchPois(samplePois, { query }).results.map((r) => r.poi);
+const filterPois = (filters: SearchFilters): Poi[] => applyFilters(samplePois, filters);
+
+describe('Kategori 1: Konfigurasi Fuzzy Matching (Fuse.js)', () => {
+  it('ambang toleransi typo 0.35 (cukup longgar untuk typo, tidak false positive)', () => {
+    expect(DEFAULT_FUSE_OPTIONS.threshold).toBe(0.35);
   });
 
-  it('menghitung distance untuk substitusi 1 karakter ("pndu" vs "pandu" = 1)', () => {
-    expect(levenshteinDistance('pndu', 'pandu')).toBe(1);
-  });
-
-  it('menghitung distance jika salah satu string kosong', () => {
-    expect(levenshteinDistance('', 'pempek')).toBe(6);
-    expect(levenshteinDistance('soto', '')).toBe(4);
+  it('nama tenant berbobot tertinggi, diikuti nama menu', () => {
+    const keys = DEFAULT_FUSE_OPTIONS.keys as { name: string; weight: number }[];
+    const weight = (name: string) => keys.find((k) => k.name === name)?.weight ?? 0;
+    expect(weight('name')).toBe(0.6);
+    expect(weight('menu.name')).toBe(0.4);
+    expect(Math.max(...keys.map((k) => k.weight))).toBe(weight('name'));
   });
 });
 
 describe('Kategori 2: Pencarian Toleran Salah Ketik (Fuzzy Match)', () => {
   it('menemukan "Pandu Baso Goreng Tenggiri" saat pengguna mencari "pandu" atau typo "pndu"', () => {
-    const results = searchPois(samplePois, 'pndu');
-    expect(results.length).toBeGreaterThan(0);
-    expect(results[0].id).toBe('P13');
+    expect(search('pandu')[0].id).toBe('P13');
+    // Typo tetap ditemukan; urutan pada fixture kecil ini bisa bersaing tipis dengan kecocokan menu.
+    expect(search('pndu').some((p) => p.id === 'P13')).toBe(true);
   });
 
   it('menemukan "Pandu Baso Goreng Tenggiri" saat mencari "batagr" via searchKeywords (AC F05)', () => {
-    const results = searchPois(samplePois, 'batagr');
-    expect(results.some((p) => p.id === 'P13')).toBe(true);
+    expect(search('batagr').some((p) => p.id === 'P13')).toBe(true);
   });
 
   it('menemukan "Dapur Sotoku" saat mencari "soto"', () => {
-    const results = searchPois(samplePois, 'soto');
-    expect(results.some((p) => p.id === 'P09')).toBe(true);
+    expect(search('soto').some((p) => p.id === 'P09')).toBe(true);
   });
 
   it('mampu mencari berdasarkan nama menu item (misal "pisang" atau "gandasturi" memunculkan P01)', () => {
-    const pisangRes = searchPois(samplePois, 'pisang');
-    expect(pisangRes.some((p) => p.id === 'P01')).toBe(true);
-
-    const gandaRes = searchPois(samplePois, 'gandasturi');
-    expect(gandaRes.some((p) => p.id === 'P01')).toBe(true);
+    expect(search('pisang').some((p) => p.id === 'P01')).toBe(true);
+    expect(search('gandasturi').some((p) => p.id === 'P01')).toBe(true);
   });
 
   it('mampu mencari berdasarkan kategori atau tipe kuliner (misal "minuman" memunculkan Susu Mbok Darmi)', () => {
-    const results = searchPois(samplePois, 'minuman');
-    expect(results.some((p) => p.id === 'P22')).toBe(true);
+    expect(search('minuman').some((p) => p.id === 'P22')).toBe(true);
   });
 
   it('mampu mencari berdasarkan searchKeywords yang terdaftar (misal "cuko" memunculkan Pempek Gochan)', () => {
-    const results = searchPois(samplePois, 'cuko');
-    expect(results.some((p) => p.id === 'P28')).toBe(true);
+    expect(search('cuko').some((p) => p.id === 'P28')).toBe(true);
   });
 });
 
 describe('Kategori 3: Multi-Filter (Harga, Rasa, Tipe, Status Buka)', () => {
   it('memfilter berdasarkan priceBucket: under15k hanya menampilkan P01 (Gorengan Rp5rb) dan P22 (Susu Rp13rb)', () => {
-    const filters: SearchFilters = { priceBucket: 'under15k' };
-    const results = filterPois(samplePois, filters);
-    expect(results.map((p) => p.id)).toEqual(['P01', 'P22']);
+    expect(filterPois({ priceBucket: 'under15k' }).map((p) => p.id)).toEqual(['P01', 'P22']);
   });
 
   it('memfilter berdasarkan profil rasa (tasteTags: pedas) menghasilkan Pempek Gochan', () => {
-    const filters: SearchFilters = { taste: 'pedas' };
-    const results = filterPois(samplePois, filters);
-    expect(results.map((p) => p.id)).toEqual(['P28']);
+    expect(filterPois({ taste: 'pedas' }).map((p) => p.id)).toEqual(['P28']);
   });
 
-  it('memfilter berdasarkan foodType: jajanan menghasilkan P13 dan P01', () => {
-    const filters: SearchFilters = { foodType: 'jajanan' };
-    const results = filterPois(samplePois, filters);
-    expect(results.map((p) => p.id)).toEqual(['P13', 'P01']);
+  it('memfilter berdasarkan jenis (type): jajanan menghasilkan P13 dan P01', () => {
+    expect(filterPois({ type: 'jajanan' }).map((p) => p.id)).toEqual(['P13', 'P01']);
   });
 
   it('memfilter kombinasi multi-filter: jajanan + harga under15k', () => {
-    const filters: SearchFilters = { foodType: 'jajanan', priceBucket: 'under15k' };
-    const results = filterPois(samplePois, filters);
-    expect(results.map((p) => p.id)).toEqual(['P01']); // Traditional Fried Food
+    expect(filterPois({ type: 'jajanan', priceBucket: 'under15k' }).map((p) => p.id)).toEqual(['P01']); // Traditional Fried Food
   });
 
   it('memfilter berdasarkan status buka saat ini (openNow)', () => {
     // Jumat pukul 16:30 -> P13, P01, P09, P22 buka; P28 (buka 17:00) tutup
     const friday1630 = new Date('2026-11-06T16:30:00');
-    const filters: SearchFilters = { openNow: true, referenceTime: friday1630 };
-    const results = filterPois(samplePois, filters);
+    const results = filterPois({ openNow: true, referenceDate: friday1630 });
     expect(results.map((p) => p.id)).toEqual(['P13', 'P01', 'P09', 'P22']);
     expect(results.some((p) => p.id === 'P28')).toBe(false);
+  });
+
+  it('filter dan kata kunci digabung dalam satu pemanggilan searchPois', () => {
+    const results = searchPois(samplePois, { query: 'soto', type: 'minuman' }).results;
+    expect(results).toEqual([]);
   });
 });
 
 describe('Kategori 4: Edge Cases Pencarian', () => {
   it('string pencarian kosong mengembalikan seluruh POI tanpa error', () => {
-    expect(searchPois(samplePois, '')).toHaveLength(samplePois.length);
-    expect(searchPois(samplePois, '   ')).toHaveLength(samplePois.length);
+    expect(search('')).toHaveLength(samplePois.length);
+    expect(search('   ')).toHaveLength(samplePois.length);
   });
 
   it('pencarian dengan karakter spesial atau tanda baca tidak memicu crash', () => {
-    expect(searchPois(samplePois, '!@#$%^&*()')).toEqual([]);
-    expect(searchPois(samplePois, 'soto!??')).toHaveLength(1);
+    expect(search('!@#$%^&*()')).toEqual([]);
+    expect(search('soto!??').some((p) => p.id === 'P09')).toBe(true);
   });
 
   it('pencarian case-insensitive: "PANDU" dan "pandu" memberikan hasil yang sama', () => {
-    const lower = searchPois(samplePois, 'pandu');
-    const upper = searchPois(samplePois, 'PANDU');
-    expect(lower).toEqual(upper);
+    expect(search('pandu').map((p) => p.id)).toEqual(search('PANDU').map((p) => p.id));
   });
 
   it('kata kunci yang sama sekali tidak relevan mengembalikan array kosong []', () => {
-    expect(searchPois(samplePois, 'pizza burger spaghetti')).toEqual([]);
+    expect(search('pizza burger spaghetti')).toEqual([]);
   });
 });

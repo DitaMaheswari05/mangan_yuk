@@ -50,7 +50,18 @@ export function planTrail(params: TrailPlanParams): TrailPlanResult {
   }
 
   // Ambil hanya tenant yang sedang buka dan memiliki harga menu termurah <= budget
-  const availablePois = pois.filter((p) => isOpenAt(p, referenceTime) && p.priceMinIdr <= budget);
+  let availablePois = pois.filter((p) => isOpenAt(p, referenceTime) && p.priceMinIdr <= budget);
+
+  // Fallback: Jika pengguna merencanakan rute di luar jam operasional malam (mis. di atas pukul 23:00 atau pagi hari untuk testing/preview),
+  // gunakan waktu simulasi jam buka ramai (19:00) agar rute kuliner tetap dapat direncanakan.
+  if (availablePois.length === 0) {
+    const fallbackTime = new Date(referenceTime);
+    fallbackTime.setHours(19, 0, 0, 0);
+    const fallbackPois = pois.filter((p) => isOpenAt(p, fallbackTime) && p.priceMinIdr <= budget);
+    if (fallbackPois.length > 0) {
+      availablePois = fallbackPois;
+    }
+  }
 
   if (availablePois.length === 0) {
     return {
@@ -64,7 +75,24 @@ export function planTrail(params: TrailPlanParams): TrailPlanResult {
 
   const selectedSteps: TrailStep[] = [];
   const visitedIds = new Set<string>();
-  let currentPosition = userPosition;
+
+  // Cek apakah posisi awal pengguna berada di luar kawasan kuliner (> 300m dari seluruh tenant).
+  // Misalnya pengguna sedang merencanakan rute dari rumah / luar kawasan Sudirman Street Food.
+  // Gunakan titik tengah tenant sebagai titik awal kalkulasi agar jarak tempuh dari luar kawasan
+  // tidak menghabiskan kuota durasi eksplorasi kuliner di dalam kawasan.
+  const isFarFromPois = availablePois.every(
+    (p) => haversineM(userPosition, { latitude: p.latitude, longitude: p.longitude }) > 300
+  );
+
+  let currentPosition: LatLng;
+  if (isFarFromPois) {
+    const avgLat = availablePois.reduce((sum, p) => sum + p.latitude, 0) / availablePois.length;
+    const avgLng = availablePois.reduce((sum, p) => sum + p.longitude, 0) / availablePois.length;
+    currentPosition = { latitude: avgLat, longitude: avgLng };
+  } else {
+    currentPosition = userPosition;
+  }
+
   let remainingBudget = budget;
   let remainingMin = durationMin;
   let totalCost = 0;

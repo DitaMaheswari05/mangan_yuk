@@ -7,6 +7,7 @@
 
 import { AppState } from 'react-native';
 import areaJson from '@/data/area.json';
+import { WalkModeService } from '@/features/audio';
 import { NotificationService } from '@/features/notifications';
 import { getPoiById, getPois } from '@/features/poi';
 import { VisitRepository } from '@/features/visits';
@@ -67,7 +68,8 @@ async function runSideEffects(e: GeofenceEvent): Promise<void> {
       const poi = getPoiById(e.poiId);
       if (!poi) return;
       await vibrate();
-      await NotificationService.notifyNearbyPoi(poi, e.distanceM);
+      const { autoPlayed } = await WalkModeService.handleProximityAudioTrigger(poi);
+      await NotificationService.notifyNearbyPoi(poi, e.distanceM, { autoPlaying: autoPlayed });
       return;
     }
     case 'DWELL':

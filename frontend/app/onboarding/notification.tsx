@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, StyleSheet, Text, View } from 'react-native';
+import { Animated, Image, StyleSheet, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { OnboardingScaffold } from '@/components/ui/OnboardingScaffold';
-import { colors, typography } from '@/constants/theme';
+import { colors, fontFamily, typography } from '@/constants/theme';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
 import { useAppStore } from '@/store/useAppStore';
 
-const notificationIllustration = require('../../assets/images/illustration-notification.png');
+const notificationIllustration = require('../../assets/images/person.png');
+const comingSoonBadge = require('../../assets/images/rocket.png');
 
 export default function NotificationScreen() {
   const router = useRouter();
@@ -116,21 +118,29 @@ export default function NotificationScreen() {
           },
         ]}
       >
-        <Text style={styles.previewTitle}>
-          Kamu lagi di dekat <Text style={styles.previewHighlight}>Mi dan Pho 1996</Text>!
-        </Text>
-        <Text style={styles.previewSub}>
-          Ketuk untuk mendengarkan kisah kuliner & rekomendasi menu andalannya.
-        </Text>
+        {/* Coming Soon Graphic Badge */}
+        <Image
+          source={comingSoonBadge}
+          style={styles.comingSoonImage}
+          resizeMode="contain"
+        />
 
-        <View style={styles.audioBar}>
-          <View style={styles.playCircle}>
-            <Text style={styles.playIcon}>▶</Text>
+        {/* Text Header */}
+        <View style={styles.textContainer}>
+          <Text style={styles.previewSub}>Kamu sampai di:</Text>
+          <Text style={styles.previewTitle} numberOfLines={1}>
+            Mi dan Pho 1996
+          </Text>
+        </View>
+
+        {/* White Action Pill Button */}
+        <View style={styles.actionPill}>
+          <View style={styles.playIconCircle}>
+            <Ionicons name="play" size={14} color="#FFFFFF" style={{ marginLeft: 2 }} />
           </View>
-          <View style={styles.progressTrack}>
-            <View style={styles.progressFill} />
-          </View>
-          <Text style={styles.audioDuration}>01:00</Text>
+          <Text style={styles.actionPillText} numberOfLines={1}>
+            Dengarkan ceritanya!
+          </Text>
         </View>
       </Animated.View>
     </OnboardingScaffold>
@@ -139,61 +149,78 @@ export default function NotificationScreen() {
 
 const styles = StyleSheet.create({
   previewCard: {
-    backgroundColor: colors.surfaceContainerLowest,
-    borderRadius: 16,
-    padding: 14,
-    borderWidth: 1,
-    borderColor: colors.outlineVariant,
-    gap: 8,
+    backgroundColor: '#FF8316',
+    borderRadius: 20,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    gap: 12,
+    position: 'relative',
+    overflow: 'hidden',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    elevation: 5,
   },
-  previewTitle: {
-    ...typography.textMdSemibold,
-    color: colors.onSurface,
+  comingSoonImage: {
+    position: 'absolute',
+    top: -4,
+    right: -10,
+    width: 128,
+    height: 128,
+    zIndex: 1,
   },
-  previewHighlight: {
-    color: colors.primaryContainer,
+  textContainer: {
+    alignItems: 'flex-start',
+    gap: 2,
+    zIndex: 2,
+    maxWidth: '70%',
   },
   previewSub: {
-    ...typography.textXsRegular,
-    color: colors.onSurfaceVariant,
+    fontFamily: fontFamily.regular,
+    fontSize: 14,
+    lineHeight: 20,
+    color: '#FFFFFF',
+    opacity: 0.95,
+    includeFontPadding: false,
   },
-  audioBar: {
-    marginTop: 4,
-    height: 48,
-    borderRadius: 12,
-    backgroundColor: colors.primaryFixed,
-    paddingHorizontal: 12,
+  previewTitle: {
+    fontFamily: fontFamily.semibold,
+    fontSize: 18,
+    lineHeight: 26,
+    color: '#FFFFFF',
+    includeFontPadding: false,
+  },
+  actionPill: {
+    alignSelf: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    paddingVertical: 7,
+    paddingHorizontal: 14,
+    gap: 8,
+    zIndex: 2,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  playCircle: {
-    width: 28,
-    height: 28,
-    borderRadius: 100,
-    backgroundColor: colors.primaryContainer,
+  playIconCircle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: '#FF8316',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  playIcon: {
-    ...typography.textXsBold,
-    color: colors.onPrimary,
-  },
-  progressTrack: {
-    flex: 1,
-    height: 6,
-    borderRadius: 100,
-    backgroundColor: colors.surfaceContainerLowest,
-    overflow: 'hidden',
-  },
-  progressFill: {
-    width: '42%',
-    height: '100%',
-    borderRadius: 100,
-    backgroundColor: colors.primaryContainer,
-  },
-  audioDuration: {
-    ...typography.textXsMedium,
-    color: colors.primary,
+  actionPillText: {
+    fontFamily: fontFamily.medium,
+    fontSize: 13,
+    lineHeight: 18,
+    color: '#FF8316',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 });

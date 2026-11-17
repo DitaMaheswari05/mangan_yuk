@@ -1,0 +1,43 @@
+% Bab 1: Product Definition
+\chapter{Product Definition}
+\label{bab:product-definition}
+\section{Problem Statement}
+
+Pengunjung kawasan kuliner seperti Sudirman Street Food, Bandung, dapat menghadapi kesulitan dalam mengeksplorasi berbagai pilihan kuliner ketika memiliki keterbatasan waktu dan anggaran. Informasi mengenai lokasi tenant, menu, dan harga dapat tersebar di berbagai sumber, sehingga pengguna perlu mencari dan membandingkan informasi secara terpisah sebelum menentukan tempat yang ingin dikunjungi. Kondisi ini berpotensi membuat proses eksplorasi kuliner menjadi kurang efisien, terutama ketika pengguna ingin mengunjungi beberapa tenant dalam satu waktu.
+
+Hal ini membuka peluang transformasi digital melalui aplikasi eksplorasi kuliner berbasis lokasi yang mengintegrasikan informasi \textit{tenant }dengan konteks posisi pengguna. Dengan memanfaatkan lokasi pengguna, filter berdasarkan preferensi, serta rekomendasi tenant dan rute kunjungan, aplikasi dapat membantu pengguna menemukan pilihan kuliner yang relevan dengan waktu dan anggaran mereka tanpa harus berpindah-pindah platform.
+
+\section{Target User/Stakeholder}
+
+\begin{longtable}{|L{0.273}|L{0.354}|L{0.373}|}
+\caption{Target User/Stakeholder}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Target User} & \cellcolor[HTML]{D9EAF7}\textbf{Karakteristik} & \cellcolor[HTML]{D9EAF7}\textbf{Kebutuhan Utama} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Target User} & \cellcolor[HTML]{D9EAF7}\textbf{Karakteristik} & \cellcolor[HTML]{D9EAF7}\textbf{Kebutuhan Utama} \\ \hline
+\endhead
+Pengunjung kawasan kuliner (lokal dan non-lokal) & Individu atau kelompok yang mengunjungi Sudirman Street Food; memiliki preferensi makanan, anggaran, dan waktu kunjungan yang berbeda & Menemukan tenant kuliner yang sesuai dengan anggaran, preferensi, dan lokasi; membandingkan pilihan berdasarkan informasi yang tersedia \\ \hline
+Pengunjung dengan waktu terbatas & Pengunjung yang ingin mengeksplorasi beberapa tenant dalam satu kunjungan dengan durasi tertentu & Menentukan prioritas kunjungan dan menemukan rute sesuai waktu yang ia punya. \\ \hline
+\end{longtable}
+
+\section{Proposed Product}
+
+\textbf{Mangan Yuk!} adalah aplikasi \textit{location-based culinary \& local culture explorer} yang membantu pengunjung dan wisatawan kawasan kuliner Sudirman Street Food untuk menemukan, menjelajahi, serta memahami ragam kuliner lokal beserta cerita budayanya secara efisien melalui pemicu lokasi \textit{hybrid} (GPS), \textit{Smart Culinary Trail Planner} berbasis preferensi (waktu, \textit{budget}, dan rasa), narasi audio multimodal, serta panduan navigasi interaktif, sehingga pengguna dapat menikmati pengalaman jelajah kuliner yang terstruktur, hemat waktu, dan kaya akan nilai budaya lokal tanpa perlu membuka banyak platform secara bersamaan.
+
+\section{Product Goals \& Non-Goals}
+
+\begin{longtable}{|L{0.500}|L{0.500}|}
+\caption{Product Goals \& Non-Goals}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Product Goals} & \cellcolor[HTML]{D9EAF7}\textbf{Non-Goals} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Product Goals} & \cellcolor[HTML]{D9EAF7}\textbf{Non-Goals} \\ \hline
+\endhead
+G01. Membantu pengunjung menemukan rekomendasi tempat kuliner dan tenant berdasarkan lokasi/\textit{geofencing} saat eksplorasi di area studi kasus. & NG01. Versi awal tidak menyediakan sistem pemesanan makanan (\textit{online food ordering}) atau transaksi pembayaran digital (\textit{payment gateway}). \\ \hline
+G02. Membantu pengguna membandingkan menu dan estimasi harga antar-tenant kuliner secara langsung dalam satu platform. & NG02. Versi awal tidak menggunakan fitur AI, kecerdasan buatan, maupun LLM (\textit{Large Language Model}) untuk sistem rekomendasi atau chatbot. \\ \hline
+G03. Menyediakan peta interaktif dan navigasi rute untuk memandu pengguna menuju titik/tenant kuliner yang dituju. & NG03. Aplikasi tidak menyediakan pembaruan stok menu atau antrean secara \textit{real-time} dari pihak tenant (menggunakan estimasi berbasis data historis/input pengguna). \\ \hline
+G04. Membantu pengguna mengoptimalkan waktu kunjungan dengan memberikan informasi estimasi antrean dan pengingat durasi (\textit{dwelling time}). & NG04. Versi awal tidak mencakup seluruh area kuliner di Kota Bandung, melainkan berfokus khusus pada \textit{pilot project} di Sudirman Street Food. \\ \hline
+G05. Mengirimkan notifikasi berbasis \textit{geofencing }(\textit{push notification}) saat pengguna memasuki radius atau lokasi area kuliner. & NG05. Aplikasi tidak menyediakan reservasi tempat duduk atau meja secara langsung untuk pengunjung. \\ \hline
+\end{longtable}

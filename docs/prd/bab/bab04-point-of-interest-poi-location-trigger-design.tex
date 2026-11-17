@@ -1,0 +1,50 @@
+% Bab 4: Point of Interest (POI) & Location-Trigger Design
+\chapter{Point of Interest (POI) \& Location-Trigger Design}
+\label{bab:point-of-interest-poi-location-trigger-design}
+\section{POI Definition}
+
+\begin{landscape}
+\begin{longtable}{|L{0.072}|L{0.160}|L{0.132}|L{0.150}|L{0.161}|L{0.117}|L{0.207}|}
+\caption{POI Definition}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{POI ID} & \cellcolor[HTML]{D9EAF7}\textbf{Nama POI} & \cellcolor[HTML]{D9EAF7}\textbf{Kategori} & \cellcolor[HTML]{D9EAF7}\textbf{Lokasi/Koordinat} & \cellcolor[HTML]{D9EAF7}\textbf{Content} & \cellcolor[HTML]{D9EAF7}\textbf{Trigger Rule} & \cellcolor[HTML]{D9EAF7}\textbf{System Response} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{POI ID} & \cellcolor[HTML]{D9EAF7}\textbf{Nama POI} & \cellcolor[HTML]{D9EAF7}\textbf{Kategori} & \cellcolor[HTML]{D9EAF7}\textbf{Lokasi/Koordinat} & \cellcolor[HTML]{D9EAF7}\textbf{Content} & \cellcolor[HTML]{D9EAF7}\textbf{Trigger Rule} & \cellcolor[HTML]{D9EAF7}\textbf{System Response} \\ \hline
+\endhead
+\textbf{P01} & Raja Pukis Modern & Jajanan / Manis & Zone Entrance / Koordinat P01 (-6.9181, 107.6002) & 3 foto (pukis, tenant, suasana), deskripsi tekstur lembut ala sandwich \& varian isian, menu \& harga, audio narasi 60s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P01 & Memunculkan Kartu POI, getar singkat, dan opsi pemutaran audio narasi ``Cerita Raja Pukis Modern'' \\ \hline
+\textbf{P02} & King Crab Bandung & Seafood / Gurih-Pedas & Zone Utama A / Koordinat P02 (-6.9182, 107.6004) & 3 foto, deskripsi \textit{king combo delight} \& pilihan saus, menu \& harga, audio narasi 75s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P02 & Memunculkan Kartu POI, getar, serta memicu \textit{prompt} audio eyes-free di \textit{Mode Jalan} \\ \hline
+\textbf{P03} & Khe-Bab-Bi & Asian Food / Gurih & Zone Tengah A / Koordinat P03 (-6.9183, 107.6005) & 3 foto, deskripsi varian kebab \& menu olahan se'i, menu \& harga, audio narasi 60s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P03 & Memunculkan Kartu POI dan tawaran audio penjelasan varian menu unik khas tenant \\ \hline
+\textbf{P04} & Dapur Sotoku & Makanan Berkuah / Gurih & Zone Tengah B / Koordinat P04 (-6.9184, 107.6007) & 3 foto, deskripsi soto khas \& gurami bakar, menu \& harga, audio narasi 50s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P04 & Memunculkan Kartu POI, notifikasi aksi lockscreen (``Dengar/Lewati''), dan rekomendasi makanan berkuah \\ \hline
+\textbf{P05} & Baso Goreng Pandu & Jajanan / Gurih & Zone Lorong Utama / Koordinat P05 (-6.9185, 107.6008) & 3 foto, cerita olahan bakso ikan tenggiri krispi, menu \& harga, audio narasi 45s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P05 & Memunculkan Kartu POI serta pengingat \textit{Paspor Kuliner} untuk \textit{trail} jajanan gurih \\ \hline
+\textbf{P06} & Hong Nam BakKutTeh \& PorkRibs & Asian Food / Gurih & Zone Tengah C / Koordinat P06 (-6.9186, 107.6010) & 3 foto, deskripsi olahan bak kut teh \& samcan, menu \& harga, audio narasi 65s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P06 & Memunculkan Kartu POI dan rekomendasi kontekstual hidangan khas \\ \hline
+\textbf{P07} & Kedai Kun Kun & Sate / Gurih-Manis & Zone Kuliner Malam / Koordinat P07 (-6.9187, 107.6012) & 3 foto, deskripsi sate \& varian sambal rica/kacang, menu \& harga, audio narasi 55s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P07 & Memunculkan Kartu POI, \textit{prompt} getar, atau menampilkan opsi scan QR paspor (opsional) \\ \hline
+\textbf{P08} & Sate Babi Wibisana & Sate / Gurih-Aromatik & Zone Kuliner Malam B / Koordinat P08 (-6.9188, 107.6014) & 3 foto, deskripsi aromatik bumbu ketumbar \& sate babi jumbo, menu \& harga, audio narasi 60s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P08 & Memunculkan Kartu POI, \textit{push notification} rekomendasi tempat favorit ramai pengunjung \\ \hline
+\textbf{P09} & Nasi Campur Kencana99 & Makanan Utama / Gurih & Zone Plaza Barat / Koordinat P09 (-6.9189, 107.6015) & 3 foto, deskripsi porsi nasi hainan/putih \& topping lengkap, menu \& harga, audio narasi 50s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P09 & Memunculkan Kartu POI dan memperbarui rute \textit{Smart Culinary Trail Planner} ke titik tujuan \\ \hline
+\textbf{P10} & Rob Thai & Asian Food / Segar-Pedas & Zone Exit / Koordinat P10 (-6.9190, 107.6017) & 3 foto, deskripsi tim ikan lemon \& hidangan khas Thailand, menu \& harga, audio narasi 50s + transkrip & Proximity Event: Pengguna masuk radius 10 m dari P10 & Memunculkan Kartu POI, memainkan narasi otomatis (\textit{Mode Jalan}), atau menampilkan opsi scan QR paspor (opsional) \\ \hline
+\end{longtable}
+\end{landscape}
+
+\section{Location-Trigger Logic}
+
+\subsection{Diagram Location-Trigger Logic}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth,height=0.8\textheight,keepaspectratio]{images/diagram-location-trigger.png}
+\caption{Diagram Location-Trigger Logic}
+\label{fig:diagram-location-trigger}
+\end{figure}
+
+\subsection{Penjelasan Alur Logika}
+\begin{enumerate}
+  \item Pembacaan lokasi: aplikasi meminta izin lokasi kepada pengguna dan membaca koordinat GPS secara berkala ketika fitur eksplorasi aktif.
+  \item Identifikasi POI: sistem mencari tenant yang berada dalam radius tertentu dari posisi pengguna.
+  \item Pemeriksaan kondisi: sistem memeriksa apakah pengguna telah memasuki radius pemicu dan apakah informasi tenant tersebut sudah ditampilkan dalam sesi eksplorasi saat ini.
+  \item Pemilihan konten: jika kondisi terpenuhi, sistem mengambil informasi tenant dari basis data. Informasi yang ditampilkan menggunakan data terstruktur dan aturan yang ditetapkan, bukan hasil generasi LLM.
+  \item Respons sistem: aplikasi menampilkan kartu informasi atau pop-up. Pengguna dapat melihat detail tenant, membandingkan pilihan, atau melanjutkan ke POI berikutnya.
+\end{enumerate}
+
+\subsection{Contoh Skenario}
+
+Misalnya, radius pemicu ditetapkan sebesar 30 meter dari suatu tenant. Ketika pengguna mendekati tenant tersebut hingga masuk ke radius itu, aplikasi memeriksa status pemicu. Jika informasinya belum ditampilkan pada sesi eksplorasi, aplikasi menampilkan kartu berisi nama tenant, kategori makanan, menu, dan harga. Jika pengguna masih berada di radius yang sama, \textit{pop-up} tidak ditampilkan berulang kali.

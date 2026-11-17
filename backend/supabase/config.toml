@@ -31,3 +31,8 @@ objects_path = "./storage/poi-photos"
 public = true
 allowed_mime_types = ["audio/mpeg"]
 objects_path = "./storage/poi-audio"
+
+[storage.buckets.review-photos]
+public = true
+allowed_mime_types = ["image/jpeg", "image/png", "image/webp"]
+objects_path = "./storage/review-photos"

@@ -1,4 +1,5 @@
 import request from 'supertest';
+import jwt from 'jsonwebtoken';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { createApp } from '../app';
 import { AuthService } from '../auth/service';
@@ -160,6 +161,10 @@ describe('AUTH-05/06 me', () => {
     advance(15 * 60_000 + 1000);
     const res = await api.get('/v1/auth/me').set(bearer(tokens.accessToken)).expect(401);
     expect(res.body.error.code).toBe('TOKEN_EXPIRED');
+
+    const withoutExp = jwt.sign({ sub: 'some-user', sid: 'some-sid' }, config.jwtSecret, { algorithm: 'HS256' });
+    const noExpRes = await api.get('/v1/auth/me').set(bearer(withoutExp)).expect(401);
+    expect(noExpRes.body.error.code).toBe('TOKEN_INVALID');
   });
 
   it('PATCH hanya mengubah displayName', async () => {

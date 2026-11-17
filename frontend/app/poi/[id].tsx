@@ -7,6 +7,7 @@ import { NarrationPlayer } from '@/components/poi/NarrationPlayer';
 import { colors, fontFamily } from '@/constants/theme';
 import { resolveAsset } from '@/features/audio';
 import { getPoiById, isOpenAt } from '@/features/poi';
+import { sanitizePoiId } from '@/lib/validation';
 import { useVisitedPoiIds } from '@/features/visits';
 import type { PhotoKind, Poi, TimeSlot } from '@/types/content';
 
@@ -34,7 +35,8 @@ function hoursByDay(slots: TimeSlot[]): { day: string; hours: string }[] {
 // F03 / PB08: Kartu detail POI multimodal (3 foto, menu & harga, jam buka, audio + transkrip), offline.
 export default function PoiDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const poi = id ? getPoiById(id) : undefined;
+  const cleanId = sanitizePoiId(id);
+  const poi = cleanId ? getPoiById(cleanId) : undefined;
   const insets = useSafeAreaInsets();
 
   if (!poi) {
@@ -290,9 +292,17 @@ const styles = StyleSheet.create({
     gap: 8,
     backgroundColor: ACCENT,
     borderRadius: 999,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
+    paddingVertical: 13,
+    paddingHorizontal: 20,
+    width: '100%',
   },
-  navigateBtn: { marginTop: 28 },
-  primaryBtnText: { fontFamily: fontFamily.semibold, fontSize: 15, color: '#FFFFFF' },
+  navigateBtn: { marginTop: 20, marginBottom: 24 },
+  primaryBtnText: {
+    fontFamily: fontFamily.medium,
+    fontSize: 15,
+    paddingVertical: 0,
+    color: '#FFFFFF',
+    includeFontPadding: false,
+    textAlignVertical: 'center',
+  },
 });

@@ -12,6 +12,14 @@ const CIRCLE_SEGMENTS = 64;
 
 const prisma = new PrismaClient();
 
+// Harus sama dengan MenuPriceBucket di frontend/src/types/content.ts.
+function menuPriceBucket(priceIdr: number) {
+  if (priceIdr < 25_000) return 'murah';
+  if (priceIdr < 50_000) return 'sedang';
+  if (priceIdr < 100_000) return 'mahal';
+  return 'premium';
+}
+
 // Kolom `time` dibaca Prisma sebagai Date 1970-01-01 UTC.
 const hhmm = (d: Date) => d.toISOString().slice(11, 16);
 
@@ -43,10 +51,7 @@ async function writeAssetMap() {
   const lines = [...downloadedAssetKeys]
     .sort()
     .map((key) => `  '${key}': require('../../assets/content/${key}'),`);
-  const body = lines.length ? `{
-${lines.join('
-')}
-}` : '{}';
+  const body = lines.length ? `{\n${lines.join('\n')}\n}` : '{}';
   await writeFile(
     ASSET_MAP_FILE,
     [
@@ -56,8 +61,7 @@ ${lines.join('
       '',
       `export const CONTENT_ASSETS: Record<string, number> = ${body};`,
       '',
-    ].join('
-'),
+    ].join('\n'),
   );
 }
 
@@ -96,6 +100,10 @@ async function main() {
     include: { trailPois: { orderBy: { position: 'asc' } } },
   });
   const pairings = await prisma.tastePairing.findMany({ orderBy: { id: 'asc' } });
+
+  // Filter per menu butuh food_type & dish_category di setiap menu.
+  const missing = pois.flatMap((p) => p.menuItems.filter((m) => !m.foodType || !m.dishCategory).map((m) => m.id));
+  if (missing.length) throw new Error(`food_type/dish_category kosong di menu: ${missing.join(', ')}`);
 
   for (const p of pois) {
     for (const ph of p.photos) await download('poi-photos', ph.path);
@@ -152,9 +160,16 @@ async function main() {
           : null,
       menu: p.menuItems.map((m) => ({
         id: m.id,
+        poiId: p.id,
         name: m.name,
         priceIdr: m.priceIdr,
+        priceBucket: menuPriceBucket(m.priceIdr),
         tastes: m.tastes,
+        type: m.foodType,
+        // Prisma memakai nama kunci enum (kwetiau_bihun); app memakai nilai DB (kwetiau-bihun).
+        dishCategory: m.dishCategory?.replace(/_/g, '-'),
+        // null = belum diverifikasi → warisi status tenant (dapur non-halal → menu ikut non-halal).
+        isHalal: m.isHalal ?? (p.isHalal === false ? false : null),
         isSignature: m.isSignature,
       })),
       openingHours: p.openingHours.map((h) => ({ day: h.dayOfWeek, open: hhmm(h.openTime), close: hhmm(h.closeTime) })),

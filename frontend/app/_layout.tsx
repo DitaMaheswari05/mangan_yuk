@@ -4,6 +4,9 @@ import { router, Stack } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 // Task background harus terdaftar saat bundle dimuat, termasuk saat OS menjalankan app headless.
 import '@/tasks/backgroundLocation';
+import '@/tasks/notificationActions';
+import { handleNotificationResponse } from '@/features/notifications/actions';
+import { isValidInternalRoute } from '@/lib/validation';
 
 export default function RootLayout() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -20,7 +23,9 @@ export default function RootLayout() {
           'ChironGoRoundTC-Bold': require('../assets/fonts/ChironGoRoundTC-Bold.ttf'),
         });
       } catch (e) {
-        console.warn('[RootLayout] Gagal memuat font Chiron GoRound TC:', e);
+        if (__DEV__) {
+          console.warn('[RootLayout] Gagal memuat font Chiron GoRound TC:', e);
+        }
       } finally {
         if (mounted) {
           setFontsLoaded(true);
@@ -32,17 +37,27 @@ export default function RootLayout() {
     };
   }, []);
 
-  // Ketuk notifikasi geofence → buka layar terkait (mis. kartu POI).
-  // Ditunda sampai Stack terpasang (fontsLoaded) agar navigasi saat cold start tidak gagal.
+  // Ketuk notifikasi geofence → buka layar terkait (mis. kartu POI); tombol Dengar / Lewati
+  // ditangani tanpa navigasi. Ditunda sampai Stack terpasang (fontsLoaded) agar navigasi saat
+  // cold start tidak gagal.
   useEffect(() => {
     if (!fontsLoaded) return undefined;
-    const open = (response: Notifications.NotificationResponse | null) => {
-      const url = response?.notification.request.content.data?.url;
-      if (typeof url === 'string') router.push(url as never);
+    const handle = async (
+      response: Notifications.NotificationResponse | null,
+      allowActions: boolean,
+    ) => {
+      const res = await handleNotificationResponse(response, { allowActions });
+      if (res.kind === 'open' && isValidInternalRoute(res.url)) {
+        router.push(res.url as never);
+      }
     };
     try {
-      open(Notifications.getLastNotificationResponse());
-      const sub = Notifications.addNotificationResponseReceivedListener(open);
+      // Respons terakhir saat cold start: aksi tombol sudah ditangani background task, jadi
+      // hanya ketukan biasa yang diteruskan (mencegah narasi terputar ulang saat app dibuka).
+      void handle(Notifications.getLastNotificationResponse(), false);
+      const sub = Notifications.addNotificationResponseReceivedListener((r) => {
+        void handle(r, true);
+      });
       return () => sub.remove();
     } catch {
       return undefined;

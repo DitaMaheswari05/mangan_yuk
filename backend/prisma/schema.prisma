@@ -37,6 +37,31 @@ enum FoodType {
   @@map("food_type")
 }
 
+// Migration 20261109000000_menu_filters.sql. Nilai berstrip dipetakan lewat @map.
+enum DishCategory {
+  nasi
+  mie
+  kwetiau_bihun @map("kwetiau-bihun")
+  bubur
+  soto_sup      @map("soto-sup")
+  sate
+  lauk
+  pempek
+  gorengan
+  dimsum_bakpao @map("dimsum-bakpao")
+  roti_sandwich @map("roti-sandwich")
+  dessert
+  kopi
+  teh
+  susu
+  jus_es_buah   @map("jus-es-buah")
+  alkohol
+  minuman_lain  @map("minuman-lain")
+  pelengkap
+
+  @@map("dish_category")
+}
+
 enum PhotoKind {
   food
   tenant
@@ -99,6 +124,7 @@ model Poi {
   peakHours      PeakHour[]
   trailPois      TrailPoi[]
   passportStamps PassportStamp[]
+  reviews        Review[]
 
   @@map("pois")
 }
@@ -118,15 +144,19 @@ model PoiPhoto {
 }
 
 model MenuItem {
-  id          String  @id // 'P01-M01'
-  poiId       String  @map("poi_id")
-  name        String
-  priceIdr    Int     @map("price_idr")
-  tastes      Taste[] @default([])
-  isSignature Boolean @default(false) @map("is_signature")
-  position    Int     @default(0)
+  id           String        @id // 'P01-M01'
+  poiId        String        @map("poi_id")
+  name         String
+  priceIdr     Int           @map("price_idr")
+  tastes       Taste[]       @default([])
+  foodType     FoodType?     @map("food_type") // jenis per menu; diisi seed, wajib saat export
+  dishCategory DishCategory? @map("dish_category")
+  isHalal      Boolean?      @map("is_halal") // null = belum diverifikasi; export mewarisi dari tenant
+  isSignature  Boolean       @default(false) @map("is_signature")
+  position     Int           @default(0)
 
-  poi Poi @relation(fields: [poiId], references: [id], onDelete: Cascade)
+  poi         Poi              @relation(fields: [poiId], references: [id], onDelete: Cascade)
+  reviewItems ReviewMenuItem[]
 
   @@unique([poiId, name])
   @@map("menu_items")
@@ -268,6 +298,7 @@ model Profile {
 
   user           User            @relation(fields: [id], references: [id], onDelete: Cascade)
   passportStamps PassportStamp[]
+  reviews        Review[]
 
   @@map("profiles")
 }
@@ -282,4 +313,39 @@ model PassportStamp {
 
   @@id([userId, poiId])
   @@map("passport_stamps")
+}
+
+// ---------------------------------------------------------------------------
+// Ulasan (Review) Tenant & Menu untuk Gamifikasi (migrations/20261117000000_gamification_reviews.sql)
+// ---------------------------------------------------------------------------
+
+model Review {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  poiId      String   @map("poi_id")
+  rating     Int      @db.SmallInt
+  reviewText String?  @map("review_text")
+  photoPath  String?  @map("photo_path") // opsional, path foto yang diunggah ke bucket 'review-photos'
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user      Profile          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  poi       Poi              @relation(fields: [poiId], references: [id], onDelete: Cascade)
+  menuItems ReviewMenuItem[]
+
+  @@index([poiId, createdAt(sort: Desc)])
+  @@index([userId, poiId])
+  @@map("reviews")
+}
+
+model ReviewMenuItem {
+  reviewId   String @map("review_id") @db.Uuid
+  menuItemId String @map("menu_item_id")
+
+  review   Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+
+  @@id([reviewId, menuItemId])
+  @@index([menuItemId])
+  @@map("review_menu_items")
 }

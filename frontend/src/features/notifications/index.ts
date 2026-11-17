@@ -6,6 +6,11 @@ export const EXPLORE_CHANNEL_ID = 'manganyuk-explore-mode';
 export const GEOFENCE_CHANNEL_ID = 'manganyuk-geofence-poi';
 export const EXPLORE_NOTIFICATION_ID = 'manganyuk-explore-active-notification';
 
+// F04 – Notifikasi proximity punya tombol aksi agar bisa direspons dari lock screen.
+export const POI_PROXIMITY_CATEGORY = 'poi-proximity';
+export const ACTION_LISTEN = 'LISTEN';
+export const ACTION_SKIP = 'SKIP';
+
 let handlerConfigured = false;
 let activeExploreNotifId: string | null = null;
 
@@ -54,8 +59,25 @@ export async function ensureNotificationSetup(): Promise<void> {
         name: 'Kuliner Terdekat',
         description: 'Notifikasi saat kamu berada di dekat tenant kuliner Sudirman Street Food',
         importance: Notifications.AndroidImportance.HIGH,
+        // PUBLIC: isi & tombol Dengar/Lewati tampil penuh di lock screen.
+        // Catatan: setelan channel Android tidak berubah untuk channel yang sudah terlanjur dibuat;
+        // perangkat lama perlu clear data / install ulang agar nilai ini berlaku.
+        lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
       });
     }
+
+    await Notifications.setNotificationCategoryAsync(POI_PROXIMITY_CATEGORY, [
+      {
+        identifier: ACTION_LISTEN,
+        buttonTitle: 'Dengar',
+        options: { opensAppToForeground: false },
+      },
+      {
+        identifier: ACTION_SKIP,
+        buttonTitle: 'Lewati',
+        options: { opensAppToForeground: false, isDestructive: true },
+      },
+    ]);
   } catch {
     // Abaikan jika dijalankan di lingkungan tanpa dukungan penuh notifikasi native
   }
@@ -150,23 +172,33 @@ export async function dismissPersistentExploreNotification(): Promise<void> {
 /**
  * F02 proximity event: pengguna masuk radius geofence tenant. Ketuk → buka kartu POI.
  */
-export async function notifyNearbyPoi(poi: Poi, distanceM: number): Promise<void> {
+export async function notifyNearbyPoi(
+  poi: Poi,
+  distanceM: number,
+  options?: { autoPlaying?: boolean },
+): Promise<void> {
   const Notifications = getNotificationsModule();
   if (!Notifications) return;
 
   try {
     await ensureNotificationSetup();
 
+    const bodyText = options?.autoPlaying
+      ? `${poi.categoryLabel} · ~${distanceM} m. Memutar narasi otomatis (Mode Jalan).`
+      : `${poi.categoryLabel} · ~${distanceM} m. Mau dengar ceritanya?`;
+
     await Notifications.scheduleNotificationAsync({
       identifier: `poi-nearby-${poi.id}`,
       content: {
         title: `Kamu mendekati ${poi.name}`,
-        body: `${poi.categoryLabel} · ~${distanceM} m. Mau dengar ceritanya?`,
+        body: bodyText,
         color: '#FF8316',
+        categoryIdentifier: POI_PROXIMITY_CATEGORY,
         data: {
           type: 'poi-geofence-enter',
           poiId: poi.id,
           url: `/poi/${poi.id}`,
+          autoPlaying: options?.autoPlaying ?? false,
         },
         ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
       },

@@ -57,7 +57,7 @@ describe('Kategori 1: Zero Network Coordinate Leakage Audit (F09, NFR, SB-5.3)',
     const userLocation: LatLng = { latitude: -6.92089, longitude: 107.600574 };
 
     // 1. Jalankan pencarian
-    searchPois([dummyPoi], 'baso');
+    searchPois([dummyPoi], { query: 'baso' });
 
     // 2. Jalankan rekomendasi
     getRecommendations({

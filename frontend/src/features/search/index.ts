@@ -1,137 +1,236 @@
-// F05 / PB-10 – Pencarian POI toleran typo (fuzzy) & multi-filter.
-import type { FoodType, Poi, PriceBucket, TasteTag } from '@/types/content';
-import { isOpenAt } from '@/features/poi';
+// F05 / PB10 – Mesin Pencari Lokal Toleran Typo (Fuse.js) & Filter Multi-Parameter (SB-3.3)
+// Mendukung pencarian toleran salah ketik berdasarkan nama tenant (bobot 0.6),
+// nama menu (bobot 0.4), kategori kuliner, dan kata kunci (threshold fuzziness 0.35).
+
+import Fuse, { type IFuseOptions } from 'fuse.js';
+import { haversineM } from '@/features/location';
+import { getAllMenuItems, getPoiById, isOpenAt } from '@/features/poi';
+import type { LatLng } from '@/lib/geo';
+import type { DishCategory, FoodType, MenuItem, MenuPriceBucket, Poi, PriceBucket, TasteTag } from '@/types/content';
+
+export const DEFAULT_FUSE_OPTIONS: IFuseOptions<Poi> = {
+  keys: [
+    { name: 'name', weight: 0.6 },
+    { name: 'menu.name', weight: 0.4 },
+    { name: 'categoryLabel', weight: 0.3 },
+    { name: 'searchKeywords', weight: 0.3 },
+    { name: 'tasteTags', weight: 0.2 },
+    { name: 'type', weight: 0.2 },
+  ],
+  threshold: 0.35, // Diturunkan dari 0.6 agar tidak false positive (misal 'soto' -> 'roti')
+  minMatchCharLength: 2,
+  ignoreLocation: true, // Toleran lokasi substring dalam teks
+  includeScore: true,
+  includeMatches: true,
+  shouldSort: true,
+};
 
 export type SearchFilters = {
-  priceBucket?: PriceBucket;
-  taste?: TasteTag;
-  foodType?: FoodType;
-  isHalal?: boolean | null;
+  query?: string;
+  priceBucket?: PriceBucket; // 'under15k' | '15to30k' | 'over30k'
+  taste?: TasteTag; // 'pedas' | 'manis' | 'gurih' | 'segar' | 'aromatik' (kompatibilitas backward)
+  tastes?: TasteTag[]; // Mendukung multi-select profil rasa
+  type?: FoodType; // 'makanan' | 'minuman' | 'jajanan'
   openNow?: boolean;
-  referenceTime?: Date;
+  referenceDate?: Date; // Untuk pengujian / simulasi waktu
+  userCoordinate?: LatLng;
+  sortBy?: 'relevance' | 'distance';
+};
+
+export type SearchResultItem = {
+  poi: Poi;
+  score?: number; // 0 = kecocokan sempurna, 1 = tidak cocok
+  distanceM?: number;
+  matchedFields?: string[];
+  matchedMenuNames?: string[];
+};
+
+export type SearchResponse = {
+  results: SearchResultItem[];
+  total: number;
+  executionTimeMs: number;
 };
 
 /**
- * Menghitung Levenshtein distance antara dua string.
+ * Filter POI secara deterministik berdasarkan parameter harga, rasa, jenis makanan, dan jam buka.
  */
-export function levenshteinDistance(a: string, b: string): number {
-  const s1 = a.toLowerCase().trim();
-  const s2 = b.toLowerCase().trim();
-
-  if (s1 === s2) return 0;
-  if (s1.length === 0) return s2.length;
-  if (s2.length === 0) return s1.length;
-
-  const row = Array.from({ length: s2.length + 1 }, (_, i) => i);
-
-  for (let i = 1; i <= s1.length; i++) {
-    let prev = i;
-    for (let j = 1; j <= s2.length; j++) {
-      let current = row[j - 1];
-      if (s1[i - 1] !== s2[j - 1]) {
-        current = Math.min(row[j - 1], prev, row[j]) + 1;
-      }
-      row[j - 1] = prev;
-      prev = current;
-    }
-    row[s2.length] = prev;
-  }
-
-  return row[s2.length];
-}
-
-/**
- * Fuzzy matcher toleran typo.
- * True jika substring cocok, atau jarak Levenshtein relatif terhadap panjang kata <= maxRelativeError.
- */
-export function fuzzyMatch(query: string, target: string, maxDistanceRatio: number = 0.35): boolean {
-  const q = query.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').trim();
-  const t = target.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').trim();
-
-  if (!q) return true;
-  if (!t) return false;
-  if (t.includes(q)) return true;
-
-  // Cek kecocokan per kata (token)
-  const targetWords = t.split(/\s+/).filter(Boolean);
-  for (const word of targetWords) {
-    if (word.includes(q)) return true;
-    const dist = levenshteinDistance(q, word);
-    const maxAllowedDist = Math.max(1, Math.floor(Math.max(q.length, word.length) * maxDistanceRatio));
-    if (dist <= maxAllowedDist) return true;
-  }
-
-  // Cek kecocokan kalimat penuh jika query terdiri dari beberapa kata
-  if (q.includes(' ')) {
-    const dist = levenshteinDistance(q, t);
-    const maxAllowedDist = Math.max(1, Math.floor(Math.max(q.length, t.length) * maxDistanceRatio));
-    if (dist <= maxAllowedDist) return true;
-  }
-
-  return false;
-}
-
-/**
- * Filter POI berdasarkan kriteria: harga, rasa, tipe makanan, kehalalan, dan status buka.
- */
-export function filterPois(pois: Poi[], filters?: SearchFilters): Poi[] {
-  if (!filters) return pois;
-
-  const now = filters.referenceTime ?? new Date();
+export function applyFilters(
+  pois: Poi[],
+  filters: Omit<SearchFilters, 'query' | 'userCoordinate' | 'sortBy'>,
+): Poi[] {
+  const { priceBucket, taste, tastes, type, openNow, referenceDate } = filters;
+  const now = referenceDate ?? new Date();
 
   return pois.filter((poi) => {
-    if (filters.priceBucket && poi.priceBucket !== filters.priceBucket) {
+    // 1. Filter Rentang Harga (under15k / 15to30k / over30k)
+    if (priceBucket && poi.priceBucket !== priceBucket) {
       return false;
     }
-    if (filters.taste && !poi.tasteTags.includes(filters.taste)) {
+
+    // 2. Filter Profil Rasa (dari tag tenant atau tag menu) - mendukung single dan multi-select
+    const activeTastes: TasteTag[] = tastes && tastes.length > 0 ? tastes : taste ? [taste] : [];
+    if (activeTastes.length > 0) {
+      const matchesAnyTaste = activeTastes.some(
+        (t) => poi.tasteTags.includes(t) || poi.menu.some((m) => m.tastes.includes(t))
+      );
+      if (!matchesAnyTaste) {
+        return false;
+      }
+    }
+
+    // 3. Filter Jenis (makanan / minuman / jajanan)
+    if (type && poi.type !== type) {
       return false;
     }
-    if (filters.foodType && poi.type !== filters.foodType) {
-      return false;
+
+    // 4. Filter Status Buka Saat Ini
+    if (openNow) {
+      if (!isOpenAt(poi, now)) {
+        return false;
+      }
     }
-    if (filters.isHalal !== undefined && filters.isHalal !== null && poi.isHalal !== filters.isHalal) {
-      return false;
-    }
-    if (filters.openNow && !isOpenAt(poi, now)) {
-      return false;
-    }
+
     return true;
   });
 }
 
 /**
- * Mencari POI dengan toleransi typo dan multi-filter.
- * Mencocokkan: nama tenant, nama menu, kategori, tasteTags, dan searchKeywords.
+ * Eksekusi pencarian toleran typo (Fuse.js) dan filter multi-parameter.
+ * Memenuhi kriteria performa F05-AC1 (offline, waktu respons ≤1 detik).
  */
-export function searchPois(pois: Poi[], query: string, filters?: SearchFilters): Poi[] {
-  const filtered = filterPois(pois, filters);
-  const rawQ = query.trim();
+export function searchPois(
+  pois: Poi[],
+  filters: SearchFilters = {},
+  customFuseOptions?: IFuseOptions<Poi>,
+): SearchResponse {
+  const startTime = Date.now();
+  const { query, userCoordinate, sortBy = 'relevance', ...filterOptions } = filters;
 
-  // Jika input hanya whitespace atau kosong, kembalikan semua
-  if (!rawQ) return filtered;
+  const rawQuery = query?.trim() ?? '';
+  // Tanda baca dibuang agar "soto!??" tetap cocok dengan "soto".
+  const trimmedQuery = rawQuery
+    .replace(/[^a-z0-9À-ɏ\s]/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-  // Bersihkan tanda baca
-  const q = rawQ.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').trim();
+  let matchedItems: Array<{
+    poi: Poi;
+    score?: number;
+    matchedFields?: string[];
+    matchedMenuNames?: string[];
+  }> = [];
 
-  // Jika query hanya berisi tanda baca atau simbol tanpa huruf/angka, tidak ada hasil yang cocok
-  if (!q) return [];
+  if (!rawQuery) {
+    // Jika tidak ada kata kunci pencarian, tampilkan semua yang lolos filter parameter
+    matchedItems = pois.map((poi) => ({ poi }));
+  } else if (!trimmedQuery) {
+    // Kata kunci hanya berisi simbol/tanda baca: tidak ada yang cocok.
+    matchedItems = [];
+  } else {
+    // Buat index Fuse.js untuk pencarian toleran salah ketik
+    const fuse = new Fuse(pois, {
+      ...DEFAULT_FUSE_OPTIONS,
+      ...customFuseOptions,
+    });
 
-  return filtered.filter((poi) => {
-    // 1. Nama tenant
-    if (fuzzyMatch(q, poi.name)) return true;
+    const fuseResults = fuse.search(trimmedQuery);
 
-    // 2. Kategori label & tipe
-    if (fuzzyMatch(q, poi.categoryLabel) || fuzzyMatch(q, poi.type)) return true;
+    matchedItems = fuseResults.map((res) => {
+      const matchedFields = new Set<string>();
+      const matchedMenuNames = new Set<string>();
 
-    // 3. Kata kunci rasa
-    if (poi.tasteTags.some((tag) => fuzzyMatch(q, tag))) return true;
+      res.matches?.forEach((m) => {
+        if (m.key === 'name') matchedFields.add('Nama Tenant');
+        if (m.key === 'categoryLabel') matchedFields.add('Kategori');
+        if (m.key === 'tasteTags') matchedFields.add('Profil Rasa');
+        if (m.key === 'searchKeywords') matchedFields.add('Kata Kunci');
+        if (m.key === 'menu.name' && m.value) {
+          matchedFields.add('Menu');
+          matchedMenuNames.add(m.value);
+        }
+      });
 
-    // 4. Menu items
-    if (poi.menu.some((item) => fuzzyMatch(q, item.name))) return true;
+      return {
+        poi: res.item,
+        score: res.score,
+        matchedFields: Array.from(matchedFields),
+        matchedMenuNames: Array.from(matchedMenuNames),
+      };
+    });
+  }
 
-    // 5. Search keywords tambahan
-    if (poi.searchKeywords.some((kw) => fuzzyMatch(q, kw))) return true;
-
-    return false;
+  // Terapkan filter multi-parameter
+  const filtered = matchedItems.filter((item) => {
+    const passed = applyFilters([item.poi], filterOptions);
+    return passed.length > 0;
   });
+
+  // Hitung jarak jika userCoordinate tersedia
+  const resultsWithDistance: SearchResultItem[] = filtered.map((item) => {
+    let distanceM: number | undefined;
+    if (userCoordinate) {
+      distanceM = Math.round(
+        haversineM(userCoordinate, {
+          latitude: item.poi.latitude,
+          longitude: item.poi.longitude,
+        }),
+      );
+    }
+    return {
+      poi: item.poi,
+      score: item.score,
+      distanceM,
+      matchedFields: item.matchedFields,
+      matchedMenuNames: item.matchedMenuNames,
+    };
+  });
+
+  // Pengurutan hasil
+  if (sortBy === 'distance' && userCoordinate) {
+    resultsWithDistance.sort((a, b) => (a.distanceM ?? Infinity) - (b.distanceM ?? Infinity));
+  } else if (!trimmedQuery && userCoordinate) {
+    // Default jika tidak ada query: urutkan dari yang terdekat
+    resultsWithDistance.sort((a, b) => (a.distanceM ?? Infinity) - (b.distanceM ?? Infinity));
+  }
+
+  const executionTimeMs = Math.max(1, Date.now() - startTime);
+
+  return {
+    results: resultsWithDistance,
+    total: resultsWithDistance.length,
+    executionTimeMs,
+  };
+}
+
+// ── Filter per menu (F05) ────────────────────────────────────────────────────
+
+export type MenuFilterOptions = {
+  query?: string;
+  tastes?: TasteTag[];
+  type?: FoodType;
+  dishCategory?: DishCategory;
+  priceBucket?: MenuPriceBucket;
+  isHalalOnly?: boolean;
+};
+
+export type MenuItemWithPoi = MenuItem & { poi?: Poi };
+
+/**
+ * Filter dan cari item menu berdasarkan rasa, jenis, jenis hidangan, halal, harga, dan nama.
+ * Menyertakan POI (tenant) agar UI bisa langsung bernavigasi ke tenant saat menu diklik.
+ */
+export function filterMenuItems(options: MenuFilterOptions = {}): MenuItemWithPoi[] {
+  const q = options.query?.toLowerCase().trim();
+  return getAllMenuItems()
+    .filter((item) => {
+      if (q && !item.name.toLowerCase().includes(q)) return false;
+      // Cocok jika menu punya minimal salah satu rasa yang dipilih.
+      if (options.tastes?.length && !options.tastes.some((t) => item.tastes.includes(t))) return false;
+      if (options.type && item.type !== options.type) return false;
+      if (options.dishCategory && item.dishCategory !== options.dishCategory) return false;
+      if (options.priceBucket && item.priceBucket !== options.priceBucket) return false;
+      if (options.isHalalOnly && item.isHalal === false) return false;
+      return true;
+    })
+    .map((item) => ({ ...item, poi: getPoiById(item.poiId) }));
 }

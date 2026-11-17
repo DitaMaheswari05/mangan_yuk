@@ -3,7 +3,7 @@
 import areaJson from '@/data/area.json';
 import poisJson from '@/data/pois.json';
 import { fail, ok, type Result } from '@/lib/result';
-import type { AreaConfig, Poi, PoiDataset, PoiRecord, PriceBucket } from '@/types/content';
+import type { AreaConfig, MenuItem, Poi, PoiDataset, PoiRecord, PriceBucket } from '@/types/content';
 import { validate, type ValidationResult } from './validator';
 
 export { validate } from './validator';
@@ -37,7 +37,7 @@ export function __setSourceForTest(next?: { area: unknown; pois: unknown }) {
 function build(): Loaded {
   if (cache) return cache;
   const validation = validate(source, 'PB04');
-  if (!validation.valid) {
+  if (__DEV__ && !validation.valid) {
     console.warn(`[PoiRepository] dataset tidak valid:\n- ${validation.errors.join('\n- ')}`);
   }
   // Release: POI rusak disembunyikan jika masih ada POI valid, atau gunakan fallback dataset asli agar marker tetap tampil
@@ -100,3 +100,6 @@ export function isOpenAt(poi: Pick<PoiRecord, 'openingHours'>, date: Date): bool
 /** Versi sinkron untuk komponen peta lama. POI tidak valid sudah disembunyikan. */
 export const getPois = (): Poi[] => build().dataset.pois;
 export const getPoiById = (id: string): Poi | undefined => getPois().find((p) => p.id === id);
+
+// F05 — filter per menu: tampilkan daftar menu dulu, lalu buka tenant lewat menu.poiId.
+export const getAllMenuItems = (): MenuItem[] => getPois().flatMap((p) => p.menu);
