@@ -8411,7 +8411,9 @@
         "isSignature": false
       }
     ],
-    "photos": [],
+    "photos": [
+      "p27/1.jpg"
+    ],
     "audio": null,
     "audioDurationSec": null
   },
@@ -9339,7 +9341,9 @@
         "isSignature": false
       }
     ],
-    "photos": [],
+    "photos": [
+      "p30/1.jpg"
+    ],
     "audio": null,
     "audioDurationSec": null
   },
