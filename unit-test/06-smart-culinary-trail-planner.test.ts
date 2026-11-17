@@ -5,6 +5,8 @@
 
 import {
   checkDwellAlert,
+  createTrailSession,
+  pendingTrailSteps,
   planTrail,
   skipTrailStep,
   type TrailPlanParams,
@@ -171,7 +173,14 @@ describe('Kategori 5: Penanganan Lewati Tenant (Skip Step / Re-Plan)', () => {
 
     expect(initialPlan.steps.length).toBeGreaterThanOrEqual(2);
 
-    const rePlanned = skipTrailStep(initialPlan, 'P01', pois, startPos, testTime);
-    expect(rePlanned.steps.some((s) => s.poi.id === 'P01')).toBe(false);
+    const session = createTrailSession(
+      initialPlan,
+      { durationMin: 60, budget: 50000, preferredTastes: [] },
+      testTime.getTime(),
+    );
+    const { session: rePlanned } = skipTrailStep(session, 'P01', pois, startPos, testTime.getTime());
+    expect(rePlanned.status.P01).toBe('skipped');
+    expect(pendingTrailSteps(rePlanned).some((s) => s.poi.id === 'P01')).toBe(false);
+    expect(pendingTrailSteps(rePlanned).length).toBeGreaterThanOrEqual(1);
   });
 });
