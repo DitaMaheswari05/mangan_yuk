@@ -235,10 +235,46 @@ export async function notifyAreaEntry(areaName: string): Promise<void> {
   }
 }
 
+/** F08: pengguna berdiam di tenant trail melebihi alokasi + 5 menit. Ketuk → buka itinerary. */
+export async function notifyTrailOverstay(alert: {
+  poiId: string;
+  poiName: string;
+  dwellMin: number;
+  remainingMin: number;
+  remainingStops: number;
+}): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications) return;
+
+  const next =
+    alert.remainingStops > 0
+      ? `masih ada ${alert.remainingStops} tenant lagi.`
+      : 'ini tenant terakhir di trailmu.';
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: `trail-overstay-${alert.poiId}`,
+      content: {
+        title: `Sudah ${alert.dwellMin} menit di ${alert.poiName}`,
+        body: `Sisa waktumu ${alert.remainingMin} menit, ${next}`,
+        color: '#FF8316',
+        data: { type: 'trail-overstay', poiId: alert.poiId, url: '/trail/itinerary' },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
 export const NotificationService = {
   ensureNotificationSetup,
   showPersistentExploreNotification,
   dismissPersistentExploreNotification,
   notifyNearbyPoi,
   notifyAreaEntry,
+  notifyTrailOverstay,
 };

@@ -1,6 +1,6 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Alert,
   FlatList,
@@ -18,10 +18,18 @@ import { CONTENT_ASSETS } from '@/data/assets';
 import { sanitizeNumber, sanitizeTastes } from '@/lib/validation';
 import { DEV_SUDIRMAN_COORDINATE, haversineM, useUserLocation } from '@/features/location';
 import { getPois } from '@/features/poi';
+import { ExploreModeController } from '@/features/geofence';
 import {
+  activeTrailStepIndex,
+  createTrailSession,
+  doneTrailSteps,
+  jumpToTrailStep,
+  pendingTrailSteps,
   planTrail,
   skipTrailStep,
-  type TrailPlanResult,
+  TrailSessionStore,
+  undoSkipTrailStep,
+  useTrailSession,
   type TrailStep,
 } from '@/features/trail';
 import type { Poi, TasteTag } from '@/types/content';
@@ -70,118 +78,116 @@ export default function TrailItineraryScreen() {
     preferredTastes?: string;
   }>();
 
-  const durationMin = sanitizeNumber(params.durationMin, 60, 15, 360);
-  const budget = sanitizeNumber(params.budget, 50000, 15000, 2000000);
-  const preferredTastes = sanitizeTastes(params.preferredTastes, ['gurih']);
+  // Dari planner selalu ada parameter; dari notifikasi pengingat tidak ada → lanjutkan trail aktif.
+  const isNewTrail = params.durationMin !== undefined;
 
   const pois = useMemo(() => getPois(), []);
   const rawCoord = position?.coordinate ?? DEV_SUDIRMAN_COORDINATE;
   const isFarFromSSF = haversineM(rawCoord, DEV_SUDIRMAN_COORDINATE) > 300;
   const userCoord = isFarFromSSF ? DEV_SUDIRMAN_COORDINATE : rawCoord;
 
-  // State plan & steps
-  const initialPlan = useMemo(() => {
-    return planTrail({
-      userPosition: userCoord,
-      pois,
-      durationMin,
-      budget,
-      preferredTastes,
-    });
-  }, [userCoord, pois, durationMin, budget, preferredTastes]);
+  const storedSession = useTrailSession();
+  const [started, setStarted] = useState(!isNewTrail);
+  const startRequested = useRef(false);
 
-  const [steps, setSteps] = useState<TrailStep[]>(initialPlan.steps);
-  const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
-  const [skippedIds, setSkippedIds] = useState<string[]>([]);
+  useEffect(() => {
+    if (!isNewTrail || startRequested.current) return;
+    startRequested.current = true;
+    const durationMin = sanitizeNumber(params.durationMin, 60, 15, 360);
+    const budget = sanitizeNumber(params.budget, 50000, 15000, 2000000);
+    const preferredTastes = sanitizeTastes(params.preferredTastes, ['gurih']);
+    const plan = planTrail({ userPosition: userCoord, pois, durationMin, budget, preferredTastes });
+    void TrailSessionStore.start(
+      createTrailSession(plan, { durationMin, budget, preferredTastes }, Date.now()),
+    ).then(() => setStarted(true));
+  }, [isNewTrail, params, pois, userCoord]);
+
+  // Selama trail baru belum tersimpan, jangan tampilkan sesi lama yang masih ada di storage.
+  const session = started ? storedSession : undefined;
+  const steps = session?.steps ?? [];
+  const activeStepIndex = session ? activeTrailStepIndex(session) : -1;
+  const pendingCount = session ? pendingTrailSteps(session).length : 0;
+  const doneSteps = session ? doneTrailSteps(session) : [];
+
+  const durationMin = session?.durationMin ?? sanitizeNumber(params.durationMin, 60, 15, 360);
+  const budget = session?.budget ?? sanitizeNumber(params.budget, 50000, 15000, 2000000);
+  const preferredTastes = session?.preferredTastes ?? sanitizeTastes(params.preferredTastes, ['gurih']);
+
   const [exitModalVisible, setExitModalVisible] = useState(false);
   const [skipModalVisible, setSkipModalVisible] = useState(false);
   const [poiToSkip, setPoiToSkip] = useState<Poi | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
-  // Tenant yang masih aktif (tidak berstatus dilewati/nonaktif)
-  const activeSteps = useMemo(
-    () => steps.filter((s, idx) => !skippedIds.includes(s.poi.id) && idx >= activeStepIndex),
-    [steps, skippedIds, activeStepIndex]
-  );
-
-  // Hitung ulang total biaya & estimasi waktu saat step diubah/dilewati
-  const totalCost = useMemo(
-    () => activeSteps.reduce((sum, s) => sum + s.estimatedCostIdr, 0),
-    [activeSteps]
-  );
-  const totalMin = useMemo(
-    () => activeSteps.reduce((sum, s) => sum + s.allocatedVisitMin + s.estimatedWalkingMin, 0),
-    [activeSteps]
-  );
-
-  // Fitur SB-4.4: Lewati Tenant dengan Custom In-App Modal
   const handlePromptSkip = (poi: Poi) => {
     setPoiToSkip(poi);
     setSkipModalVisible(true);
   };
 
-  const confirmSkipStep = () => {
+  const confirmSkipStep = async () => {
     if (!poiToSkip) return;
-    const poiIdToSkip = poiToSkip.id;
+    const skipped = poiToSkip;
     setSkipModalVisible(false);
-
-    // Tandai tenant sebagai dilewati tanpa menghapus kartu dari itinerary
-    setSkippedIds((prev) => (prev.includes(poiIdToSkip) ? prev : [...prev, poiIdToSkip]));
-
-    // Jika yang dilewati adalah step aktif saat ini, majukan activeStepIndex ke step berikutnya yang belum dilewati
-    if (steps[activeStepIndex]?.poi.id === poiIdToSkip) {
-      const nextActiveIndex = steps.findIndex(
-        (s, idx) => idx > activeStepIndex && !skippedIds.includes(s.poi.id) && s.poi.id !== poiIdToSkip
-      );
-      if (nextActiveIndex !== -1) {
-        setActiveStepIndex(nextActiveIndex);
-      }
-    }
-
     setPoiToSkip(null);
-  };
 
-  // Saat pengguna membatalkan status lewati
-  const handleUndoSkip = (poiId: string, index: number) => {
-    setSkippedIds((prev) => prev.filter((id) => id !== poiId));
-    if (index < activeStepIndex) {
-      setActiveStepIndex(index);
+    let added: string[] = [];
+    let pendingAfter = 0;
+    await TrailSessionStore.update((s) => {
+      const res = skipTrailStep(s, skipped.id, pois, userCoord, Date.now());
+      added = res.addedPoiIds;
+      pendingAfter = pendingTrailSteps(res.session).length;
+      return res.session;
+    });
+
+    if (added.length > 0) {
+      const names = added.map((id) => pois.find((p) => p.id === id)?.name).filter(Boolean);
+      setNotice(`Rute disusun ulang. Pengganti: ${names.join(', ')}.`);
+    } else if (pendingAfter > 0) {
+      setNotice('Rute disusun ulang dari posisimu sekarang.');
+    } else {
+      setNotice('Tidak ada tenant pengganti yang muat di sisa waktu dan budget.');
     }
   };
 
-  // Navigasi langsung ke step tertentu (misal langsung ke card 2):
-  // Menonaktifkan step-step sebelumnya, mengaktifkan step target, dan memulai navigasi
+  const handleUndoSkip = (poiId: string) => {
+    setNotice(null);
+    void TrailSessionStore.update((s) => undoSkipTrailStep(s, poiId));
+  };
+
+  // Langsung ke step tertentu: step pending sebelumnya dilewati tanpa susun ulang.
   const handleNavigateToStep = (targetIndex: number, poiId: string) => {
-    const newlySkipped: string[] = [];
-    for (let i = 0; i < targetIndex; i++) {
-      const pId = steps[i].poi.id;
-      if (!skippedIds.includes(pId)) {
-        newlySkipped.push(pId);
-      }
-    }
-    if (newlySkipped.length > 0) {
-      setSkippedIds((prev) => [...prev, ...newlySkipped]);
-    }
-    setActiveStepIndex(targetIndex);
+    setNotice(null);
+    void TrailSessionStore.update((s) => jumpToTrailStep(s, targetIndex));
     router.push(`/navigate/${poiId}`);
   };
 
-  // Navigasi ke ringkasan trail
   const handleFinishTrail = () => {
-    router.push({
+    const elapsedMin = session ? Math.max(1, Math.round((Date.now() - session.startedAt) / 60_000)) : 0;
+    router.replace({
       pathname: '/trail/summary',
       params: {
-        totalCost: totalCost.toString(),
-        totalMin: totalMin.toString(),
-        visitedCount: activeSteps.length.toString(),
+        totalCost: doneSteps.reduce((sum, s) => sum + s.estimatedCostIdr, 0).toString(),
+        totalMin: elapsedMin.toString(),
+        visitedCount: doneSteps.length.toString(),
       },
     });
+    void TrailSessionStore.end();
   };
+
+  const handleReplan = () => {
+    void TrailSessionStore.end();
+    router.replace('/(tabs)/trail');
+  };
+
+  const exploreModeOff = session != null && pendingCount > 0 && !ExploreModeController.isActive();
 
   const renderStepItem = ({ item, index }: { item: TrailStep; index: number }) => {
     const isFirst = index === 0;
     const isLast = index === steps.length - 1;
-    const isDeactivated = skippedIds.includes(item.poi.id) || index < activeStepIndex;
-    const isActive = !isDeactivated && index === activeStepIndex;
+    const status = session?.status[item.poi.id] ?? 'pending';
+    const isDone = status === 'done';
+    const isDeactivated = status === 'skipped';
+    const isActive = index === activeStepIndex;
+    const canUndo = isDeactivated && session?.undo?.poiId === item.poi.id;
 
     // Foto tenant dari data POI
     const firstPhotoKey = item.poi.photos && item.poi.photos.length > 0 ? item.poi.photos[0].assetKey : null;
@@ -223,7 +229,9 @@ export default function TrailItineraryScreen() {
           <View
             style={[
               styles.stepBullet,
-              isDeactivated
+              isDone
+                ? styles.stepBulletDone
+                : isDeactivated
                 ? styles.stepBulletDeactivated
                 : isActive
                   ? styles.stepBulletActive
@@ -236,7 +244,9 @@ export default function TrailItineraryScreen() {
         <View
           style={[
             styles.stepCard,
-            isDeactivated
+            isDone
+              ? styles.stepCardDone
+              : isDeactivated
               ? styles.stepCardDeactivated
               : isActive
                 ? styles.stepCardActive
@@ -300,33 +310,52 @@ export default function TrailItineraryScreen() {
             </View>
           </View>
 
-          {/* Tombol Aksi di Kartu */}
-          {isDeactivated ? (
+          {isDone ? (
+            <View style={styles.deactivatedActionsRow}>
+              <View style={styles.doneBadge}>
+                <Ionicons name="checkmark-circle" size={14} color="#FF8316" />
+                <Text style={styles.doneBadgeText}>Selesai</Text>
+              </View>
+            </View>
+          ) : isDeactivated ? (
             <View style={styles.deactivatedActionsRow}>
               <View style={styles.deactivatedBadge}>
                 <Ionicons name="play-skip-forward-circle-outline" size={14} color="#8E7164" />
                 <Text style={styles.deactivatedBadgeText}>Dilewati</Text>
               </View>
-              <Pressable
-                style={styles.undoBtn}
-                onPress={() => handleUndoSkip(item.poi.id, index)}
-                accessibilityRole="button"
-                accessibilityLabel={`Batal lewati ${item.poi.name}`}
-              >
-                <Ionicons name="refresh-outline" size={13} color="#8E7164" />
-                <Text style={styles.undoBtnText}>Batal lewati</Text>
-              </Pressable>
+              {canUndo && (
+                <Pressable
+                  style={styles.undoBtn}
+                  onPress={() => handleUndoSkip(item.poi.id)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Batal lewati ${item.poi.name}`}
+                >
+                  <Ionicons name="refresh-outline" size={13} color="#8E7164" />
+                  <Text style={styles.undoBtnText}>Batal lewati</Text>
+                </Pressable>
+              )}
             </View>
           ) : isActive ? (
-            <Pressable
-              style={styles.navStepBtnActive}
-              onPress={() => router.push(`/navigate/${item.poi.id}`)}
-              accessibilityRole="button"
-              accessibilityLabel={`Mulai navigasi ke ${item.poi.name}`}
-            >
-              <Text style={styles.navStepBtnActiveText}>Mulai Navigasi</Text>
-              <Ionicons name="navigate-outline" size={16} color="#FFFFFF" />
-            </Pressable>
+            <View style={styles.nonActiveActionsRow}>
+              <Pressable
+                style={styles.skipBtnSmall}
+                onPress={() => handlePromptSkip(item.poi)}
+                accessibilityRole="button"
+                accessibilityLabel={`Lewati ${item.poi.name}`}
+              >
+                <Ionicons name="play-skip-forward-outline" size={15} color="#8E7164" />
+                <Text style={styles.skipBtnSmallText}>Lewati</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.navStepBtnActive, styles.navStepBtnActiveFlex]}
+                onPress={() => router.push(`/navigate/${item.poi.id}`)}
+                accessibilityRole="button"
+                accessibilityLabel={`Mulai navigasi ke ${item.poi.name}`}
+              >
+                <Text style={styles.navStepBtnActiveText}>Mulai Navigasi</Text>
+                <Ionicons name="navigate-outline" size={16} color="#FFFFFF" />
+              </Pressable>
+            </View>
           ) : (
             <View style={styles.nonActiveActionsRow}>
               <Pressable
@@ -411,6 +440,25 @@ export default function TrailItineraryScreen() {
         </View>
       </View>
 
+      {(notice || exploreModeOff) && (
+        <View style={styles.noticeBanner}>
+          <Ionicons name="information-circle-outline" size={16} color="#8E7164" />
+          <Text style={styles.noticeText}>
+            {notice ?? 'Nyalakan Mode Jelajah di Beranda supaya tenant tercentang otomatis saat kamu mampir.'}
+          </Text>
+          {notice && (
+            <Pressable
+              onPress={() => setNotice(null)}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="Tutup info"
+            >
+              <Ionicons name="close" size={16} color="#8E7164" />
+            </Pressable>
+          )}
+        </View>
+      )}
+
       {/* Timeline List Container (Warna Krem #FFE0B8) */}
       <View style={styles.timelineListOuter}>
         <FlatList
@@ -420,30 +468,42 @@ export default function TrailItineraryScreen() {
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
           ListFooterComponent={
-            activeSteps.length === 0 ? (
+            steps.length > 0 && pendingCount === 0 ? (
               <View style={styles.allSkippedFooter}>
-                <MaterialCommunityIcons name="map-marker-off" size={32} color="#8E7164" />
-                <Text style={styles.allSkippedText}>Semua tenant pada rute telah dilewati</Text>
+                <MaterialCommunityIcons
+                  name={doneSteps.length > 0 ? 'flag-checkered' : 'map-marker-off'}
+                  size={32}
+                  color="#8E7164"
+                />
+                <Text style={styles.allSkippedText}>
+                  {doneSteps.length > 0
+                    ? `Trail selesai, ${doneSteps.length} tenant sudah kamu kunjungi`
+                    : 'Semua tenant pada rute telah dilewati'}
+                </Text>
                 <Pressable
                   style={styles.replanBtn}
-                  onPress={() => router.replace('/(tabs)/trail')}
+                  onPress={doneSteps.length > 0 ? handleFinishTrail : handleReplan}
+                  accessibilityRole="button"
                 >
-                  <Text style={styles.replanBtnText}>Rencanakan Ulang</Text>
+                  <Text style={styles.replanBtnText}>
+                    {doneSteps.length > 0 ? 'Lihat Ringkasan' : 'Rencanakan Ulang'}
+                  </Text>
                 </Pressable>
               </View>
             ) : undefined
           }
           ListEmptyComponent={
-            <View style={styles.emptyContainer}>
-              <MaterialCommunityIcons name="map-marker-off" size={48} color="#C4B4AB" />
-              <Text style={styles.emptyTitle}>Semua tenant pada rute telah dilewati</Text>
-              <Pressable
-                style={styles.replanBtn}
-                onPress={() => router.replace('/(tabs)/trail')}
-              >
-                <Text style={styles.replanBtnText}>Rencanakan Ulang</Text>
-              </Pressable>
-            </View>
+            session === undefined ? undefined : (
+              <View style={styles.emptyContainer}>
+                <MaterialCommunityIcons name="map-marker-off" size={48} color="#C4B4AB" />
+                <Text style={styles.emptyTitle}>
+                  {session ? 'Tidak ada tenant yang muat di rute ini' : 'Tidak ada trail yang sedang berjalan'}
+                </Text>
+                <Pressable style={styles.replanBtn} onPress={handleReplan} accessibilityRole="button">
+                  <Text style={styles.replanBtnText}>Rencanakan Ulang</Text>
+                </Pressable>
+              </View>
+            )
           }
         />
       </View>
@@ -491,6 +551,7 @@ export default function TrailItineraryScreen() {
                 style={styles.modalTetapKeluarBtn}
                 onPress={() => {
                   setExitModalVisible(false);
+                  void TrailSessionStore.end();
                   router.back();
                 }}
               >
@@ -544,7 +605,7 @@ export default function TrailItineraryScreen() {
 
               <Pressable
                 style={styles.modalTetapKeluarBtn}
-                onPress={confirmSkipStep}
+                onPress={() => void confirmSkipStep()}
               >
                 <Text style={styles.modalTetapKeluarBtnText} numberOfLines={1}>
                   Ya, lewati
@@ -719,6 +780,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderWidth: 3.5,
   },
+  stepBulletDone: {
+    borderColor: '#FF8316',
+    backgroundColor: '#FF8316',
+    borderWidth: 3.5,
+  },
   stepBulletDeactivated: {
     borderColor: '#BDBDBD',
     backgroundColor: '#EEEEEE',
@@ -740,6 +806,10 @@ const styles = StyleSheet.create({
   },
   stepCardActive: {
     borderColor: '#FF8316',
+  },
+  stepCardDone: {
+    backgroundColor: '#FFF8EF',
+    borderColor: '#FFC17E',
   },
   stepCardDeactivated: {
     opacity: 0.58,
@@ -941,6 +1011,42 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     paddingVertical: 2,
+  },
+  navStepBtnActiveFlex: {
+    flex: 1,
+    paddingHorizontal: 12,
+  },
+  doneBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    backgroundColor: '#FFF0DC',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 12,
+  },
+  doneBadgeText: {
+    fontFamily: fontFamily.medium,
+    fontSize: 12,
+    color: '#FF8316',
+  },
+  noticeBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginHorizontal: 16,
+    marginBottom: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 12,
+    backgroundColor: '#F3ECE7',
+  },
+  noticeText: {
+    flex: 1,
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    lineHeight: 16,
+    color: '#8E7164',
   },
   deactivatedBadge: {
     flexDirection: 'row',
