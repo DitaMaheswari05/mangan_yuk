@@ -56,7 +56,7 @@ export default function SearchScreen() {
 
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('semua');
-  const [selectedTaste, setSelectedTaste] = useState<TasteTag | null>(null);
+  const [selectedTastes, setSelectedTastes] = useState<TasteTag[]>([]);
   const [selectedPriceBucket, setSelectedPriceBucket] = useState<PriceBucket | null>(null);
   const [openNowOnly, setOpenNowOnly] = useState(false);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
@@ -67,13 +67,13 @@ export default function SearchScreen() {
   const searchResponse = useMemo(() => {
     return searchPois(pois, {
       query,
-      taste: selectedTaste ?? undefined,
+      tastes: selectedTastes.length > 0 ? selectedTastes : undefined,
       priceBucket: selectedPriceBucket ?? undefined,
       openNow: openNowOnly || undefined,
       userCoordinate: position?.coordinate,
       sortBy: query.trim() ? 'relevance' : 'distance',
     });
-  }, [pois, query, selectedTaste, selectedPriceBucket, openNowOnly, position]);
+  }, [pois, query, selectedTastes, selectedPriceBucket, openNowOnly, position]);
 
   // Filter kategori horizontal chip
   const filteredResults = useMemo(() => {
@@ -160,13 +160,19 @@ export default function SearchScreen() {
 
   const activeFilterCount =
     (selectedCategory !== 'semua' ? 1 : 0) +
-    (selectedTaste ? 1 : 0) +
+    selectedTastes.length +
     (selectedPriceBucket ? 1 : 0) +
     (openNowOnly ? 1 : 0);
 
+  const toggleTaste = (taste: TasteTag) => {
+    setSelectedTastes((prev) =>
+      prev.includes(taste) ? prev.filter((t) => t !== taste) : [...prev, taste]
+    );
+  };
+
   const resetFilters = () => {
     setSelectedCategory('semua');
-    setSelectedTaste(null);
+    setSelectedTastes([]);
     setSelectedPriceBucket(null);
     setOpenNowOnly(false);
   };
@@ -345,9 +351,6 @@ export default function SearchScreen() {
         <Text style={styles.statusCount}>
           Ditemukan <Text style={styles.statusCountBold}>{filteredResults.length}</Text> tenant
         </Text>
-        <Text style={styles.statusSpeed}>
-          {searchResponse.executionTimeMs}ms (offline)
-        </Text>
       </View>
 
       {/* Daftar Kartu Tenant */}
@@ -424,16 +427,16 @@ export default function SearchScreen() {
                 })}
               </View>
 
-              {/* Seksi Profil Rasa */}
+              {/* Seksi Profil Rasa (Multi-Select) */}
               <Text style={styles.filterSectionTitle}>Profil Rasa</Text>
               <View style={styles.tasteChipsGrid}>
                 {TASTE_OPTIONS.map((item) => {
-                  const active = selectedTaste === item.id;
+                  const active = selectedTastes.includes(item.id);
                   return (
                     <Pressable
                       key={item.id}
                       style={[styles.tasteChip, active && styles.tasteChipActive]}
-                      onPress={() => setSelectedTaste(active ? null : item.id)}
+                      onPress={() => toggleTaste(item.id)}
                     >
                       <Text
                         style={[styles.tasteChipText, active && styles.tasteChipTextActive]}
@@ -498,20 +501,20 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontFamily: fontFamily.bold,
     fontSize: 26,
-    lineHeight: 30,
+    lineHeight: 45,
     color: '#404040',
     marginBottom: 2,
   },
   categoryChipsScroll: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    paddingVertical: 2,
+    gap: 8,
+    paddingVertical: 6,
   },
   categoryChip: {
     borderRadius: 100,
-    paddingVertical: 6,
-    paddingHorizontal: 13,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
   categoryChipActive: {
     backgroundColor: '#FF8316',
@@ -601,14 +604,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    padding: 10,
-    gap: 10,
+    padding: 12,
+    gap: 16,
     borderWidth: 1,
     borderColor: '#FFF0DC',
   },
   thumbWrapper: {
-    width: 97,
-    height: 91,
+    width: 105,
+    height: 105,
     borderRadius: 10,
     overflow: 'hidden',
     position: 'relative',
@@ -648,10 +651,10 @@ const styles = StyleSheet.create({
   tenantInfoCol: {
     flex: 1,
     justifyContent: 'center',
-    gap: 3.5,
+    gap: 7,
   },
   nameAndTagsCol: {
-    gap: 3,
+    gap: 7,
   },
   poiName: {
     fontFamily: fontFamily.medium,
@@ -702,12 +705,12 @@ const styles = StyleSheet.create({
   cardInnerDivider: {
     height: 0.5,
     backgroundColor: '#E6E6E6',
-    marginVertical: 1,
+    marginTop: 6,
   },
   distanceWalkRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: 10,
   },
   distanceText: {
     fontFamily: fontFamily.regular,
@@ -748,28 +751,28 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontFamily: fontFamily.medium,
-    fontSize: 15,
+    fontSize: 20,
     color: '#404040',
     textAlign: 'center',
     marginTop: 8,
   },
   emptySubtitle: {
     fontFamily: fontFamily.regular,
-    fontSize: 12,
+    fontSize: 13,
     color: '#A6A6A6',
     textAlign: 'center',
     maxWidth: 240,
   },
   resetFilterBtn: {
     backgroundColor: '#FF8316',
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    paddingVertical: 4,
     marginTop: 12,
   },
   resetFilterBtnText: {
     fontFamily: fontFamily.medium,
-    fontSize: 12,
+    fontSize: 15,
     color: '#FFFFFF',
   },
   modalOverlay: {
@@ -814,8 +817,8 @@ const styles = StyleSheet.create({
   },
   modalOptionCard: {
     flex: 1,
-    paddingVertical: 6,
-    paddingHorizontal: 6,
+    paddingVertical: 3,
+    paddingHorizontal: 3,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#E6E6E6',
@@ -828,7 +831,7 @@ const styles = StyleSheet.create({
   },
   modalOptionLabel: {
     fontFamily: fontFamily.medium,
-    fontSize: 11,
+    fontSize: 12,
     color: '#404040',
   },
   modalOptionLabelActive: {
@@ -836,7 +839,7 @@ const styles = StyleSheet.create({
   },
   modalOptionSub: {
     fontFamily: fontFamily.regular,
-    fontSize: 9,
+    fontSize: 11,
     color: '#A6A6A6',
     marginTop: 1,
   },
@@ -846,12 +849,12 @@ const styles = StyleSheet.create({
   tasteChipsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 6,
+    gap: 8,
   },
   tasteChip: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 1,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: '#E6E6E6',
     backgroundColor: '#F9F9F9',
@@ -907,9 +910,9 @@ const styles = StyleSheet.create({
     borderTopColor: '#F0ECE8',
   },
   modalResetBtn: {
-    paddingVertical: 10,
+    paddingVertical: 4,
     paddingHorizontal: 16,
-    borderRadius: 16,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: '#E6E6E6',
   },
@@ -921,8 +924,8 @@ const styles = StyleSheet.create({
   modalApplyBtn: {
     flex: 1,
     backgroundColor: '#FF8316',
-    borderRadius: 16,
-    paddingVertical: 10,
+    borderRadius: 20,
+    paddingVertical: 4,
     alignItems: 'center',
   },
   modalApplyBtnText: {

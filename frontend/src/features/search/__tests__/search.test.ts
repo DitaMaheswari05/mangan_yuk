@@ -176,6 +176,14 @@ describe('F05 Pencarian Toleran Typo (Fuse.js) & Filter Multi-Parameter (SB-3.3)
       expect(ids).not.toContain('P01'); // Pukis manis tidak boleh masuk
     });
 
+    it('filter multi-select rasa (tastes) menampilkan tenant yang cocok dengan salah satu rasa', () => {
+      const filtered = applyFilters(TEST_POIS, { tastes: ['manis', 'pedas'] });
+      const ids = filtered.map((p) => p.id);
+      expect(ids).toContain('P01'); // Pukis (manis)
+      expect(ids).toContain('P02'); // King Crab (pedas)
+      expect(ids).toContain('P05'); // Baso Pandu (pedas)
+    });
+
     it('kombinasi filter: harga under15k DAN rasa gurih menghasilkan daftar yang sesuai deterministik', () => {
       const filtered = applyFilters(TEST_POIS, { priceBucket: 'under15k', taste: 'gurih' });
       const ids = filtered.map((p) => p.id);

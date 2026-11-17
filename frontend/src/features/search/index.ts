@@ -28,7 +28,8 @@ export const DEFAULT_FUSE_OPTIONS: IFuseOptions<Poi> = {
 export type SearchFilters = {
   query?: string;
   priceBucket?: PriceBucket; // 'under15k' | '15to30k' | 'over30k'
-  taste?: TasteTag; // 'pedas' | 'manis' | 'gurih' | 'segar' | 'aromatik'
+  taste?: TasteTag; // 'pedas' | 'manis' | 'gurih' | 'segar' | 'aromatik' (kompatibilitas backward)
+  tastes?: TasteTag[]; // Mendukung multi-select profil rasa
   type?: FoodType; // 'makanan' | 'minuman' | 'jajanan'
   openNow?: boolean;
   referenceDate?: Date; // Untuk pengujian / simulasi waktu
@@ -57,7 +58,7 @@ export function applyFilters(
   pois: Poi[],
   filters: Omit<SearchFilters, 'query' | 'userCoordinate' | 'sortBy'>,
 ): Poi[] {
-  const { priceBucket, taste, type, openNow, referenceDate } = filters;
+  const { priceBucket, taste, tastes, type, openNow, referenceDate } = filters;
   const now = referenceDate ?? new Date();
 
   return pois.filter((poi) => {
@@ -66,11 +67,13 @@ export function applyFilters(
       return false;
     }
 
-    // 2. Filter Profil Rasa (dari tag tenant atau tag menu)
-    if (taste) {
-      const hasTenantTaste = poi.tasteTags.includes(taste);
-      const hasMenuTaste = poi.menu.some((m) => m.tastes.includes(taste));
-      if (!hasTenantTaste && !hasMenuTaste) {
+    // 2. Filter Profil Rasa (dari tag tenant atau tag menu) - mendukung single dan multi-select
+    const activeTastes: TasteTag[] = tastes && tastes.length > 0 ? tastes : taste ? [taste] : [];
+    if (activeTastes.length > 0) {
+      const matchesAnyTaste = activeTastes.some(
+        (t) => poi.tasteTags.includes(t) || poi.menu.some((m) => m.tastes.includes(t))
+      );
+      if (!matchesAnyTaste) {
         return false;
       }
     }
