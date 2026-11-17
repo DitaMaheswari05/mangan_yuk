@@ -6,7 +6,7 @@ const config: ExpoConfig = {
   scheme: 'manganyuk',
   version: '0.1.0',
   orientation: 'portrait',
-  owner: 'ditmahes',
+  owner: 'mangan-yuk-prod',
   extra: { eas: { projectId: '1e36eaeb-ae38-4396-8040-bc2814a81b33' } },
   plugins: [
     'expo-router',
