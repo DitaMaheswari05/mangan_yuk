@@ -82,6 +82,34 @@ export default function NavigateScreen() {
     return computeNavigationStatus(position.coordinate, headingDeg, targetCoord, opts);
   }, [position, targetCoord, headingDeg, walkingRoute, routePoints]);
 
+  // Format estimasi waktu sesuai Figma (misal "1j 30mnt" atau "10 mnt")
+  const etaFormatted = useMemo(() => {
+    if (!navStatus) return '~ mnt';
+    const totalMinutes = Math.max(1, Math.ceil(navStatus.distanceM / 60)); // asumsi ~60m/menit jalan kaki santai
+    if (totalMinutes >= 60) {
+      const hours = Math.floor(totalMinutes / 60);
+      const mins = totalMinutes % 60;
+      return mins > 0 ? `${hours}j ${mins}mnt` : `${hours}j`;
+    }
+    return `${totalMinutes} mnt`;
+  }, [navStatus]);
+
+  // Format jarak (misal "4.9 km" atau "250 m")
+  const distanceFormatted = useMemo(() => {
+    if (!navStatus) return '~';
+    if (navStatus.distanceM >= 1000) {
+      return `${(navStatus.distanceM / 1000).toFixed(1)} km`;
+    }
+    return `${navStatus.distanceM} m`;
+  }, [navStatus]);
+
+  // Teks instruksi manuver berikutnya
+  const maneuverText = useMemo(() => {
+    if (!navStatus) return 'lurus';
+    if (navStatus.isOnTarget) return 'lurus terus';
+    return navStatus.deviationDeg > 0 ? 'belok kanan' : 'belok kiri';
+  }, [navStatus]);
+
   // Efek rotasi panah kompas (menghadap ke target)
   // Deviasi = bearing - heading. Jika heading=0 dan bearing=90, deviasi = 90 (panah mengarah ke kanan)
   useEffect(() => {
@@ -170,45 +198,43 @@ export default function NavigateScreen() {
         routePoints={routePoints}
       />
 
-      {/* Header Bar Navigasi Mengambang */}
-      <View style={[styles.topHeader, { top: insets.top + 10 }]}>
+      {/* Header Bar Navigasi Mengambang sesuai Figma #334:43229 */}
+      <View style={[styles.topHeaderCard, { top: insets.top + 12 }]}>
         <Pressable
-          style={styles.circleBtn}
-          onPress={() => router.back()}
-          accessibilityRole="button"
-          accessibilityLabel="Keluar dari mode navigasi"
-        >
-          <Ionicons name="arrow-back" size={22} color="#1B1B1C" />
-        </Pressable>
-
-        <Pressable
-          style={styles.headerTitleBox}
+          style={styles.headerInfoCol}
           onPress={() => router.push(`/poi/${targetPoi.id}`)}
           accessibilityRole="button"
           accessibilityLabel={`Buka detail ${targetPoi.name}`}
         >
-          <Text style={styles.navSubLabel}>Navigasi Menuju</Text>
-          <View style={styles.headerPoiRow}>
-            <Text style={styles.navPoiName} numberOfLines={1}>
-              {targetPoi.name}
-            </Text>
-            <Ionicons name="information-circle-outline" size={16} color="#FF8316" />
-          </View>
+          <Text style={styles.navSubLabel}>Navigasi menuju</Text>
+          <Text style={styles.navPoiName} numberOfLines={1}>
+            {targetPoi.name}
+          </Text>
         </Pressable>
 
         <Pressable
-          style={styles.circleBtn}
-          onPress={handleRecenter}
+          style={styles.headerCloseBtn}
+          onPress={() => router.back()}
           accessibilityRole="button"
-          accessibilityLabel="Pusatkan peta ke posisi saat ini"
+          accessibilityLabel="Tutup navigasi"
         >
-          <MaterialCommunityIcons name="crosshairs-gps" size={22} color="#FF8316" />
+          <Ionicons name="close" size={26} color="#FF6B00" />
         </Pressable>
       </View>
 
+      {/* Floating Recenter GPS Button di kanan bawah di atas bottom card */}
+      <Pressable
+        style={[styles.floatingGpsBtn, { bottom: Math.max(insets.bottom, 16) + 116 }]}
+        onPress={handleRecenter}
+        accessibilityRole="button"
+        accessibilityLabel="Pusatkan peta ke posisi saat ini"
+      >
+        <MaterialCommunityIcons name="crosshairs-gps" size={24} color="#5A5A5A" />
+      </Pressable>
+
       {/* Banner Sinyal GPS Lemah jika akurasi > 30m */}
       {position && position.accuracyM > 30 ? (
-        <View style={[styles.gpsWarningBanner, { top: insets.top + 76 }]}>
+        <View style={[styles.gpsWarningBanner, { top: insets.top + 88 }]}>
           <Ionicons name="warning-outline" size={16} color="#BA1A1A" />
           <Text style={styles.gpsWarningText}>
             Sinyal GPS lemah (akurasi ~{Math.round(position.accuracyM)}m). Menunggu sinyal lebih presisi...
@@ -217,7 +243,7 @@ export default function NavigateScreen() {
       ) : null}
 
       {/* Modal / Card Info Navigasi Bagian Bawah */}
-      <View style={[styles.bottomCard, { paddingBottom: Math.max(insets.bottom, 18) }]}>
+      <View style={[styles.bottomCardWrapper, { paddingBottom: Math.max(insets.bottom, 16) }]}>
         {hasArrivedState || (navStatus && navStatus.hasArrived) ? (
           // Status Sudah Sampai (AC F06-3: <= 10m)
           <View style={styles.arrivalBox}>
@@ -239,56 +265,42 @@ export default function NavigateScreen() {
             </Pressable>
           </View>
         ) : (
-          // Status Sedang Dipandu: Kiri (Arah Belokan/Kompas) - Tengah (ETA & Jarak) - Kanan (Tombol X)
-          <View style={styles.compactNavRow}>
-            {/* Kiri: Arah Panah & Panduan Arah */}
-            <View style={styles.directionSection}>
-              <View style={styles.directionDial}>
-                <Animated.View style={[styles.arrowContainer, { transform: [{ rotate: spin }] }]}>
-                  <Ionicons
-                    name="navigate"
-                    size={28}
-                    color={navStatus?.isOnTarget ? '#2E9E4F' : '#FF8316'}
-                  />
-                </Animated.View>
-              </View>
-              <Text style={styles.directionLabel} numberOfLines={1}>
-                {!isCompassAvailable
-                  ? 'Kompas N/A'
-                  : navStatus?.isOnTarget
-                    ? 'Arah Tepat'
-                    : navStatus && navStatus.deviationDeg > 0
-                      ? 'Belok Kanan'
-                      : 'Belok Kiri'}
+          // Status Sedang Dipandu Sesuai Figma #334:43229
+          <View style={styles.bottomCard}>
+            {/* Kiri: Total Estimasi Waktu & Jarak */}
+            <View style={styles.bottomLeftCol}>
+              <Text style={styles.mainEtaText} numberOfLines={1}>
+                {etaFormatted}
+              </Text>
+              <Text style={styles.mainDistanceText} numberOfLines={1}>
+                {distanceFormatted}
               </Text>
             </View>
 
-            {/* Tengah: ETA Utama & Jarak Sisa Meter */}
-            <View style={styles.compactCenterBlock}>
-              <View style={styles.etaRow}>
-                <Text style={styles.compactEtaValue}>
-                  {navStatus ? Math.max(1, Math.ceil(navStatus.distanceM / 60)) : '~'}
+            {/* Kanan: Badge Oranye Manuver Belokan */}
+            <View style={styles.maneuverBadge}>
+              <Animated.View style={[styles.arrowContainer, { transform: [{ rotate: spin }] }]}>
+                <Ionicons
+                  name={
+                    navStatus?.isOnTarget
+                      ? 'arrow-up'
+                      : navStatus && navStatus.deviationDeg > 0
+                        ? 'arrow-forward'
+                        : 'arrow-back'
+                  }
+                  size={24}
+                  color="#FFFFFF"
+                />
+              </Animated.View>
+              <View style={styles.maneuverTextCol}>
+                <Text style={styles.maneuverTimeText} numberOfLines={1}>
+                  {navStatus ? `${Math.max(1, Math.ceil(navStatus.distanceM / 60))} menit lagi` : '~ mnt'}
                 </Text>
-                <Text style={styles.compactEtaUnit}>min</Text>
+                <Text style={styles.maneuverActionText} numberOfLines={1}>
+                  {maneuverText}
+                </Text>
               </View>
-              <Text style={styles.compactSubMeta}>
-                {navStatus
-                  ? navStatus.distanceM >= 1000
-                    ? `${(navStatus.distanceM / 1000).toFixed(1)} km`
-                    : `${navStatus.distanceM} m`
-                  : '~ m'}
-              </Text>
             </View>
-
-            {/* Kanan: Tombol X Bulat untuk Selesaikan Navigasi */}
-            <Pressable
-              style={styles.closeCircleBtn}
-              onPress={() => router.back()}
-              accessibilityRole="button"
-              accessibilityLabel="Selesaikan navigasi"
-            >
-              <Ionicons name="close" size={24} color="#FFFFFF" />
-            </Pressable>
           </View>
         )}
       </View>
@@ -325,61 +337,61 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#FFFFFF',
   },
-  topHeader: {
+  topHeaderCard: {
     position: 'absolute',
     left: 16,
     right: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 30,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     zIndex: 10,
-  },
-  circleBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 4,
+    elevation: 6,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-  },
-  headerTitleBox: {
-    flex: 1,
-    marginHorizontal: 12,
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 14,
-    paddingHorizontal: 14,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 12,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.12,
-    shadowRadius: 3,
+    shadowRadius: 8,
+  },
+  headerInfoCol: {
+    flex: 1,
+    marginRight: 12,
   },
   navSubLabel: {
     fontFamily: fontFamily.regular,
-    fontSize: 12,
-    lineHeight: 14,
-    color: '#8E7164',
+    fontSize: 14,
+    lineHeight: 18,
+    color: '#666666',
   },
   navPoiName: {
     fontFamily: fontFamily.bold,
-    fontSize: 20,
-    lineHeight: 18,
-    color: '#1B1B1C',
+    fontSize: 18,
+    lineHeight: 24,
+    color: '#1E1E1E',
+    marginTop: 2,
   },
-  headerPoiRow: {
-    flexDirection: 'row',
+  headerCloseBtn: {
+    padding: 4,
     alignItems: 'center',
-    gap: 4,
-    maxWidth: '100%',
+    justifyContent: 'center',
+  },
+  floatingGpsBtn: {
+    position: 'absolute',
+    right: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    zIndex: 10,
   },
   gpsWarningBanner: {
     position: 'absolute',
@@ -400,105 +412,87 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#BA1A1A',
   },
-  arrowContainer: {
-    width: 36,
-    height: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bottomCard: {
+  bottomCardWrapper: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    paddingTop: 18,
-    paddingHorizontal: 22,
-    elevation: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -3 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
+    paddingHorizontal: 20,
     zIndex: 10,
   },
-  compactNavRow: {
+  bottomCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 30,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '100%',
-    paddingVertical: 2,
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.14,
+    shadowRadius: 10,
   },
-  directionSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 76,
-  },
-  directionDial: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#FFF4EA',
-    borderWidth: 1.5,
-    borderColor: '#FFDBCC',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  directionLabel: {
-    fontFamily: fontFamily.semibold,
-    fontSize: 12,
-    lineHeight: 20,
-    color: '#5A4136',
-    marginTop: 4,
-    textAlign: 'center',
-  },
-  compactCenterBlock: {
+  bottomLeftCol: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 8,
   },
-  etaRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    gap: 4,
-  },
-  compactEtaValue: {
+  mainEtaText: {
     fontFamily: fontFamily.bold,
-    fontSize: 34,
-    lineHeight: 38,
-    color: '#1B1B1C',
+    fontSize: 26,
+    lineHeight: 32,
+    color: '#1E1E1E',
   },
-  compactEtaUnit: {
-    fontFamily: fontFamily.medium,
-    fontSize: 18,
-    lineHeight: 22,
-    color: '#1B1B1C',
-  },
-  compactSubMeta: {
+  mainDistanceText: {
     fontFamily: fontFamily.regular,
-    fontSize: 14,
-    lineHeight: 18,
-    color: '#707070',
+    fontSize: 15,
+    lineHeight: 20,
+    color: '#666666',
     marginTop: 2,
   },
-  closeCircleBtn: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
-    backgroundColor: '#A61C1C',
+  maneuverBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FF8316',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    gap: 10,
+  },
+  arrowContainer: {
+    width: 28,
+    height: 28,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3,
+  },
+  maneuverTextCol: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+  maneuverTimeText: {
+    fontFamily: fontFamily.bold,
+    fontSize: 13,
+    lineHeight: 17,
+    color: '#FFFFFF',
+  },
+  maneuverActionText: {
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    lineHeight: 15,
+    color: '#FFFFFF',
   },
   arrivalBox: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 30,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
     alignItems: 'center',
-    paddingVertical: 8,
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.14,
+    shadowRadius: 10,
   },
   arrivalIconCircle: {
     width: 56,
