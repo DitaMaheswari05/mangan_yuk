@@ -147,6 +147,7 @@ function PoiDetail({ poi, topInset, bottomInset }: { poi: Poi; topInset: number;
                     {m.isSignature ? '  ' : ''}
                     {m.isSignature ? <Ionicons name="star" size={12} color="#FFB800" /> : null}
                   </Text>
+                  {m.description ? <Text style={styles.menuDesc}>{m.description}</Text> : null}
                   {m.tastes.length ? <Text style={styles.menuTastes}>{m.tastes.join(' · ')}</Text> : null}
                 </View>
                 <Text style={styles.menuPrice}>{rupiah(m.priceIdr)}</Text>
@@ -279,7 +280,8 @@ const styles = StyleSheet.create({
   },
   menuNameCol: { flex: 1 },
   menuName: { fontFamily: fontFamily.medium, fontSize: 14, color: colors.onSurface },
-  menuTastes: { fontFamily: fontFamily.regular, fontSize: 12, color: '#8A8A8A', marginTop: 2 },
+  menuDesc: { fontFamily: fontFamily.regular, fontSize: 12, lineHeight: 17, color: '#5A5A5A', marginTop: 3 },
+  menuTastes: { fontFamily: fontFamily.regular, fontSize: 12, color: '#8A8A8A', marginTop: 3 },
   menuPrice: { fontFamily: fontFamily.semibold, fontSize: 14, color: ACCENT },
   hourRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 4 },
   hourDay: { fontFamily: fontFamily.regular, fontSize: 14, color: '#5A5A5A' },
