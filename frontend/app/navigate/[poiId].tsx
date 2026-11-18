@@ -224,7 +224,7 @@ export default function NavigateScreen() {
 
       {/* Floating Recenter GPS Button di kanan bawah di atas bottom card */}
       <Pressable
-        style={[styles.floatingGpsBtn, { bottom: Math.max(insets.bottom, 16) + 116 }]}
+        style={[styles.floatingGpsBtn, { bottom: Math.max(insets.bottom, 16) + 130 }]}
         onPress={handleRecenter}
         accessibilityRole="button"
         accessibilityLabel="Pusatkan peta ke posisi saat ini"
@@ -423,8 +423,9 @@ const styles = StyleSheet.create({
   bottomCard: {
     backgroundColor: '#FFFFFF',
     borderRadius: 30,
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    paddingVertical: 22,
+    paddingHorizontal: 22,
+    minHeight: 104,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -440,8 +441,8 @@ const styles = StyleSheet.create({
   },
   mainEtaText: {
     fontFamily: fontFamily.bold,
-    fontSize: 26,
-    lineHeight: 32,
+    fontSize: 28,
+    lineHeight: 34,
     color: '#1E1E1E',
   },
   mainDistanceText: {
@@ -449,15 +450,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     color: '#666666',
-    marginTop: 2,
+    marginTop: 4,
   },
   maneuverBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FF8316',
     borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     gap: 10,
   },
   arrowContainer: {
