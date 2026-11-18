@@ -8,7 +8,8 @@ import { colors, fontFamily } from '@/constants/theme';
 import { resolveAsset } from '@/features/audio';
 import { getPoiById, isOpenAt } from '@/features/poi';
 import { sanitizePoiId } from '@/lib/validation';
-import { useVisitedPoiIds } from '@/features/visits';
+import { useVisitedPoiIds, VisitRepository } from '@/features/visits';
+import { completeTrailStep, TrailSessionStore, useTrailSession } from '@/features/trail';
 import type { PhotoKind, Poi, TimeSlot } from '@/types/content';
 
 const ACCENT = '#FF8316';
@@ -34,7 +35,7 @@ function hoursByDay(slots: TimeSlot[]): { day: string; hours: string }[] {
 
 // F03 / PB08: Kartu detail POI multimodal (3 foto, menu & harga, jam buka, audio + transkrip), offline.
 export default function PoiDetailScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, fromTrail } = useLocalSearchParams<{ id: string; fromTrail?: string }>();
   const cleanId = sanitizePoiId(id);
   const poi = cleanId ? getPoiById(cleanId) : undefined;
   const insets = useSafeAreaInsets();
@@ -50,16 +51,53 @@ export default function PoiDetailScreen() {
     );
   }
 
-  return <PoiDetail poi={poi} topInset={insets.top} bottomInset={insets.bottom} />;
+  return (
+    <PoiDetail
+      poi={poi}
+      fromTrail={fromTrail === '1'}
+      topInset={insets.top}
+      bottomInset={insets.bottom}
+    />
+  );
 }
 
-function PoiDetail({ poi, topInset, bottomInset }: { poi: Poi; topInset: number; bottomInset: number }) {
+function PoiDetail({
+  poi,
+  fromTrail,
+  topInset,
+  bottomInset,
+}: {
+  poi: Poi;
+  fromTrail: boolean;
+  topInset: number;
+  bottomInset: number;
+}) {
   const { width } = useWindowDimensions();
   const visited = useVisitedPoiIds().has(poi.id);
+  const trailSession = useTrailSession();
   const openNow = useMemo(() => isOpenAt(poi, new Date()), [poi]);
   const hours = useMemo(() => hoursByDay(poi.openingHours), [poi.openingHours]);
   const [photoIndex, setPhotoIndex] = useState(0);
   const today = new Date().getDay();
+
+  // Cek apakah POI ini adalah bagian dari trail session yang aktif
+  const isPartOfActiveTrail = useMemo(() => {
+    if (fromTrail) return true;
+    if (!trailSession) return false;
+    return trailSession.steps.some((s) => s.poi.id === poi.id);
+  }, [fromTrail, trailSession, poi.id]);
+
+  const handleContinueTrail = async () => {
+    // Pastikan langkah ini ditandai selesai di trail session dan kunjungan tercatat
+    await VisitRepository.markVisited(poi.id);
+    await TrailSessionStore.update((s) => completeTrailStep(s, poi.id, Date.now()));
+    // Kembali ke halaman rute kuliner
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/trail/itinerary');
+    }
+  };
 
   // 3 slot foto: pakai foto sesuai jenis bila ada, selain itu placeholder.
   const photos = PHOTO_SLOTS.map((slot, i) => {
@@ -169,14 +207,26 @@ function PoiDetail({ poi, topInset, bottomInset }: { poi: Poi; topInset: number;
             <Text style={styles.mutedText}>Jam operasional belum tersedia.</Text>
           )}
 
-          <Pressable
-            style={[styles.primaryBtn, styles.navigateBtn]}
-            onPress={() => router.push(`/navigate/${poi.id}`)}
-            accessibilityRole="button"
-          >
-            <Ionicons name="navigate" size={18} color="#FFFFFF" />
-            <Text style={styles.primaryBtnText}>Arahkan ke Tenant</Text>
-          </Pressable>
+          {isPartOfActiveTrail ? (
+            <Pressable
+              style={[styles.primaryBtn, styles.navigateBtn]}
+              onPress={() => void handleContinueTrail()}
+              accessibilityRole="button"
+              accessibilityLabel="Lanjut jelajah rute"
+            >
+              <Text style={styles.primaryBtnText}>Lanjut</Text>
+              <Ionicons name="arrow-forward" size={18} color="#FFFFFF" />
+            </Pressable>
+          ) : (
+            <Pressable
+              style={[styles.primaryBtn, styles.navigateBtn]}
+              onPress={() => router.push(`/navigate/${poi.id}`)}
+              accessibilityRole="button"
+            >
+              <Ionicons name="navigate" size={18} color="#FFFFFF" />
+              <Text style={styles.primaryBtnText}>Arahkan ke Tenant</Text>
+            </Pressable>
+          )}
         </View>
       </ScrollView>
     </View>

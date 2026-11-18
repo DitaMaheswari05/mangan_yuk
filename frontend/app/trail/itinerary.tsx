@@ -28,7 +28,6 @@ import {
   planTrail,
   skipTrailStep,
   TrailSessionStore,
-  undoSkipTrailStep,
   useTrailSession,
   type TrailStep,
 } from '@/features/trail';
@@ -148,11 +147,6 @@ export default function TrailItineraryScreen() {
     }
   };
 
-  const handleUndoSkip = (poiId: string) => {
-    setNotice(null);
-    void TrailSessionStore.update((s) => undoSkipTrailStep(s, poiId));
-  };
-
   // Langsung ke step tertentu: step pending sebelumnya dilewati tanpa susun ulang.
   const handleNavigateToStep = (targetIndex: number, poiId: string) => {
     setNotice(null);
@@ -187,7 +181,6 @@ export default function TrailItineraryScreen() {
     const isDone = status === 'done';
     const isDeactivated = status === 'skipped';
     const isActive = index === activeStepIndex;
-    const canUndo = isDeactivated && session?.undo?.poiId === item.poi.id;
 
     // Foto tenant dari data POI
     const firstPhotoKey = item.poi.photos && item.poi.photos.length > 0 ? item.poi.photos[0].assetKey : null;
@@ -253,7 +246,12 @@ export default function TrailItineraryScreen() {
                 : null,
           ]}
         >
-          <View style={styles.cardMainRow}>
+          <Pressable
+            style={styles.cardMainRow}
+            onPress={() => router.push(`/poi/${item.poi.id}`)}
+            accessibilityRole="button"
+            accessibilityLabel={`Buka detail tenant ${item.poi.name}`}
+          >
             {/* Foto Thumbnail Tenant */}
             <View style={styles.thumbWrapper}>
               {photoSource ? (
@@ -308,7 +306,7 @@ export default function TrailItineraryScreen() {
                 </View>
               </View>
             </View>
-          </View>
+          </Pressable>
 
           {isDone ? (
             <View style={styles.deactivatedActionsRow}>
@@ -317,25 +315,7 @@ export default function TrailItineraryScreen() {
                 <Text style={styles.doneBadgeText}>Selesai</Text>
               </View>
             </View>
-          ) : isDeactivated ? (
-            <View style={styles.deactivatedActionsRow}>
-              <View style={styles.deactivatedBadge}>
-                <Ionicons name="play-skip-forward-circle-outline" size={14} color="#8E7164" />
-                <Text style={styles.deactivatedBadgeText}>Dilewati</Text>
-              </View>
-              {canUndo && (
-                <Pressable
-                  style={styles.undoBtn}
-                  onPress={() => handleUndoSkip(item.poi.id)}
-                  accessibilityRole="button"
-                  accessibilityLabel={`Batal lewati ${item.poi.name}`}
-                >
-                  <Ionicons name="refresh-outline" size={13} color="#8E7164" />
-                  <Text style={styles.undoBtnText}>Batal lewati</Text>
-                </Pressable>
-              )}
-            </View>
-          ) : isActive ? (
+          ) : isDeactivated ? null : isActive ? (
             <View style={styles.nonActiveActionsRow}>
               <Pressable
                 style={styles.skipBtnSmall}
@@ -1058,22 +1038,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   deactivatedBadgeText: {
-    fontFamily: fontFamily.medium,
-    fontSize: 12,
-    color: '#8E7164',
-  },
-  undoBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#E6E0DA',
-    backgroundColor: '#FFFFFF',
-  },
-  undoBtnText: {
     fontFamily: fontFamily.medium,
     fontSize: 12,
     color: '#8E7164',

@@ -25,7 +25,8 @@ import {
 } from '@/features/navigation';
 import { getPoiById } from '@/features/poi';
 import { sanitizePoiId } from '@/lib/validation';
-import { useVisitedPoiIds } from '@/features/visits';
+import { useVisitedPoiIds, VisitRepository } from '@/features/visits';
+import { completeTrailStep, TrailSessionStore, useTrailSession } from '@/features/trail';
 import type { LatLng } from '@/lib/geo';
 
 export default function NavigateScreen() {
@@ -105,6 +106,14 @@ export default function NavigateScreen() {
       hasSpokenArrivalRef.current = true;
       setHasArrivedState(true);
       void TtsService.speakArrivalCue(targetPoi.name);
+      // Catat kunjungan dan selesaikan step di trail session jika sedang aktif
+      void VisitRepository.markVisited(targetPoi.id);
+      void TrailSessionStore.update((s) => completeTrailStep(s, targetPoi.id, Date.now()));
+      // Auto-redirect langsung ke halaman detail tenant
+      router.replace({
+        pathname: '/poi/[id]',
+        params: { id: targetPoi.id, fromTrail: '1' },
+      });
       return;
     }
 
@@ -172,12 +181,20 @@ export default function NavigateScreen() {
           <Ionicons name="arrow-back" size={22} color="#1B1B1C" />
         </Pressable>
 
-        <View style={styles.headerTitleBox}>
+        <Pressable
+          style={styles.headerTitleBox}
+          onPress={() => router.push(`/poi/${targetPoi.id}`)}
+          accessibilityRole="button"
+          accessibilityLabel={`Buka detail ${targetPoi.name}`}
+        >
           <Text style={styles.navSubLabel}>Navigasi Menuju</Text>
-          <Text style={styles.navPoiName} numberOfLines={1}>
-            {targetPoi.name}
-          </Text>
-        </View>
+          <View style={styles.headerPoiRow}>
+            <Text style={styles.navPoiName} numberOfLines={1}>
+              {targetPoi.name}
+            </Text>
+            <Ionicons name="information-circle-outline" size={16} color="#FF8316" />
+          </View>
+        </Pressable>
 
         <Pressable
           style={styles.circleBtn}
@@ -199,30 +216,8 @@ export default function NavigateScreen() {
         </View>
       ) : null}
 
-      {/* Floating Compass Dial (Kanan Atas / Tengah Layar) */}
-      <View style={[styles.compassCard, { top: insets.top + (position && position.accuracyM > 30 ? 120 : 80) }]}>
-        <View style={styles.compassDial}>
-          <Animated.View style={[styles.arrowContainer, { transform: [{ rotate: spin }] }]}>
-            <Ionicons
-              name="navigate"
-              size={34}
-              color={navStatus?.isOnTarget ? '#2E9E4F' : '#FF8316'}
-            />
-          </Animated.View>
-        </View>
-        <Text style={styles.compassLabel}>
-          {!isCompassAvailable
-            ? 'Kompas: Sensor N/A'
-            : navStatus?.isOnTarget
-            ? 'Arah Tepat ✓'
-            : navStatus && navStatus.deviationDeg > 0
-            ? 'Belok Kanan ↗'
-            : 'Belok Kiri ↖'}
-        </Text>
-      </View>
-
       {/* Modal / Card Info Navigasi Bagian Bawah */}
-      <View style={[styles.bottomCard, { paddingBottom: Math.max(insets.bottom, 16) }]}>
+      <View style={[styles.bottomCard, { paddingBottom: Math.max(insets.bottom, 18) }]}>
         {hasArrivedState || (navStatus && navStatus.hasArrived) ? (
           // Status Sudah Sampai (AC F06-3: <= 10m)
           <View style={styles.arrivalBox}>
@@ -244,54 +239,56 @@ export default function NavigateScreen() {
             </Pressable>
           </View>
         ) : (
-          // Status Sedang Dipandu
-          <View>
-            <View style={styles.infoRow}>
-              <View style={styles.distanceBlock}>
-                <Text style={styles.distanceValue}>
-                  {navStatus ? navStatus.distanceM : '~'}
-                </Text>
-                <Text style={styles.distanceUnit}>meter lagi</Text>
+          // Status Sedang Dipandu: Kiri (Arah Belokan/Kompas) - Tengah (ETA & Jarak) - Kanan (Tombol X)
+          <View style={styles.compactNavRow}>
+            {/* Kiri: Arah Panah & Panduan Arah */}
+            <View style={styles.directionSection}>
+              <View style={styles.directionDial}>
+                <Animated.View style={[styles.arrowContainer, { transform: [{ rotate: spin }] }]}>
+                  <Ionicons
+                    name="navigate"
+                    size={28}
+                    color={navStatus?.isOnTarget ? '#2E9E4F' : '#FF8316'}
+                  />
+                </Animated.View>
               </View>
-
-              <View style={styles.guidanceDivider} />
-
-              <View style={styles.guidanceBlock}>
-                <Text style={styles.guidanceInstruction} numberOfLines={2}>
-                  {navStatus?.isOnTarget
-                    ? 'Lurus terus mengikuti garis rute'
+              <Text style={styles.directionLabel} numberOfLines={1}>
+                {!isCompassAvailable
+                  ? 'Kompas N/A'
+                  : navStatus?.isOnTarget
+                    ? 'Arah Tepat'
                     : navStatus && navStatus.deviationDeg > 0
-                    ? `Arahkan langkah ${Math.abs(navStatus.deviationDeg)}° ke kanan`
-                    : navStatus
-                    ? `Arahkan langkah ${Math.abs(navStatus.deviationDeg)}° ke kiri`
-                    : 'Menghitung rute...'}
+                      ? 'Belok Kanan'
+                      : 'Belok Kiri'}
+              </Text>
+            </View>
+
+            {/* Tengah: ETA Utama & Jarak Sisa Meter */}
+            <View style={styles.compactCenterBlock}>
+              <View style={styles.etaRow}>
+                <Text style={styles.compactEtaValue}>
+                  {navStatus ? Math.max(1, Math.ceil(navStatus.distanceM / 60)) : '~'}
                 </Text>
-                <Text style={styles.guidanceCategory}>
-                  {targetPoi.categoryLabel} · {targetPoi.zone}
-                </Text>
+                <Text style={styles.compactEtaUnit}>min</Text>
               </View>
+              <Text style={styles.compactSubMeta}>
+                {navStatus
+                  ? navStatus.distanceM >= 1000
+                    ? `${(navStatus.distanceM / 1000).toFixed(1)} km`
+                    : `${navStatus.distanceM} m`
+                  : '~ m'}
+              </Text>
             </View>
 
-            {/* Tombol Aksi Bawah */}
-            <View style={styles.actionRow}>
-              <Pressable
-                style={styles.detailLinkBtn}
-                onPress={() => router.push(`/poi/${targetPoi.id}`)}
-                accessibilityRole="button"
-              >
-                <Text style={styles.detailLinkText}>Lihat Info Tenant</Text>
-              </Pressable>
-
-              <Pressable
-                style={styles.stopNavBtn}
-                onPress={() => router.back()}
-                accessibilityRole="button"
-                accessibilityLabel="Akhiri navigasi"
-              >
-                <Ionicons name="close-circle-outline" size={18} color="#BA1A1A" />
-                <Text style={styles.stopNavBtnText}>Selesai</Text>
-              </Pressable>
-            </View>
+            {/* Kanan: Tombol X Bulat untuk Selesaikan Navigasi */}
+            <Pressable
+              style={styles.closeCircleBtn}
+              onPress={() => router.back()}
+              accessibilityRole="button"
+              accessibilityLabel="Selesaikan navigasi"
+            >
+              <Ionicons name="close" size={24} color="#FFFFFF" />
+            </Pressable>
           </View>
         )}
       </View>
@@ -354,10 +351,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 12,
     backgroundColor: '#FFFFFF',
-    paddingVertical: 8,
+    paddingVertical: 14,
     paddingHorizontal: 14,
-    borderRadius: 22,
+    borderRadius: 14,
     alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -366,13 +365,21 @@ const styles = StyleSheet.create({
   },
   navSubLabel: {
     fontFamily: fontFamily.regular,
-    fontSize: 11,
+    fontSize: 12,
+    lineHeight: 14,
     color: '#8E7164',
   },
   navPoiName: {
     fontFamily: fontFamily.bold,
-    fontSize: 14,
+    fontSize: 20,
+    lineHeight: 18,
     color: '#1B1B1C',
+  },
+  headerPoiRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    maxWidth: '100%',
   },
   gpsWarningBanner: {
     position: 'absolute',
@@ -393,41 +400,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#BA1A1A',
   },
-  compassCard: {
-    position: 'absolute',
-    right: 16,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 10,
-    alignItems: 'center',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    zIndex: 10,
-  },
-  compassDial: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#FFF4EA',
-    borderWidth: 1.5,
-    borderColor: '#FFDBCC',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   arrowContainer: {
     width: 36,
     height: 36,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  compassLabel: {
-    fontFamily: fontFamily.semibold,
-    fontSize: 11,
-    color: '#5A4136',
-    marginTop: 6,
   },
   bottomCard: {
     position: 'absolute',
@@ -435,88 +412,89 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
     paddingTop: 18,
-    paddingHorizontal: 20,
-    elevation: 8,
+    paddingHorizontal: 22,
+    elevation: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -3 },
     shadowOpacity: 0.12,
-    shadowRadius: 6,
+    shadowRadius: 8,
     zIndex: 10,
   },
-  infoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  distanceBlock: {
-    alignItems: 'flex-start',
-    minWidth: 80,
-  },
-  distanceValue: {
-    fontFamily: fontFamily.bold,
-    fontSize: 32,
-    lineHeight: 36,
-    color: '#FF8316',
-  },
-  distanceUnit: {
-    fontFamily: fontFamily.regular,
-    fontSize: 12,
-    color: '#8E7164',
-  },
-  guidanceDivider: {
-    width: 1,
-    height: 44,
-    backgroundColor: '#E5E2E1',
-    marginHorizontal: 16,
-  },
-  guidanceBlock: {
-    flex: 1,
-  },
-  guidanceInstruction: {
-    fontFamily: fontFamily.semibold,
-    fontSize: 15,
-    color: '#1B1B1C',
-    lineHeight: 20,
-  },
-  guidanceCategory: {
-    fontFamily: fontFamily.regular,
-    fontSize: 12,
-    color: '#707070',
-    marginTop: 2,
-  },
-  actionRow: {
+  compactNavRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 16,
-    paddingTop: 14,
-    borderTopWidth: 1,
-    borderTopColor: '#F0EDED',
+    width: '100%',
+    paddingVertical: 2,
   },
-  detailLinkBtn: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-  },
-  detailLinkText: {
-    fontFamily: fontFamily.semibold,
-    fontSize: 13,
-    color: '#065CBB',
-  },
-  stopNavBtn: {
-    flexDirection: 'row',
+  directionSection: {
     alignItems: 'center',
-    gap: 6,
-    backgroundColor: '#FFDAD6',
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 20,
+    justifyContent: 'center',
+    minWidth: 76,
   },
-  stopNavBtnText: {
+  directionDial: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#FFF4EA',
+    borderWidth: 1.5,
+    borderColor: '#FFDBCC',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  directionLabel: {
     fontFamily: fontFamily.semibold,
-    fontSize: 13,
-    color: '#BA1A1A',
+    fontSize: 12,
+    lineHeight: 20,
+    color: '#5A4136',
+    marginTop: 4,
+    textAlign: 'center',
+  },
+  compactCenterBlock: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 8,
+  },
+  etaRow: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 4,
+  },
+  compactEtaValue: {
+    fontFamily: fontFamily.bold,
+    fontSize: 34,
+    lineHeight: 38,
+    color: '#1B1B1C',
+  },
+  compactEtaUnit: {
+    fontFamily: fontFamily.medium,
+    fontSize: 18,
+    lineHeight: 22,
+    color: '#1B1B1C',
+  },
+  compactSubMeta: {
+    fontFamily: fontFamily.regular,
+    fontSize: 14,
+    lineHeight: 18,
+    color: '#707070',
+    marginTop: 2,
+  },
+  closeCircleBtn: {
+    width: 46,
+    height: 46,
+    borderRadius: 23,
+    backgroundColor: '#A61C1C',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
   },
   arrivalBox: {
     alignItems: 'center',
