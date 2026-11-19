@@ -1,7 +1,7 @@
 -- Melengkapi data tenant (pois) yang sebelumnya bertanda TODO di seed.sql:
 --   1. is_halal = true untuk tenant yang tidak punya menu berbahan babi, kodok, atau alkohol
 --      (tenant non-halal sudah diisi false di seed).
---   2. zone = 'Sudirman Street' untuk semua tenant (belum ada pembagian zona).
+--   2. zone = 'Sudirman Street Food' untuk semua tenant (belum ada pembagian zona).
 --   3. description = ringkasan informatif dari transkrip audio (content/transcripts/pXX.md).
 -- seed.sql ikut diperbarui dengan nilai yang sama, supaya db reset menghasilkan data yang identik.
 
@@ -11,7 +11,7 @@ where id in ('P01', 'P04', 'P07', 'P09', 'P10', 'P11', 'P13', 'P16', 'P17', 'P22
   and is_halal is null;
 
 update public.pois
-set zone = 'Sudirman Street'
+set zone = 'Sudirman Street Food'
 where zone = 'TODO';
 
 update public.pois as p
