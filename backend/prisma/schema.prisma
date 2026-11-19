@@ -147,6 +147,7 @@ model MenuItem {
   id           String        @id // 'P01-M01'
   poiId        String        @map("poi_id")
   name         String
+  description  String?
   priceIdr     Int           @map("price_idr")
   tastes       Taste[]       @default([])
   foodType     FoodType?     @map("food_type") // jenis per menu; diisi seed, wajib saat export

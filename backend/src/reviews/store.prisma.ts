@@ -44,7 +44,7 @@ export class PrismaReviewStore implements ReviewStore {
         categoryLabel: true,
         zone: true,
         menuItems: {
-          select: { id: true, poiId: true, name: true, priceIdr: true, isSignature: true },
+          select: { id: true, poiId: true, name: true, description: true, priceIdr: true, isSignature: true },
           orderBy: { position: 'asc' },
         },
       },

@@ -5,6 +5,7 @@ export interface MenuCatalogItem {
   id: string;
   poiId: string;
   name: string;
+  description?: string | null;
   priceIdr: number;
   isSignature: boolean;
 }

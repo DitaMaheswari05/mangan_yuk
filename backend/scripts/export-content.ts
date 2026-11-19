@@ -162,6 +162,7 @@ async function main() {
         id: m.id,
         poiId: p.id,
         name: m.name,
+        description: m.description ?? null,
         priceIdr: m.priceIdr,
         priceBucket: menuPriceBucket(m.priceIdr),
         tastes: m.tastes,

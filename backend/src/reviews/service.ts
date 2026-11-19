@@ -54,6 +54,7 @@ export interface UnlockedBadgeDto {
 export interface PopularMenuStatDto {
   menuItemId: string;
   name: string;
+  description?: string | null;
   priceIdr: number;
   isSignature: boolean;
   reviewCount: number;
@@ -254,6 +255,7 @@ export function computePoiReviewStats(
     popularMenus.push({
       menuItemId,
       name: info?.name ?? menuItemId,
+      description: info?.description ?? null,
       priceIdr: info?.priceIdr ?? 0,
       isSignature: info?.isSignature ?? false,
       reviewCount,
