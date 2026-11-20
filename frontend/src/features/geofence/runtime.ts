@@ -9,10 +9,12 @@ import { AppState } from 'react-native';
 import areaJson from '@/data/area.json';
 import { WalkModeService } from '@/features/audio';
 import { NotificationService } from '@/features/notifications';
+import { PreferenceRepository } from '@/features/onboarding';
 import { getPoiById, getPois } from '@/features/poi';
+import { buildExitRecommendation, ExitRecommendationStore } from '@/features/recommendation/exit';
 import { completeTrailStep, findTrailOverstay, markOverstayNotified, TrailSessionStore } from '@/features/trail';
 import { VisitRepository } from '@/features/visits';
-import type { UserPosition } from '@/lib/geo';
+import type { LatLng, UserPosition } from '@/lib/geo';
 import { load, save } from '@/storage';
 import type { AreaConfig } from '@/types/content';
 import {
@@ -60,7 +62,30 @@ async function vibrate(): Promise<void> {
   }
 }
 
-async function runSideEffects(e: GeofenceEvent): Promise<void> {
+async function recommendAfterExit(poiId: string, position: LatLng, at: number): Promise<void> {
+  const exitedPoi = getPoiById(poiId);
+  if (!exitedPoi) return;
+  const [visits, trail, prefs] = await Promise.all([
+    VisitRepository.getAll(),
+    TrailSessionStore.get(),
+    PreferenceRepository.get(),
+  ]);
+  const rec = buildExitRecommendation({
+    exitedPoi,
+    position,
+    pois: getPois(),
+    visitedPoiIds: Object.keys(visits),
+    trail,
+    halalOnly: prefs.ok && prefs.data.halalOnly,
+    at,
+  });
+  if (!rec) return;
+  await ExitRecommendationStore.set(rec);
+  // Di foreground sheet sudah tampil; notifikasi hanya untuk app di background.
+  if (AppState.currentState !== 'active') await NotificationService.notifyRecommendations(rec);
+}
+
+async function runSideEffects(e: GeofenceEvent, pos: UserPosition): Promise<void> {
   switch (e.type) {
     case 'AREA_ENTRY':
       await NotificationService.notifyAreaEntry(AREA.name);
@@ -78,8 +103,11 @@ async function runSideEffects(e: GeofenceEvent): Promise<void> {
       await TrailSessionStore.update((s) => completeTrailStep(s, e.poiId, e.at));
       return;
     case 'EXIT':
+      // Hanya setelah dwell: lewat sebentar di depan tenant bukan berarti selesai makan.
+      if (e.visited) await recommendAfterExit(e.poiId, pos.coordinate, e.at);
+      return;
     case 'AREA_EXIT':
-      // Rekomendasi saat exit (F07) dikerjakan di Sprint 4; pendengar UI tetap menerima event-nya.
+      await ExitRecommendationStore.clear();
       return;
   }
 }
@@ -105,7 +133,7 @@ async function processOne(pos: UserPosition, now: number): Promise<GeofenceEvent
 
   for (const e of res.events) {
     try {
-      await runSideEffects(e);
+      await runSideEffects(e, pos);
     } catch {
       // Satu efek gagal (mis. notifikasi ditolak) tidak boleh menghentikan event lain.
     }

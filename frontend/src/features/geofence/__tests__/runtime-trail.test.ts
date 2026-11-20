@@ -1,5 +1,6 @@
 import { NotificationService } from '@/features/notifications';
 import { getPois } from '@/features/poi';
+import { ExitRecommendationStore } from '@/features/recommendation/exit';
 import { createTrailSession, TrailSessionStore, type TrailStep } from '@/features/trail';
 import { haversineM, type UserPosition } from '@/lib/geo';
 import { GeofenceRuntime } from '../runtime';
@@ -9,6 +10,7 @@ jest.mock('@/features/notifications', () => ({
     notifyAreaEntry: jest.fn(async () => {}),
     notifyNearbyPoi: jest.fn(async () => {}),
     notifyTrailOverstay: jest.fn(async () => {}),
+    notifyRecommendations: jest.fn(async () => {}),
   },
 }));
 
@@ -38,6 +40,7 @@ const step = (poi: typeof first, n: number): TrailStep => ({
 beforeEach(async () => {
   GeofenceRuntime.__reset();
   TrailSessionStore.__reset();
+  await ExitRecommendationStore.clear();
   jest.clearAllMocks();
   const plan = { steps: [step(first, 1), step(second, 2)], totalEstimatedCostIdr: 0, totalEstimatedMin: 22, isValid: true };
   await TrailSessionStore.start(
@@ -64,6 +67,29 @@ it('mengirim pengingat sekali saat berdiam melebihi alokasi + 5 menit', async ()
   expect(NotificationService.notifyTrailOverstay).toHaveBeenCalledWith(
     expect.objectContaining({ poiId: first.id, dwellMin: 16, remainingMin: 44, remainingStops: 1 }),
   );
+});
+
+it('keluar dari tenant setelah dwell menyimpan 3 rekomendasi berikutnya', async () => {
+  await GeofenceRuntime.processPosition(atFirst(T0));
+  await GeofenceRuntime.processPosition(atFirst(T0 + 3 * MIN));
+  await GeofenceRuntime.processPosition(at(second.latitude, second.longitude, T0 + 4 * MIN));
+
+  // Tenant di sebelah P01 berjarak beberapa meter dan ikut terdiami, jadi asal rekomendasi
+  // adalah exit terakhir di antara tenant tersebut.
+  const rec = await ExitRecommendationStore.get(T0 + 4 * MIN);
+  expect(rec).not.toBeNull();
+  expect(rec!.items).toHaveLength(3);
+  const ids = rec!.items.map((i) => i.poiId);
+  expect(ids).not.toContain(first.id);
+  expect(ids).not.toContain(rec!.fromPoiId);
+});
+
+it('lewat tenant tanpa dwell tidak memicu rekomendasi', async () => {
+  await GeofenceRuntime.processPosition(atFirst(T0));
+  await GeofenceRuntime.processPosition(at(second.latitude, second.longitude, T0 + MIN));
+
+  expect(await ExitRecommendationStore.get(T0 + MIN)).toBeNull();
+  expect(NotificationService.notifyRecommendations).not.toHaveBeenCalled();
 });
 
 it('tanpa trail aktif tidak ada pengingat', async () => {

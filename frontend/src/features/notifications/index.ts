@@ -270,6 +270,36 @@ export async function notifyTrailOverstay(alert: {
   }
 }
 
+/** F07 exit event: 3 tenant berikutnya setelah selesai di satu tenant. Ketuk → peta dengan sheet rekomendasi. */
+export async function notifyRecommendations(rec: {
+  fromPoiId: string;
+  fromPoiName: string;
+  items: { poiName: string; distanceM: number }[];
+}): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications || rec.items.length === 0) return;
+
+  const list = rec.items.map((i) => `${i.poiName} (~${i.distanceM} m)`).join(', ');
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: 'exit-recommendation',
+      content: {
+        title: `Selesai di ${rec.fromPoiName}? Coba ini berikutnya`,
+        body: list,
+        color: '#FF8316',
+        data: { type: 'exit-recommendation', poiId: rec.fromPoiId, url: '/(tabs)' },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
 export const NotificationService = {
   ensureNotificationSetup,
   showPersistentExploreNotification,
@@ -277,4 +307,5 @@ export const NotificationService = {
   notifyNearbyPoi,
   notifyAreaEntry,
   notifyTrailOverstay,
+  notifyRecommendations,
 };

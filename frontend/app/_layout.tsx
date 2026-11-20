@@ -5,6 +5,7 @@ import * as Notifications from 'expo-notifications';
 // Task background harus terdaftar saat bundle dimuat, termasuk saat OS menjalankan app headless.
 import '@/tasks/backgroundLocation';
 import '@/tasks/notificationActions';
+import { RecommendationSheet } from '@/components/recommendation/RecommendationSheet';
 import { handleNotificationResponse } from '@/features/notifications/actions';
 import { isValidInternalRoute } from '@/lib/validation';
 
@@ -65,9 +66,12 @@ export default function RootLayout() {
   }, [fontsLoaded]);
 
   return (
-    <Stack
-      key={fontsLoaded ? 'fonts-ready' : 'fonts-loading'}
-      screenOptions={{ headerShown: false }}
-    />
+    <>
+      <Stack
+        key={fontsLoaded ? 'fonts-ready' : 'fonts-loading'}
+        screenOptions={{ headerShown: false }}
+      />
+      {fontsLoaded ? <RecommendationSheet /> : null}
+    </>
   );
 }
