@@ -397,7 +397,7 @@ const styles = StyleSheet.create({
     gap: 8,
     backgroundColor: '#FF8316',
     borderRadius: 30,
-    paddingVertical: 12,
+    paddingVertical: 9,
     shadowColor: '#FF8316',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
@@ -406,7 +406,8 @@ const styles = StyleSheet.create({
   },
   addReviewBtnText: {
     fontFamily: fontFamily.medium,
-    fontSize: 16,
+    fontSize: 15,
     color: '#FFFFFF',
+    includeFontPadding: false,
   },
 });
