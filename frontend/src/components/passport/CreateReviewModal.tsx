@@ -587,19 +587,24 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   submitBtn: {
-    backgroundColor: '#FF8316',
-    borderRadius: 30,
-    paddingVertical: 9,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 10,
+    backgroundColor: '#FF8316',
+    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
   },
   submitBtnDisabled: {
     opacity: 0.6,
   },
   submitBtnText: {
     fontFamily: fontFamily.medium,
-    fontSize: 15,
+    fontSize: 16,
+    lineHeight: 24,
     color: '#FFFFFF',
     includeFontPadding: false,
+    textAlignVertical: 'center',
   },
 });
