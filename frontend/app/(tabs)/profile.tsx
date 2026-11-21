@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Image,
   Pressable,
@@ -10,14 +10,15 @@ import {
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { colors, fontFamily } from '@/constants/theme';
 import { clearAllUserData, load } from '@/storage';
 import { ExploreModeController } from '@/features/geofence';
 import { AuthService } from '@/features/auth';
 import { PreferenceRepository } from '@/features/onboarding';
+import { resolveAsset } from '@/features/audio';
 import { getPois } from '@/features/poi';
-import { INITIAL_PASSPORT_STATE, type PassportState } from '@/features/passport';
+import { INITIAL_PASSPORT_STATE, PassportClient, type PassportState } from '@/features/passport';
 import { useAppStore } from '@/store/useAppStore';
 import { AppDialog, type DialogButton } from '@/components/ui/AppDialog';
 import { EditPreferenceModal } from '@/components/ui/EditPreferenceModal';
@@ -69,17 +70,30 @@ export default function ProfileScreen() {
     setDialogConfig((prev) => ({ ...prev, visible: false }));
   };
 
-  // Load paspor untuk menghitung tenant dikunjungi
-  useEffect(() => {
-    let active = true;
-    (async () => {
-      const saved = await load<PassportState>(PASSPORT_KEY, INITIAL_PASSPORT_STATE);
-      if (active) setPassport(saved);
-    })();
-    return () => {
-      active = false;
-    };
+  // Load paspor untuk menghitung tenant dikunjungi & review
+  const loadPassportData = useCallback(async () => {
+    try {
+      const summaryRes = await PassportClient.getPassport();
+      if (summaryRes.ok) {
+        setPassport({
+          stamps: summaryRes.data.stamps,
+          unlockedBadgeIds: summaryRes.data.unlockedBadgeIds,
+          reviews: summaryRes.data.reviews,
+        });
+        return;
+      }
+    } catch {
+      // Fallback local
+    }
+    const local = await PassportClient.loadLocalPassport();
+    setPassport(local);
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      void loadPassportData();
+    }, [loadPassportData])
+  );
 
   const visitedCount = Object.keys(passport.stamps).length;
   const totalPois = pois.length > 0 ? pois.length : 17;
@@ -226,7 +240,7 @@ export default function ProfileScreen() {
         <View style={styles.passportSection}>
           <Pressable
             style={styles.passportHeaderRow}
-            onPress={() => router.push('/(tabs)/passport')}
+            onPress={() => router.push('/passport')}
           >
             <View style={{ flex: 1 }}>
               <Text style={styles.passportTitle}>Paspor Kuliner</Text>
@@ -238,28 +252,65 @@ export default function ProfileScreen() {
             <Ionicons name="chevron-forward" size={20} color="#404040" />
           </Pressable>
 
-          {/* Mini Stamp / Photo Row */}
-          <View style={styles.passportPreviewRow}>
-            {pois.slice(0, 3).map((p, idx) => (
-              <View
-                key={p.id}
-                style={[
-                  styles.previewBox,
-                  idx === 0 && { backgroundColor: '#FFC17E' },
-                  idx > 0 && { backgroundColor: '#CFE1FF' },
-                ]}
-              >
-                <Ionicons
-                  name={passport.stamps[p.id] ? 'seal' : 'storefront-outline'}
-                  size={32}
-                  color={idx === 0 ? '#BD5200' : '#2563EB'}
-                />
-                <Text style={styles.previewBoxText} numberOfLines={1}>
-                  {p.name}
+          {/* Ulasan Terbaru / Preview Row */}
+          {passport.reviews && passport.reviews.length > 0 ? (
+            <View style={styles.passportPreviewRow}>
+              {passport.reviews.slice(0, 3).map((rev) => {
+                const poi = pois.find((p) => p.id === rev.poiId);
+                const poiName = poi?.name ?? 'Tenant Kuliner';
+                const photoAsset = rev.photoPath
+                  ? { uri: rev.photoPath }
+                  : resolveAsset(poi?.photos?.[0]?.assetKey);
+
+                return (
+                  <Pressable
+                    key={rev.id}
+                    style={styles.previewBox}
+                    onPress={() => router.push('/passport')}
+                  >
+                    {photoAsset ? (
+                      <Image
+                        source={photoAsset}
+                        style={styles.previewBoxImage}
+                        resizeMode="cover"
+                      />
+                    ) : (
+                      <View style={styles.previewBoxPlaceholder}>
+                        <Ionicons name="restaurant" size={24} color="#FFA044" />
+                      </View>
+                    )}
+                    {/* Dark Overlay untuk keterbacaan teks */}
+                    <View style={styles.previewBoxOverlay} />
+
+                    {/* Stempel centang stempel ulasan */}
+                    <View style={styles.previewStampBadge}>
+                      <Ionicons name="checkmark-circle" size={18} color="#FF8316" />
+                    </View>
+
+                    <Text style={styles.previewBoxText} numberOfLines={2}>
+                      {poiName}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+            </View>
+          ) : (
+            <Pressable
+              style={styles.passportEmptyState}
+              onPress={() => router.push('/passport')}
+            >
+              <View style={styles.passportEmptyIconCircle}>
+                <Ionicons name="book-outline" size={22} color="#FF8316" />
+              </View>
+              <View style={styles.passportEmptyTextCol}>
+                <Text style={styles.passportEmptyTitle}>Belum ada ulasan</Text>
+                <Text style={styles.passportEmptySubtitle}>
+                  Kunjungi tenant dan buat ulasan pertamamu untuk mengoleksi stempel!
                 </Text>
               </View>
-            ))}
-          </View>
+              <Ionicons name="chevron-forward" size={18} color="#A6A6A6" />
+            </Pressable>
+          )}
         </View>
 
         {/* Action Buttons: Pengaturan & Keluar Akun */}
@@ -308,26 +359,26 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: 20,
-    paddingTop: 12,
+    paddingTop: 8,
     alignItems: 'stretch',
-    gap: 22,
+    gap: 16,
   },
   pageTitle: {
     fontFamily: fontFamily.semibold,
-    fontSize: 26,
-    lineHeight: 32,
+    fontSize: 24,
+    lineHeight: 30,
     color: '#1E1E1E',
     textAlign: 'center',
-    marginTop: 4,
+    marginTop: 2,
   },
   avatarSection: {
     alignItems: 'center',
-    gap: 4,
+    gap: 3,
   },
   avatarWrapper: {
-    width: 95,
-    height: 95,
-    borderRadius: 47.5,
+    width: 86,
+    height: 86,
+    borderRadius: 43,
     backgroundColor: '#FFF0DC',
     alignItems: 'center',
     justifyContent: 'center',
@@ -338,7 +389,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 10,
     elevation: 3,
-    marginBottom: 6,
+    marginBottom: 4,
   },
   userName: {
     fontFamily: fontFamily.semibold,
@@ -357,8 +408,8 @@ const styles = StyleSheet.create({
   preferenceCard: {
     backgroundColor: '#FF8316',
     borderRadius: 20,
-    padding: 20,
-    gap: 16,
+    padding: 16,
+    gap: 12,
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
@@ -372,18 +423,18 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontFamily: fontFamily.semibold,
-    fontSize: 18,
-    lineHeight: 26,
+    fontSize: 16,
+    lineHeight: 22,
     color: '#FFFFFF',
   },
   editButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 14,
   },
   editText: {
     fontFamily: fontFamily.medium,
@@ -392,27 +443,27 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   prefGroup: {
-    gap: 6,
+    gap: 4,
   },
   prefGroupTitle: {
     fontFamily: fontFamily.regular,
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 13,
+    lineHeight: 18,
     color: '#FFFFFF',
   },
   chipRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 6,
   },
   chip: {
     backgroundColor: '#FFF0DC',
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    borderRadius: 16,
   },
   chipText: {
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.medium,
     fontSize: 12,
     lineHeight: 16,
     color: '#BD5200',
@@ -420,24 +471,24 @@ const styles = StyleSheet.create({
   cardDivider: {
     height: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    marginVertical: 4,
+    marginVertical: 2,
   },
   halalStatusRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    paddingTop: 2,
+    paddingTop: 0,
   },
   halalStatusText: {
     fontFamily: fontFamily.regular,
-    fontSize: 13,
-    lineHeight: 18,
+    fontSize: 12,
+    lineHeight: 16,
     color: '#FFFFFF',
     flex: 1,
     opacity: 0.95,
   },
   passportSection: {
-    gap: 12,
+    gap: 10,
   },
   passportHeaderRow: {
     flexDirection: 'row',
@@ -446,14 +497,14 @@ const styles = StyleSheet.create({
   },
   passportTitle: {
     fontFamily: fontFamily.semibold,
-    fontSize: 18,
-    lineHeight: 26,
+    fontSize: 16,
+    lineHeight: 22,
     color: '#404040',
   },
   passportSubtitle: {
     fontFamily: fontFamily.regular,
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 13,
+    lineHeight: 18,
   },
   passportCountBold: {
     color: '#FF8316',
@@ -465,26 +516,93 @@ const styles = StyleSheet.create({
   },
   passportPreviewRow: {
     flexDirection: 'row',
-    height: 98,
-    gap: 8,
+    height: 104,
+    gap: 10,
   },
   previewBox: {
     flex: 1,
-    borderRadius: 12,
+    borderRadius: 14,
+    overflow: 'hidden',
+    position: 'relative',
+    backgroundColor: '#F5F5F5',
+    justifyContent: 'flex-end',
+    borderWidth: 1,
+    borderColor: '#ECECEC',
+  },
+  previewBoxImage: {
+    ...StyleSheet.absoluteFill,
+    width: '100%',
+    height: '100%',
+  },
+  previewBoxPlaceholder: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: '#FFF4EA',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 8,
-    gap: 4,
+  },
+  previewBoxOverlay: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: 'rgba(0, 0, 0, 0.35)',
+  },
+  previewStampBadge: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
   },
   previewBoxText: {
     fontFamily: fontFamily.medium,
     fontSize: 11,
-    color: '#404040',
-    textAlign: 'center',
+    lineHeight: 14,
+    color: '#FFFFFF',
+    paddingHorizontal: 8,
+    paddingBottom: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.6)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3,
+  },
+  passportEmptyState: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FAFAFA',
+    borderRadius: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: '#ECECEC',
+    gap: 14,
+  },
+  passportEmptyIconCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#FFF0DC',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  passportEmptyTextCol: {
+    flex: 1,
+    justifyContent: 'center',
+    gap: 3,
+  },
+  passportEmptyTitle: {
+    fontFamily: fontFamily.semibold,
+    fontSize: 14,
+    lineHeight: 18,
+    color: '#333333',
+    includeFontPadding: false,
+  },
+  passportEmptySubtitle: {
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    lineHeight: 16,
+    color: '#8A8A8A',
+    includeFontPadding: false,
   },
   actionButtonsContainer: {
-    gap: 10,
-    marginTop: 6,
+    gap: 8,
+    marginTop: 2,
   },
   settingButton: {
     flexDirection: 'row',

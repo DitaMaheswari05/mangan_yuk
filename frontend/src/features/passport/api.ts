@@ -506,3 +506,6 @@ export const PassportReviewApi = {
     });
   },
 };
+
+export const PassportClient = PassportReviewApi;
+
