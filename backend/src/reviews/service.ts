@@ -145,8 +145,8 @@ export function calculateTrailProgress(
       poiIds: [...trail.poiIds],
       totalPois: 0,
       visitedCount: 0,
-      percentage: 100,
-      isCompleted: true,
+      percentage: 0,
+      isCompleted: false,
     };
   }
 

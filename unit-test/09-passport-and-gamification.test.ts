@@ -126,7 +126,7 @@ describe('Kategori 3: Sistem Penghargaan Badge Digital', () => {
 });
 
 describe('Kategori 4: Edge Cases Paspor Kuliner', () => {
-  it('menangani trail kosong dengan aman', () => {
+  it('trail kosong tidak dianggap selesai', () => {
     const emptyTrail: Trail = {
       id: 'T_EMPTY',
       name: 'Trail Kosong',
@@ -137,7 +137,7 @@ describe('Kategori 4: Edge Cases Paspor Kuliner', () => {
     };
     const progress = calculateTrailProgress(emptyTrail, ['P01']);
     expect(progress.totalPois).toBe(0);
-    expect(progress.isCompleted).toBe(true);
+    expect(progress.isCompleted).toBe(false);
   });
 
   it('menangani POI di luar trail tanpa mempengaruhi progres trail yang ada', () => {

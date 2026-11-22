@@ -15,6 +15,7 @@ import { colors, fontFamily } from '@/constants/theme';
 import { resolveAsset } from '@/features/audio';
 import { getPois } from '@/features/poi';
 import {
+  calculateTrailProgress,
   INITIAL_PASSPORT_STATE,
   PassportClient,
   type PassportState,
@@ -23,9 +24,11 @@ import {
 import { CreateReviewModal } from '@/components/passport/CreateReviewModal';
 import { ReviewDetailModal } from '@/components/passport/ReviewDetailModal';
 import { StampBadge } from '@/components/passport/StampBadge';
-import type { Poi } from '@/types/content';
+import trailsJson from '@/data/trails.json';
+import type { Poi, Trail } from '@/types/content';
 
 const mascotIllustration = require('@/assets/passport_mascot.png');
+const THEMED_TRAILS = trailsJson as Trail[];
 
 // Helper hitung "2 hari lalu", "hari ini", dll.
 function formatRelativeTime(dateIso: string): string {
@@ -89,6 +92,79 @@ export default function PassportScreen() {
   const reviewsList = useMemo(() => {
     return passport.reviews ?? [];
   }, [passport.reviews]);
+
+  const [expandedTrailId, setExpandedTrailId] = useState<string | null>(null);
+  const stampedIds = useMemo(() => new Set(Object.keys(passport.stamps)), [passport.stamps]);
+
+  const renderTrailCard = (trail: Trail) => {
+    const progress = calculateTrailProgress(trail, stampedIds);
+    const expanded = expandedTrailId === trail.id;
+
+    return (
+      <Pressable
+        key={trail.id}
+        style={styles.trailCard}
+        onPress={() => setExpandedTrailId(expanded ? null : trail.id)}
+        accessibilityRole="button"
+        accessibilityState={{ expanded }}
+        accessibilityLabel={`${trail.name}, ${progress.visitedCount} dari ${progress.totalPois} tenant distempel`}
+      >
+        <View style={styles.trailHeaderRow}>
+          <Text style={styles.trailName} numberOfLines={1}>
+            {trail.name}
+          </Text>
+          <Text style={styles.trailCount}>
+            {progress.visitedCount}/{progress.totalPois}
+          </Text>
+          <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={18} color="#A6A6A6" />
+        </View>
+
+        <View style={styles.progressTrack}>
+          <View style={[styles.progressFill, { width: `${progress.percentage}%` }]} />
+        </View>
+
+        <View style={styles.badgeRow}>
+          <Ionicons
+            name={progress.isCompleted ? 'ribbon' : 'ribbon-outline'}
+            size={16}
+            color={progress.isCompleted ? '#FF8316' : '#A6A6A6'}
+          />
+          <Text style={[styles.badgeText, progress.isCompleted && styles.badgeTextUnlocked]}>
+            {progress.isCompleted ? trail.badgeName : `Kunci: ${trail.badgeName}`}
+          </Text>
+        </View>
+
+        {expanded ? (
+          <View style={styles.trailPoiList}>
+            <Text style={styles.trailDescription}>{trail.description}</Text>
+            {trail.poiIds.map((id) => {
+              const done = stampedIds.has(id);
+              return (
+                <View key={id} style={styles.trailPoiRow}>
+                  <Ionicons
+                    name={done ? 'checkmark-circle' : 'ellipse-outline'}
+                    size={18}
+                    color={done ? '#FF8316' : '#CFCFCF'}
+                  />
+                  <Text style={[styles.trailPoiName, done && styles.trailPoiNameDone]} numberOfLines={1}>
+                    {poiMap.get(id)?.name ?? id}
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+        ) : null}
+      </Pressable>
+    );
+  };
+
+  const listHeader = (
+    <View style={styles.trailSection}>
+      <Text style={styles.sectionTitle}>Trail Tematik</Text>
+      {THEMED_TRAILS.map(renderTrailCard)}
+      <Text style={[styles.sectionTitle, styles.reviewSectionTitle]}>Ulasanmu</Text>
+    </View>
+  );
 
   const renderReviewCard = ({ item }: { item: PoiReview }) => {
     const poi = poiMap.get(item.poiId);
@@ -177,6 +253,7 @@ export default function PassportScreen() {
         data={reviewsList}
         keyExtractor={(item) => item.id}
         renderItem={renderReviewCard}
+        ListHeaderComponent={listHeader}
         contentContainerStyle={[
           styles.listContainer,
           reviewsList.length === 0 && styles.listContainerEmpty,
@@ -296,13 +373,98 @@ const styles = StyleSheet.create({
   },
   listContainerEmpty: {
     flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   emptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 36,
+  },
+  trailSection: {
+    gap: 10,
+  },
+  sectionTitle: {
+    fontFamily: fontFamily.bold,
+    fontSize: 16,
+    lineHeight: 22,
+    color: '#404040',
+  },
+  reviewSectionTitle: {
+    marginTop: 8,
+  },
+  trailCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: '#F2F2F2',
+    gap: 8,
+  },
+  trailHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  trailName: {
+    flex: 1,
+    fontFamily: fontFamily.medium,
+    fontSize: 15,
+    lineHeight: 20,
+    color: '#1E1E1E',
+  },
+  trailCount: {
+    fontFamily: fontFamily.medium,
+    fontSize: 13,
+    color: '#FF8316',
+  },
+  progressTrack: {
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#FFF4EA',
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    borderRadius: 3,
+    backgroundColor: '#FF8316',
+  },
+  badgeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  badgeText: {
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    color: '#A6A6A6',
+  },
+  badgeTextUnlocked: {
+    fontFamily: fontFamily.medium,
+    color: '#E66B00',
+  },
+  trailPoiList: {
+    gap: 6,
+    paddingTop: 4,
+  },
+  trailDescription: {
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    lineHeight: 17,
+    color: '#7A7A7A',
+    marginBottom: 2,
+  },
+  trailPoiRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  trailPoiName: {
+    flex: 1,
+    fontFamily: fontFamily.regular,
+    fontSize: 13,
+    color: '#404040',
+  },
+  trailPoiNameDone: {
+    color: '#A6A6A6',
   },
   emptyText: {
     fontFamily: fontFamily.regular,

@@ -10,6 +10,7 @@ import areaJson from '@/data/area.json';
 import { WalkModeService } from '@/features/audio';
 import { NotificationService } from '@/features/notifications';
 import { PreferenceRepository } from '@/features/onboarding';
+import { PassportClient } from '@/features/passport';
 import { getPoiById, getPois } from '@/features/poi';
 import { buildExitRecommendation, ExitRecommendationStore } from '@/features/recommendation/exit';
 import { completeTrailStep, findTrailOverstay, markOverstayNotified, TrailSessionStore } from '@/features/trail';
@@ -101,6 +102,7 @@ async function runSideEffects(e: GeofenceEvent, pos: UserPosition): Promise<void
     case 'DWELL':
       await VisitRepository.markVisited(e.poiId, e.at);
       await TrailSessionStore.update((s) => completeTrailStep(s, e.poiId, e.at));
+      await stampPassport(e.poiId);
       return;
     case 'EXIT':
       // Hanya setelah dwell: lewat sebentar di depan tenant bukan berarti selesai makan.
@@ -109,6 +111,19 @@ async function runSideEffects(e: GeofenceEvent, pos: UserPosition): Promise<void
     case 'AREA_EXIT':
       await ExitRecommendationStore.clear();
       return;
+  }
+}
+
+/** F10: dwell = stempel Paspor Kuliner. Gagal menyimpan stempel tidak boleh menghentikan event lain. */
+async function stampPassport(poiId: string): Promise<void> {
+  try {
+    const res = await PassportClient.stampPoi(poiId);
+    if (!res.ok) return;
+    for (const badge of res.data.newlyUnlockedBadges) {
+      await NotificationService.notifyBadgeUnlocked(badge);
+    }
+  } catch {
+    // abaikan
   }
 }
 

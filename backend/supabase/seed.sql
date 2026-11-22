@@ -1130,12 +1130,17 @@ insert into public.taste_pairings (after_taste, suggest_taste, suggest_food_type
   ('gurih', 'manis', 'jajanan', 'pencuci mulut setelah makanan gurih');
 
 -- ---------------------------------------------------------------------------
--- Trail tematik Paspor Kuliner (F10) — TODO tentukan anggota trail
+-- Trail tematik Paspor Kuliner (F10). Harus sama dengan frontend/src/data/trails.json.
 -- ---------------------------------------------------------------------------
 
 insert into public.trails (id, name, description, badge_name) values
-  ('jejak-jajanan-sunda', 'Jejak Jajanan Sunda', 'Jelajahi jajanan khas di Sudirman Street Food.', 'Penjelajah Jajanan Sunda'),
+  ('jejak-kuliner-nusantara', 'Jejak Kuliner Nusantara', 'Cicipi masakan khas Madura, Siantar, Bandung, Sukabumi, dan Palembang di Sudirman Street Food.', 'Penjelajah Kuliner Nusantara'),
   ('manis-manis-bandung', 'Manis-manis Bandung', 'Kumpulkan stempel dari tenant kuliner manis.', 'Pemburu Manis Bandung');
 
--- insert into public.trail_pois (trail_id, poi_id, position) values
---   ('jejak-jajanan-sunda', 'P01', 1), ('jejak-jajanan-sunda', 'P05', 2);
+insert into public.trail_pois (trail_id, poi_id, position) values
+  ('jejak-kuliner-nusantara', 'P04', 1), ('jejak-kuliner-nusantara', 'P06', 2),
+  ('jejak-kuliner-nusantara', 'P09', 3), ('jejak-kuliner-nusantara', 'P26', 4),
+  ('jejak-kuliner-nusantara', 'P28', 5),
+  ('manis-manis-bandung', 'P01', 1), ('manis-manis-bandung', 'P19', 2),
+  ('manis-manis-bandung', 'P22', 3), ('manis-manis-bandung', 'P27', 4),
+  ('manis-manis-bandung', 'P29', 5);

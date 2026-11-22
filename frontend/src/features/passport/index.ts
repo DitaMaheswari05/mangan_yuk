@@ -127,8 +127,8 @@ export function calculateTrailProgress(
       trailName: trail.name,
       totalPois: 0,
       visitedCount: 0,
-      percentage: 100,
-      isCompleted: true,
+      percentage: 0,
+      isCompleted: false,
     };
   }
 
@@ -155,13 +155,17 @@ export function evaluateBadges(
   timestampMs: number = Date.now(),
 ): { updatedState: PassportState; newlyUnlockedBadges: UnlockedBadge[] } {
   const stampedPoiIds = new Set(Object.keys(passportState.stamps));
-  const currentUnlocked = new Set(passportState.unlockedBadgeIds);
+  const previouslyUnlocked = new Set(passportState.unlockedBadgeIds);
+  // Badge diturunkan dari stempel (sama seperti backend), sehingga badge yang dulu terbuka
+  // karena trail kosong otomatis terhapus.
+  const currentUnlocked = new Set<string>();
   const newlyUnlockedBadges: UnlockedBadge[] = [];
 
   for (const trail of trails) {
     const progress = calculateTrailProgress(trail, stampedPoiIds);
-    if (progress.isCompleted && !currentUnlocked.has(trail.id)) {
-      currentUnlocked.add(trail.id);
+    if (!progress.isCompleted) continue;
+    currentUnlocked.add(trail.id);
+    if (!previouslyUnlocked.has(trail.id)) {
       newlyUnlockedBadges.push({
         id: trail.id,
         name: trail.badgeName,
