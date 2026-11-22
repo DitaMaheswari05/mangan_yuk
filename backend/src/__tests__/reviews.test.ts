@@ -364,7 +364,7 @@ describe('GAM-01/02: Progres Trail Tematik & Evaluasi Lencana (Badge) Paspor Kul
     expect(r4.passport.unlockedBadgeIds).toEqual(['jejak-jajanan-sudirman']);
   });
 
-  it('fungsi murni calculateTrailProgress & evaluateBadges menangani trail kosong dengan aman', () => {
+  it('trail kosong tidak dianggap selesai dan tidak membuka badge', () => {
     const emptyProgress = calculateTrailProgress(
       {
         id: 'empty-trail',
@@ -377,8 +377,8 @@ describe('GAM-01/02: Progres Trail Tematik & Evaluasi Lencana (Badge) Paspor Kul
       ['P01'],
     );
     expect(emptyProgress.totalPois).toBe(0);
-    expect(emptyProgress.percentage).toBe(100);
-    expect(emptyProgress.isCompleted).toBe(true);
+    expect(emptyProgress.percentage).toBe(0);
+    expect(emptyProgress.isCompleted).toBe(false);
 
     const evalResult = evaluateBadges([
       {
