@@ -118,8 +118,7 @@ export default function TrailItineraryScreen() {
   const [poiToSkip, setPoiToSkip] = useState<Poi | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
-  // SB4.4: selama layar ini terbuka, tenant yang tutup di tengah trail dilewati otomatis
-  // (saat Mode Jelajah aktif, runtime geofence juga melakukannya di background).
+  // Runtime geofence hanya jalan saat Mode Jelajah aktif, jadi layar ini juga mengecek tenant tutup.
   const coordRef = useRef(userCoord);
   useEffect(() => {
     coordRef.current = userCoord;

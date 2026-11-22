@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NarrationPlayer } from '@/components/poi/NarrationPlayer';
+import { PoiReviewsSection } from '@/components/poi/PoiReviewsSection';
 import { colors, fontFamily } from '@/constants/theme';
 import { resolveAsset } from '@/features/audio';
 import { getPoiById, isOpenAt } from '@/features/poi';
@@ -207,6 +208,8 @@ function PoiDetail({
           ) : (
             <Text style={styles.mutedText}>Jam operasional belum tersedia.</Text>
           )}
+
+          <PoiReviewsSection poi={poi} />
 
           {isPartOfActiveTrail ? (
             <Pressable

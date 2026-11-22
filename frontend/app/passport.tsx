@@ -25,30 +25,11 @@ import { CreateReviewModal } from '@/components/passport/CreateReviewModal';
 import { ReviewDetailModal } from '@/components/passport/ReviewDetailModal';
 import { StampBadge } from '@/components/passport/StampBadge';
 import trailsJson from '@/data/trails.json';
+import { formatRelativeTime } from '@/lib/time';
 import type { Poi, Trail } from '@/types/content';
 
 const mascotIllustration = require('@/assets/passport_mascot.png');
 const THEMED_TRAILS = trailsJson as Trail[];
-
-// Helper hitung "2 hari lalu", "hari ini", dll.
-function formatRelativeTime(dateIso: string): string {
-  try {
-    const diffMs = Date.now() - new Date(dateIso).getTime();
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    const diffDays = Math.floor(diffHours / 24);
-
-    if (diffDays <= 0) {
-      if (diffHours <= 0) return 'Baru saja';
-      return `${diffHours} jam lalu`;
-    }
-    if (diffDays === 1) return 'Kemarin';
-    if (diffDays < 30) return `${diffDays} hari lalu`;
-    const diffMonths = Math.floor(diffDays / 30);
-    return `${diffMonths} bulan lalu`;
-  } catch {
-    return 'Beberapa hari lalu';
-  }
-}
 
 export default function PassportScreen() {
   const insets = useSafeAreaInsets();

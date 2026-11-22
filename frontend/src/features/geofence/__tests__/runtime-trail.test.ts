@@ -1,10 +1,9 @@
-import trailsJson from '@/data/trails.json';
 import { NotificationService } from '@/features/notifications';
 import { INITIAL_PASSPORT_STATE, PassportClient } from '@/features/passport';
 import { getPois } from '@/features/poi';
-import type { Trail } from '@/types/content';
 import { ExitRecommendationStore } from '@/features/recommendation/exit';
 import { createTrailSession, TrailSessionStore, type TrailStep } from '@/features/trail';
+import { VisitRepository } from '@/features/visits';
 import { haversineM, type UserPosition } from '@/lib/geo';
 import { GeofenceRuntime } from '../runtime';
 
@@ -14,7 +13,6 @@ jest.mock('@/features/notifications', () => ({
     notifyNearbyPoi: jest.fn(async () => {}),
     notifyTrailOverstay: jest.fn(async () => {}),
     notifyTrailAutoSkipped: jest.fn(async () => {}),
-    notifyBadgeUnlocked: jest.fn(async () => {}),
     notifyRecommendations: jest.fn(async () => {}),
   },
 }));
@@ -47,6 +45,7 @@ beforeEach(async () => {
   TrailSessionStore.__reset();
   await ExitRecommendationStore.clear();
   await PassportClient.saveLocalPassport(INITIAL_PASSPORT_STATE);
+  await VisitRepository.clear();
   jest.clearAllMocks();
   const plan = { steps: [step(first, 1), step(second, 2)], totalEstimatedCostIdr: 0, totalEstimatedMin: 22, isValid: true };
   await TrailSessionStore.start(
@@ -62,32 +61,12 @@ it('dwell di tenant trail menandai step selesai', async () => {
   expect(s?.status[second.id]).toBe('pending');
 });
 
-it('dwell memberi stempel Paspor Kuliner, lewat sebentar tidak', async () => {
+it('dwell mencatat kunjungan tapi tidak memberi stempel paspor', async () => {
   await GeofenceRuntime.processPosition(atFirst(T0));
+  await GeofenceRuntime.processPosition(atFirst(T0 + 3 * MIN));
+
+  expect(await VisitRepository.isVisited(first.id)).toBe(true);
   expect((await PassportClient.loadLocalPassport()).stamps[first.id]).toBeUndefined();
-
-  await GeofenceRuntime.processPosition(atFirst(T0 + 3 * MIN));
-  expect((await PassportClient.loadLocalPassport()).stamps[first.id]).toBeDefined();
-});
-
-it('stempel terakhir pada trail tematik membuka badge dan mengirim notifikasi', async () => {
-  const trail = (trailsJson as Trail[]).find((t) => t.poiIds.includes(first.id))!;
-  const iso = new Date(T0).toISOString();
-  const stamps = Object.fromEntries(
-    trail.poiIds
-      .filter((id) => id !== first.id)
-      .map((poiId) => [poiId, { poiId, firstStampedAt: iso, lastStampedAt: iso, visitCount: 1 }]),
-  );
-  await PassportClient.saveLocalPassport({ ...INITIAL_PASSPORT_STATE, stamps });
-
-  await GeofenceRuntime.processPosition(atFirst(T0));
-  await GeofenceRuntime.processPosition(atFirst(T0 + 3 * MIN));
-
-  expect((await PassportClient.loadLocalPassport()).unlockedBadgeIds).toContain(trail.id);
-  expect(NotificationService.notifyBadgeUnlocked).toHaveBeenCalledTimes(1);
-  expect(NotificationService.notifyBadgeUnlocked).toHaveBeenCalledWith(
-    expect.objectContaining({ id: trail.id, name: trail.badgeName }),
-  );
 });
 
 it('mengirim pengingat sekali saat berdiam melebihi alokasi + 5 menit', async () => {

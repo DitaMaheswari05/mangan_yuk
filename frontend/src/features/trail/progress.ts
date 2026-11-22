@@ -160,10 +160,8 @@ export type AutoSkipResult = SkipResult & {
 };
 
 /**
- * Tenant pending yang buka saat trail dimulai tetapi sekarang sudah tutup dilewati otomatis,
- * lalu rute disusun ulang hanya dari tenant yang sedang buka. Tenant yang sudah tutup sejak
- * awal (rute disusun memakai jam simulasi di luar jam operasional) tidak disentuh, supaya rute
- * tidak terus-menerus dikosongkan. Mengembalikan objek sesi yang sama jika tidak ada yang tutup.
+ * Lewati tenant pending yang buka saat trail dimulai tapi kini tutup, lalu susun ulang dari tenant yang buka.
+ * Tenant yang tutup sejak awal (rute jam simulasi 19:00) dibiarkan agar rute tidak terus dikosongkan.
  */
 export function skipClosedTrailSteps(
   session: TrailSession,
@@ -189,10 +187,7 @@ export function skipClosedTrailSteps(
   return { session: { ...res.session, undo: null }, addedPoiIds: res.addedPoiIds, skippedPoiIds: closed };
 }
 
-/**
- * Tandai `poiIds` sebagai dilewati, lalu susun ulang semua step pending dari posisi pengguna
- * dengan sisa waktu trail dan sisa budget. Tenant yang sudah selesai atau dilewati tidak dipilih lagi.
- */
+/** Susun ulang step pending dengan sisa waktu dan budget; tenant selesai atau dilewati tidak dipilih lagi. */
 function skipAndReplan(
   session: TrailSession,
   poiIds: string[],

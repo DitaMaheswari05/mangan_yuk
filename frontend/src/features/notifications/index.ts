@@ -302,30 +302,6 @@ export async function notifyTrailAutoSkipped(info: {
   }
 }
 
-/** F10: semua tenant satu trail tematik sudah distempel. Ketuk → buka Paspor Kuliner. */
-export async function notifyBadgeUnlocked(badge: { id: string; name: string }): Promise<void> {
-  const Notifications = getNotificationsModule();
-  if (!Notifications) return;
-
-  try {
-    await ensureNotificationSetup();
-
-    await Notifications.scheduleNotificationAsync({
-      identifier: `badge-${badge.id}`,
-      content: {
-        title: 'Badge baru terbuka!',
-        body: `Selamat, kamu mendapat badge "${badge.name}". Lihat di Paspor Kuliner.`,
-        color: '#FF8316',
-        data: { type: 'badge-unlocked', badgeId: badge.id, url: '/passport' },
-        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
-      },
-      trigger: null,
-    });
-  } catch {
-    // abaikan
-  }
-}
-
 /** F07 exit event: 3 tenant berikutnya setelah selesai di satu tenant. Ketuk → peta dengan sheet rekomendasi. */
 export async function notifyRecommendations(rec: {
   fromPoiId: string;
@@ -364,6 +340,5 @@ export const NotificationService = {
   notifyAreaEntry,
   notifyTrailOverstay,
   notifyTrailAutoSkipped,
-  notifyBadgeUnlocked,
   notifyRecommendations,
 };

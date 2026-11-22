@@ -10,7 +10,6 @@ const ALLOWED_INTERNAL_ROUTE_PATTERNS = [
   /^\/poi\/P[0-9]{2}$/i,
   /^\/navigate\/P[0-9]{2}$/i,
   /^\/trail\/(itinerary|planner|summary)$/,
-  /^\/passport$/,
   /^\/onboarding\/(welcome|location|no-location|notification|preferences)$/,
   /^\/auth\/(login|register)$/,
 ];

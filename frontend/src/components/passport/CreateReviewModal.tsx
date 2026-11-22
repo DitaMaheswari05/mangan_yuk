@@ -17,6 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { fontFamily } from '@/constants/theme';
 import { getPois } from '@/features/poi';
 import { PassportClient, type CreatePoiReviewInput, type PoiReview } from '@/features/passport';
+import { useVisitedPoiIds } from '@/features/visits';
 import type { MenuItem, Poi } from '@/types/content';
 
 interface CreateReviewModalProps {
@@ -33,9 +34,11 @@ export function CreateReviewModal({
   initialPoiId,
 }: CreateReviewModalProps) {
   const insets = useSafeAreaInsets();
-  const pois = useMemo(() => getPois(), []);
+  // Ulasan hanya untuk tenant yang pernah dikunjungi (tercatat lewat dwell).
+  const visitedIds = useVisitedPoiIds();
+  const pois = useMemo(() => getPois().filter((p) => visitedIds.has(p.id)), [visitedIds]);
 
-  const [selectedPoiId, setSelectedPoiId] = useState<string>(initialPoiId || pois[0]?.id || 'P01');
+  const [selectedPoiId, setSelectedPoiId] = useState<string>(initialPoiId ?? '');
   const [rating, setRating] = useState<1 | 2 | 3 | 4 | 5>(5);
   const [selectedMenuItems, setSelectedMenuItems] = useState<string[]>([]);
   const [reviewText, setReviewText] = useState('');
@@ -79,7 +82,7 @@ export function CreateReviewModal({
   };
 
   const handleSubmit = async () => {
-    if (!selectedPoiId) {
+    if (!selectedPoi) {
       Alert.alert('Perhatian', 'Pilih tenant terlebih dahulu.');
       return;
     }
@@ -87,7 +90,7 @@ export function CreateReviewModal({
     try {
       setIsSubmitting(true);
       const input: CreatePoiReviewInput = {
-        poiId: selectedPoiId,
+        poiId: selectedPoi.id,
         rating,
         reviewText: reviewText.trim() || null,
         photoPath: photoUri || null,
@@ -140,6 +143,11 @@ export function CreateReviewModal({
           {/* 1. Pilih Tenant */}
           <View style={styles.sectionBlock}>
             <Text style={styles.sectionLabel}>Pilih Tenant Kuliner</Text>
+            {pois.length === 0 ? (
+              <Text style={styles.noVisitText}>
+                Kamu belum mengunjungi tenant mana pun. Mampir dulu ke tenant, lalu tulis ulasannya di sini.
+              </Text>
+            ) : (
             <Pressable
               style={styles.dropdownBtn}
               onPress={() => setShowPoiPicker(!showPoiPicker)}
@@ -153,6 +161,7 @@ export function CreateReviewModal({
                 color="#666666"
               />
             </Pressable>
+            )}
 
             {showPoiPicker && (
               <View style={styles.dropdownListContainer}>
@@ -167,7 +176,7 @@ export function CreateReviewModal({
                       key={poi.id}
                       style={[
                         styles.dropdownListItem,
-                        poi.id === selectedPoiId && styles.dropdownListItemActive,
+                        poi.id === selectedPoi?.id && styles.dropdownListItemActive,
                       ]}
                       onPress={() => {
                         setSelectedPoiId(poi.id);
@@ -178,13 +187,13 @@ export function CreateReviewModal({
                       <Text
                         style={[
                           styles.dropdownListItemText,
-                          poi.id === selectedPoiId && styles.dropdownListItemTextActive,
+                          poi.id === selectedPoi?.id && styles.dropdownListItemTextActive,
                         ]}
                         numberOfLines={1}
                       >
                         {poi.name}
                       </Text>
-                      {poi.id === selectedPoiId && (
+                      {poi.id === selectedPoi?.id && (
                         <Ionicons name="checkmark" size={16} color="#FF8316" />
                       )}
                     </Pressable>
@@ -346,9 +355,9 @@ export function CreateReviewModal({
           {/* Tombol Kirim */}
           <View style={styles.submitSection}>
             <Pressable
-              style={[styles.submitBtn, isSubmitting && styles.submitBtnDisabled]}
+              style={[styles.submitBtn, (isSubmitting || !selectedPoi) && styles.submitBtnDisabled]}
               onPress={handleSubmit}
-              disabled={isSubmitting}
+              disabled={isSubmitting || !selectedPoi}
             >
               {isSubmitting ? (
                 <ActivityIndicator color="#FFFFFF" size="small" />
@@ -598,6 +607,15 @@ const styles = StyleSheet.create({
   },
   submitBtnDisabled: {
     opacity: 0.6,
+  },
+  noVisitText: {
+    fontFamily: fontFamily.regular,
+    fontSize: 13,
+    lineHeight: 19,
+    color: '#A86A3A',
+    backgroundColor: '#FFF4EA',
+    borderRadius: 12,
+    padding: 12,
   },
   submitBtnText: {
     fontFamily: fontFamily.medium,

@@ -156,8 +156,7 @@ export function evaluateBadges(
 ): { updatedState: PassportState; newlyUnlockedBadges: UnlockedBadge[] } {
   const stampedPoiIds = new Set(Object.keys(passportState.stamps));
   const previouslyUnlocked = new Set(passportState.unlockedBadgeIds);
-  // Badge diturunkan dari stempel (sama seperti backend), sehingga badge yang dulu terbuka
-  // karena trail kosong otomatis terhapus.
+  // Badge dihitung ulang dari stempel, sama seperti backend.
   const currentUnlocked = new Set<string>();
   const newlyUnlockedBadges: UnlockedBadge[] = [];
 
