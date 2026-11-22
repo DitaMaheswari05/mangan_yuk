@@ -13,7 +13,14 @@ import { PreferenceRepository } from '@/features/onboarding';
 import { PassportClient } from '@/features/passport';
 import { getPoiById, getPois } from '@/features/poi';
 import { buildExitRecommendation, ExitRecommendationStore } from '@/features/recommendation/exit';
-import { completeTrailStep, findTrailOverstay, markOverstayNotified, TrailSessionStore } from '@/features/trail';
+import {
+  completeTrailStep,
+  findTrailOverstay,
+  markOverstayNotified,
+  skipClosedTrailSteps,
+  TrailSessionStore,
+  type AutoSkipResult,
+} from '@/features/trail';
 import { VisitRepository } from '@/features/visits';
 import type { LatLng, UserPosition } from '@/lib/geo';
 import { load, save } from '@/storage';
@@ -138,6 +145,22 @@ async function remindTrailOverstay(now: number): Promise<void> {
   await NotificationService.notifyTrailOverstay(alert);
 }
 
+/** SB4.4: tenant trail yang tutup di tengah jalan dilewati otomatis, lalu rute disusun ulang. */
+async function autoSkipClosedTenants(position: LatLng, now: number): Promise<void> {
+  let result: AutoSkipResult | null = null;
+  await TrailSessionStore.update((s) => {
+    result = skipClosedTrailSteps(s, getPois(), position, now);
+    return result.session;
+  });
+  const res = result as AutoSkipResult | null;
+  if (!res || res.skippedPoiIds.length === 0) return;
+  const nameOf = (id: string) => getPoiById(id)?.name ?? id;
+  await NotificationService.notifyTrailAutoSkipped({
+    skippedNames: res.skippedPoiIds.map(nameOf),
+    addedNames: res.addedPoiIds.map(nameOf),
+  });
+}
+
 async function processOne(pos: UserPosition, now: number): Promise<GeofenceEvent[]> {
   await hydrate();
   const pois = getPois();
@@ -159,6 +182,11 @@ async function processOne(pos: UserPosition, now: number): Promise<GeofenceEvent
     await remindTrailOverstay(now);
   } catch {
     // Pengingat gagal tidak boleh menghentikan pemrosesan lokasi.
+  }
+  try {
+    await autoSkipClosedTenants(pos.coordinate, now);
+  } catch {
+    // Gagal menyusun ulang tidak boleh menghentikan pemrosesan lokasi.
   }
   return res.events;
 }

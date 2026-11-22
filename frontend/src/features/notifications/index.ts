@@ -270,6 +270,38 @@ export async function notifyTrailOverstay(alert: {
   }
 }
 
+/** F08: tenant di trail tutup di tengah jalan dan dilewati otomatis. Ketuk → buka itinerary. */
+export async function notifyTrailAutoSkipped(info: {
+  skippedNames: string[];
+  addedNames: string[];
+}): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications) return;
+
+  const body =
+    info.addedNames.length > 0
+      ? `Rute disusun ulang. Pengganti: ${info.addedNames.join(', ')}.`
+      : 'Rute disusun ulang dengan tenant yang masih buka.';
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: 'trail-auto-skip',
+      content: {
+        title: `${info.skippedNames.join(', ')} sudah tutup, dilewati`,
+        body,
+        color: '#FF8316',
+        data: { type: 'trail-auto-skip', url: '/trail/itinerary' },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
 /** F10: semua tenant satu trail tematik sudah distempel. Ketuk → buka Paspor Kuliner. */
 export async function notifyBadgeUnlocked(badge: { id: string; name: string }): Promise<void> {
   const Notifications = getNotificationsModule();
@@ -331,6 +363,7 @@ export const NotificationService = {
   notifyNearbyPoi,
   notifyAreaEntry,
   notifyTrailOverstay,
+  notifyTrailAutoSkipped,
   notifyBadgeUnlocked,
   notifyRecommendations,
 };

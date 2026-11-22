@@ -13,6 +13,7 @@ jest.mock('@/features/notifications', () => ({
     notifyAreaEntry: jest.fn(async () => {}),
     notifyNearbyPoi: jest.fn(async () => {}),
     notifyTrailOverstay: jest.fn(async () => {}),
+    notifyTrailAutoSkipped: jest.fn(async () => {}),
     notifyBadgeUnlocked: jest.fn(async () => {}),
     notifyRecommendations: jest.fn(async () => {}),
   },
@@ -123,6 +124,24 @@ it('lewat tenant tanpa dwell tidak memicu rekomendasi', async () => {
 
   expect(await ExitRecommendationStore.get(T0 + MIN)).toBeNull();
   expect(NotificationService.notifyRecommendations).not.toHaveBeenCalled();
+});
+
+it('tenant trail yang tutup di tengah jalan dilewati otomatis dan pengguna diberi tahu', async () => {
+  // Tenant data asli tutup pukul 23:00 (Jumat). Trail dimulai 22:50, posisi berikutnya 23:05.
+  const late = new Date('2026-11-06T22:50:00').getTime();
+  const plan = { steps: [step(first, 1), step(second, 2)], totalEstimatedCostIdr: 0, totalEstimatedMin: 22, isValid: true };
+  await TrailSessionStore.start(
+    createTrailSession(plan, { durationMin: 60, budget: 100000, preferredTastes: [] }, late),
+  );
+
+  await GeofenceRuntime.processPosition(at(-6.9, 107.5, late + 15 * MIN));
+
+  const s = await TrailSessionStore.get();
+  expect(s?.status[first.id]).toBe('skipped');
+  expect(NotificationService.notifyTrailAutoSkipped).toHaveBeenCalledTimes(1);
+  expect(NotificationService.notifyTrailAutoSkipped).toHaveBeenCalledWith(
+    expect.objectContaining({ skippedNames: expect.arrayContaining([first.name]) }),
+  );
 });
 
 it('tanpa trail aktif tidak ada pengingat', async () => {

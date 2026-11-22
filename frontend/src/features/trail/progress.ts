@@ -1,5 +1,6 @@
 // F08 / PB-15 – Progres trail yang sedang berjalan. Fungsi murni; penyimpanan ada di session.ts.
 
+import { isOpenAt } from '@/features/poi';
 import type { LatLng } from '@/lib/geo';
 import type { Poi, TasteTag } from '@/types/content';
 import { checkDwellAlert, planTrail, type TrailPlanResult, type TrailStep } from './planner';
@@ -146,14 +147,68 @@ export function skipTrailStep(
 ): SkipResult {
   if (session.status[poiId] !== 'pending') return { session, addedPoiIds: [] };
 
-  const status: Record<string, TrailStepStatus> = { ...session.status, [poiId]: 'skipped' };
+  const res = skipAndReplan(session, [poiId], allPois, userPosition, now);
+  return {
+    session: { ...res.session, undo: { poiId, steps: session.steps, status: session.status } },
+    addedPoiIds: res.addedPoiIds,
+  };
+}
+
+export type AutoSkipResult = SkipResult & {
+  /** Tenant yang dilewati otomatis karena tutup; kosong jika tidak ada perubahan. */
+  skippedPoiIds: string[];
+};
+
+/**
+ * Tenant pending yang buka saat trail dimulai tetapi sekarang sudah tutup dilewati otomatis,
+ * lalu rute disusun ulang hanya dari tenant yang sedang buka. Tenant yang sudah tutup sejak
+ * awal (rute disusun memakai jam simulasi di luar jam operasional) tidak disentuh, supaya rute
+ * tidak terus-menerus dikosongkan. Mengembalikan objek sesi yang sama jika tidak ada yang tutup.
+ */
+export function skipClosedTrailSteps(
+  session: TrailSession,
+  allPois: Poi[],
+  userPosition: LatLng,
+  now: number,
+): AutoSkipResult {
+  const startedAt = new Date(session.startedAt);
+  const at = new Date(now);
+  const closed = pendingTrailSteps(session)
+    .filter((s) => isOpenAt(s.poi, startedAt) && !isOpenAt(s.poi, at))
+    .map((s) => s.poi.id);
+  if (closed.length === 0) return { session, addedPoiIds: [], skippedPoiIds: [] };
+
+  const res = skipAndReplan(
+    session,
+    closed,
+    allPois.filter((p) => isOpenAt(p, at)),
+    userPosition,
+    now,
+  );
+  // Lewati otomatis tidak bisa dibatalkan: tenantnya memang tutup.
+  return { session: { ...res.session, undo: null }, addedPoiIds: res.addedPoiIds, skippedPoiIds: closed };
+}
+
+/**
+ * Tandai `poiIds` sebagai dilewati, lalu susun ulang semua step pending dari posisi pengguna
+ * dengan sisa waktu trail dan sisa budget. Tenant yang sudah selesai atau dilewati tidak dipilih lagi.
+ */
+function skipAndReplan(
+  session: TrailSession,
+  poiIds: string[],
+  candidatePois: Poi[],
+  userPosition: LatLng,
+  now: number,
+): SkipResult {
+  const status: Record<string, TrailStepStatus> = { ...session.status };
+  for (const id of poiIds) status[id] = 'skipped';
   const kept = session.steps.filter((s) => status[s.poi.id] !== 'pending');
   const excluded = new Set(kept.map((s) => s.poi.id));
   const before = new Set(session.steps.map((s) => s.poi.id));
 
   const replan = planTrail({
     userPosition,
-    pois: allPois.filter((p) => !excluded.has(p.id)),
+    pois: candidatePois.filter((p) => !excluded.has(p.id)),
     durationMin: remainingTrailMin(session, now),
     budget: remainingTrailBudget(session),
     preferredTastes: session.preferredTastes,
@@ -168,7 +223,6 @@ export function skipTrailStep(
       ...session,
       steps: [...kept, ...replan.steps].map((s, i) => ({ ...s, stepNumber: i + 1 })),
       status,
-      undo: { poiId, steps: session.steps, status: session.status },
     },
     addedPoiIds: replan.steps.map((s) => s.poi.id).filter((id) => !before.has(id)),
   };
