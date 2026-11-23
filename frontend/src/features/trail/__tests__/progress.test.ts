@@ -8,7 +8,6 @@ import {
   pendingTrailSteps,
   planTrail,
   remainingTrailBudget,
-  skipClosedTrailSteps,
   skipTrailStep,
   TrailSessionStore,
   undoSkipTrailStep,
@@ -66,7 +65,6 @@ function newSession(durationMin = 60, budget = 30000): TrailSession {
     pois,
     durationMin,
     budget,
-    referenceTime: new Date(T0),
   });
   return createTrailSession(plan, { durationMin, budget, preferredTastes: [] }, T0);
 }
@@ -166,69 +164,6 @@ describe('skipTrailStep (lewati & susun ulang)', () => {
   it('tenant yang bukan pending tidak bisa dilewati', () => {
     const s = completeTrailStep(newSession(), 'P01', T0);
     expect(skipTrailStep(s, 'P01', pois, startPos, T0).session).toBe(s);
-  });
-});
-
-describe('skipClosedTrailSteps (lewati otomatis tenant tutup)', () => {
-  // Jumat: tenant tutup pukul 18:20, 20 menit setelah trail dimulai pukul 18:00.
-  const closesEarly = (p: Poi): Poi => ({
-    ...p,
-    openingHours: [{ day: 5, open: '15:00', close: '18:20' }],
-  });
-  const withHours = (ids: string[], fn: (p: Poi) => Poi) =>
-    pois.map((p) => (ids.includes(p.id) ? fn(p) : p));
-
-  function sessionFrom(list: Poi[]): TrailSession {
-    const plan = planTrail({ userPosition: startPos, pois: list, durationMin: 60, budget: 30000, referenceTime: new Date(T0) });
-    return createTrailSession(plan, { durationMin: 60, budget: 30000, preferredTastes: [] }, T0);
-  }
-
-  it('tenant yang tutup di tengah trail dilewati dan diganti tenant yang masih buka', () => {
-    const list = withHours(['P02'], closesEarly);
-    const s = sessionFrom(list);
-    expect(s.steps.map((x) => x.poi.id)).toEqual(['P01', 'P02', 'P03']);
-
-    const res = skipClosedTrailSteps(s, list, startPos, T0 + 25 * MIN);
-    expect(res.skippedPoiIds).toEqual(['P02']);
-    expect(res.session.status.P02).toBe('skipped');
-    expect(res.addedPoiIds).toContain('P04');
-    expect(res.session.undo).toBeNull();
-  });
-
-  it('pengganti tidak diambil dari tenant yang juga sudah tutup', () => {
-    const list = withHours(['P02', 'P04'], closesEarly);
-    const res = skipClosedTrailSteps(sessionFrom(list), list, startPos, T0 + 25 * MIN);
-    expect(res.addedPoiIds).not.toContain('P04');
-    expect(res.addedPoiIds).toContain('P05');
-  });
-
-  it('tidak ada perubahan selama semua tenant masih buka', () => {
-    const s = newSession();
-    const res = skipClosedTrailSteps(s, pois, startPos, T0 + 25 * MIN);
-    expect(res.session).toBe(s);
-    expect(res.skippedPoiIds).toEqual([]);
-  });
-
-  it('tenant yang sudah tutup sejak trail dimulai (rute jam simulasi) tidak dilewati', () => {
-    const s = newSession();
-    const closedFromStart = {
-      ...s,
-      steps: s.steps.map((x) =>
-        x.poi.id === 'P02'
-          ? { ...x, poi: { ...x.poi, openingHours: [{ day: 5, open: '20:00', close: '23:00' }] } }
-          : x,
-      ),
-    };
-    const res = skipClosedTrailSteps(closedFromStart, pois, startPos, T0 + 25 * MIN);
-    expect(res.session).toBe(closedFromStart);
-  });
-
-  it('tenant yang sudah selesai tidak ikut dilewati walau sudah tutup', () => {
-    const list = withHours(['P01'], closesEarly);
-    const s = completeTrailStep(sessionFrom(list), 'P01', T0 + 10 * MIN);
-    const res = skipClosedTrailSteps(s, list, startPos, T0 + 25 * MIN);
-    expect(res.session).toBe(s);
-    expect(res.session.status.P01).toBe('done');
   });
 });
 

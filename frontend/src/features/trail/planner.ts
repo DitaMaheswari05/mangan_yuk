@@ -1,5 +1,4 @@
 // F08 / PB-14 & PB-15 – Smart Culinary Trail Planner (Nearest Neighbor Heuristic) & Dwell Monitor.
-import { isOpenAt } from '@/features/poi';
 import { haversineM, type LatLng } from '@/lib/geo';
 import type { Poi, TasteTag } from '@/types/content';
 
@@ -9,7 +8,6 @@ export type TrailPlanParams = {
   durationMin: number; // 30, 60, atau 90 menit
   budget: number;
   preferredTastes?: TasteTag[];
-  referenceTime?: Date;
 };
 
 export type TrailStep = {
@@ -37,7 +35,7 @@ const WALKING_METERS_PER_MIN = 60;
  * Memastikan rute tidak bolak-balik, total biaya <= budget, dan total waktu <= durasi.
  */
 export function planTrail(params: TrailPlanParams): TrailPlanResult {
-  const { userPosition, pois, durationMin, budget, preferredTastes = [], referenceTime = new Date() } = params;
+  const { userPosition, pois, durationMin, budget, preferredTastes = [] } = params;
 
   if (durationMin <= 0 || budget <= 0) {
     return {
@@ -49,19 +47,8 @@ export function planTrail(params: TrailPlanParams): TrailPlanResult {
     };
   }
 
-  // Ambil hanya tenant yang sedang buka dan memiliki harga menu termurah <= budget
-  let availablePois = pois.filter((p) => isOpenAt(p, referenceTime) && p.priceMinIdr <= budget);
-
-  // Fallback: Jika pengguna merencanakan rute di luar jam operasional malam (mis. di atas pukul 23:00 atau pagi hari untuk testing/preview),
-  // gunakan waktu simulasi jam buka ramai (19:00) agar rute kuliner tetap dapat direncanakan.
-  if (availablePois.length === 0) {
-    const fallbackTime = new Date(referenceTime);
-    fallbackTime.setHours(19, 0, 0, 0);
-    const fallbackPois = pois.filter((p) => isOpenAt(p, fallbackTime) && p.priceMinIdr <= budget);
-    if (fallbackPois.length > 0) {
-      availablePois = fallbackPois;
-    }
-  }
+  // Jam buka tidak membatasi rute: tenant yang tutup tetap boleh direncanakan.
+  const availablePois = pois.filter((p) => p.priceMinIdr <= budget);
 
   if (availablePois.length === 0) {
     return {
@@ -69,7 +56,7 @@ export function planTrail(params: TrailPlanParams): TrailPlanResult {
       totalEstimatedCostIdr: 0,
       totalEstimatedMin: 0,
       isValid: false,
-      message: 'Tidak ada tenant yang buka atau sesuai dengan batas budget.',
+      message: 'Tidak ada tenant yang sesuai dengan batas budget.',
     };
   }
 

@@ -1,6 +1,5 @@
 // F08 / PB-15 – Progres trail yang sedang berjalan. Fungsi murni; penyimpanan ada di session.ts.
 
-import { isOpenAt } from '@/features/poi';
 import type { LatLng } from '@/lib/geo';
 import type { Poi, TasteTag } from '@/types/content';
 import { checkDwellAlert, planTrail, type TrailPlanResult, type TrailStep } from './planner';
@@ -154,39 +153,6 @@ export function skipTrailStep(
   };
 }
 
-export type AutoSkipResult = SkipResult & {
-  /** Tenant yang dilewati otomatis karena tutup; kosong jika tidak ada perubahan. */
-  skippedPoiIds: string[];
-};
-
-/**
- * Lewati tenant pending yang buka saat trail dimulai tapi kini tutup, lalu susun ulang dari tenant yang buka.
- * Tenant yang tutup sejak awal (rute jam simulasi 19:00) dibiarkan agar rute tidak terus dikosongkan.
- */
-export function skipClosedTrailSteps(
-  session: TrailSession,
-  allPois: Poi[],
-  userPosition: LatLng,
-  now: number,
-): AutoSkipResult {
-  const startedAt = new Date(session.startedAt);
-  const at = new Date(now);
-  const closed = pendingTrailSteps(session)
-    .filter((s) => isOpenAt(s.poi, startedAt) && !isOpenAt(s.poi, at))
-    .map((s) => s.poi.id);
-  if (closed.length === 0) return { session, addedPoiIds: [], skippedPoiIds: [] };
-
-  const res = skipAndReplan(
-    session,
-    closed,
-    allPois.filter((p) => isOpenAt(p, at)),
-    userPosition,
-    now,
-  );
-  // Lewati otomatis tidak bisa dibatalkan: tenantnya memang tutup.
-  return { session: { ...res.session, undo: null }, addedPoiIds: res.addedPoiIds, skippedPoiIds: closed };
-}
-
 /** Susun ulang step pending dengan sisa waktu dan budget; tenant selesai atau dilewati tidak dipilih lagi. */
 function skipAndReplan(
   session: TrailSession,
@@ -207,7 +173,6 @@ function skipAndReplan(
     durationMin: remainingTrailMin(session, now),
     budget: remainingTrailBudget(session),
     preferredTastes: session.preferredTastes,
-    referenceTime: new Date(now),
   });
 
   for (const s of session.steps) if (status[s.poi.id] === 'pending') delete status[s.poi.id];

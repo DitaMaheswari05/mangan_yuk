@@ -26,7 +26,6 @@ import {
   jumpToTrailStep,
   pendingTrailSteps,
   planTrail,
-  skipClosedTrailSteps,
   skipTrailStep,
   TrailSessionStore,
   useTrailSession,
@@ -117,34 +116,6 @@ export default function TrailItineraryScreen() {
   const [skipModalVisible, setSkipModalVisible] = useState(false);
   const [poiToSkip, setPoiToSkip] = useState<Poi | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-
-  // Runtime geofence hanya jalan saat Mode Jelajah aktif, jadi layar ini juga mengecek tenant tutup.
-  const coordRef = useRef(userCoord);
-  useEffect(() => {
-    coordRef.current = userCoord;
-  }, [userCoord]);
-  const hasSession = session != null;
-  useEffect(() => {
-    if (!hasSession) return;
-    const check = async () => {
-      let skipped: string[] = [];
-      let added: string[] = [];
-      await TrailSessionStore.update((s) => {
-        const res = skipClosedTrailSteps(s, pois, coordRef.current, Date.now());
-        skipped = res.skippedPoiIds;
-        added = res.addedPoiIds;
-        return res.session;
-      });
-      if (skipped.length === 0) return;
-      const nameOf = (id: string) => pois.find((p) => p.id === id)?.name ?? id;
-      const replacement =
-        added.length > 0 ? ` Pengganti: ${added.map(nameOf).join(', ')}.` : '';
-      setNotice(`${skipped.map(nameOf).join(', ')} sudah tutup dan dilewati otomatis.${replacement}`);
-    };
-    void check();
-    const timer = setInterval(() => void check(), 60_000);
-    return () => clearInterval(timer);
-  }, [hasSession, pois]);
 
   const handlePromptSkip = (poi: Poi) => {
     setPoiToSkip(poi);

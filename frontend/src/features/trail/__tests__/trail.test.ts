@@ -52,8 +52,6 @@ const pois: Poi[] = [
   makeTestPoi(13, 150, 36000, 15, ['gurih']), // P13: Pandu Baso Goreng (150 m)
 ];
 
-const testTime = new Date('2026-11-06T18:00:00'); // Jumat 18:00
-
 describe('Kategori 1: Validasi Input Trail Planner (AC F08-1)', () => {
   it('menolak input jika durasi <= 0 atau budget <= 0', () => {
     const invalidDuration = planTrail({
@@ -61,7 +59,6 @@ describe('Kategori 1: Validasi Input Trail Planner (AC F08-1)', () => {
       pois,
       durationMin: 0,
       budget: 50000,
-      referenceTime: testTime,
     });
     expect(invalidDuration.isValid).toBe(false);
     expect(invalidDuration.steps).toEqual([]);
@@ -71,7 +68,6 @@ describe('Kategori 1: Validasi Input Trail Planner (AC F08-1)', () => {
       pois,
       durationMin: 60,
       budget: -1000,
-      referenceTime: testTime,
     });
     expect(invalidBudget.isValid).toBe(false);
   });
@@ -84,7 +80,6 @@ describe('Kategori 2: Algoritma Rute Berurutan (Nearest Neighbor) & Non-Backtrac
       pois,
       durationMin: 60,
       budget: 50000,
-      referenceTime: testTime,
     };
 
     const result = planTrail(params);
@@ -103,7 +98,6 @@ describe('Kategori 2: Algoritma Rute Berurutan (Nearest Neighbor) & Non-Backtrac
       pois,
       durationMin: 90,
       budget: 100000,
-      referenceTime: testTime,
     });
 
     const ids = result.steps.map((s) => s.poi.id);
@@ -120,7 +114,6 @@ describe('Kategori 3: Kepatuhan Batasan Keras (Budget & Waktu)', () => {
       pois,
       durationMin: 90,
       budget: userBudget,
-      referenceTime: testTime,
     });
 
     expect(result.isValid).toBe(true);
@@ -134,7 +127,6 @@ describe('Kategori 3: Kepatuhan Batasan Keras (Budget & Waktu)', () => {
       pois,
       durationMin: userDurationMin,
       budget: 100000,
-      referenceTime: testTime,
     });
 
     expect(result.isValid).toBe(true);
@@ -149,7 +141,6 @@ describe('Kategori 3: Kepatuhan Batasan Keras (Budget & Waktu)', () => {
       pois,
       durationMin: 30,
       budget: 50000,
-      referenceTime: testTime,
     });
 
     expect(result.isValid).toBe(true);
@@ -174,17 +165,10 @@ describe('Kategori 4: Pengingat Batas Waktu Kunjungan (Dwell Time Alert)', () =>
   });
 });
 
-describe('Kategori 5: Fallback Jam Operasional', () => {
-  it('menggunakan fallback jam operasional normal jika waktu pengujian berada di luar jam operasional (misal jam 23:15)', () => {
-    // Waktu di luar jam operasional (Jumat 23:45)
-    const lateNightTime = new Date('2026-11-06T23:45:00');
-    const plan = planTrail({
-      userPosition: startPos,
-      pois,
-      durationMin: 60,
-      budget: 50000,
-      referenceTime: lateNightTime,
-    });
+describe('Kategori 5: Jam Operasional Tidak Membatasi Rute', () => {
+  it('tetap menyusun rute walaupun semua tenant sedang tutup', () => {
+    const closedPois = pois.map((p) => ({ ...p, openingHours: [] }));
+    const plan = planTrail({ userPosition: startPos, pois: closedPois, durationMin: 60, budget: 50000 });
 
     expect(plan.isValid).toBe(true);
     expect(plan.steps.length).toBeGreaterThanOrEqual(1);
