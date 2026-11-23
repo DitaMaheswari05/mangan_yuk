@@ -4,11 +4,13 @@ import { useMemo, useState } from 'react';
 import { Image, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NarrationPlayer } from '@/components/poi/NarrationPlayer';
+import { PoiReviewsSection } from '@/components/poi/PoiReviewsSection';
 import { colors, fontFamily } from '@/constants/theme';
 import { resolveAsset } from '@/features/audio';
 import { getPoiById, isOpenAt } from '@/features/poi';
 import { sanitizePoiId } from '@/lib/validation';
-import { useVisitedPoiIds } from '@/features/visits';
+import { useVisitedPoiIds, VisitRepository } from '@/features/visits';
+import { completeTrailStep, TrailSessionStore, useTrailSession } from '@/features/trail';
 import type { PhotoKind, Poi, TimeSlot } from '@/types/content';
 
 const ACCENT = '#FF8316';
@@ -34,7 +36,7 @@ function hoursByDay(slots: TimeSlot[]): { day: string; hours: string }[] {
 
 // F03 / PB08: Kartu detail POI multimodal (3 foto, menu & harga, jam buka, audio + transkrip), offline.
 export default function PoiDetailScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, fromTrail } = useLocalSearchParams<{ id: string; fromTrail?: string }>();
   const cleanId = sanitizePoiId(id);
   const poi = cleanId ? getPoiById(cleanId) : undefined;
   const insets = useSafeAreaInsets();
@@ -50,16 +52,53 @@ export default function PoiDetailScreen() {
     );
   }
 
-  return <PoiDetail poi={poi} topInset={insets.top} bottomInset={insets.bottom} />;
+  return (
+    <PoiDetail
+      poi={poi}
+      fromTrail={fromTrail === '1'}
+      topInset={insets.top}
+      bottomInset={insets.bottom}
+    />
+  );
 }
 
-function PoiDetail({ poi, topInset, bottomInset }: { poi: Poi; topInset: number; bottomInset: number }) {
+function PoiDetail({
+  poi,
+  fromTrail,
+  topInset,
+  bottomInset,
+}: {
+  poi: Poi;
+  fromTrail: boolean;
+  topInset: number;
+  bottomInset: number;
+}) {
   const { width } = useWindowDimensions();
   const visited = useVisitedPoiIds().has(poi.id);
+  const trailSession = useTrailSession();
   const openNow = useMemo(() => isOpenAt(poi, new Date()), [poi]);
   const hours = useMemo(() => hoursByDay(poi.openingHours), [poi.openingHours]);
   const [photoIndex, setPhotoIndex] = useState(0);
   const today = new Date().getDay();
+
+  // Cek apakah POI ini adalah bagian dari trail session yang aktif
+  const isPartOfActiveTrail = useMemo(() => {
+    if (fromTrail) return true;
+    if (!trailSession) return false;
+    return trailSession.steps.some((s) => s.poi.id === poi.id);
+  }, [fromTrail, trailSession, poi.id]);
+
+  const handleContinueTrail = async () => {
+    // Pastikan langkah ini ditandai selesai di trail session dan kunjungan tercatat
+    await VisitRepository.markVisited(poi.id);
+    await TrailSessionStore.update((s) => completeTrailStep(s, poi.id, Date.now()));
+    // Kembali ke halaman rute kuliner
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/trail/itinerary');
+    }
+  };
 
   // 3 slot foto: pakai foto sesuai jenis bila ada, selain itu placeholder.
   const photos = PHOTO_SLOTS.map((slot, i) => {
@@ -147,6 +186,7 @@ function PoiDetail({ poi, topInset, bottomInset }: { poi: Poi; topInset: number;
                     {m.isSignature ? '  ' : ''}
                     {m.isSignature ? <Ionicons name="star" size={12} color="#FFB800" /> : null}
                   </Text>
+                  {m.description ? <Text style={styles.menuDesc}>{m.description}</Text> : null}
                   {m.tastes.length ? <Text style={styles.menuTastes}>{m.tastes.join(' · ')}</Text> : null}
                 </View>
                 <Text style={styles.menuPrice}>{rupiah(m.priceIdr)}</Text>
@@ -169,14 +209,28 @@ function PoiDetail({ poi, topInset, bottomInset }: { poi: Poi; topInset: number;
             <Text style={styles.mutedText}>Jam operasional belum tersedia.</Text>
           )}
 
-          <Pressable
-            style={[styles.primaryBtn, styles.navigateBtn]}
-            onPress={() => router.push(`/navigate/${poi.id}`)}
-            accessibilityRole="button"
-          >
-            <Ionicons name="navigate" size={18} color="#FFFFFF" />
-            <Text style={styles.primaryBtnText}>Arahkan ke Tenant</Text>
-          </Pressable>
+          <PoiReviewsSection poi={poi} />
+
+          {isPartOfActiveTrail ? (
+            <Pressable
+              style={[styles.primaryBtn, styles.navigateBtn]}
+              onPress={() => void handleContinueTrail()}
+              accessibilityRole="button"
+              accessibilityLabel="Lanjut jelajah rute"
+            >
+              <Text style={styles.primaryBtnText}>Lanjut</Text>
+              <Ionicons name="arrow-forward" size={18} color="#FFFFFF" />
+            </Pressable>
+          ) : (
+            <Pressable
+              style={[styles.primaryBtn, styles.navigateBtn]}
+              onPress={() => router.push(`/navigate/${poi.id}`)}
+              accessibilityRole="button"
+            >
+              <Ionicons name="navigate" size={18} color="#FFFFFF" />
+              <Text style={styles.primaryBtnText}>Arahkan ke Tenant</Text>
+            </Pressable>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -279,7 +333,8 @@ const styles = StyleSheet.create({
   },
   menuNameCol: { flex: 1 },
   menuName: { fontFamily: fontFamily.medium, fontSize: 14, color: colors.onSurface },
-  menuTastes: { fontFamily: fontFamily.regular, fontSize: 12, color: '#8A8A8A', marginTop: 2 },
+  menuDesc: { fontFamily: fontFamily.regular, fontSize: 12, lineHeight: 17, color: '#5A5A5A', marginTop: 3 },
+  menuTastes: { fontFamily: fontFamily.regular, fontSize: 12, color: '#8A8A8A', marginTop: 3 },
   menuPrice: { fontFamily: fontFamily.semibold, fontSize: 14, color: ACCENT },
   hourRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 4 },
   hourDay: { fontFamily: fontFamily.regular, fontSize: 14, color: '#5A5A5A' },

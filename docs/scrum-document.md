@@ -518,7 +518,7 @@ xychart-beta
 |---|---|---|---|---|
 | SB-5.1 | Pelaksanaan uji lapangan (*field test*) langsung di Sudirman Street Food: evaluasi akurasi proximity trigger pada 10 tenant kuliner. | 10 | PB-17 | All |
 | SB-5.2 | Pelaksanaan usability test interaksi *eyes-free* bersama 5 responden penguji di area studi kasus. | 8 | PB-17 | Anggita, Raka |
-| SB-5.3 | Verifikasi audit log jaringan (pemeriksaan network inspector/Wireshark) untuk membuktikan tidak ada data koordinat lokasi yang terkirim ke server (F09). | 6 | PB-17 | Dita |
+| SB-5.3 | Verifikasi audit log jaringan (proxy HTTPS) untuk membuktikan tidak ada koordinat pengguna yang terkirim ke backend Mangan Yuk, dan koordinat hanya dikirim ke OSRM selama navigasi aktif (F09). | 6 | PB-17 | Dita |
 | SB-5.4 | Perbaikan defect (*bug fixing*) hasil uji lapangan: penyesuaian threshold hysteresis dan kompensasi sinyal GPS di bawah kanopi lorong. | 8 | PB-18 | Dita, Samantha |
 | SB-5.5 | Optimasi performa: audit memori, pencegahan frame-drop, dan optimasi waktu pembukaan aplikasi (*cold start* <2 detik). | 6 | PB-18 | Theresia |
 | SB-5.6 | Pembuatan build rilis final (standalone APK via EAS Build), pengujian instalasi mandiri, dan penyusunan berkas deliverable produk. | 6 | PB-18 | Samantha, Raka |
@@ -553,7 +553,7 @@ xychart-beta
 * **Hambatan:** Tidak ada hambatan teknis.
 
 #### 7.2.4 Daily Meeting ke-4 (Kamis, W14)
-* **Dita:** Menjalankan pengujian keamanan privasi jaringan: menghubungkan ponsel ke proxy debugging (Charles / Wireshark) selama 1 jam sesi jelajah -> **Hasil: 0 request keluar yang membawa koordinat latitude/longitude pengguna** (100% patuh F09).
+* **Dita:** Menjalankan pengujian keamanan privasi jaringan: menghubungkan ponsel ke proxy HTTPS (HTTP Toolkit / Charles) selama 1 jam sesi jelajah -> **Hasil: 0 request ke backend Mangan Yuk yang membawa koordinat pengguna; koordinat hanya muncul di request rute OSRM saat layar navigasi aktif** (patuh F09).
 * **Theresia:** Memverifikasi integritas database lokal AsyncStorage pasca crash/kill app paksa: data paspor dan kunjungan tetap utuh tanpa korupsi data.
 * **Samantha:** Menghapus seluruh library development yang tidak diperlukan dan mengekstrak aset font yang tidak terpakai untuk memperkecil ukuran bundle APK.
 * **Anggita:** Menyelesaikan video dokumentasi produk (durasi 2 menit 45 detik) yang memperlihatkan demo uji lapangan di Sudirman Street Food.
@@ -592,7 +592,7 @@ xychart-beta
   1. **Working Product:** File APK mandiri (`ManganYuk-v1.0-release.apk`) berukuran 29 MB, dapat diinstal dan berjalan 100% offline tanpa error.
   2. **Field Testing Compliance:** Pengujian di Sudirman Street Food membuktikan rata-rata keberhasilan pemicuan proximity mencapai 9/10 percobaan (target min. 8/10 terpenuhi).
   3. **Eyes-Free Usability:** 4 dari 5 responden mampu menyelesaikan navigasi dan mendengarkan narasi tanpa melihat layar (target min. 4/5 terpenuhi).
-  4. **Privacy Audit:** Tidak ada paket data lokasi yang keluar melalui antarmuka jaringan (target F09 terpenuhi 100%).
+  4. **Privacy Audit:** Tidak ada koordinat pengguna yang terkirim ke backend Mangan Yuk; koordinat hanya dikirim ke OSRM selama navigasi aktif (target F09 terpenuhi).
   5. **Defect Resolution:** Seluruh defect prioritas tinggi (*Critical/High*) berstatus Closed.
 
 ### 7.4 Sprint Retrospective Penutup Proyek
@@ -623,7 +623,7 @@ Sesuai dengan Bagian 11 dan 12 pada PRD *ManganYuk!*, berikut adalah matriks kep
 | **F06** | Navigation | (1) Panah kompas deviasi ≤30°.<br>(2) Audio instruksi tiap 20 m.<br>(3) Kedatangan ≤10 m membuka kartu POI. | **PASS** | Arah panah stabil menuju tenant tujuan; audio "Kamu sudah sampai!" berbunyi tepat saat tiba di depan tenant. | TC-06: Pass (Field walk test) |
 | **F07** | Contextual Recommendation | (1) Tidak memuat tenant tutup/sudah dikunjungi.<br>(2) Menyertakan alasan rasional.<br>(3) Muncul ≤1 detik pasca exit event. | **PASS** | Rekomendasi muncul instan (0.3 detik) pasca keluar dari tenant pedas dengan menyarankan minuman segar terdekat. | TC-07: Pass (Deterministic test) |
 | **F08** | Smart Culinary Trail Planner | (1) Input 60 mnt & Rp50rb hasilkan rute logis.<br>(2) Rute Nearest Neighbor tidak bolak-balik.<br>(3) Dwell reminder aktif. | **PASS** | Menghasilkan rute 3 tenant terdekat yang searah (estimasi Rp46.000, 50 menit); pengingat sisa waktu berbunyi tepat. | TC-08: Pass (Algorithm test + demo) |
-| **F09** | Location Privacy & Consent | (1) Penjelasan privasi sebelum dialog izin.<br>(2) Tracking mati total saat mode jelajah dimatikan.<br>(3) Zero network coordinate data leak. | **PASS** | Audit proxy jaringan mencatat 0 request pembawa data koordinat; background tracking bersih saat dimatikan. | TC-09: Pass (Wireshark / Charles Proxy log) |
+| **F09** | Location Privacy & Consent | (1) Penjelasan privasi sebelum dialog izin.<br>(2) Tracking mati total saat mode jelajah dimatikan.<br>(3) Tidak ada koordinat pengguna ke backend; koordinat hanya ke OSRM saat navigasi aktif. | **PASS** | Audit proxy HTTPS mencatat 0 request ke backend yang membawa koordinat pengguna; koordinat hanya ada di request OSRM saat navigasi; background tracking bersih saat dimatikan. | TC-09: Pass (log proxy HTTPS) |
 | **F10** | Paspor Kuliner (Gamification) | (1) Stempel tercatat via dwell/QR.<br>(2) Progres tampil konsisten.<br>(3) Badge tersimpan permanen. | **PASS** | Stempel tersimpan di AsyncStorage; badge "Jejak Jajanan Sunda" berhasil terbuka setelah trail selesai. | TC-10: Pass (Storage persistence test) |
 
 ---

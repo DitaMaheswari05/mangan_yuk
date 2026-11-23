@@ -10,13 +10,13 @@
       "gurih",
       "pedas"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.921332,
     "longitude": 107.60065,
     "triggerRadiusM": 10,
     "avgVisitMin": 10,
-    "description": "",
+    "description": "Kedai gorengan khas Pontianak, Kalimantan Barat. Andalannya pisang goreng kipas: pisang diiris tipis tanpa putus hingga terbuka seperti kipas, lalu digoreng dengan tepung renyah. Tersedia juga bakwan Pontianak, pisang tanduk madu, tape goreng madu, nanas goreng, bom singkong, tahu isi, dan gandasturi isi kacang hijau.",
     "culturalStory": null,
     "photos": [
       {
@@ -40,6 +40,7 @@
         "id": "P01-M01",
         "poiId": "P01",
         "name": "Pisang Goreng Kipas Khas Pontianak",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -54,6 +55,7 @@
         "id": "P01-M02",
         "poiId": "P01",
         "name": "Pisang Tanduk Madu",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -68,6 +70,7 @@
         "id": "P01-M03",
         "poiId": "P01",
         "name": "Gandasturi / Gandas Kacang Hijau",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -82,6 +85,7 @@
         "id": "P01-M04",
         "poiId": "P01",
         "name": "Tape Goreng Madu",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -96,6 +100,7 @@
         "id": "P01-M05",
         "poiId": "P01",
         "name": "Nanas Goreng",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -110,6 +115,7 @@
         "id": "P01-M06",
         "poiId": "P01",
         "name": "Bom Singkong",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -124,6 +130,7 @@
         "id": "P01-M07",
         "poiId": "P01",
         "name": "Bakwan Kuce / Bakwan Pontianak",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -139,6 +146,7 @@
         "id": "P01-M08",
         "poiId": "P01",
         "name": "Tahu Isi Ikan",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -153,6 +161,7 @@
         "id": "P01-M09",
         "poiId": "P01",
         "name": "Tahu Isi Ayam",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -228,7 +237,7 @@
     "longitude": 107.60065,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai swike, masakan peranakan Tionghoa berbahan kodok. Namanya berasal dari bahasa Hokkien sui ke yang berarti ayam air. Andalannya kodok goreng mentega dan kodok goreng tepung, dengan varian rica-rica dan asam manis, serta swike kuah tauco versi klasik.",
     "culturalStory": null,
     "photos": [
       {
@@ -247,6 +256,7 @@
         "id": "P03-M01",
         "poiId": "P03",
         "name": "Swike Kuah Kodok + Kuah Tauco",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -261,6 +271,7 @@
         "id": "P03-M02",
         "poiId": "P03",
         "name": "Kodok Goreng Mentega",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -275,6 +286,7 @@
         "id": "P03-M03",
         "poiId": "P03",
         "name": "Kodok Goreng Mentega Rica-Rica",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -290,6 +302,7 @@
         "id": "P03-M04",
         "poiId": "P03",
         "name": "Kodok Goreng Tepung",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -304,6 +317,7 @@
         "id": "P03-M05",
         "poiId": "P03",
         "name": "Kodok Goreng Tepung Mentega",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -318,6 +332,7 @@
         "id": "P03-M06",
         "poiId": "P03",
         "name": "Kodok Goreng Tepung Rica-Rica",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -333,6 +348,7 @@
         "id": "P03-M07",
         "poiId": "P03",
         "name": "Kodok Goreng Asam Manis",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -347,6 +363,7 @@
         "id": "P03-M08",
         "poiId": "P03",
         "name": "Kodok Goreng Asam Manis Rica-Rica",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -362,6 +379,7 @@
         "id": "P03-M09",
         "poiId": "P03",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -376,6 +394,7 @@
         "id": "P03-M10",
         "poiId": "P03",
         "name": "Kuah Polos",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -390,6 +409,7 @@
         "id": "P03-M11",
         "poiId": "P03",
         "name": "Saos Mentega",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -404,6 +424,7 @@
         "id": "P03-M12",
         "poiId": "P03",
         "name": "Saos Mentega Rica-Rica",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -419,6 +440,7 @@
         "id": "P03-M13",
         "poiId": "P03",
         "name": "Saos Asam Manis",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -433,6 +455,7 @@
         "id": "P03-M14",
         "poiId": "P03",
         "name": "Saos Asam Manis Rica-Rica",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -448,6 +471,7 @@
         "id": "P03-M15",
         "poiId": "P03",
         "name": "Juice (Alpukat, Strawberry, Melon, Sirsak, Buah Naga, Mangga, dll)",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -462,6 +486,7 @@
         "id": "P03-M16",
         "poiId": "P03",
         "name": "Es Jeruk",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -476,6 +501,7 @@
         "id": "P03-M17",
         "poiId": "P03",
         "name": "Es Campur",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -490,6 +516,7 @@
         "id": "P03-M18",
         "poiId": "P03",
         "name": "Sop Buah",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -504,6 +531,7 @@
         "id": "P03-M19",
         "poiId": "P03",
         "name": "Juice Wortel",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -571,13 +599,13 @@
       "gurih",
       "pedas"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.921285,
     "longitude": 107.600602,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai bebek goreng bumbu hitam khas Madura. Bumbunya dari rempah yang dimasak lama hingga gelap dan pekat, sehingga dagingnya gurih, sedikit pedas, dan meresap. Tersedia paket nasi bebek ukuran biasa dan kecil, serta ayam goreng bumbu hitam, termasuk versi pedas.",
     "culturalStory": null,
     "photos": [
       {
@@ -601,6 +629,7 @@
         "id": "P04-M01",
         "poiId": "P04",
         "name": "Paket Nasi Bebek Bumbu Hitam Madura",
+        "description": null,
         "priceIdr": 53900,
         "priceBucket": "mahal",
         "tastes": [
@@ -616,6 +645,7 @@
         "id": "P04-M02",
         "poiId": "P04",
         "name": "Bebek Bumbu Hitam Madura (Tanpa Nasi)",
+        "description": null,
         "priceIdr": 48900,
         "priceBucket": "sedang",
         "tastes": [
@@ -631,6 +661,7 @@
         "id": "P04-M03",
         "poiId": "P04",
         "name": "Paket Nasi Bebek Ukuran Kecil Bumbu Hitam",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -646,6 +677,7 @@
         "id": "P04-M04",
         "poiId": "P04",
         "name": "Paket Nasi Ayam Goreng Bumbu Madura Hitam Pedas",
+        "description": null,
         "priceIdr": 36900,
         "priceBucket": "sedang",
         "tastes": [
@@ -661,6 +693,7 @@
         "id": "P04-M05",
         "poiId": "P04",
         "name": "Ayam Goreng Bumbu Madura Hitam Pedas (Tanpa Nasi)",
+        "description": null,
         "priceIdr": 30900,
         "priceBucket": "sedang",
         "tastes": [
@@ -676,6 +709,7 @@
         "id": "P04-M06",
         "poiId": "P04",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 8500,
         "priceBucket": "murah",
         "tastes": [
@@ -690,6 +724,7 @@
         "id": "P04-M07",
         "poiId": "P04",
         "name": "Jukut Goreng",
+        "description": null,
         "priceIdr": 10900,
         "priceBucket": "murah",
         "tastes": [
@@ -704,6 +739,7 @@
         "id": "P04-M08",
         "poiId": "P04",
         "name": "Tahu / Tempe Goreng",
+        "description": null,
         "priceIdr": 4000,
         "priceBucket": "murah",
         "tastes": [
@@ -718,6 +754,7 @@
         "id": "P04-M09",
         "poiId": "P04",
         "name": "Telor Dadar / Ceplok",
+        "description": null,
         "priceIdr": 8500,
         "priceBucket": "murah",
         "tastes": [
@@ -732,6 +769,7 @@
         "id": "P04-M10",
         "poiId": "P04",
         "name": "Teh Tarik Signature",
+        "description": null,
         "priceIdr": 15900,
         "priceBucket": "murah",
         "tastes": [
@@ -746,6 +784,7 @@
         "id": "P04-M11",
         "poiId": "P04",
         "name": "Es Teh Manis",
+        "description": null,
         "priceIdr": 9900,
         "priceBucket": "murah",
         "tastes": [
@@ -819,7 +858,7 @@
     "longitude": 107.600588,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai nasi campur olahan babi. Andalannya nasi campur hainan, yaitu nasi yang dimasak dengan kaldu, jahe, dan bawang putih, dengan lauk seperti samcan (perut babi tiga lapis) dan charsiu (babi panggang khas Kanton). Ada juga nasi samcan crispy sambal matah, nasi samcan lada garam, dan nasi goreng Pigbull.",
     "culturalStory": null,
     "photos": [
       {
@@ -843,6 +882,7 @@
         "id": "P05-M01",
         "poiId": "P05",
         "name": "Nasi Campur Hainan",
+        "description": null,
         "priceIdr": 82000,
         "priceBucket": "mahal",
         "tastes": [
@@ -857,6 +897,7 @@
         "id": "P05-M02",
         "poiId": "P05",
         "name": "Nasi Campur Putih",
+        "description": null,
         "priceIdr": 74000,
         "priceBucket": "mahal",
         "tastes": [
@@ -871,6 +912,7 @@
         "id": "P05-M03",
         "poiId": "P05",
         "name": "Nasi Hainan Samcan Crispy Sambal Matah",
+        "description": null,
         "priceIdr": 82000,
         "priceBucket": "mahal",
         "tastes": [
@@ -886,6 +928,7 @@
         "id": "P05-M04",
         "poiId": "P05",
         "name": "Nasi Putih Samcan Crispy Sambal Matah",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -901,6 +944,7 @@
         "id": "P05-M05",
         "poiId": "P05",
         "name": "Nasi Samcan Lada Garam",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -916,6 +960,7 @@
         "id": "P05-M06",
         "poiId": "P05",
         "name": "Nasi Goreng Pigbull",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -930,6 +975,7 @@
         "id": "P05-M07",
         "poiId": "P05",
         "name": "Nasi Hainan Charsiu Madu",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -944,6 +990,7 @@
         "id": "P05-M08",
         "poiId": "P05",
         "name": "Nasi Putih Charsiu Madu",
+        "description": null,
         "priceIdr": 69000,
         "priceBucket": "mahal",
         "tastes": [
@@ -958,6 +1005,7 @@
         "id": "P05-M09",
         "poiId": "P05",
         "name": "Nasi Babi Saos Asam Manis",
+        "description": null,
         "priceIdr": 69000,
         "priceBucket": "mahal",
         "tastes": [
@@ -972,6 +1020,7 @@
         "id": "P05-M10",
         "poiId": "P05",
         "name": "Nasi Ayam Saos Asam Manis",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -986,6 +1035,7 @@
         "id": "P05-M11",
         "poiId": "P05",
         "name": "Nasi Ayam + Baso Goreng",
+        "description": null,
         "priceIdr": 37500,
         "priceBucket": "sedang",
         "tastes": [
@@ -1000,6 +1050,7 @@
         "id": "P05-M12",
         "poiId": "P05",
         "name": "Nasi Samcan + Baso Goreng",
+        "description": null,
         "priceIdr": 42000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1014,6 +1065,7 @@
         "id": "P05-M13",
         "poiId": "P05",
         "name": "Nasi Charsiu + Baso Goreng",
+        "description": null,
         "priceIdr": 42000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1028,6 +1080,7 @@
         "id": "P05-M14",
         "poiId": "P05",
         "name": "Nasi Samcan Charsiu + Baso Goreng",
+        "description": null,
         "priceIdr": 52000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1042,6 +1095,7 @@
         "id": "P05-M15",
         "poiId": "P05",
         "name": "Charsiu Madu (100 gram)",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1056,6 +1110,7 @@
         "id": "P05-M16",
         "poiId": "P05",
         "name": "Samcan Crispy (100 gram)",
+        "description": null,
         "priceIdr": 90000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1070,6 +1125,7 @@
         "id": "P05-M17",
         "poiId": "P05",
         "name": "Baso Goreng (5 Biji)",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1144,7 +1200,7 @@
     "longitude": 107.600539,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai kwetiau goreng khas Pematang Siantar dan Medan, Sumatera Utara, yang dimasak di atas api besar hingga beraroma smoky (wok hei). Tersedia juga ayam kampung pek cam ke, yaitu ayam rebus ala Tionghoa dengan saus jahe, serta chicken rice, bubur, dan dimsum. Ayam bisa dipesan setengah hingga satu ekor.",
     "culturalStory": null,
     "photos": [
       {
@@ -1168,6 +1224,7 @@
         "id": "P06-M01",
         "poiId": "P06",
         "name": "Ayam Kampung PekCamKee (1/4 Ekor)",
+        "description": null,
         "priceIdr": 62000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1182,6 +1239,7 @@
         "id": "P06-M02",
         "poiId": "P06",
         "name": "Ayam Kampung PekCamKee (1/2 Ekor)",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -1196,6 +1254,7 @@
         "id": "P06-M03",
         "poiId": "P06",
         "name": "Ayam Kampung PekCamKee (1 Ekor)",
+        "description": null,
         "priceIdr": 205000,
         "priceBucket": "premium",
         "tastes": [
@@ -1210,6 +1269,7 @@
         "id": "P06-M04",
         "poiId": "P06",
         "name": "Chicken Rice Ayam Kampung",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1224,6 +1284,7 @@
         "id": "P06-M05",
         "poiId": "P06",
         "name": "Paket Chicken Rice Ayam Kampung (2 Orang)",
+        "description": null,
         "priceIdr": 125000,
         "priceBucket": "premium",
         "tastes": [
@@ -1238,6 +1299,7 @@
         "id": "P06-M06",
         "poiId": "P06",
         "name": "Bubur Oriental Polos",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1252,6 +1314,7 @@
         "id": "P06-M07",
         "poiId": "P06",
         "name": "Bubur Oriental Telur Phitan",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1266,6 +1329,7 @@
         "id": "P06-M08",
         "poiId": "P06",
         "name": "Bubur Oriental Babi Kecap Telur Asin",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1280,6 +1344,7 @@
         "id": "P06-M09",
         "poiId": "P06",
         "name": "Bubur Kodok Singapore",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1294,6 +1359,7 @@
         "id": "P06-M10",
         "poiId": "P06",
         "name": "Kwetiau Goreng Medan / Siantar",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1308,6 +1374,7 @@
         "id": "P06-M11",
         "poiId": "P06",
         "name": "Kwetiau Siram / Bun",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1322,6 +1389,7 @@
         "id": "P06-M12",
         "poiId": "P06",
         "name": "Bakmi Goreng Khas Awin",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1336,6 +1404,7 @@
         "id": "P06-M13",
         "poiId": "P06",
         "name": "Ci Cong Fan Goreng / Siram",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1350,6 +1419,7 @@
         "id": "P06-M14",
         "poiId": "P06",
         "name": "Aneka Dimsum (Siomay Babi, Hakau, dll)",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -1420,13 +1490,13 @@
     "tasteTags": [
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920932,
     "longitude": 107.600533,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai Chinese food ala Indonesia. Pilihannya meliputi bakmie kepiting, mie hokkian, misua kuah, kwetiau dan bihun goreng, capcay, hingga nasi goreng, dengan pilihan ayam, sapi, atau seafood. Cocok untuk memesan beberapa menu dan menikmatinya bersama.",
     "culturalStory": null,
     "photos": [
       {
@@ -1445,6 +1515,7 @@
         "id": "P07-M01",
         "poiId": "P07",
         "name": "Bakmie Kepiting",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1459,6 +1530,7 @@
         "id": "P07-M02",
         "poiId": "P07",
         "name": "Mie Hokkian",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1473,6 +1545,7 @@
         "id": "P07-M03",
         "poiId": "P07",
         "name": "Mie Goreng Sapi",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1487,6 +1560,7 @@
         "id": "P07-M04",
         "poiId": "P07",
         "name": "Mie Goreng Seafood",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1501,6 +1575,7 @@
         "id": "P07-M05",
         "poiId": "P07",
         "name": "Mie Kuah Ayam",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1515,6 +1590,7 @@
         "id": "P07-M06",
         "poiId": "P07",
         "name": "Mie Ayam Jamur",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1529,6 +1605,7 @@
         "id": "P07-M07",
         "poiId": "P07",
         "name": "Mie Goreng Ayam",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1543,6 +1620,7 @@
         "id": "P07-M08",
         "poiId": "P07",
         "name": "Misua Kuah",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1557,6 +1635,7 @@
         "id": "P07-M09",
         "poiId": "P07",
         "name": "Kwetiau Goreng Seafood",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1571,6 +1650,7 @@
         "id": "P07-M10",
         "poiId": "P07",
         "name": "Kwetiau Goreng Sapi",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1585,6 +1665,7 @@
         "id": "P07-M11",
         "poiId": "P07",
         "name": "Kwetiau Siram Sapi",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1599,6 +1680,7 @@
         "id": "P07-M12",
         "poiId": "P07",
         "name": "Kwetiau Kepiting",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1613,6 +1695,7 @@
         "id": "P07-M13",
         "poiId": "P07",
         "name": "Kwetiau Goreng / Siram Ayam",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1627,6 +1710,7 @@
         "id": "P07-M14",
         "poiId": "P07",
         "name": "Bihun Goreng Sapi",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1641,6 +1725,7 @@
         "id": "P07-M15",
         "poiId": "P07",
         "name": "Bihun Goreng Seafood",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1655,6 +1740,7 @@
         "id": "P07-M16",
         "poiId": "P07",
         "name": "Bihun Goreng Ayam",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1669,6 +1755,7 @@
         "id": "P07-M17",
         "poiId": "P07",
         "name": "Kwetiau / Bihun Goreng Telur",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1683,6 +1770,7 @@
         "id": "P07-M18",
         "poiId": "P07",
         "name": "Nasi Goreng Seafood",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1697,6 +1785,7 @@
         "id": "P07-M19",
         "poiId": "P07",
         "name": "Nasi Goreng Sapi",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1711,6 +1800,7 @@
         "id": "P07-M20",
         "poiId": "P07",
         "name": "Nasi Campur Ayam",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1725,6 +1815,7 @@
         "id": "P07-M21",
         "poiId": "P07",
         "name": "Capcay Sapi",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1739,6 +1830,7 @@
         "id": "P07-M22",
         "poiId": "P07",
         "name": "Capcay Seafood",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1753,6 +1845,7 @@
         "id": "P07-M23",
         "poiId": "P07",
         "name": "Capcay Ayam",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -1827,7 +1920,7 @@
     "longitude": 107.600462,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai bak kut teh dan olahan babi bergaya Kalimantan. Bak kut teh (bahasa Hokkien: teh tulang daging) adalah sup iga babi yang direbus lama dengan rempah dan herbal; namanya merujuk pada kebiasaan menyantapnya bersama teh. Pilihannya antara lain bakut sayur asin, bakut perut ikan, bak kut angkhak merah, kolo mie bakut ala Sarawak, dan kaki babi angkhak.",
     "culturalStory": null,
     "photos": [
       {
@@ -1846,6 +1939,7 @@
         "id": "P08-M01",
         "poiId": "P08",
         "name": "Bakut Sayur Asin Kalimantan",
+        "description": null,
         "priceIdr": 80000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1860,6 +1954,7 @@
         "id": "P08-M02",
         "poiId": "P08",
         "name": "Bakkut Angkhak Merah",
+        "description": null,
         "priceIdr": 90000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1874,6 +1969,7 @@
         "id": "P08-M03",
         "poiId": "P08",
         "name": "Bakut Perut Ikan",
+        "description": null,
         "priceIdr": 160000,
         "priceBucket": "premium",
         "tastes": [
@@ -1888,6 +1984,7 @@
         "id": "P08-M04",
         "poiId": "P08",
         "name": "Kolo Mie Bakkut Sarawak",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1902,6 +1999,7 @@
         "id": "P08-M05",
         "poiId": "P08",
         "name": "Pork Leg Adobo",
+        "description": null,
         "priceIdr": 95000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1916,6 +2014,7 @@
         "id": "P08-M06",
         "poiId": "P08",
         "name": "Kaki Babi Angkhak Merah",
+        "description": null,
         "priceIdr": 95000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1930,6 +2029,7 @@
         "id": "P08-M07",
         "poiId": "P08",
         "name": "Pata & Beans",
+        "description": null,
         "priceIdr": 109998,
         "priceBucket": "premium",
         "tastes": [
@@ -1944,6 +2044,7 @@
         "id": "P08-M08",
         "poiId": "P08",
         "name": "Nasi Telur Kecap Pontianak",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -1958,6 +2059,7 @@
         "id": "P08-M09",
         "poiId": "P08",
         "name": "ShangHai Braised Pork",
+        "description": null,
         "priceIdr": 95000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1972,6 +2074,7 @@
         "id": "P08-M10",
         "poiId": "P08",
         "name": "Nasi Sate Kalimantan",
+        "description": null,
         "priceIdr": 95000,
         "priceBucket": "mahal",
         "tastes": [
@@ -1986,6 +2089,7 @@
         "id": "P08-M11",
         "poiId": "P08",
         "name": "Udang Rebus GCH",
+        "description": null,
         "priceIdr": 135000,
         "priceBucket": "premium",
         "tastes": [
@@ -2000,6 +2104,7 @@
         "id": "P08-M12",
         "poiId": "P08",
         "name": "Sop Drogdog Babi Cincang",
+        "description": null,
         "priceIdr": 120000,
         "priceBucket": "premium",
         "tastes": [
@@ -2014,6 +2119,7 @@
         "id": "P08-M13",
         "poiId": "P08",
         "name": "Telur Dadar",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2028,6 +2134,7 @@
         "id": "P08-M14",
         "poiId": "P08",
         "name": "Hekeng/Gohiong Udang",
+        "description": null,
         "priceIdr": 80000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2042,6 +2149,7 @@
         "id": "P08-M15",
         "poiId": "P08",
         "name": "Chicken Wing",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2056,6 +2164,7 @@
         "id": "P08-M16",
         "poiId": "P08",
         "name": "Bola-bola Kepiting",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2070,6 +2179,7 @@
         "id": "P08-M17",
         "poiId": "P08",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 7000,
         "priceBucket": "murah",
         "tastes": [
@@ -2084,6 +2194,7 @@
         "id": "P08-M18",
         "poiId": "P08",
         "name": "Nasi Bawang",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -2098,6 +2209,7 @@
         "id": "P08-M19",
         "poiId": "P08",
         "name": "Sambal Ebi",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2112,6 +2224,7 @@
         "id": "P08-M20",
         "poiId": "P08",
         "name": "Kopi Susu Warkop Aroma Pontianak",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2126,6 +2239,7 @@
         "id": "P08-M21",
         "poiId": "P08",
         "name": "Syrup Sonkit",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -2195,13 +2309,13 @@
     "tasteTags": [
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920838,
     "longitude": 107.600471,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "Soto khas dan gurami bakar.",
+    "description": "Kedai soto dan sop dari berbagai daerah. Andalannya soto Bandung berkuah bening dengan daging sapi, lobak, dan kacang kedelai goreng. Tersedia juga soto Lamongan, soto Betawi, sop iga, sop buntut, serta gurame pesmol khas Sunda dan gurame bakar.",
     "culturalStory": null,
     "photos": [
       {
@@ -2220,6 +2334,7 @@
         "id": "P09-M01",
         "poiId": "P09",
         "name": "Soto Bandung",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2234,6 +2349,7 @@
         "id": "P09-M02",
         "poiId": "P09",
         "name": "Soto Lamongan",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2248,6 +2364,7 @@
         "id": "P09-M03",
         "poiId": "P09",
         "name": "Soto Betawi",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2262,6 +2379,7 @@
         "id": "P09-M04",
         "poiId": "P09",
         "name": "Sop Iga",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2276,6 +2394,7 @@
         "id": "P09-M05",
         "poiId": "P09",
         "name": "Sop Buntut",
+        "description": null,
         "priceIdr": 52000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2290,6 +2409,7 @@
         "id": "P09-M06",
         "poiId": "P09",
         "name": "Soto Urat",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2304,6 +2424,7 @@
         "id": "P09-M07",
         "poiId": "P09",
         "name": "Soto Babat",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2318,6 +2439,7 @@
         "id": "P09-M08",
         "poiId": "P09",
         "name": "Soto Mie",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2332,6 +2454,7 @@
         "id": "P09-M09",
         "poiId": "P09",
         "name": "Gurame Pesmol",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2347,6 +2470,7 @@
         "id": "P09-M10",
         "poiId": "P09",
         "name": "Gurame Bakar",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2361,6 +2485,7 @@
         "id": "P09-M11",
         "poiId": "P09",
         "name": "Nasi Goreng Babat Gongso",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2375,6 +2500,7 @@
         "id": "P09-M12",
         "poiId": "P09",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 7000,
         "priceBucket": "murah",
         "tastes": [
@@ -2445,13 +2571,13 @@
       "manis",
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920782,
     "longitude": 107.600481,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai hidangan claypot yang dimasak dan disajikan dalam panci tanah liat agar tetap hangat. Pilihannya chicken, beef, seafood, kimchi, udang pete, dan cumi cabe hijau claypot. Andalannya puding peach gum, getah pohon persik yang bertekstur bening dan kenyal, serta aneka puding seperti cokelat, wintermelon, dan almond.",
     "culturalStory": null,
     "photos": [
       {
@@ -2470,6 +2596,7 @@
         "id": "P10-M01",
         "poiId": "P10",
         "name": "Peach Gum Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2484,6 +2611,7 @@
         "id": "P10-M02",
         "poiId": "P10",
         "name": "Chicken Claypot",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2498,6 +2626,7 @@
         "id": "P10-M03",
         "poiId": "P10",
         "name": "Beef Claypot",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2512,6 +2641,7 @@
         "id": "P10-M04",
         "poiId": "P10",
         "name": "Seafood Claypot",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2526,6 +2656,7 @@
         "id": "P10-M05",
         "poiId": "P10",
         "name": "Kimchi Claypot",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2540,6 +2671,7 @@
         "id": "P10-M06",
         "poiId": "P10",
         "name": "Udang Pete Claypot",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2554,6 +2686,7 @@
         "id": "P10-M07",
         "poiId": "P10",
         "name": "Cumi Cabe Hijau Claypot",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2568,6 +2701,7 @@
         "id": "P10-M08",
         "poiId": "P10",
         "name": "Chocolate Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2582,6 +2716,7 @@
         "id": "P10-M09",
         "poiId": "P10",
         "name": "Wintermelon Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2596,6 +2731,7 @@
         "id": "P10-M10",
         "poiId": "P10",
         "name": "Almond Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2610,6 +2746,7 @@
         "id": "P10-M11",
         "poiId": "P10",
         "name": "Coconut Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2624,6 +2761,7 @@
         "id": "P10-M12",
         "poiId": "P10",
         "name": "Chrysanthemum Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2638,6 +2776,7 @@
         "id": "P10-M13",
         "poiId": "P10",
         "name": "Silky Taro Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2652,6 +2791,7 @@
         "id": "P10-M14",
         "poiId": "P10",
         "name": "Macca Pudding",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -2666,6 +2806,7 @@
         "id": "P10-M15",
         "poiId": "P10",
         "name": "Chicken Wings (8 Pcs)",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2734,13 +2875,13 @@
       "gurih",
       "pedas"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920673,
     "longitude": 107.600584,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai masakan Jepang. Andalannya gyuniku amakara donburi, nasi dengan irisan daging sapi berbumbu manis pedas. Tersedia juga salmon amakara donburi, salmon shioyaki, hibiki gyudon, tori katsu, tsuya karaage, nagoya tebasaki, dan tamagoyaki.",
     "culturalStory": null,
     "photos": [
       {
@@ -2759,6 +2900,7 @@
         "id": "P11-M01",
         "poiId": "P11",
         "name": "Gyuniku Amakara Donburi",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2774,6 +2916,7 @@
         "id": "P11-M02",
         "poiId": "P11",
         "name": "Salmon Amakara Donburi",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2789,6 +2932,7 @@
         "id": "P11-M03",
         "poiId": "P11",
         "name": "Hibiki Gyudon",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2803,6 +2947,7 @@
         "id": "P11-M04",
         "poiId": "P11",
         "name": "Salmon Shioyaki Bento / Donburi",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2817,6 +2962,7 @@
         "id": "P11-M05",
         "poiId": "P11",
         "name": "Tori Katsu",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -2831,6 +2977,7 @@
         "id": "P11-M06",
         "poiId": "P11",
         "name": "Chicken Taru-Taru",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2845,6 +2992,7 @@
         "id": "P11-M07",
         "poiId": "P11",
         "name": "Tsuya Karaage",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2859,6 +3007,7 @@
         "id": "P11-M08",
         "poiId": "P11",
         "name": "Nagoya Tebasaki (8 Pcs)",
+        "description": null,
         "priceIdr": 77000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2873,6 +3022,7 @@
         "id": "P11-M09",
         "poiId": "P11",
         "name": "Tamagoyaki",
+        "description": null,
         "priceIdr": 37500,
         "priceBucket": "sedang",
         "tastes": [
@@ -2949,7 +3099,7 @@
     "longitude": 107.600476,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "Olahan bak kut teh dan samcan.",
+    "description": "Kedai bak kut teh dan samcan. Bak kut teh di sini bergaya Singapura, berkuah bening dengan rasa lada putih yang hangat, tersedia dalam ukuran reguler dan besar. Pilihan lainnya bak kut teh pork loin yang lebih banyak daging, bak kut sayur asin, dan mie bak kut teh.",
     "culturalStory": null,
     "photos": [
       {
@@ -2968,6 +3118,7 @@
         "id": "P12-M01",
         "poiId": "P12",
         "name": "Bak Kut Teh Pork Loin (Regular)",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2982,6 +3133,7 @@
         "id": "P12-M02",
         "poiId": "P12",
         "name": "Bak Kut Teh Singapore (Regular)",
+        "description": null,
         "priceIdr": 85000,
         "priceBucket": "mahal",
         "tastes": [
@@ -2997,6 +3149,7 @@
         "id": "P12-M03",
         "poiId": "P12",
         "name": "Bak Kut Sayur Asin",
+        "description": null,
         "priceIdr": 85000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3011,6 +3164,7 @@
         "id": "P12-M04",
         "poiId": "P12",
         "name": "Mie Bak Kut Teh",
+        "description": null,
         "priceIdr": 90000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3025,6 +3179,7 @@
         "id": "P12-M05",
         "poiId": "P12",
         "name": "Bak Kut Teh Pork Loin (Large)",
+        "description": null,
         "priceIdr": 98000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3039,6 +3194,7 @@
         "id": "P12-M06",
         "poiId": "P12",
         "name": "Bak Kut Teh Singapore (Large)",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -3054,6 +3210,7 @@
         "id": "P12-M07",
         "poiId": "P12",
         "name": "Dry Bak Kut Teh",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -3068,6 +3225,7 @@
         "id": "P12-M08",
         "poiId": "P12",
         "name": "Pork Ribs Charsiu (Regular)",
+        "description": null,
         "priceIdr": 85000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3082,6 +3240,7 @@
         "id": "P12-M09",
         "poiId": "P12",
         "name": "Nasi Pork Ribs Charsiu",
+        "description": null,
         "priceIdr": 95000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3096,6 +3255,7 @@
         "id": "P12-M10",
         "poiId": "P12",
         "name": "Pork Ribs Charsiu (Large)",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -3110,6 +3270,7 @@
         "id": "P12-M11",
         "poiId": "P12",
         "name": "Sate Babi (5 Tusuk)",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3124,6 +3285,7 @@
         "id": "P12-M12",
         "poiId": "P12",
         "name": "Pork Ribs Steak",
+        "description": null,
         "priceIdr": 165000,
         "priceBucket": "premium",
         "tastes": [
@@ -3138,6 +3300,7 @@
         "id": "P12-M13",
         "poiId": "P12",
         "name": "Shanghai Crispy Pork",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3152,6 +3315,7 @@
         "id": "P12-M14",
         "poiId": "P12",
         "name": "Kekian/Gohyong Babi",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3166,6 +3330,7 @@
         "id": "P12-M15",
         "poiId": "P12",
         "name": "Bak Kut Goreng Cabe Garam",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3181,6 +3346,7 @@
         "id": "P12-M16",
         "poiId": "P12",
         "name": "Bak Kut Goreng Sambal Matah",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3196,6 +3362,7 @@
         "id": "P12-M17",
         "poiId": "P12",
         "name": "Samcan Cabe Garam",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3211,6 +3378,7 @@
         "id": "P12-M18",
         "poiId": "P12",
         "name": "Samcan Sambal Matah",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3226,6 +3394,7 @@
         "id": "P12-M19",
         "poiId": "P12",
         "name": "Nasi Goreng Hong / Mr. Hao",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3293,13 +3462,13 @@
     "tasteTags": [
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920687,
     "longitude": 107.600476,
     "triggerRadiusM": 10,
     "avgVisitMin": 10,
-    "description": "Bakso ikan tenggiri goreng yang krispi.",
+    "description": "Kedai baso goreng dari ikan tenggiri, renyah di luar dan lembut di dalam. Tersedia porsi isi 4, 6, atau 8–10 biji untuk disantap di tempat, serta baso goreng beku lengkap dengan sambal untuk dibawa pulang.",
     "culturalStory": null,
     "photos": [
       {
@@ -3318,6 +3487,7 @@
         "id": "P13-M01",
         "poiId": "P13",
         "name": "Baso Goreng Siap Santap (4 Pcs)",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -3332,6 +3502,7 @@
         "id": "P13-M02",
         "poiId": "P13",
         "name": "Baso Goreng Siap Santap (6 Pcs)",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -3346,6 +3517,7 @@
         "id": "P13-M03",
         "poiId": "P13",
         "name": "Baso Goreng Siap Santap (8-10 Pcs)",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3360,6 +3532,7 @@
         "id": "P13-M04",
         "poiId": "P13",
         "name": "Baso Goreng Frozen (9 Pcs + Sambal)",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3435,7 +3608,7 @@
     "longitude": 107.600476,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai olahan nasi dan bakmie babi dengan lebih dari 30 pilihan menu. Andalannya nasi segulung babi dan nasi babi banjur bawang, yaitu babi yang disiram minyak bawang. Ada juga nasi babi hong, bakmie babi, bakmie cukiok kaki babi, nasi campur babi empat musim, dan sosis siluman babi.",
     "culturalStory": null,
     "photos": [
       {
@@ -3454,6 +3627,7 @@
         "id": "P14-M01",
         "poiId": "P14",
         "name": "Nasi Segulung Babi",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3469,6 +3643,7 @@
         "id": "P14-M02",
         "poiId": "P14",
         "name": "Nasi Babi Banjur Bawang",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3484,6 +3659,7 @@
         "id": "P14-M03",
         "poiId": "P14",
         "name": "Bakmie Segulung Babi",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3498,6 +3674,7 @@
         "id": "P14-M04",
         "poiId": "P14",
         "name": "Nasi Babi Hong",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3512,6 +3689,7 @@
         "id": "P14-M05",
         "poiId": "P14",
         "name": "Bakmie Babi Polos",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -3526,6 +3704,7 @@
         "id": "P14-M06",
         "poiId": "P14",
         "name": "Nasi Babi Pedas",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3540,6 +3719,7 @@
         "id": "P14-M07",
         "poiId": "P14",
         "name": "Bakmie Cukiok Kaki Babi",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3554,6 +3734,7 @@
         "id": "P14-M08",
         "poiId": "P14",
         "name": "Nasi Campur Babi 4 Musim",
+        "description": null,
         "priceIdr": 87000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3568,6 +3749,7 @@
         "id": "P14-M09",
         "poiId": "P14",
         "name": "Sosis Siluman Babi",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -3582,6 +3764,7 @@
         "id": "P14-M10",
         "poiId": "P14",
         "name": "Nasi Siluman Babi Istimewa",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3596,6 +3779,7 @@
         "id": "P14-M11",
         "poiId": "P14",
         "name": "Nasi Cukiok (Kaki Babi Coklat)",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3610,6 +3794,7 @@
         "id": "P14-M12",
         "poiId": "P14",
         "name": "Nasi Sosis Siluman Babi",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -3624,6 +3809,7 @@
         "id": "P14-M13",
         "poiId": "P14",
         "name": "Pork Steam Rice",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -3638,6 +3824,7 @@
         "id": "P14-M14",
         "poiId": "P14",
         "name": "Nasi Bacon Dadar Banjur Bawang",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -3652,6 +3839,7 @@
         "id": "P14-M15",
         "poiId": "P14",
         "name": "Nasi Babi Kecap",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3666,6 +3854,7 @@
         "id": "P14-M16",
         "poiId": "P14",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -3680,6 +3869,7 @@
         "id": "P14-M17",
         "poiId": "P14",
         "name": "Segulung Babi Per 100 Gram",
+        "description": null,
         "priceIdr": 69000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3694,6 +3884,7 @@
         "id": "P14-M18",
         "poiId": "P14",
         "name": "Babi Banjur Bawang Tanpa Nasi",
+        "description": null,
         "priceIdr": 69000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3708,6 +3899,7 @@
         "id": "P14-M19",
         "poiId": "P14",
         "name": "Babi Hong Tanpa Nasi",
+        "description": null,
         "priceIdr": 72500,
         "priceBucket": "mahal",
         "tastes": [
@@ -3722,6 +3914,7 @@
         "id": "P14-M20",
         "poiId": "P14",
         "name": "Kaki Babi Coklat Cukiok Tanpa Nasi",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3736,6 +3929,7 @@
         "id": "P14-M21",
         "poiId": "P14",
         "name": "Topping Banjur Bawang",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -3750,6 +3944,7 @@
         "id": "P14-M22",
         "poiId": "P14",
         "name": "Extra Sambal Matah",
+        "description": null,
         "priceIdr": 7500,
         "priceBucket": "murah",
         "tastes": [
@@ -3764,6 +3959,7 @@
         "id": "P14-M23",
         "poiId": "P14",
         "name": "Babi Pedas Tanpa Nasi",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3778,6 +3974,7 @@
         "id": "P14-M24",
         "poiId": "P14",
         "name": "Siomay Babi Hokcai (4 Pcs)",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3792,6 +3989,7 @@
         "id": "P14-M25",
         "poiId": "P14",
         "name": "Babi Hong Porsi Jumbo",
+        "description": null,
         "priceIdr": 205000,
         "priceBucket": "premium",
         "tastes": [
@@ -3806,6 +4004,7 @@
         "id": "P14-M26",
         "poiId": "P14",
         "name": "Cukiok Porsi Jumbo",
+        "description": null,
         "priceIdr": 172500,
         "priceBucket": "premium",
         "tastes": [
@@ -3820,6 +4019,7 @@
         "id": "P14-M27",
         "poiId": "P14",
         "name": "Babi Kecap",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3834,6 +4034,7 @@
         "id": "P14-M28",
         "poiId": "P14",
         "name": "Bakmie Babi Hong",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3848,6 +4049,7 @@
         "id": "P14-M29",
         "poiId": "P14",
         "name": "Bakmie 4 Musim",
+        "description": null,
         "priceIdr": 87000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3862,6 +4064,7 @@
         "id": "P14-M30",
         "poiId": "P14",
         "name": "Bakmie Babi Item",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3876,6 +4079,7 @@
         "id": "P14-M31",
         "poiId": "P14",
         "name": "Segulung Babi + Pork Steam Rice",
+        "description": null,
         "priceIdr": 90000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3890,6 +4094,7 @@
         "id": "P14-M32",
         "poiId": "P14",
         "name": "Babi Hong + Pork Steam Rice",
+        "description": null,
         "priceIdr": 100000,
         "priceBucket": "premium",
         "tastes": [
@@ -3904,6 +4109,7 @@
         "id": "P14-M33",
         "poiId": "P14",
         "name": "Cukiok + Pork Steam Rice",
+        "description": null,
         "priceIdr": 90000,
         "priceBucket": "mahal",
         "tastes": [
@@ -3918,6 +4124,7 @@
         "id": "P14-M34",
         "poiId": "P14",
         "name": "2 Porsi Nasi Babi Pedas",
+        "description": null,
         "priceIdr": 115000,
         "priceBucket": "premium",
         "tastes": [
@@ -3932,6 +4139,7 @@
         "id": "P14-M35",
         "poiId": "P14",
         "name": "3 Porsi Nasi Babi Pedas",
+        "description": null,
         "priceIdr": 165000,
         "priceBucket": "premium",
         "tastes": [
@@ -3946,6 +4154,7 @@
         "id": "P14-M36",
         "poiId": "P14",
         "name": "Air Mineral Gelas",
+        "description": null,
         "priceIdr": 2500,
         "priceBucket": "murah",
         "tastes": [
@@ -3960,6 +4169,7 @@
         "id": "P14-M37",
         "poiId": "P14",
         "name": "Teh Pucuk Harum Botol",
+        "description": null,
         "priceIdr": 7000,
         "priceBucket": "murah",
         "tastes": [
@@ -4034,7 +4244,7 @@
     "longitude": 107.600575,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai bacuk, olahan babi cincang berbumbu gurih yang disajikan dengan nasi putih atau sebagai nasi goreng. Andalannya nasi goreng bacuk putih dan nasi bacuk original. Tersedia juga babi tore khas Manado dengan sambal matah, babi madu, nasi goreng babi madu asin, serta kwetiau goreng bacuk dan babi tore.",
     "culturalStory": null,
     "photos": [
       {
@@ -4053,6 +4263,7 @@
         "id": "P15-M01",
         "poiId": "P15",
         "name": "Nasgor Bacuk Putih",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4067,6 +4278,7 @@
         "id": "P15-M02",
         "poiId": "P15",
         "name": "Nasi Bacuk Ori",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4081,6 +4293,7 @@
         "id": "P15-M03",
         "poiId": "P15",
         "name": "Nasgor Bacuk Sambal Matah",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4096,6 +4309,7 @@
         "id": "P15-M04",
         "poiId": "P15",
         "name": "Nasgor Babi Tore Sambal Matah",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4111,6 +4325,7 @@
         "id": "P15-M05",
         "poiId": "P15",
         "name": "Kwetiau Goreng Bacuk",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4125,6 +4340,7 @@
         "id": "P15-M06",
         "poiId": "P15",
         "name": "Kwetiau Goreng Babi Tore",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4139,6 +4355,7 @@
         "id": "P15-M07",
         "poiId": "P15",
         "name": "Babi Madu",
+        "description": null,
         "priceIdr": 49000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4153,6 +4370,7 @@
         "id": "P15-M08",
         "poiId": "P15",
         "name": "Nasi Putih Babi Madu",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4167,6 +4385,7 @@
         "id": "P15-M09",
         "poiId": "P15",
         "name": "Nasgor Babi Madu Asin",
+        "description": null,
         "priceIdr": 49000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4181,6 +4400,7 @@
         "id": "P15-M10",
         "poiId": "P15",
         "name": "Nasgor Babi Madu Manis",
+        "description": null,
         "priceIdr": 49000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4195,6 +4415,7 @@
         "id": "P15-M11",
         "poiId": "P15",
         "name": "Bacuk Jumbo",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -4209,6 +4430,7 @@
         "id": "P15-M12",
         "poiId": "P15",
         "name": "Bacuk Ori",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4223,6 +4445,7 @@
         "id": "P15-M13",
         "poiId": "P15",
         "name": "Babi Tore Manado",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4237,6 +4460,7 @@
         "id": "P15-M14",
         "poiId": "P15",
         "name": "Nasi Babi Tore",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4251,6 +4475,7 @@
         "id": "P15-M15",
         "poiId": "P15",
         "name": "Nasgor Bacuk Kecap",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4265,6 +4490,7 @@
         "id": "P15-M16",
         "poiId": "P15",
         "name": "Nasgor Bacuk Cabe Ijo",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4280,6 +4506,7 @@
         "id": "P15-M17",
         "poiId": "P15",
         "name": "Nasgor Bacuk Rica",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4295,6 +4522,7 @@
         "id": "P15-M18",
         "poiId": "P15",
         "name": "Nasgor Babi Tore Putih",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4309,6 +4537,7 @@
         "id": "P15-M19",
         "poiId": "P15",
         "name": "Nasgor Babi Tore Kecap",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4323,6 +4552,7 @@
         "id": "P15-M20",
         "poiId": "P15",
         "name": "Nasgor Babi Tore Cabe Ijo",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4338,6 +4568,7 @@
         "id": "P15-M21",
         "poiId": "P15",
         "name": "Nasgor Babi Tore Rica",
+        "description": null,
         "priceIdr": 58000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4353,6 +4584,7 @@
         "id": "P15-M22",
         "poiId": "P15",
         "name": "Nasgor Babi Kecap",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4367,6 +4599,7 @@
         "id": "P15-M23",
         "poiId": "P15",
         "name": "Keju Aroma Original",
+        "description": null,
         "priceIdr": 21000,
         "priceBucket": "murah",
         "tastes": [
@@ -4381,6 +4614,7 @@
         "id": "P15-M24",
         "poiId": "P15",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 9000,
         "priceBucket": "murah",
         "tastes": [
@@ -4395,6 +4629,7 @@
         "id": "P15-M25",
         "poiId": "P15",
         "name": "Telor",
+        "description": null,
         "priceIdr": 7000,
         "priceBucket": "murah",
         "tastes": [
@@ -4409,6 +4644,7 @@
         "id": "P15-M26",
         "poiId": "P15",
         "name": "Caisim Goreng",
+        "description": null,
         "priceIdr": 7000,
         "priceBucket": "murah",
         "tastes": [
@@ -4423,6 +4659,7 @@
         "id": "P15-M27",
         "poiId": "P15",
         "name": "Bacuk Frozen 250 gr",
+        "description": null,
         "priceIdr": 125000,
         "priceBucket": "premium",
         "tastes": [
@@ -4437,6 +4674,7 @@
         "id": "P15-M28",
         "poiId": "P15",
         "name": "Bacuk Frozen 500 gr",
+        "description": null,
         "priceIdr": 240000,
         "priceBucket": "premium",
         "tastes": [
@@ -4451,6 +4689,7 @@
         "id": "P15-M29",
         "poiId": "P15",
         "name": "Bacuk Daging",
+        "description": null,
         "priceIdr": 69000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4465,6 +4704,7 @@
         "id": "P15-M30",
         "poiId": "P15",
         "name": "Nasi Bacuk Daging",
+        "description": null,
         "priceIdr": 73000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4533,13 +4773,13 @@
     "tasteTags": [
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920633,
     "longitude": 107.600575,
     "triggerRadiusM": 10,
     "avgVisitMin": 10,
-    "description": "",
+    "description": "Meski namanya seperti kedai minuman, andalan Hau’s Tea adalah cakue, adonan dua batang yang digoreng hingga mengembang dan renyah. Variasinya antara lain cakue bumbu, rujak, udang, chili dog, dan sprinkle. Tersedia juga baso campur, baso goreng, chickenball, chicken stick, batagor, dan mie kocok.",
     "culturalStory": null,
     "photos": [
       {
@@ -4568,6 +4808,7 @@
         "id": "P16-M01",
         "poiId": "P16",
         "name": "Cakue Original",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -4582,6 +4823,7 @@
         "id": "P16-M02",
         "poiId": "P16",
         "name": "Cakue Bumbu",
+        "description": null,
         "priceIdr": 12000,
         "priceBucket": "murah",
         "tastes": [
@@ -4596,6 +4838,7 @@
         "id": "P16-M03",
         "poiId": "P16",
         "name": "Cakue Rujak",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -4611,6 +4854,7 @@
         "id": "P16-M04",
         "poiId": "P16",
         "name": "Cakue Chili-Dog",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -4626,6 +4870,7 @@
         "id": "P16-M05",
         "poiId": "P16",
         "name": "Cakue Udang",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -4640,6 +4885,7 @@
         "id": "P16-M06",
         "poiId": "P16",
         "name": "Cakue Popping",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4654,6 +4900,7 @@
         "id": "P16-M07",
         "poiId": "P16",
         "name": "Cakue Sprinkle",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4668,6 +4915,7 @@
         "id": "P16-M08",
         "poiId": "P16",
         "name": "Baso Campur",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4682,6 +4930,7 @@
         "id": "P16-M09",
         "poiId": "P16",
         "name": "Baso Goreng",
+        "description": null,
         "priceIdr": 9000,
         "priceBucket": "murah",
         "tastes": [
@@ -4696,6 +4945,7 @@
         "id": "P16-M10",
         "poiId": "P16",
         "name": "Paket Baso Goreng",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4710,6 +4960,7 @@
         "id": "P16-M11",
         "poiId": "P16",
         "name": "Chickenball",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -4724,6 +4975,7 @@
         "id": "P16-M12",
         "poiId": "P16",
         "name": "Chicken Stick",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -4738,6 +4990,7 @@
         "id": "P16-M13",
         "poiId": "P16",
         "name": "Paket Batagor",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -4752,6 +5005,7 @@
         "id": "P16-M14",
         "poiId": "P16",
         "name": "Mie Kocok",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -4766,6 +5020,7 @@
         "id": "P16-M15",
         "poiId": "P16",
         "name": "Chicken Noodle / Lo Mie",
+        "description": null,
         "priceIdr": 22000,
         "priceBucket": "murah",
         "tastes": [
@@ -4834,13 +5089,13 @@
     "tasteTags": [
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920633,
     "longitude": 107.600575,
     "triggerRadiusM": 10,
     "avgVisitMin": 10,
-    "description": "",
+    "description": "Kedai kuo tie (guotie), pangsit yang dimasak menempel di wajan datar. Ada dua pilihan: original (pan fried) dengan dasar renyah dan kulit atas lembut, serta crispy (deep fried) yang garing di seluruh sisi. Bisa dibeli satuan atau satu porsi isi 10, nikmat dicocol saus cuka atau sambal.",
     "culturalStory": null,
     "photos": [
       {
@@ -4859,6 +5114,7 @@
         "id": "P17-M01",
         "poiId": "P17",
         "name": "Kuo Tie Original (Pan Fried)",
+        "description": null,
         "priceIdr": 7500,
         "priceBucket": "murah",
         "tastes": [
@@ -4873,6 +5129,7 @@
         "id": "P17-M02",
         "poiId": "P17",
         "name": "Kuo Tie Crispy (Deep Fried)",
+        "description": null,
         "priceIdr": 7500,
         "priceBucket": "murah",
         "tastes": [
@@ -4887,6 +5144,7 @@
         "id": "P17-M03",
         "poiId": "P17",
         "name": "Kuo Tie 1 Porsi (10 Pcs)",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4959,7 +5217,7 @@
     "longitude": 107.600631,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai nasi goreng babi dengan berbagai topping. Andalannya nasi goreng topping chasiu (babi panggang manis khas Kanton) dan topping samcan goreng renyah. Tersedia juga topping campur samcan, chasiu, dan lapchiong, serta nasi goreng yang chou ala Yangzhou.",
     "culturalStory": null,
     "photos": [
       {
@@ -4983,6 +5241,7 @@
         "id": "P18-M01",
         "poiId": "P18",
         "name": "Nasi Goreng Babi Toping Chasiu",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -4997,6 +5256,7 @@
         "id": "P18-M02",
         "poiId": "P18",
         "name": "Nasi Goreng Babi Toping Samcan",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5011,6 +5271,7 @@
         "id": "P18-M03",
         "poiId": "P18",
         "name": "Nasi Goreng Babi Chasiu Lapchong",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5025,6 +5286,7 @@
         "id": "P18-M04",
         "poiId": "P18",
         "name": "Nasi Goreng Babi Toping Samcan Chasiu Lapchong",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5039,6 +5301,7 @@
         "id": "P18-M05",
         "poiId": "P18",
         "name": "Nasi Goreng Babi",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5053,6 +5316,7 @@
         "id": "P18-M06",
         "poiId": "P18",
         "name": "Nasi Goreng Babi Yang Chou",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5067,6 +5331,7 @@
         "id": "P18-M07",
         "poiId": "P18",
         "name": "Nasi Goreng Babi Toping Lapciong",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5081,6 +5346,7 @@
         "id": "P18-M08",
         "poiId": "P18",
         "name": "Promo 2 Porsi Nasi Goreng Babi Toping Lapchong",
+        "description": null,
         "priceIdr": 130000,
         "priceBucket": "premium",
         "tastes": [
@@ -5095,6 +5361,7 @@
         "id": "P18-M09",
         "poiId": "P18",
         "name": "Promo 2 Porsi Nasi Goreng Babi",
+        "description": null,
         "priceIdr": 95000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5109,6 +5376,7 @@
         "id": "P18-M10",
         "poiId": "P18",
         "name": "Kwetiaw Goreng Babi",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5123,6 +5391,7 @@
         "id": "P18-M11",
         "poiId": "P18",
         "name": "Kwetiaw Goreng Babi Toping Chasiu",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5137,6 +5406,7 @@
         "id": "P18-M12",
         "poiId": "P18",
         "name": "Kwetiaw Goreng Babi Toping Samcan",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5151,6 +5421,7 @@
         "id": "P18-M13",
         "poiId": "P18",
         "name": "Mie Goreng Babi",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5165,6 +5436,7 @@
         "id": "P18-M14",
         "poiId": "P18",
         "name": "Mie Goreng Babi Toping Chasiu",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5179,6 +5451,7 @@
         "id": "P18-M15",
         "poiId": "P18",
         "name": "Mie Goreng Babi Toping Samcan",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5193,6 +5466,7 @@
         "id": "P18-M16",
         "poiId": "P18",
         "name": "Bihun Goreng Babi",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5207,6 +5481,7 @@
         "id": "P18-M17",
         "poiId": "P18",
         "name": "Bihun Goreng Babi Toping Chasiu",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5221,6 +5496,7 @@
         "id": "P18-M18",
         "poiId": "P18",
         "name": "Bihun Goreng Babi Toping Samcan",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5235,6 +5511,7 @@
         "id": "P18-M19",
         "poiId": "P18",
         "name": "Telur Mata Sapi",
+        "description": null,
         "priceIdr": 13500,
         "priceBucket": "murah",
         "tastes": [
@@ -5249,6 +5526,7 @@
         "id": "P18-M20",
         "poiId": "P18",
         "name": "Liang Teh",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5314,7 +5592,7 @@
     "longitude": 107.600631,
     "triggerRadiusM": 10,
     "avgVisitMin": 5,
-    "description": "",
+    "description": "Kedai kopi dengan andalan Jazz Coffee Latte dan Orange Espresso Tonic (espresso, air tonik, dan jeruk). Ada juga hazelnut jazz coffee, brown sugar latte, caramel macchiato, americano, dan matcha latte, serta lemonade stroberi dan minuman serai untuk yang tidak minum kopi. Beberapa menu mengandung alkohol, seperti Rhum dan Baileys Jazz Coffee.",
     "culturalStory": null,
     "photos": [
       {
@@ -5338,6 +5616,7 @@
         "id": "P19-M01",
         "poiId": "P19",
         "name": "Jazz Coffee Latte",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5352,6 +5631,7 @@
         "id": "P19-M02",
         "poiId": "P19",
         "name": "Orange Espresso Tonic",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5366,6 +5646,7 @@
         "id": "P19-M03",
         "poiId": "P19",
         "name": "Rhum Jazz Coffee",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5380,6 +5661,7 @@
         "id": "P19-M04",
         "poiId": "P19",
         "name": "Baileys Jazz Coffee",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5394,6 +5676,7 @@
         "id": "P19-M05",
         "poiId": "P19",
         "name": "Hazelnut Jazz Coffee",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5408,6 +5691,7 @@
         "id": "P19-M06",
         "poiId": "P19",
         "name": "Brown Sugar Latte",
+        "description": null,
         "priceIdr": 23000,
         "priceBucket": "murah",
         "tastes": [
@@ -5422,6 +5706,7 @@
         "id": "P19-M07",
         "poiId": "P19",
         "name": "Caramel Macchiato",
+        "description": null,
         "priceIdr": 26000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5436,6 +5721,7 @@
         "id": "P19-M08",
         "poiId": "P19",
         "name": "Ice Americano",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -5450,6 +5736,7 @@
         "id": "P19-M09",
         "poiId": "P19",
         "name": "Matcha Latte",
+        "description": null,
         "priceIdr": 29500,
         "priceBucket": "sedang",
         "tastes": [
@@ -5464,6 +5751,7 @@
         "id": "P19-M10",
         "poiId": "P19",
         "name": "Stratoberi Lemonade",
+        "description": null,
         "priceIdr": 27000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5478,6 +5766,7 @@
         "id": "P19-M11",
         "poiId": "P19",
         "name": "Lemongrass Tea",
+        "description": null,
         "priceIdr": 19000,
         "priceBucket": "murah",
         "tastes": [
@@ -5492,6 +5781,7 @@
         "id": "P19-M12",
         "poiId": "P19",
         "name": "Hot Latte",
+        "description": null,
         "priceIdr": 23000,
         "priceBucket": "murah",
         "tastes": [
@@ -5506,6 +5796,7 @@
         "id": "P19-M13",
         "poiId": "P19",
         "name": "Hot Cappuccino",
+        "description": null,
         "priceIdr": 23000,
         "priceBucket": "murah",
         "tastes": [
@@ -5520,6 +5811,7 @@
         "id": "P19-M14",
         "poiId": "P19",
         "name": "Hot Americano",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -5534,6 +5826,7 @@
         "id": "P19-M15",
         "poiId": "P19",
         "name": "Mocha Latte",
+        "description": null,
         "priceIdr": 22000,
         "priceBucket": "murah",
         "tastes": [
@@ -5548,6 +5841,7 @@
         "id": "P19-M16",
         "poiId": "P19",
         "name": "Affogato",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -5562,6 +5856,7 @@
         "id": "P19-M17",
         "poiId": "P19",
         "name": "Hot Matcha Latte",
+        "description": null,
         "priceIdr": 28000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5576,6 +5871,7 @@
         "id": "P19-M18",
         "poiId": "P19",
         "name": "Dark Chocolate",
+        "description": null,
         "priceIdr": 23000,
         "priceBucket": "murah",
         "tastes": [
@@ -5590,6 +5886,7 @@
         "id": "P19-M19",
         "poiId": "P19",
         "name": "Hot Black Tea",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -5604,6 +5901,7 @@
         "id": "P19-M20",
         "poiId": "P19",
         "name": "V60",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5618,6 +5916,7 @@
         "id": "P19-M21",
         "poiId": "P19",
         "name": "Tubruk",
+        "description": null,
         "priceIdr": 23000,
         "priceBucket": "murah",
         "tastes": [
@@ -5692,7 +5991,7 @@
     "longitude": 107.601389,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "Nasi hainan atau nasi putih dengan topping lengkap.",
+    "description": "Kedai nasi campur dengan andalan nasi hainan komplit dan nasi putih komplit. Toppingnya ayam panggang, chasiu, siobak (babi panggang berkulit renyah), dan lapchiong. Ayam panggang Kencana 99 juga bisa dibeli terpisah untuk dibawa pulang.",
     "culturalStory": null,
     "photos": [
       {
@@ -5716,6 +6015,7 @@
         "id": "P20-M01",
         "poiId": "P20",
         "name": "Nasi Hainan Komplit",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5730,6 +6030,7 @@
         "id": "P20-M02",
         "poiId": "P20",
         "name": "Nasi Putih Komplit",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5744,6 +6045,7 @@
         "id": "P20-M03",
         "poiId": "P20",
         "name": "Nasi Hainan Polos",
+        "description": null,
         "priceIdr": 14000,
         "priceBucket": "murah",
         "tastes": [
@@ -5758,6 +6060,7 @@
         "id": "P20-M04",
         "poiId": "P20",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 9000,
         "priceBucket": "murah",
         "tastes": [
@@ -5772,6 +6075,7 @@
         "id": "P20-M05",
         "poiId": "P20",
         "name": "Nasi Putih + Ayam Panggang Kencana 99",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5786,6 +6090,7 @@
         "id": "P20-M06",
         "poiId": "P20",
         "name": "Nasi Hainan + Ayam Panggang Kencana 99",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5800,6 +6105,7 @@
         "id": "P20-M07",
         "poiId": "P20",
         "name": "Ayam Panggang Kencana 99",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5814,6 +6120,7 @@
         "id": "P20-M08",
         "poiId": "P20",
         "name": "Ayam Panggang Kencana 99 1/2 Ekor",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5828,6 +6135,7 @@
         "id": "P20-M09",
         "poiId": "P20",
         "name": "Ayam Panggang Kencana 99 1 Ekor",
+        "description": null,
         "priceIdr": 135000,
         "priceBucket": "premium",
         "tastes": [
@@ -5842,6 +6150,7 @@
         "id": "P20-M10",
         "poiId": "P20",
         "name": "Nasi Hainan Chasiu",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5856,6 +6165,7 @@
         "id": "P20-M11",
         "poiId": "P20",
         "name": "Nasi Putih Chasiu",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5870,6 +6180,7 @@
         "id": "P20-M12",
         "poiId": "P20",
         "name": "Nasi Hainan Samcan",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5884,6 +6195,7 @@
         "id": "P20-M13",
         "poiId": "P20",
         "name": "Nasi Putih Samcan",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5898,6 +6210,7 @@
         "id": "P20-M14",
         "poiId": "P20",
         "name": "Telor Kecap",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -5912,6 +6225,7 @@
         "id": "P20-M15",
         "poiId": "P20",
         "name": "Bakso Goreng Kencana (5 Pcs)",
+        "description": null,
         "priceIdr": 37500,
         "priceBucket": "sedang",
         "tastes": [
@@ -5926,6 +6240,7 @@
         "id": "P20-M16",
         "poiId": "P20",
         "name": "Bakso Goreng Babi Per Pcs",
+        "description": null,
         "priceIdr": 8500,
         "priceBucket": "murah",
         "tastes": [
@@ -5940,6 +6255,7 @@
         "id": "P20-M17",
         "poiId": "P20",
         "name": "Lapceong/Sosis Babi 1 Porsi",
+        "description": null,
         "priceIdr": 38000,
         "priceBucket": "sedang",
         "tastes": [
@@ -5954,6 +6270,7 @@
         "id": "P20-M18",
         "poiId": "P20",
         "name": "Lapceong/Sosis Babi (Medium)",
+        "description": null,
         "priceIdr": 85000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5968,6 +6285,7 @@
         "id": "P20-M19",
         "poiId": "P20",
         "name": "Lapceong/Sosis Babi (Large)",
+        "description": null,
         "priceIdr": 155000,
         "priceBucket": "premium",
         "tastes": [
@@ -5982,6 +6300,7 @@
         "id": "P20-M20",
         "poiId": "P20",
         "name": "Siobak 1 Porsi",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -5996,6 +6315,7 @@
         "id": "P20-M21",
         "poiId": "P20",
         "name": "Siobak 1/4 Kg",
+        "description": null,
         "priceIdr": 180000,
         "priceBucket": "premium",
         "tastes": [
@@ -6010,6 +6330,7 @@
         "id": "P20-M22",
         "poiId": "P20",
         "name": "Siobak 1/2 Kg",
+        "description": null,
         "priceIdr": 338000,
         "priceBucket": "premium",
         "tastes": [
@@ -6024,6 +6345,7 @@
         "id": "P20-M23",
         "poiId": "P20",
         "name": "Siobak 1 Kg",
+        "description": null,
         "priceIdr": 630000,
         "priceBucket": "premium",
         "tastes": [
@@ -6038,6 +6360,7 @@
         "id": "P20-M24",
         "poiId": "P20",
         "name": "Chasiu 1 Porsi",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6052,6 +6375,7 @@
         "id": "P20-M25",
         "poiId": "P20",
         "name": "Chasiu 1/4 Kg",
+        "description": null,
         "priceIdr": 178000,
         "priceBucket": "premium",
         "tastes": [
@@ -6066,6 +6390,7 @@
         "id": "P20-M26",
         "poiId": "P20",
         "name": "Chasiu 1/2 Kg",
+        "description": null,
         "priceIdr": 338000,
         "priceBucket": "premium",
         "tastes": [
@@ -6080,6 +6405,7 @@
         "id": "P20-M27",
         "poiId": "P20",
         "name": "Chasiu 1 Kg",
+        "description": null,
         "priceIdr": 630000,
         "priceBucket": "premium",
         "tastes": [
@@ -6094,6 +6420,7 @@
         "id": "P20-M28",
         "poiId": "P20",
         "name": "Paket Murmer 1",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6108,6 +6435,7 @@
         "id": "P20-M29",
         "poiId": "P20",
         "name": "Paket Murmer 2",
+        "description": null,
         "priceIdr": 42000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6122,6 +6450,7 @@
         "id": "P20-M30",
         "poiId": "P20",
         "name": "Paket Murmer 3",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6136,6 +6465,7 @@
         "id": "P20-M31",
         "poiId": "P20",
         "name": "Paket Murmer 5",
+        "description": null,
         "priceIdr": 42000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6150,6 +6480,7 @@
         "id": "P20-M32",
         "poiId": "P20",
         "name": "Bakut Sayur Asin",
+        "description": null,
         "priceIdr": 57333,
         "priceBucket": "mahal",
         "tastes": [
@@ -6164,6 +6495,7 @@
         "id": "P20-M33",
         "poiId": "P20",
         "name": "Nasi Hainan + Bakut Sayur Asin",
+        "description": null,
         "priceIdr": 62667,
         "priceBucket": "mahal",
         "tastes": [
@@ -6178,6 +6510,7 @@
         "id": "P20-M34",
         "poiId": "P20",
         "name": "Nasi Putih + Bakut Sayur Asin",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6192,6 +6525,7 @@
         "id": "P20-M35",
         "poiId": "P20",
         "name": "Menu Bertiga",
+        "description": null,
         "priceIdr": 120000,
         "priceBucket": "premium",
         "tastes": [
@@ -6267,7 +6601,7 @@
     "longitude": 107.600645,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai kwetiau bakar dan nasi goreng. Andalannya kwetiau bakar dengan aroma smoky yang khas. Pilihan nasi gorengnya beragam: smoked chicken, Yangzhou ayam atau babi, seafood, bacon, lapchiong, hingga samcan. Tersedia pilihan ayam dan seafood, tetapi dapurnya juga mengolah babi.",
     "culturalStory": null,
     "photos": [
       {
@@ -6291,6 +6625,7 @@
         "id": "P21-M01",
         "poiId": "P21",
         "name": "Nasi Goreng Smoked Chicken",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6305,6 +6640,7 @@
         "id": "P21-M02",
         "poiId": "P21",
         "name": "Nasi Goreng YangZhou Ayam",
+        "description": null,
         "priceIdr": 49000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6319,6 +6655,7 @@
         "id": "P21-M03",
         "poiId": "P21",
         "name": "Nasi Goreng YangZhou Babi",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6333,6 +6670,7 @@
         "id": "P21-M04",
         "poiId": "P21",
         "name": "Nasi Goreng Seafood",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6347,6 +6685,7 @@
         "id": "P21-M05",
         "poiId": "P21",
         "name": "Nasi Goreng Bacon",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6361,6 +6700,7 @@
         "id": "P21-M06",
         "poiId": "P21",
         "name": "Nasi Goreng LapChong",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6375,6 +6715,7 @@
         "id": "P21-M07",
         "poiId": "P21",
         "name": "Nasi Goreng Samcan",
+        "description": null,
         "priceIdr": 76000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6389,6 +6730,7 @@
         "id": "P21-M08",
         "poiId": "P21",
         "name": "Nasi Goreng Babi Mix",
+        "description": null,
         "priceIdr": 79000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6403,6 +6745,7 @@
         "id": "P21-M09",
         "poiId": "P21",
         "name": "Kwetiaw Goreng Ayam",
+        "description": null,
         "priceIdr": 49000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6417,6 +6760,7 @@
         "id": "P21-M10",
         "poiId": "P21",
         "name": "Kwetiaw Goreng Seafood",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6431,6 +6775,7 @@
         "id": "P21-M11",
         "poiId": "P21",
         "name": "Kwetiaw Goreng Babi",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6445,6 +6790,7 @@
         "id": "P21-M12",
         "poiId": "P21",
         "name": "Kwetiaw Goreng Bacon",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6459,6 +6805,7 @@
         "id": "P21-M13",
         "poiId": "P21",
         "name": "Kwetiaw Goreng Samcan",
+        "description": null,
         "priceIdr": 76000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6473,6 +6820,7 @@
         "id": "P21-M14",
         "poiId": "P21",
         "name": "Kwetiaw Goreng Babi Mix",
+        "description": null,
         "priceIdr": 79000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6487,6 +6835,7 @@
         "id": "P21-M15",
         "poiId": "P21",
         "name": "Bihun Goreng Ayam",
+        "description": null,
         "priceIdr": 49000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6501,6 +6850,7 @@
         "id": "P21-M16",
         "poiId": "P21",
         "name": "Bihun Goreng Seafood",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6515,6 +6865,7 @@
         "id": "P21-M17",
         "poiId": "P21",
         "name": "Bihun Goreng Babi",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6529,6 +6880,7 @@
         "id": "P21-M18",
         "poiId": "P21",
         "name": "Bihun Goreng Bacon",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6543,6 +6895,7 @@
         "id": "P21-M19",
         "poiId": "P21",
         "name": "Bihun Goreng Lapchong + Bacon",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6557,6 +6910,7 @@
         "id": "P21-M20",
         "poiId": "P21",
         "name": "Bihun Goreng Samcan",
+        "description": null,
         "priceIdr": 76000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6571,6 +6925,7 @@
         "id": "P21-M21",
         "poiId": "P21",
         "name": "Bihun Goreng Babi Mix",
+        "description": null,
         "priceIdr": 79000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6585,6 +6940,7 @@
         "id": "P21-M22",
         "poiId": "P21",
         "name": "Bakmi Goreng Ayam",
+        "description": null,
         "priceIdr": 49000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6599,6 +6955,7 @@
         "id": "P21-M23",
         "poiId": "P21",
         "name": "Bakmi Goreng Seafood",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6613,6 +6970,7 @@
         "id": "P21-M24",
         "poiId": "P21",
         "name": "Bakmi Goreng Babi",
+        "description": null,
         "priceIdr": 59000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6627,6 +6985,7 @@
         "id": "P21-M25",
         "poiId": "P21",
         "name": "Bakmi Goreng Bacon",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6641,6 +7000,7 @@
         "id": "P21-M26",
         "poiId": "P21",
         "name": "Bakmi Goreng Lapchong",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6655,6 +7015,7 @@
         "id": "P21-M27",
         "poiId": "P21",
         "name": "Bakmi Goreng Samcan",
+        "description": null,
         "priceIdr": 76000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6669,6 +7030,7 @@
         "id": "P21-M28",
         "poiId": "P21",
         "name": "Bakmi Goreng Babi Mix",
+        "description": null,
         "priceIdr": 79000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6683,6 +7045,7 @@
         "id": "P21-M29",
         "poiId": "P21",
         "name": "Nasi Bacon Cabe Garam",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6698,6 +7061,7 @@
         "id": "P21-M30",
         "poiId": "P21",
         "name": "Nasi Samcan Goreng Cabe Garam",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6713,6 +7077,7 @@
         "id": "P21-M31",
         "poiId": "P21",
         "name": "Kerupuk Beras",
+        "description": null,
         "priceIdr": 12000,
         "priceBucket": "murah",
         "tastes": [
@@ -6727,6 +7092,7 @@
         "id": "P21-M32",
         "poiId": "P21",
         "name": "Bacon (Babi)",
+        "description": null,
         "priceIdr": 22000,
         "priceBucket": "murah",
         "tastes": [
@@ -6741,6 +7107,7 @@
         "id": "P21-M33",
         "poiId": "P21",
         "name": "Dorokdok Babi",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6755,6 +7122,7 @@
         "id": "P21-M34",
         "poiId": "P21",
         "name": "Otak-Otak Ikan Goreng",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6769,6 +7137,7 @@
         "id": "P21-M35",
         "poiId": "P21",
         "name": "Baso Goreng / Stick Kriuk (Ikan)",
+        "description": null,
         "priceIdr": 38000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6783,6 +7152,7 @@
         "id": "P21-M36",
         "poiId": "P21",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 6000,
         "priceBucket": "murah",
         "tastes": [
@@ -6797,6 +7167,7 @@
         "id": "P21-M37",
         "poiId": "P21",
         "name": "Kwetiau Bakar Biasa",
+        "description": null,
         "priceIdr": 46000,
         "priceBucket": "sedang",
         "tastes": [
@@ -6811,6 +7182,7 @@
         "id": "P21-M38",
         "poiId": "P21",
         "name": "Kwetiau Bakar Spesial Bacon",
+        "description": null,
         "priceIdr": 54000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6825,6 +7197,7 @@
         "id": "P21-M39",
         "poiId": "P21",
         "name": "Kwetiau Bakar Spesial Otak-Otak Goreng",
+        "description": null,
         "priceIdr": 54000,
         "priceBucket": "mahal",
         "tastes": [
@@ -6894,13 +7267,13 @@
     "tasteTags": [
       "manis"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920693,
     "longitude": 107.600669,
     "triggerRadiusM": 10,
     "avgVisitMin": 5,
-    "description": "",
+    "description": "Kedai minuman susu dengan banyak pilihan rasa. Andalannya Darmi Lychee, susu rasa leci yang manis dan segar. Rasa lainnya antara lain green tea, choco oat, regal, keju, cadbury, moka, anggur, taro, pisang, dan plain.",
     "culturalStory": null,
     "photos": [
       {
@@ -6919,6 +7292,7 @@
         "id": "P22-M01",
         "poiId": "P22",
         "name": "Darmi Lychee",
+        "description": null,
         "priceIdr": 22000,
         "priceBucket": "murah",
         "tastes": [
@@ -6933,6 +7307,7 @@
         "id": "P22-M02",
         "poiId": "P22",
         "name": "Darmi Greentea",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -6947,6 +7322,7 @@
         "id": "P22-M03",
         "poiId": "P22",
         "name": "Darmi Choco Oat",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -6961,6 +7337,7 @@
         "id": "P22-M04",
         "poiId": "P22",
         "name": "Darmi Regal",
+        "description": null,
         "priceIdr": 17000,
         "priceBucket": "murah",
         "tastes": [
@@ -6975,6 +7352,7 @@
         "id": "P22-M05",
         "poiId": "P22",
         "name": "Darmi Cheese",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -6989,6 +7367,7 @@
         "id": "P22-M06",
         "poiId": "P22",
         "name": "Darmi Cadbury",
+        "description": null,
         "priceIdr": 22000,
         "priceBucket": "murah",
         "tastes": [
@@ -7003,6 +7382,7 @@
         "id": "P22-M07",
         "poiId": "P22",
         "name": "Darmi Plain",
+        "description": null,
         "priceIdr": 14000,
         "priceBucket": "murah",
         "tastes": [
@@ -7017,6 +7397,7 @@
         "id": "P22-M08",
         "poiId": "P22",
         "name": "Darmi Moka",
+        "description": null,
         "priceIdr": 17000,
         "priceBucket": "murah",
         "tastes": [
@@ -7031,6 +7412,7 @@
         "id": "P22-M09",
         "poiId": "P22",
         "name": "Darmi Anggur",
+        "description": null,
         "priceIdr": 17000,
         "priceBucket": "murah",
         "tastes": [
@@ -7045,6 +7427,7 @@
         "id": "P22-M10",
         "poiId": "P22",
         "name": "Darmi Cokelat",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -7059,6 +7442,7 @@
         "id": "P22-M11",
         "poiId": "P22",
         "name": "Darmi Taro",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -7073,6 +7457,7 @@
         "id": "P22-M12",
         "poiId": "P22",
         "name": "Darmi Pisang",
+        "description": null,
         "priceIdr": 21000,
         "priceBucket": "murah",
         "tastes": [
@@ -7087,6 +7472,7 @@
         "id": "P22-M13",
         "poiId": "P22",
         "name": "Darmi Strawberry",
+        "description": null,
         "priceIdr": 21000,
         "priceBucket": "murah",
         "tastes": [
@@ -7101,6 +7487,7 @@
         "id": "P22-M14",
         "poiId": "P22",
         "name": "Darmi Almond",
+        "description": null,
         "priceIdr": 21000,
         "priceBucket": "murah",
         "tastes": [
@@ -7115,6 +7502,7 @@
         "id": "P22-M15",
         "poiId": "P22",
         "name": "Darmi Mangga",
+        "description": null,
         "priceIdr": 24000,
         "priceBucket": "murah",
         "tastes": [
@@ -7185,7 +7573,7 @@
     "longitude": 107.600602,
     "triggerRadiusM": 10,
     "avgVisitMin": 5,
-    "description": "",
+    "description": "Kedai bir dan koktail. Tersedia bir lokal seperti Bintang hingga bir impor seperti Heineken dan König Ludwig dalam ukuran pint maupun quart, serta koktail seperti Long Island. Seluruh menu beralkohol dan hanya untuk pengunjung berusia 21 tahun ke atas.",
     "culturalStory": null,
     "photos": [
       {
@@ -7209,6 +7597,7 @@
         "id": "P23-M01",
         "poiId": "P23",
         "name": "Prost Alster Pint",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7223,6 +7612,7 @@
         "id": "P23-M02",
         "poiId": "P23",
         "name": "Prost Quart",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7237,6 +7627,7 @@
         "id": "P23-M03",
         "poiId": "P23",
         "name": "Prost Pint",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7251,6 +7642,7 @@
         "id": "P23-M04",
         "poiId": "P23",
         "name": "Prost Pilsener Quart",
+        "description": null,
         "priceIdr": 47500,
         "priceBucket": "sedang",
         "tastes": [
@@ -7265,6 +7657,7 @@
         "id": "P23-M05",
         "poiId": "P23",
         "name": "Mix Max Exotic Blue",
+        "description": null,
         "priceIdr": 32500,
         "priceBucket": "sedang",
         "tastes": [
@@ -7279,6 +7672,7 @@
         "id": "P23-M06",
         "poiId": "P23",
         "name": "Konig Ludwig",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7293,6 +7687,7 @@
         "id": "P23-M07",
         "poiId": "P23",
         "name": "Singaraja Pint",
+        "description": null,
         "priceIdr": 24000,
         "priceBucket": "murah",
         "tastes": [
@@ -7307,6 +7702,7 @@
         "id": "P23-M08",
         "poiId": "P23",
         "name": "Singaraja Quart",
+        "description": null,
         "priceIdr": 41000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7321,6 +7717,7 @@
         "id": "P23-M09",
         "poiId": "P23",
         "name": "Ice Land Long Island",
+        "description": null,
         "priceIdr": 33000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7335,6 +7732,7 @@
         "id": "P23-M10",
         "poiId": "P23",
         "name": "Bintang Pint",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7349,6 +7747,7 @@
         "id": "P23-M11",
         "poiId": "P23",
         "name": "Bintang Quart",
+        "description": null,
         "priceIdr": 51000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7363,6 +7762,7 @@
         "id": "P23-M12",
         "poiId": "P23",
         "name": "Iceland Lecy Martini",
+        "description": null,
         "priceIdr": 33000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7377,6 +7777,7 @@
         "id": "P23-M13",
         "poiId": "P23",
         "name": "Bintang Can 320ml",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7391,6 +7792,7 @@
         "id": "P23-M14",
         "poiId": "P23",
         "name": "Bintang Can 500ml",
+        "description": null,
         "priceIdr": 41000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7405,6 +7807,7 @@
         "id": "P23-M15",
         "poiId": "P23",
         "name": "Heineken Pint",
+        "description": null,
         "priceIdr": 37000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7419,6 +7822,7 @@
         "id": "P23-M16",
         "poiId": "P23",
         "name": "Heineken Quart",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7433,6 +7837,7 @@
         "id": "P23-M17",
         "poiId": "P23",
         "name": "Heineken Can 330ml",
+        "description": null,
         "priceIdr": 37000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7447,6 +7852,7 @@
         "id": "P23-M18",
         "poiId": "P23",
         "name": "Heineken Can 500ml",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7461,6 +7867,7 @@
         "id": "P23-M19",
         "poiId": "P23",
         "name": "Pu Tao Pint",
+        "description": null,
         "priceIdr": 33000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7475,6 +7882,7 @@
         "id": "P23-M20",
         "poiId": "P23",
         "name": "Pu Tao Quart",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7489,6 +7897,7 @@
         "id": "P23-M21",
         "poiId": "P23",
         "name": "Pu Tao Lecy Quart",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7503,6 +7912,7 @@
         "id": "P23-M22",
         "poiId": "P23",
         "name": "Asahi",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7517,6 +7927,7 @@
         "id": "P23-M23",
         "poiId": "P23",
         "name": "Corona",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7531,6 +7942,7 @@
         "id": "P23-M24",
         "poiId": "P23",
         "name": "Hoegarden Witbier",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7545,6 +7957,7 @@
         "id": "P23-M25",
         "poiId": "P23",
         "name": "Balihai Pint",
+        "description": null,
         "priceIdr": 31000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7559,6 +7972,7 @@
         "id": "P23-M26",
         "poiId": "P23",
         "name": "Balihai Can 320ml",
+        "description": null,
         "priceIdr": 30000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7573,6 +7987,7 @@
         "id": "P23-M27",
         "poiId": "P23",
         "name": "Bintang Radler",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7649,7 +8064,7 @@
     "longitude": 107.600544,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai masakan khas Medan, Sumatera Utara. Empat menu andalannya bakmie Medan dengan kuah terpisah, hainan babi, kwetiau goreng, dan mie goreng Medan yang dimasak di atas api besar. Tersedia juga bihun goreng, sop iga babi, bakut sayur asin, capcay babi, serta nasi goreng samcan dan lapchiong.",
     "culturalStory": null,
     "photos": [
       {
@@ -7683,6 +8098,7 @@
         "id": "P25-M01",
         "poiId": "P25",
         "name": "Bakmie Medan",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7697,6 +8113,7 @@
         "id": "P25-M02",
         "poiId": "P25",
         "name": "Hainan Babi",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7711,6 +8128,7 @@
         "id": "P25-M03",
         "poiId": "P25",
         "name": "Kwetiau Goreng",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7725,6 +8143,7 @@
         "id": "P25-M04",
         "poiId": "P25",
         "name": "Mie Goreng Medan",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7739,6 +8158,7 @@
         "id": "P25-M05",
         "poiId": "P25",
         "name": "Bihun Goreng Medan",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7753,6 +8173,7 @@
         "id": "P25-M06",
         "poiId": "P25",
         "name": "Sop Iga Babi",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7767,6 +8188,7 @@
         "id": "P25-M07",
         "poiId": "P25",
         "name": "Nasi Goreng Samcan",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7781,6 +8203,7 @@
         "id": "P25-M08",
         "poiId": "P25",
         "name": "Nasi Goreng Medan",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7795,6 +8218,7 @@
         "id": "P25-M09",
         "poiId": "P25",
         "name": "Bakut Sayur Asin",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7809,6 +8233,7 @@
         "id": "P25-M10",
         "poiId": "P25",
         "name": "Bihun Medan",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7823,6 +8248,7 @@
         "id": "P25-M11",
         "poiId": "P25",
         "name": "Kwetiau Medan",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7837,6 +8263,7 @@
         "id": "P25-M12",
         "poiId": "P25",
         "name": "Nasi Goreng Lap Chiong",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7851,6 +8278,7 @@
         "id": "P25-M13",
         "poiId": "P25",
         "name": "Capcay Babi",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7865,6 +8293,7 @@
         "id": "P25-M14",
         "poiId": "P25",
         "name": "Misua Kuah",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7879,6 +8308,7 @@
         "id": "P25-M15",
         "poiId": "P25",
         "name": "Mie Hokkian",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7893,6 +8323,7 @@
         "id": "P25-M16",
         "poiId": "P25",
         "name": "Bihun Kuah",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7907,6 +8338,7 @@
         "id": "P25-M17",
         "poiId": "P25",
         "name": "Pangsit Kuah",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -7921,6 +8353,7 @@
         "id": "P25-M18",
         "poiId": "P25",
         "name": "Bihun Goreng Ayam",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7935,6 +8368,7 @@
         "id": "P25-M19",
         "poiId": "P25",
         "name": "Kwetiau Goreng Ayam",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7949,6 +8383,7 @@
         "id": "P25-M20",
         "poiId": "P25",
         "name": "Bihun Goreng Seafood",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7963,6 +8398,7 @@
         "id": "P25-M21",
         "poiId": "P25",
         "name": "Kwetiau Goreng Seafood",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7977,6 +8413,7 @@
         "id": "P25-M22",
         "poiId": "P25",
         "name": "Nasi Goreng Ayam",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -7991,6 +8428,7 @@
         "id": "P25-M23",
         "poiId": "P25",
         "name": "Mie Goreng Ayam",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8005,6 +8443,7 @@
         "id": "P25-M24",
         "poiId": "P25",
         "name": "Mie Goreng Seafood",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8019,6 +8458,7 @@
         "id": "P25-M25",
         "poiId": "P25",
         "name": "Kwetiau Ayam Jamur",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -8033,6 +8473,7 @@
         "id": "P25-M26",
         "poiId": "P25",
         "name": "Mie Ayam Jamur",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -8047,6 +8488,7 @@
         "id": "P25-M27",
         "poiId": "P25",
         "name": "Nasi Campur Singapur",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8061,6 +8503,7 @@
         "id": "P25-M28",
         "poiId": "P25",
         "name": "Samcan Goreng",
+        "description": null,
         "priceIdr": 80000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8075,6 +8518,7 @@
         "id": "P25-M29",
         "poiId": "P25",
         "name": "Hainam Samcan Kecap",
+        "description": null,
         "priceIdr": 100000,
         "priceBucket": "premium",
         "tastes": [
@@ -8089,6 +8533,7 @@
         "id": "P25-M30",
         "poiId": "P25",
         "name": "Nasi Goreng Bakut",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8103,6 +8548,7 @@
         "id": "P25-M31",
         "poiId": "P25",
         "name": "Kwetiau Goreng Bakut",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8117,6 +8563,7 @@
         "id": "P25-M32",
         "poiId": "P25",
         "name": "Bakmie Samcan",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8131,6 +8578,7 @@
         "id": "P25-M33",
         "poiId": "P25",
         "name": "Mie Tiau Medan",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8145,6 +8593,7 @@
         "id": "P25-M34",
         "poiId": "P25",
         "name": "Bakut Teh Kwetiau",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8159,6 +8608,7 @@
         "id": "P25-M35",
         "poiId": "P25",
         "name": "Bakut Teh Bihun",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8173,6 +8623,7 @@
         "id": "P25-M36",
         "poiId": "P25",
         "name": "Bakut Teh Mie",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8247,7 +8698,7 @@
     "longitude": 107.600478,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai mie dengan lebih dari 40 pilihan menu. Andalannya soto mie Sukabumi berisi mi kuning, kol, tomat, dan daging dalam kuah kaldu gurih. Ada juga mie yamin asin atau manis dengan topping bakut, bakso, samcan, atau charsiu, serta bakmi campur, bakmi kekian, dan soto bihun.",
     "culturalStory": null,
     "photos": [
       {
@@ -8266,6 +8717,7 @@
         "id": "P26-M01",
         "poiId": "P26",
         "name": "Soto Mie Sukabumi",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8280,6 +8732,7 @@
         "id": "P26-M02",
         "poiId": "P26",
         "name": "Yamin Asin Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8294,6 +8747,7 @@
         "id": "P26-M03",
         "poiId": "P26",
         "name": "Yamin Manis Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8308,6 +8762,7 @@
         "id": "P26-M04",
         "poiId": "P26",
         "name": "Yamin Asin Bakso",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8322,6 +8777,7 @@
         "id": "P26-M05",
         "poiId": "P26",
         "name": "Yamin Manis Bakso",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8336,6 +8792,7 @@
         "id": "P26-M06",
         "poiId": "P26",
         "name": "Bakmi Samcan",
+        "description": null,
         "priceIdr": 67500,
         "priceBucket": "mahal",
         "tastes": [
@@ -8350,6 +8807,7 @@
         "id": "P26-M07",
         "poiId": "P26",
         "name": "Bakmi Charsio",
+        "description": null,
         "priceIdr": 67500,
         "priceBucket": "mahal",
         "tastes": [
@@ -8364,6 +8822,7 @@
         "id": "P26-M08",
         "poiId": "P26",
         "name": "Bakmi Campur",
+        "description": null,
         "priceIdr": 67500,
         "priceBucket": "mahal",
         "tastes": [
@@ -8378,6 +8837,7 @@
         "id": "P26-M09",
         "poiId": "P26",
         "name": "Bakmi Kekian",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8392,6 +8852,7 @@
         "id": "P26-M10",
         "poiId": "P26",
         "name": "Soto Bihun Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8406,6 +8867,7 @@
         "id": "P26-M11",
         "poiId": "P26",
         "name": "Yam Bihun Asin Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8420,6 +8882,7 @@
         "id": "P26-M12",
         "poiId": "P26",
         "name": "Yam Bihun Manis Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8434,6 +8897,7 @@
         "id": "P26-M13",
         "poiId": "P26",
         "name": "Yam Bihun Asin Bakso",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8448,6 +8912,7 @@
         "id": "P26-M14",
         "poiId": "P26",
         "name": "Yam Bihun Manis Bakso",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8462,6 +8927,7 @@
         "id": "P26-M15",
         "poiId": "P26",
         "name": "Shirataki Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8476,6 +8942,7 @@
         "id": "P26-M16",
         "poiId": "P26",
         "name": "Soto Kwetiaw Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8490,6 +8957,7 @@
         "id": "P26-M17",
         "poiId": "P26",
         "name": "Yam Kwetiaw Asin Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8504,6 +8972,7 @@
         "id": "P26-M18",
         "poiId": "P26",
         "name": "Yam Kwetiaw Manis Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8518,6 +8987,7 @@
         "id": "P26-M19",
         "poiId": "P26",
         "name": "Yam Asin Kwetiaw Bakso",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8532,6 +9002,7 @@
         "id": "P26-M20",
         "poiId": "P26",
         "name": "Yam Manis Kwetiaw Bakso",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8546,6 +9017,7 @@
         "id": "P26-M21",
         "poiId": "P26",
         "name": "Soto Bakut Lobak",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8560,6 +9032,7 @@
         "id": "P26-M22",
         "poiId": "P26",
         "name": "Dorokdok",
+        "description": null,
         "priceIdr": 17500,
         "priceBucket": "murah",
         "tastes": [
@@ -8574,6 +9047,7 @@
         "id": "P26-M23",
         "poiId": "P26",
         "name": "Baso Kuah 1 Porsi",
+        "description": null,
         "priceIdr": 54000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8588,6 +9062,7 @@
         "id": "P26-M24",
         "poiId": "P26",
         "name": "Mie Goreng Telor",
+        "description": null,
         "priceIdr": 37000,
         "priceBucket": "sedang",
         "tastes": [
@@ -8602,6 +9077,7 @@
         "id": "P26-M25",
         "poiId": "P26",
         "name": "Mie Goreng Babi",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8616,6 +9092,7 @@
         "id": "P26-M26",
         "poiId": "P26",
         "name": "Mie Goreng Baso",
+        "description": null,
         "priceIdr": 42500,
         "priceBucket": "sedang",
         "tastes": [
@@ -8630,6 +9107,7 @@
         "id": "P26-M27",
         "poiId": "P26",
         "name": "Kwetiaw Goreng Telor",
+        "description": null,
         "priceIdr": 37000,
         "priceBucket": "sedang",
         "tastes": [
@@ -8644,6 +9122,7 @@
         "id": "P26-M28",
         "poiId": "P26",
         "name": "Kwetiaw Goreng Babi",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8658,6 +9137,7 @@
         "id": "P26-M29",
         "poiId": "P26",
         "name": "Kwetiaw Goreng Baso",
+        "description": null,
         "priceIdr": 42500,
         "priceBucket": "sedang",
         "tastes": [
@@ -8672,6 +9152,7 @@
         "id": "P26-M30",
         "poiId": "P26",
         "name": "Bihun Goreng Telor",
+        "description": null,
         "priceIdr": 32000,
         "priceBucket": "sedang",
         "tastes": [
@@ -8686,6 +9167,7 @@
         "id": "P26-M31",
         "poiId": "P26",
         "name": "Bihun Goreng Babi",
+        "description": null,
         "priceIdr": 52500,
         "priceBucket": "mahal",
         "tastes": [
@@ -8700,6 +9182,7 @@
         "id": "P26-M32",
         "poiId": "P26",
         "name": "Bihun Goreng Baso",
+        "description": null,
         "priceIdr": 42500,
         "priceBucket": "sedang",
         "tastes": [
@@ -8714,6 +9197,7 @@
         "id": "P26-M33",
         "poiId": "P26",
         "name": "Nasi Goreng Telor",
+        "description": null,
         "priceIdr": 32500,
         "priceBucket": "sedang",
         "tastes": [
@@ -8728,6 +9212,7 @@
         "id": "P26-M34",
         "poiId": "P26",
         "name": "Nasi Goreng Baso",
+        "description": null,
         "priceIdr": 39000,
         "priceBucket": "sedang",
         "tastes": [
@@ -8742,6 +9227,7 @@
         "id": "P26-M35",
         "poiId": "P26",
         "name": "Nasi Goreng Samcan",
+        "description": null,
         "priceIdr": 62500,
         "priceBucket": "mahal",
         "tastes": [
@@ -8756,6 +9242,7 @@
         "id": "P26-M36",
         "poiId": "P26",
         "name": "Telor Ceplok",
+        "description": null,
         "priceIdr": 10000,
         "priceBucket": "murah",
         "tastes": [
@@ -8770,6 +9257,7 @@
         "id": "P26-M37",
         "poiId": "P26",
         "name": "Nasi Goreng Pete Telor",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8784,6 +9272,7 @@
         "id": "P26-M38",
         "poiId": "P26",
         "name": "Nasi Goreng Lapciong",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8798,6 +9287,7 @@
         "id": "P26-M39",
         "poiId": "P26",
         "name": "Nasi Goreng Lapciong Pete",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8812,6 +9302,7 @@
         "id": "P26-M40",
         "poiId": "P26",
         "name": "Nasi Goreng Babi Pete",
+        "description": null,
         "priceIdr": 57500,
         "priceBucket": "mahal",
         "tastes": [
@@ -8826,6 +9317,7 @@
         "id": "P26-M41",
         "poiId": "P26",
         "name": "Nasi Goreng Babi Enak Banyak",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8840,6 +9332,7 @@
         "id": "P26-M42",
         "poiId": "P26",
         "name": "Soto Mie Mentah (Masak Sendiri)",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8854,6 +9347,7 @@
         "id": "P26-M43",
         "poiId": "P26",
         "name": "Misua Kuah Bakut",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8868,6 +9362,7 @@
         "id": "P26-M44",
         "poiId": "P26",
         "name": "Misua Kuah Baso",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -8882,6 +9377,7 @@
         "id": "P26-M45",
         "poiId": "P26",
         "name": "Misua Kuah Telor",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -8953,13 +9449,13 @@
       "segar",
       "manis"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920753,
     "longitude": 107.600549,
     "triggerRadiusM": 10,
     "avgVisitMin": 5,
-    "description": "",
+    "description": "Kedai jus dan es buah. Andalannya jus stroberi jeruk, jus nanas jeruk, dan es campur. Tersedia aneka jus buah tunggal maupun campuran, sop buah, paket couple seperti mango delight dan strawberry delight, serta paket pempek beku.",
     "culturalStory": null,
     "photos": [],
     "audio": {
@@ -8972,6 +9468,7 @@
         "id": "P27-M01",
         "poiId": "P27",
         "name": "Strawberry + Jeruk",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -8986,6 +9483,7 @@
         "id": "P27-M02",
         "poiId": "P27",
         "name": "Nanas + Jeruk",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9000,6 +9498,7 @@
         "id": "P27-M03",
         "poiId": "P27",
         "name": "Es Campur",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9014,6 +9513,7 @@
         "id": "P27-M04",
         "poiId": "P27",
         "name": "Couple 1 (Mango Delight + Strawberry Delight)",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9028,6 +9528,7 @@
         "id": "P27-M05",
         "poiId": "P27",
         "name": "Couple 2 (Mango Delight + Avocado Delight)",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9042,6 +9543,7 @@
         "id": "P27-M06",
         "poiId": "P27",
         "name": "Mango Delight",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9056,6 +9558,7 @@
         "id": "P27-M07",
         "poiId": "P27",
         "name": "Strawberry Delight",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9070,6 +9573,7 @@
         "id": "P27-M08",
         "poiId": "P27",
         "name": "Juice Alpukat",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9084,6 +9588,7 @@
         "id": "P27-M09",
         "poiId": "P27",
         "name": "Juice Jambu",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9098,6 +9603,7 @@
         "id": "P27-M10",
         "poiId": "P27",
         "name": "Juice Belimbing",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9112,6 +9618,7 @@
         "id": "P27-M11",
         "poiId": "P27",
         "name": "Juice Sirsak",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9126,6 +9633,7 @@
         "id": "P27-M12",
         "poiId": "P27",
         "name": "Juice Melon",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9140,6 +9648,7 @@
         "id": "P27-M13",
         "poiId": "P27",
         "name": "Juice Strawberry",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9154,6 +9663,7 @@
         "id": "P27-M14",
         "poiId": "P27",
         "name": "Juice Semangka",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9168,6 +9678,7 @@
         "id": "P27-M15",
         "poiId": "P27",
         "name": "Juice Pisang",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9182,6 +9693,7 @@
         "id": "P27-M16",
         "poiId": "P27",
         "name": "Juice Tomat",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9196,6 +9708,7 @@
         "id": "P27-M17",
         "poiId": "P27",
         "name": "Juice Wortel",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9210,6 +9723,7 @@
         "id": "P27-M18",
         "poiId": "P27",
         "name": "Juice Mangga",
+        "description": null,
         "priceIdr": 16500,
         "priceBucket": "murah",
         "tastes": [
@@ -9224,6 +9738,7 @@
         "id": "P27-M19",
         "poiId": "P27",
         "name": "Lemon (Hot / Cold)",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9238,6 +9753,7 @@
         "id": "P27-M20",
         "poiId": "P27",
         "name": "Juice Nanas",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9252,6 +9768,7 @@
         "id": "P27-M21",
         "poiId": "P27",
         "name": "Juice Pear",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9266,6 +9783,7 @@
         "id": "P27-M22",
         "poiId": "P27",
         "name": "Juice Naga",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9280,6 +9798,7 @@
         "id": "P27-M23",
         "poiId": "P27",
         "name": "Juice Apel",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9294,6 +9813,7 @@
         "id": "P27-M24",
         "poiId": "P27",
         "name": "Juice Mix 2 Buah",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9308,6 +9828,7 @@
         "id": "P27-M25",
         "poiId": "P27",
         "name": "Juice Mix 2 Buah (dengan Mangga)",
+        "description": null,
         "priceIdr": 16500,
         "priceBucket": "murah",
         "tastes": [
@@ -9322,6 +9843,7 @@
         "id": "P27-M26",
         "poiId": "P27",
         "name": "Healthy Juice",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9336,6 +9858,7 @@
         "id": "P27-M27",
         "poiId": "P27",
         "name": "Es Jeruk Kelapa",
+        "description": null,
         "priceIdr": 18000,
         "priceBucket": "murah",
         "tastes": [
@@ -9350,6 +9873,7 @@
         "id": "P27-M28",
         "poiId": "P27",
         "name": "Juice Mix 3 Buah",
+        "description": null,
         "priceIdr": 22000,
         "priceBucket": "murah",
         "tastes": [
@@ -9364,6 +9888,7 @@
         "id": "P27-M29",
         "poiId": "P27",
         "name": "Paket A (2 Mango Delight + 2 Juice)",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -9378,6 +9903,7 @@
         "id": "P27-M30",
         "poiId": "P27",
         "name": "Paket B (1 Mango Delight, 1 Avocado Delight, 2 Juice)",
+        "description": null,
         "priceIdr": 110000,
         "priceBucket": "premium",
         "tastes": [
@@ -9392,6 +9918,7 @@
         "id": "P27-M31",
         "poiId": "P27",
         "name": "2 Es Campur",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9406,6 +9933,7 @@
         "id": "P27-M32",
         "poiId": "P27",
         "name": "Sop Buah",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9420,6 +9948,7 @@
         "id": "P27-M33",
         "poiId": "P27",
         "name": "Sop Kelapa Alpukat",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9434,6 +9963,7 @@
         "id": "P27-M34",
         "poiId": "P27",
         "name": "Sop Alpukat",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9448,6 +9978,7 @@
         "id": "P27-M35",
         "poiId": "P27",
         "name": "Sop Kelapa",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9462,6 +9993,7 @@
         "id": "P27-M36",
         "poiId": "P27",
         "name": "Es Lemon Tea",
+        "description": null,
         "priceIdr": 16000,
         "priceBucket": "murah",
         "tastes": [
@@ -9476,6 +10008,7 @@
         "id": "P27-M37",
         "poiId": "P27",
         "name": "Es / Hot Milo",
+        "description": null,
         "priceIdr": 16000,
         "priceBucket": "murah",
         "tastes": [
@@ -9490,6 +10023,7 @@
         "id": "P27-M38",
         "poiId": "P27",
         "name": "Paket Frozen 1 (4 Pempek Kapal Selam + 2 Kulit)",
+        "description": null,
         "priceIdr": 130000,
         "priceBucket": "premium",
         "tastes": [
@@ -9504,6 +10038,7 @@
         "id": "P27-M39",
         "poiId": "P27",
         "name": "Paket Frozen 2 (3 Kapal Selam, 2 Lenjer, 3 Keriting)",
+        "description": null,
         "priceIdr": 130000,
         "priceBucket": "premium",
         "tastes": [
@@ -9518,6 +10053,7 @@
         "id": "P27-M40",
         "poiId": "P27",
         "name": "Paket Frozen 3",
+        "description": null,
         "priceIdr": 67000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9532,6 +10068,7 @@
         "id": "P27-M41",
         "poiId": "P27",
         "name": "Leci (Tambahan per Butir)",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -9546,6 +10083,7 @@
         "id": "P27-M42",
         "poiId": "P27",
         "name": "Lo Han Kuo (Tambahan)",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -9560,6 +10098,7 @@
         "id": "P27-M43",
         "poiId": "P27",
         "name": "Paket Pempek Lenggang + Juice",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9574,6 +10113,7 @@
         "id": "P27-M44",
         "poiId": "P27",
         "name": "Paket Pempek Kulit + Juice",
+        "description": null,
         "priceIdr": 45000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9641,13 +10181,13 @@
     "tasteTags": [
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920713,
     "longitude": 107.600607,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai pempek khas Palembang dari ikan giling dan sagu, disajikan dengan cuko yang manis, asam, dan pedas. Andalannya pempek kapal selam besar berisi telur utuh. Tersedia juga pempek lenggang, kulit, lenjer, adaan, keriting, tekwan, dan paket rame rame untuk rombongan.",
     "culturalStory": null,
     "photos": [
       {
@@ -9666,6 +10206,7 @@
         "id": "P28-M01",
         "poiId": "P28",
         "name": "Paket A (3 Kapal Selam Besar)",
+        "description": null,
         "priceIdr": 79000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9680,6 +10221,7 @@
         "id": "P28-M02",
         "poiId": "P28",
         "name": "Rame Rame 1",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9694,6 +10236,7 @@
         "id": "P28-M03",
         "poiId": "P28",
         "name": "Pempek Kapal Selam Besar",
+        "description": null,
         "priceIdr": 24000,
         "priceBucket": "murah",
         "tastes": [
@@ -9708,6 +10251,7 @@
         "id": "P28-M04",
         "poiId": "P28",
         "name": "Rame Rame 2",
+        "description": null,
         "priceIdr": 120000,
         "priceBucket": "premium",
         "tastes": [
@@ -9722,6 +10266,7 @@
         "id": "P28-M05",
         "poiId": "P28",
         "name": "Paket Pempek Selam 1",
+        "description": null,
         "priceIdr": 38000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9736,6 +10281,7 @@
         "id": "P28-M06",
         "poiId": "P28",
         "name": "Paket Pempek Selam 2",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9750,6 +10296,7 @@
         "id": "P28-M07",
         "poiId": "P28",
         "name": "Promo Pempek Selam + Juice Strawberry",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9764,6 +10311,7 @@
         "id": "P28-M08",
         "poiId": "P28",
         "name": "Paket Pempek Lenggang 1",
+        "description": null,
         "priceIdr": 38000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9778,6 +10326,7 @@
         "id": "P28-M09",
         "poiId": "P28",
         "name": "Paket Pempek Lenggang 2",
+        "description": null,
         "priceIdr": 40000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9792,6 +10341,7 @@
         "id": "P28-M10",
         "poiId": "P28",
         "name": "Pempek Adaan",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -9806,6 +10356,7 @@
         "id": "P28-M11",
         "poiId": "P28",
         "name": "Pempek Keriting",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -9820,6 +10371,7 @@
         "id": "P28-M12",
         "poiId": "P28",
         "name": "Pempek Kulit",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -9834,6 +10386,7 @@
         "id": "P28-M13",
         "poiId": "P28",
         "name": "Pempek Lenggang",
+        "description": null,
         "priceIdr": 24000,
         "priceBucket": "murah",
         "tastes": [
@@ -9848,6 +10401,7 @@
         "id": "P28-M14",
         "poiId": "P28",
         "name": "Pempek Lenggang Spesial",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9862,6 +10416,7 @@
         "id": "P28-M15",
         "poiId": "P28",
         "name": "Pempek Lenjer",
+        "description": null,
         "priceIdr": 8000,
         "priceBucket": "murah",
         "tastes": [
@@ -9876,6 +10431,7 @@
         "id": "P28-M16",
         "poiId": "P28",
         "name": "Paket B (5 Pempek Kulit Besar)",
+        "description": null,
         "priceIdr": 46000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9890,6 +10446,7 @@
         "id": "P28-M17",
         "poiId": "P28",
         "name": "Paket C (10 Pempek Adaan)",
+        "description": null,
         "priceIdr": 54000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9904,6 +10461,7 @@
         "id": "P28-M18",
         "poiId": "P28",
         "name": "Promo Pempek Kulit + Juice Strawberry",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9918,6 +10476,7 @@
         "id": "P28-M19",
         "poiId": "P28",
         "name": "Promo Pempek Lenggang + Juice Strawberry",
+        "description": null,
         "priceIdr": 48000,
         "priceBucket": "sedang",
         "tastes": [
@@ -9932,6 +10491,7 @@
         "id": "P28-M20",
         "poiId": "P28",
         "name": "Tekwan",
+        "description": null,
         "priceIdr": 24000,
         "priceBucket": "murah",
         "tastes": [
@@ -9946,6 +10506,7 @@
         "id": "P28-M21",
         "poiId": "P28",
         "name": "Paket Pempek Frozen Komplit",
+        "description": null,
         "priceIdr": 84000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9960,6 +10521,7 @@
         "id": "P28-M22",
         "poiId": "P28",
         "name": "Paket Pempek Hemat Frozen",
+        "description": null,
         "priceIdr": 54000,
         "priceBucket": "mahal",
         "tastes": [
@@ -9974,6 +10536,7 @@
         "id": "P28-M23",
         "poiId": "P28",
         "name": "Rame Rame 3",
+        "description": null,
         "priceIdr": 135000,
         "priceBucket": "premium",
         "tastes": [
@@ -9988,6 +10551,7 @@
         "id": "P28-M24",
         "poiId": "P28",
         "name": "Rame Rame 4",
+        "description": null,
         "priceIdr": 140000,
         "priceBucket": "premium",
         "tastes": [
@@ -10002,6 +10566,7 @@
         "id": "P28-M25",
         "poiId": "P28",
         "name": "Rame Rame 5",
+        "description": null,
         "priceIdr": 75000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10016,6 +10581,7 @@
         "id": "P28-M26",
         "poiId": "P28",
         "name": "Es Capucino",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -10030,6 +10596,7 @@
         "id": "P28-M27",
         "poiId": "P28",
         "name": "Es Jeruk",
+        "description": null,
         "priceIdr": 17000,
         "priceBucket": "murah",
         "tastes": [
@@ -10044,6 +10611,7 @@
         "id": "P28-M28",
         "poiId": "P28",
         "name": "Es Lemon",
+        "description": null,
         "priceIdr": 17000,
         "priceBucket": "murah",
         "tastes": [
@@ -10058,6 +10626,7 @@
         "id": "P28-M29",
         "poiId": "P28",
         "name": "Es Lemon Tea",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -10072,6 +10641,7 @@
         "id": "P28-M30",
         "poiId": "P28",
         "name": "Es Milo",
+        "description": null,
         "priceIdr": 15000,
         "priceBucket": "murah",
         "tastes": [
@@ -10086,6 +10656,7 @@
         "id": "P28-M31",
         "poiId": "P28",
         "name": "Es Teh Manis",
+        "description": null,
         "priceIdr": 6000,
         "priceBucket": "murah",
         "tastes": [
@@ -10100,6 +10671,7 @@
         "id": "P28-M32",
         "poiId": "P28",
         "name": "Juice Strawberry",
+        "description": null,
         "priceIdr": 17000,
         "priceBucket": "murah",
         "tastes": [
@@ -10169,13 +10741,13 @@
       "manis",
       "gurih"
     ],
-    "isHalal": null,
+    "isHalal": true,
     "zone": "Sudirman Street Food",
     "latitude": -6.920656,
     "longitude": 107.600649,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai mie berkuah susu yang creamy. Andalannya mie susu ayam original, dengan pilihan lain mie susu udang bakar dan soto susu sapi dengan nasi. Untuk penutup tersedia ronde, bola ketan isi kacang dalam kuah jahe hangat, dengan varian gula putih, gula merah, susu original, dan susu ubi keju.",
     "culturalStory": null,
     "photos": [
       {
@@ -10199,6 +10771,7 @@
         "id": "P29-M01",
         "poiId": "P29",
         "name": "Mie Susu Ayam Ori",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10213,6 +10786,7 @@
         "id": "P29-M02",
         "poiId": "P29",
         "name": "Soto Susu Sapi + Nasi",
+        "description": null,
         "priceIdr": 55000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10227,6 +10801,7 @@
         "id": "P29-M03",
         "poiId": "P29",
         "name": "Mie Susu Udang Bakar",
+        "description": null,
         "priceIdr": 35000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10241,6 +10816,7 @@
         "id": "P29-M04",
         "poiId": "P29",
         "name": "Ronde Gula Putih",
+        "description": null,
         "priceIdr": 23000,
         "priceBucket": "murah",
         "tastes": [
@@ -10255,6 +10831,7 @@
         "id": "P29-M05",
         "poiId": "P29",
         "name": "Ronde Gula Merah",
+        "description": null,
         "priceIdr": 23000,
         "priceBucket": "murah",
         "tastes": [
@@ -10269,6 +10846,7 @@
         "id": "P29-M06",
         "poiId": "P29",
         "name": "Ronde Susu Ori",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10283,6 +10861,7 @@
         "id": "P29-M07",
         "poiId": "P29",
         "name": "Ronde Susu Ubi Keju",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10357,7 +10936,7 @@
     "longitude": 107.600623,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai samcan, daging perut babi tiga lapis yang digoreng renyah. Andalannya nasi samcan goreng sambal matah, nasi samcan goreng cabe garam, dan paket nasi samcan hemat untuk berdua. Varian bumbu lainnya mentega, kecap, telur asin, dan mayones.",
     "culturalStory": null,
     "photos": [],
     "audio": {
@@ -10370,6 +10949,7 @@
         "id": "P30-M01",
         "poiId": "P30",
         "name": "Paket Nasi Samcan Hemat Berdua",
+        "description": null,
         "priceIdr": 125000,
         "priceBucket": "premium",
         "tastes": [
@@ -10384,6 +10964,7 @@
         "id": "P30-M02",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Sambal Matah",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10399,6 +10980,7 @@
         "id": "P30-M03",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Cabe Garam",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10414,6 +10996,7 @@
         "id": "P30-M04",
         "poiId": "P30",
         "name": "Samcan Goreng Crispy",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10428,6 +11011,7 @@
         "id": "P30-M05",
         "poiId": "P30",
         "name": "Samcan Goreng Mentega",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10442,6 +11026,7 @@
         "id": "P30-M06",
         "poiId": "P30",
         "name": "Samcan Goreng Kecap",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10456,6 +11041,7 @@
         "id": "P30-M07",
         "poiId": "P30",
         "name": "Samcan Goreng Telor Asin",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10470,6 +11056,7 @@
         "id": "P30-M08",
         "poiId": "P30",
         "name": "Samcan Goreng Mayonise",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10484,6 +11071,7 @@
         "id": "P30-M09",
         "poiId": "P30",
         "name": "Samcan Goreng Cabe Garam",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10499,6 +11087,7 @@
         "id": "P30-M10",
         "poiId": "P30",
         "name": "Samcan Goreng Sambal Matah",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10514,6 +11103,7 @@
         "id": "P30-M11",
         "poiId": "P30",
         "name": "Samcan Goreng Geprek",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10529,6 +11119,7 @@
         "id": "P30-M12",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Crispy",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10543,6 +11134,7 @@
         "id": "P30-M13",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Geprek",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10558,6 +11150,7 @@
         "id": "P30-M14",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Telor Asin",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10572,6 +11165,7 @@
         "id": "P30-M15",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Mentega",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10586,6 +11180,7 @@
         "id": "P30-M16",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Kecap",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10600,6 +11195,7 @@
         "id": "P30-M17",
         "poiId": "P30",
         "name": "Nasi Samcan Goreng Mayonise",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10614,6 +11210,7 @@
         "id": "P30-M18",
         "poiId": "P30",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 9000,
         "priceBucket": "murah",
         "tastes": [
@@ -10628,6 +11225,7 @@
         "id": "P30-M19",
         "poiId": "P30",
         "name": "Lapchiong",
+        "description": null,
         "priceIdr": 20000,
         "priceBucket": "murah",
         "tastes": [
@@ -10642,6 +11240,7 @@
         "id": "P30-M20",
         "poiId": "P30",
         "name": "Telor Kecap",
+        "description": null,
         "priceIdr": 7000,
         "priceBucket": "murah",
         "tastes": [
@@ -10717,7 +11316,7 @@
     "longitude": 107.600662,
     "triggerRadiusM": 10,
     "avgVisitMin": 10,
-    "description": "",
+    "description": "Kedai bacang, nasi atau ketan berisi daging yang dibungkus daun bambu lalu direbus. Andalannya bacang beras babi yang lebih pulen dan bacang ketan babi yang lebih kenyal. Tersedia juga bakpao babi isi telur, lapchiong, dan jamur hioko, aneka roti, serta liang tea.",
     "culturalStory": null,
     "photos": [
       {
@@ -10736,6 +11335,7 @@
         "id": "P31-M01",
         "poiId": "P31",
         "name": "Bacang Beras Babi",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10750,6 +11350,7 @@
         "id": "P31-M02",
         "poiId": "P31",
         "name": "Bacang Ketan Babi",
+        "description": null,
         "priceIdr": 50000,
         "priceBucket": "mahal",
         "tastes": [
@@ -10764,6 +11365,7 @@
         "id": "P31-M03",
         "poiId": "P31",
         "name": "Roti Baso Babi",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10778,6 +11380,7 @@
         "id": "P31-M04",
         "poiId": "P31",
         "name": "Liang Tea",
+        "description": null,
         "priceIdr": 17500,
         "priceBucket": "murah",
         "tastes": [
@@ -10792,6 +11395,7 @@
         "id": "P31-M05",
         "poiId": "P31",
         "name": "Bapau Babi Telur Lapchong Jamur Hioko",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10806,6 +11410,7 @@
         "id": "P31-M06",
         "poiId": "P31",
         "name": "Roti Ham Babi Keju",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10820,6 +11425,7 @@
         "id": "P31-M07",
         "poiId": "P31",
         "name": "Roti Baso Ayam",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10834,6 +11440,7 @@
         "id": "P31-M08",
         "poiId": "P31",
         "name": "Roti Coklat Rhum",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10848,6 +11455,7 @@
         "id": "P31-M09",
         "poiId": "P31",
         "name": "Roti Keju Susu",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10862,6 +11470,7 @@
         "id": "P31-M10",
         "poiId": "P31",
         "name": "Roti Isi Coklat",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10876,6 +11485,7 @@
         "id": "P31-M11",
         "poiId": "P31",
         "name": "Roti Susu",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10890,6 +11500,7 @@
         "id": "P31-M12",
         "poiId": "P31",
         "name": "Bapau Tausa",
+        "description": null,
         "priceIdr": 25000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10904,6 +11515,7 @@
         "id": "P31-M13",
         "poiId": "P31",
         "name": "Bapau Enten / Kelapa Gula Merah (Isi 3)",
+        "description": null,
         "priceIdr": 29000,
         "priceBucket": "sedang",
         "tastes": [
@@ -10979,7 +11591,7 @@
     "longitude": 107.6006155,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai sate babi yang dijual per tusuk. Andalannya sate samcan asin yang dibakar hingga lemaknya meleleh dan bagian luarnya garing. Pilihan lainnya sate kulit babi, sate babi manis mini, sate babi besar sambal matah, dan sate samcan shaokao berbumbu jintan dan cabai kering, dengan tambahan nasi mix.",
     "culturalStory": null,
     "photos": [
       {
@@ -11008,6 +11620,7 @@
         "id": "P32-M01",
         "poiId": "P32",
         "name": "Sate Samcan Asin (per Tusuk)",
+        "description": null,
         "priceIdr": 14400,
         "priceBucket": "murah",
         "tastes": [
@@ -11022,6 +11635,7 @@
         "id": "P32-M02",
         "poiId": "P32",
         "name": "Sate Kulit Babi (per Tusuk)",
+        "description": null,
         "priceIdr": 14400,
         "priceBucket": "murah",
         "tastes": [
@@ -11036,6 +11650,7 @@
         "id": "P32-M03",
         "poiId": "P32",
         "name": "Sate Samcan Asin Goreng",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11050,6 +11665,7 @@
         "id": "P32-M04",
         "poiId": "P32",
         "name": "Sate Samcan Shaokao Goreng",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11064,6 +11680,7 @@
         "id": "P32-M05",
         "poiId": "P32",
         "name": "Sate Babi Manis Mini",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11078,6 +11695,7 @@
         "id": "P32-M06",
         "poiId": "P32",
         "name": "Nasi Mix",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11092,6 +11710,7 @@
         "id": "P32-M07",
         "poiId": "P32",
         "name": "Sate Babi Besar Sambal Matah (per Tusuk)",
+        "description": null,
         "priceIdr": 14400,
         "priceBucket": "murah",
         "tastes": [
@@ -11107,6 +11726,7 @@
         "id": "P32-M08",
         "poiId": "P32",
         "name": "Sate Shaokao (per Tusuk)",
+        "description": null,
         "priceIdr": 14400,
         "priceBucket": "murah",
         "tastes": [
@@ -11121,6 +11741,7 @@
         "id": "P32-M09",
         "poiId": "P32",
         "name": "Sate Samcan Manis (per Tusuk)",
+        "description": null,
         "priceIdr": 14400,
         "priceBucket": "murah",
         "tastes": [
@@ -11135,6 +11756,7 @@
         "id": "P32-M10",
         "poiId": "P32",
         "name": "Nasi Babi Asap Sambal Matah",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11150,6 +11772,7 @@
         "id": "P32-M11",
         "poiId": "P32",
         "name": "Nasi Mix Ca Pete Sambal Matah",
+        "description": null,
         "priceIdr": 84000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11165,6 +11788,7 @@
         "id": "P32-M12",
         "poiId": "P32",
         "name": "Nasi Samcan Bakar Sambal Matah",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11180,6 +11804,7 @@
         "id": "P32-M13",
         "poiId": "P32",
         "name": "Nasi Babi Asap Ca Pete Sambal Matah",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11195,6 +11820,7 @@
         "id": "P32-M14",
         "poiId": "P32",
         "name": "Nasi Samcan Ca Pete Sambal Matah",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11210,6 +11836,7 @@
         "id": "P32-M15",
         "poiId": "P32",
         "name": "Nasi Mix Ca Pete",
+        "description": null,
         "priceIdr": 84000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11224,6 +11851,7 @@
         "id": "P32-M16",
         "poiId": "P32",
         "name": "Nasi Babi Crispy Sambal Matah",
+        "description": null,
         "priceIdr": 72000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11239,6 +11867,7 @@
         "id": "P32-M17",
         "poiId": "P32",
         "name": "Bakut Kuah",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11253,6 +11882,7 @@
         "id": "P32-M18",
         "poiId": "P32",
         "name": "Sayur Asin Kuah",
+        "description": null,
         "priceIdr": 36000,
         "priceBucket": "sedang",
         "tastes": [
@@ -11267,6 +11897,7 @@
         "id": "P32-M19",
         "poiId": "P32",
         "name": "Bakso Goreng (3 Pcs)",
+        "description": null,
         "priceIdr": 24000,
         "priceBucket": "murah",
         "tastes": [
@@ -11281,6 +11912,7 @@
         "id": "P32-M20",
         "poiId": "P32",
         "name": "Nasi Putih",
+        "description": null,
         "priceIdr": 9000,
         "priceBucket": "murah",
         "tastes": [
@@ -11295,6 +11927,7 @@
         "id": "P32-M21",
         "poiId": "P32",
         "name": "Babi Rica",
+        "description": null,
         "priceIdr": 66000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11368,7 +12001,7 @@
     "longitude": 107.6005713,
     "triggerRadiusM": 10,
     "avgVisitMin": 15,
-    "description": "",
+    "description": "Kedai bernuansa Meksiko dan Amerika Latin. Andalannya cubanos, sandwich isi babi panggang, ham, keju, acar, dan mustard yang dipanggang sambil ditekan, serta Uncle Joe’s Porky Plate. Ada juga nasi samcan panggang bumbu Meksiko dan cheese whiz.",
     "culturalStory": null,
     "photos": [
       {
@@ -11392,6 +12025,7 @@
         "id": "P33-M01",
         "poiId": "P33",
         "name": "Cubanos",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11406,6 +12040,7 @@
         "id": "P33-M02",
         "poiId": "P33",
         "name": "Cubanos Single",
+        "description": null,
         "priceIdr": 43000,
         "priceBucket": "sedang",
         "tastes": [
@@ -11420,6 +12055,7 @@
         "id": "P33-M03",
         "poiId": "P33",
         "name": "Uncle Joe's Porky Plate",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11434,6 +12070,7 @@
         "id": "P33-M04",
         "poiId": "P33",
         "name": "Uncle Joe's Feat. Babi Bali",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11448,6 +12085,7 @@
         "id": "P33-M05",
         "poiId": "P33",
         "name": "Cheese Whiz",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11462,6 +12100,7 @@
         "id": "P33-M06",
         "poiId": "P33",
         "name": "Cheese Whiz Single",
+        "description": null,
         "priceIdr": 43000,
         "priceBucket": "sedang",
         "tastes": [
@@ -11476,6 +12115,7 @@
         "id": "P33-M07",
         "poiId": "P33",
         "name": "Balco Pork Asada",
+        "description": null,
         "priceIdr": 65000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11490,6 +12130,7 @@
         "id": "P33-M08",
         "poiId": "P33",
         "name": "Nasi Samcan Panggang Bumbu Meksiko",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11504,6 +12145,7 @@
         "id": "P33-M09",
         "poiId": "P33",
         "name": "Nasi Samcan Panggang Bumbu Sate Bali / Maranggi",
+        "description": null,
         "priceIdr": 70000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11518,6 +12160,7 @@
         "id": "P33-M10",
         "poiId": "P33",
         "name": "Ekstra Smoked Beef",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -11532,6 +12175,7 @@
         "id": "P33-M11",
         "poiId": "P33",
         "name": "Ekstra Keju",
+        "description": null,
         "priceIdr": 5000,
         "priceBucket": "murah",
         "tastes": [
@@ -11546,6 +12190,7 @@
         "id": "P33-M12",
         "poiId": "P33",
         "name": "Pork Steak",
+        "description": null,
         "priceIdr": 78000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11560,6 +12205,7 @@
         "id": "P33-M13",
         "poiId": "P33",
         "name": "Nasi Goreng Babi Oriental",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [
@@ -11574,6 +12220,7 @@
         "id": "P33-M14",
         "poiId": "P33",
         "name": "Nasi Goreng Babi Woku",
+        "description": null,
         "priceIdr": 60000,
         "priceBucket": "mahal",
         "tastes": [

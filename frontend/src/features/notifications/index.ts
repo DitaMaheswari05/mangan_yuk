@@ -235,10 +235,110 @@ export async function notifyAreaEntry(areaName: string): Promise<void> {
   }
 }
 
+/** F08: pengguna berdiam di tenant trail melebihi alokasi + 5 menit. Ketuk → buka itinerary. */
+export async function notifyTrailOverstay(alert: {
+  poiId: string;
+  poiName: string;
+  dwellMin: number;
+  remainingMin: number;
+  remainingStops: number;
+}): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications) return;
+
+  const next =
+    alert.remainingStops > 0
+      ? `masih ada ${alert.remainingStops} tenant lagi.`
+      : 'ini tenant terakhir di trailmu.';
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: `trail-overstay-${alert.poiId}`,
+      content: {
+        title: `Sudah ${alert.dwellMin} menit di ${alert.poiName}`,
+        body: `Sisa waktumu ${alert.remainingMin} menit, ${next}`,
+        color: '#FF8316',
+        data: { type: 'trail-overstay', poiId: alert.poiId, url: '/trail/itinerary' },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
+/** F08: tenant di trail tutup di tengah jalan dan dilewati otomatis. Ketuk → buka itinerary. */
+export async function notifyTrailAutoSkipped(info: {
+  skippedNames: string[];
+  addedNames: string[];
+}): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications) return;
+
+  const body =
+    info.addedNames.length > 0
+      ? `Rute disusun ulang. Pengganti: ${info.addedNames.join(', ')}.`
+      : 'Rute disusun ulang dengan tenant yang masih buka.';
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: 'trail-auto-skip',
+      content: {
+        title: `${info.skippedNames.join(', ')} sudah tutup, dilewati`,
+        body,
+        color: '#FF8316',
+        data: { type: 'trail-auto-skip', url: '/trail/itinerary' },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
+/** F07 exit event: 3 tenant berikutnya setelah selesai di satu tenant. Ketuk → peta dengan sheet rekomendasi. */
+export async function notifyRecommendations(rec: {
+  fromPoiId: string;
+  fromPoiName: string;
+  items: { poiName: string; distanceM: number }[];
+}): Promise<void> {
+  const Notifications = getNotificationsModule();
+  if (!Notifications || rec.items.length === 0) return;
+
+  const list = rec.items.map((i) => `${i.poiName} (~${i.distanceM} m)`).join(', ');
+
+  try {
+    await ensureNotificationSetup();
+
+    await Notifications.scheduleNotificationAsync({
+      identifier: 'exit-recommendation',
+      content: {
+        title: `Selesai di ${rec.fromPoiName}? Coba ini berikutnya`,
+        body: list,
+        color: '#FF8316',
+        data: { type: 'exit-recommendation', poiId: rec.fromPoiId, url: '/(tabs)' },
+        ...(Platform.OS === 'android' ? { channelId: GEOFENCE_CHANNEL_ID } : {}),
+      },
+      trigger: null,
+    });
+  } catch {
+    // abaikan
+  }
+}
+
 export const NotificationService = {
   ensureNotificationSetup,
   showPersistentExploreNotification,
   dismissPersistentExploreNotification,
   notifyNearbyPoi,
   notifyAreaEntry,
+  notifyTrailOverstay,
+  notifyTrailAutoSkipped,
+  notifyRecommendations,
 };

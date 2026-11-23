@@ -9,9 +9,19 @@ import { AppState } from 'react-native';
 import areaJson from '@/data/area.json';
 import { WalkModeService } from '@/features/audio';
 import { NotificationService } from '@/features/notifications';
+import { PreferenceRepository } from '@/features/onboarding';
 import { getPoiById, getPois } from '@/features/poi';
+import { buildExitRecommendation, ExitRecommendationStore } from '@/features/recommendation/exit';
+import {
+  completeTrailStep,
+  findTrailOverstay,
+  markOverstayNotified,
+  skipClosedTrailSteps,
+  TrailSessionStore,
+  type AutoSkipResult,
+} from '@/features/trail';
 import { VisitRepository } from '@/features/visits';
-import type { UserPosition } from '@/lib/geo';
+import type { LatLng, UserPosition } from '@/lib/geo';
 import { load, save } from '@/storage';
 import type { AreaConfig } from '@/types/content';
 import {
@@ -59,7 +69,30 @@ async function vibrate(): Promise<void> {
   }
 }
 
-async function runSideEffects(e: GeofenceEvent): Promise<void> {
+async function recommendAfterExit(poiId: string, position: LatLng, at: number): Promise<void> {
+  const exitedPoi = getPoiById(poiId);
+  if (!exitedPoi) return;
+  const [visits, trail, prefs] = await Promise.all([
+    VisitRepository.getAll(),
+    TrailSessionStore.get(),
+    PreferenceRepository.get(),
+  ]);
+  const rec = buildExitRecommendation({
+    exitedPoi,
+    position,
+    pois: getPois(),
+    visitedPoiIds: Object.keys(visits),
+    trail,
+    halalOnly: prefs.ok && prefs.data.halalOnly,
+    at,
+  });
+  if (!rec) return;
+  await ExitRecommendationStore.set(rec);
+  // Di foreground sheet sudah tampil; notifikasi hanya untuk app di background.
+  if (AppState.currentState !== 'active') await NotificationService.notifyRecommendations(rec);
+}
+
+async function runSideEffects(e: GeofenceEvent, pos: UserPosition): Promise<void> {
   switch (e.type) {
     case 'AREA_ENTRY':
       await NotificationService.notifyAreaEntry(AREA.name);
@@ -74,12 +107,43 @@ async function runSideEffects(e: GeofenceEvent): Promise<void> {
     }
     case 'DWELL':
       await VisitRepository.markVisited(e.poiId, e.at);
+      await TrailSessionStore.update((s) => completeTrailStep(s, e.poiId, e.at));
       return;
     case 'EXIT':
+      // Hanya setelah dwell: lewat sebentar di depan tenant bukan berarti selesai makan.
+      if (e.visited) await recommendAfterExit(e.poiId, pos.coordinate, e.at);
+      return;
     case 'AREA_EXIT':
-      // Rekomendasi saat exit (F07) dikerjakan di Sprint 4; pendengar UI tetap menerima event-nya.
+      await ExitRecommendationStore.clear();
       return;
   }
+}
+
+async function remindTrailOverstay(now: number): Promise<void> {
+  const session = await TrailSessionStore.get();
+  if (!session) return;
+  const enteredAt: Record<string, number | null> = {};
+  for (const [id, p] of Object.entries(state.pois)) enteredAt[id] = p.inside ? p.enteredAt : null;
+  const alert = findTrailOverstay(session, enteredAt, now);
+  if (!alert) return;
+  await TrailSessionStore.update((s) => markOverstayNotified(s, alert.poiId));
+  await NotificationService.notifyTrailOverstay(alert);
+}
+
+/** SB4.4: tenant trail yang tutup di tengah jalan dilewati otomatis, lalu rute disusun ulang. */
+async function autoSkipClosedTenants(position: LatLng, now: number): Promise<void> {
+  let result: AutoSkipResult | null = null;
+  await TrailSessionStore.update((s) => {
+    result = skipClosedTrailSteps(s, getPois(), position, now);
+    return result.session;
+  });
+  const res = result as AutoSkipResult | null;
+  if (!res || res.skippedPoiIds.length === 0) return;
+  const nameOf = (id: string) => getPoiById(id)?.name ?? id;
+  await NotificationService.notifyTrailAutoSkipped({
+    skippedNames: res.skippedPoiIds.map(nameOf),
+    addedNames: res.addedPoiIds.map(nameOf),
+  });
 }
 
 async function processOne(pos: UserPosition, now: number): Promise<GeofenceEvent[]> {
@@ -92,11 +156,22 @@ async function processOne(pos: UserPosition, now: number): Promise<GeofenceEvent
 
   for (const e of res.events) {
     try {
-      await runSideEffects(e);
+      await runSideEffects(e, pos);
     } catch {
       // Satu efek gagal (mis. notifikasi ditolak) tidak boleh menghentikan event lain.
     }
     listeners.forEach((l) => l(e));
+  }
+
+  try {
+    await remindTrailOverstay(now);
+  } catch {
+    // Pengingat gagal tidak boleh menghentikan pemrosesan lokasi.
+  }
+  try {
+    await autoSkipClosedTenants(pos.coordinate, now);
+  } catch {
+    // Gagal menyusun ulang tidak boleh menghentikan pemrosesan lokasi.
   }
   return res.events;
 }

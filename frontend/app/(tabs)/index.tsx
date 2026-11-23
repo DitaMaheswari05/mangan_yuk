@@ -488,6 +488,11 @@ export default function HomeScreen() {
                             <Ionicons name="star" size={12} color="#FFB800" />
                           ) : null}
                         </Text>
+                        {item.description ? (
+                          <Text style={styles.sheetMenuDescText} numberOfLines={2}>
+                            {item.description}
+                          </Text>
+                        ) : null}
                         {item.tastes && item.tastes.length > 0 ? (
                           <Text style={styles.sheetMenuTastesText}>
                             {item.tastes.join(' · ')}
@@ -1346,6 +1351,13 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.medium,
     fontSize: 14,
     color: '#1E1E1E',
+  },
+  sheetMenuDescText: {
+    fontFamily: fontFamily.regular,
+    fontSize: 12,
+    lineHeight: 16,
+    color: '#5A5A5A',
+    marginTop: 2,
   },
   sheetMenuTastesText: {
     fontFamily: fontFamily.regular,

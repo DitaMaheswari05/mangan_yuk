@@ -125,8 +125,21 @@ describe('Kategori 3: Sistem Penghargaan Badge Digital', () => {
   });
 });
 
+describe('Data trail tematik bawaan', () => {
+  it('setiap trail punya tenant dan semua tenantnya ada di dataset POI', () => {
+    const trails = require('@/data/trails.json') as Trail[];
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { getPoiById } = require('@/features/poi') as typeof import('@/features/poi');
+    expect(trails.length).toBeGreaterThan(0);
+    for (const trail of trails) {
+      expect(trail.poiIds.length).toBeGreaterThan(0);
+      for (const id of trail.poiIds) expect(getPoiById(id)).toBeDefined();
+    }
+  });
+});
+
 describe('Kategori 4: Edge Cases Paspor Kuliner', () => {
-  it('menangani trail kosong dengan aman', () => {
+  it('trail kosong tidak dianggap selesai sehingga badge tidak terbuka', () => {
     const emptyTrail: Trail = {
       id: 'T_EMPTY',
       name: 'Trail Kosong',
@@ -137,7 +150,14 @@ describe('Kategori 4: Edge Cases Paspor Kuliner', () => {
     };
     const progress = calculateTrailProgress(emptyTrail, ['P01']);
     expect(progress.totalPois).toBe(0);
-    expect(progress.isCompleted).toBe(true);
+    expect(progress.percentage).toBe(0);
+    expect(progress.isCompleted).toBe(false);
+    const { updatedState, newlyUnlockedBadges } = evaluateBadges([emptyTrail], {
+      ...INITIAL_PASSPORT_STATE,
+      unlockedBadgeIds: ['T_EMPTY'],
+    });
+    expect(newlyUnlockedBadges).toEqual([]);
+    expect(updatedState.unlockedBadgeIds).toEqual([]);
   });
 
   it('menangani POI di luar trail tanpa mempengaruhi progres trail yang ada', () => {

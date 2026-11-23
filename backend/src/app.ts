@@ -4,8 +4,19 @@ import cors from 'cors';
 import { authRouter } from './auth/routes';
 import type { AuthService } from './auth/service';
 import { ApiError } from './errors';
+import { passportRouter, poiReviewsRouter, reviewsRouter } from './reviews/routes';
+import { ReviewService } from './reviews/service';
+import { MemoryReviewStore } from './reviews/store.memory';
 
-export function createApp({ auth, trustProxy = 0 }: { auth: AuthService; trustProxy?: number }) {
+export function createApp({
+  auth,
+  reviews = new ReviewService({ store: new MemoryReviewStore() }),
+  trustProxy = 0,
+}: {
+  auth: AuthService;
+  reviews?: ReviewService;
+  trustProxy?: number;
+}) {
   const app = express();
   app.set('trust proxy', trustProxy);
 
@@ -36,6 +47,9 @@ export function createApp({ auth, trustProxy = 0 }: { auth: AuthService; trustPr
     res.json({ ok: true });
   });
   app.use('/v1/auth', authRouter(auth));
+  app.use('/v1/reviews', reviewsRouter(auth, reviews));
+  app.use('/v1/pois', poiReviewsRouter(auth, reviews));
+  app.use('/v1/passport', passportRouter(auth, reviews));
 
   app.use(() => {
     throw new ApiError('NOT_FOUND');

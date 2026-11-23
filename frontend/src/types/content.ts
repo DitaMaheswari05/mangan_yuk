@@ -49,6 +49,7 @@ export type MenuItem = {
   id: string; // 'P01-M01'
   poiId: string; // tenant pemilik menu, untuk membuka detail tenant dari hasil filter
   name: string;
+  description?: string | null;
   priceIdr: number;
   priceBucket: MenuPriceBucket;
   tastes: TasteTag[];

@@ -106,7 +106,12 @@ export function searchPois(
   const startTime = Date.now();
   const { query, userCoordinate, sortBy = 'relevance', ...filterOptions } = filters;
 
-  const trimmedQuery = query?.trim();
+  const rawQuery = query?.trim() ?? '';
+  // Tanda baca dibuang agar "soto!??" tetap cocok dengan "soto".
+  const trimmedQuery = rawQuery
+    .replace(/[^a-z0-9À-ɏ\s]/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
   let matchedItems: Array<{
     poi: Poi;
@@ -115,9 +120,12 @@ export function searchPois(
     matchedMenuNames?: string[];
   }> = [];
 
-  if (!trimmedQuery) {
+  if (!rawQuery) {
     // Jika tidak ada kata kunci pencarian, tampilkan semua yang lolos filter parameter
     matchedItems = pois.map((poi) => ({ poi }));
+  } else if (!trimmedQuery) {
+    // Kata kunci hanya berisi simbol/tanda baca: tidak ada yang cocok.
+    matchedItems = [];
   } else {
     // Buat index Fuse.js untuk pencarian toleran salah ketik
     const fuse = new Fuse(pois, {

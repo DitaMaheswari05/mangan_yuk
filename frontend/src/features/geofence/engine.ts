@@ -67,7 +67,7 @@ export function stepGeofence(
   ctx: GeofenceContext,
 ): { state: GeofenceState; events: GeofenceEvent[] } {
   // Filter jitter: pembacaan tidak akurat tidak boleh memicu atau mengakhiri apa pun.
-  if (!(pos.accuracyM <= MAX_ACCURACY_M)) return { state, events: [] };
+  if (!(pos.accuracyM > 0 && pos.accuracyM <= MAX_ACCURACY_M)) return { state, events: [] };
 
   const now = ctx.now ?? pos.timestamp;
   const events: GeofenceEvent[] = [];

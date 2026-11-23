@@ -24,7 +24,7 @@ const unicornBanner = require('../../assets/images/happy.png');
 const DURATION_OPTIONS = [
   { value: 30, label: '30 menit' },
   { value: 60, label: '60 menit' },
-  { value: 90, label: '>60 menit' },
+  { value: 90, label: '90 menit' },
 ];
 
 const TASTE_OPTIONS: { id: TasteTag; label: string }[] = [

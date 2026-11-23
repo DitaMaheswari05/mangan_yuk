@@ -6,7 +6,6 @@
 import {
   checkDwellAlert,
   planTrail,
-  skipTrailStep,
   type TrailPlanParams,
 } from '@/features/trail';
 import type { LatLng } from '@/lib/geo';
@@ -175,22 +174,7 @@ describe('Kategori 4: Pengingat Batas Waktu Kunjungan (Dwell Time Alert)', () =>
   });
 });
 
-describe('Kategori 5: Penanganan Lewati Tenant (Skip Step / Re-Plan)', () => {
-  it('skipTrailStep menghapus tenant yang dilewati dan menyusun ulang rute sisa', () => {
-    const initialPlan = planTrail({
-      userPosition: startPos,
-      pois,
-      durationMin: 60,
-      budget: 50000,
-      referenceTime: testTime,
-    });
-
-    expect(initialPlan.steps.length).toBeGreaterThanOrEqual(2);
-
-    const rePlanned = skipTrailStep(initialPlan, 'P01', pois, startPos, testTime);
-    expect(rePlanned.steps.some((s) => s.poi.id === 'P01')).toBe(false);
-  });
-
+describe('Kategori 5: Fallback Jam Operasional', () => {
   it('menggunakan fallback jam operasional normal jika waktu pengujian berada di luar jam operasional (misal jam 23:15)', () => {
     // Waktu di luar jam operasional (Jumat 23:45)
     const lateNightTime = new Date('2026-11-06T23:45:00');
