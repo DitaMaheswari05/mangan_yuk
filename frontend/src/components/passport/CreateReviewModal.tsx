@@ -25,6 +25,8 @@ interface CreateReviewModalProps {
   onClose: () => void;
   onSuccess: (newReview: PoiReview) => void;
   initialPoiId?: string;
+  /** true → semua tenant bisa dipilih, tanpa harus pernah dikunjungi (tombol Tambah Ulasan di paspor). */
+  allowAllTenants?: boolean;
 }
 
 export function CreateReviewModal({
@@ -32,11 +34,15 @@ export function CreateReviewModal({
   onClose,
   onSuccess,
   initialPoiId,
+  allowAllTenants = false,
 }: CreateReviewModalProps) {
   const insets = useSafeAreaInsets();
-  // Ulasan hanya untuk tenant yang pernah dikunjungi (tercatat lewat dwell).
+  // Default: ulasan hanya untuk tenant yang pernah dikunjungi (tercatat lewat dwell).
   const visitedIds = useVisitedPoiIds();
-  const pois = useMemo(() => getPois().filter((p) => visitedIds.has(p.id)), [visitedIds]);
+  const pois = useMemo(
+    () => (allowAllTenants ? getPois() : getPois().filter((p) => visitedIds.has(p.id))),
+    [allowAllTenants, visitedIds],
+  );
 
   const [selectedPoiId, setSelectedPoiId] = useState<string>(initialPoiId ?? '');
   const [rating, setRating] = useState<1 | 2 | 3 | 4 | 5>(5);

@@ -271,6 +271,7 @@ export default function PassportScreen() {
 
       {/* Modal Buat Ulasan */}
       <CreateReviewModal
+        allowAllTenants
         visible={createModalVisible}
         onClose={() => setCreateModalVisible(false)}
         onSuccess={(newReview) => {
