@@ -17,7 +17,7 @@ import { colors, fontFamily } from '@/constants/theme';
 import { CONTENT_ASSETS } from '@/data/assets';
 import { sanitizeNumber, sanitizeTastes } from '@/lib/validation';
 import { DEV_SUDIRMAN_COORDINATE, haversineM, useUserLocation } from '@/features/location';
-import { getPois } from '@/features/poi';
+import { filterByHalalPreference, getPois } from '@/features/poi';
 import { ExploreModeController } from '@/features/geofence';
 import {
   activeTrailStepIndex,
@@ -31,6 +31,7 @@ import {
   useTrailSession,
   type TrailStep,
 } from '@/features/trail';
+import { useAppStore } from '@/store/useAppStore';
 import type { Poi, TasteTag } from '@/types/content';
 
 const exitIllustration = require('../../assets/images/search.png');
@@ -81,6 +82,9 @@ export default function TrailItineraryScreen() {
   const isNewTrail = params.durationMin !== undefined;
 
   const pois = useMemo(() => getPois(), []);
+  const halalOnly = useAppStore((s) => s.preferences.halalOnly);
+  // Tenant yang boleh masuk rute (perencanaan awal & pengganti saat Lewati).
+  const plannablePois = useMemo(() => filterByHalalPreference(pois, halalOnly), [pois, halalOnly]);
   const rawCoord = position?.coordinate ?? DEV_SUDIRMAN_COORDINATE;
   const isFarFromSSF = haversineM(rawCoord, DEV_SUDIRMAN_COORDINATE) > 300;
   const userCoord = isFarFromSSF ? DEV_SUDIRMAN_COORDINATE : rawCoord;
@@ -95,11 +99,11 @@ export default function TrailItineraryScreen() {
     const durationMin = sanitizeNumber(params.durationMin, 60, 15, 360);
     const budget = sanitizeNumber(params.budget, 50000, 15000, 2000000);
     const preferredTastes = sanitizeTastes(params.preferredTastes, ['gurih']);
-    const plan = planTrail({ userPosition: userCoord, pois, durationMin, budget, preferredTastes });
+    const plan = planTrail({ userPosition: userCoord, pois: plannablePois, durationMin, budget, preferredTastes });
     void TrailSessionStore.start(
       createTrailSession(plan, { durationMin, budget, preferredTastes }, Date.now()),
     ).then(() => setStarted(true));
-  }, [isNewTrail, params, pois, userCoord]);
+  }, [isNewTrail, params, plannablePois, userCoord]);
 
   // Selama trail baru belum tersimpan, jangan tampilkan sesi lama yang masih ada di storage.
   const session = started ? storedSession : undefined;
@@ -131,7 +135,7 @@ export default function TrailItineraryScreen() {
     let added: string[] = [];
     let pendingAfter = 0;
     await TrailSessionStore.update((s) => {
-      const res = skipTrailStep(s, skipped.id, pois, userCoord, Date.now());
+      const res = skipTrailStep(s, skipped.id, plannablePois, userCoord, Date.now());
       added = res.addedPoiIds;
       pendingAfter = pendingTrailSteps(res.session).length;
       return res.session;

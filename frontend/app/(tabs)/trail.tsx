@@ -15,8 +15,9 @@ import {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, fontFamily } from '@/constants/theme';
 import { DEV_SUDIRMAN_COORDINATE, haversineM, useUserLocation } from '@/features/location';
-import { getPois } from '@/features/poi';
+import { filterByHalalPreference, getPois } from '@/features/poi';
 import { planTrail } from '@/features/trail';
+import { useAppStore } from '@/store/useAppStore';
 import type { TasteTag } from '@/types/content';
 
 const unicornBanner = require('../../assets/images/happy.png');
@@ -40,6 +41,7 @@ export default function TrailScreen() {
   const [durationMin, setDurationMin] = useState<number>(30);
   const [budgetText, setBudgetText] = useState<string>('100000');
   const [selectedTastes, setSelectedTastes] = useState<TasteTag[]>(['manis']);
+  const halalOnly = useAppStore((s) => s.preferences.halalOnly);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const toggleTaste = (taste: TasteTag) => {
@@ -57,7 +59,7 @@ export default function TrailScreen() {
       return;
     }
 
-    const pois = getPois();
+    const pois = filterByHalalPreference(getPois(), halalOnly);
     const rawCoord = position?.coordinate ?? DEV_SUDIRMAN_COORDINATE;
     // Jika posisi pengguna > 300m dari pusat Sudirman Street Food (mis. merencanakan dari rumah/luar kawasan),
     // gunakan titik masuk Sudirman Street Food agar waktu tempuh dari luar kawasan tidak menghabiskan durasi trail.

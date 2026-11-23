@@ -25,7 +25,7 @@ import { CONTENT_ASSETS } from '@/data/assets';
 import { ExploreModeController, getNearbyPoisSorted } from '@/features/geofence';
 import { haversineM, useUserLocation } from '@/features/location';
 import { AppStateRepository, PermissionService } from '@/features/onboarding';
-import { getAll, getPois } from '@/features/poi';
+import { filterByHalalPreference, getAll, getPois } from '@/features/poi';
 import { useVisitedPoiIds } from '@/features/visits';
 import { useAppStore } from '@/store/useAppStore';
 import type { Poi } from '@/types/content';
@@ -61,7 +61,10 @@ export default function HomeScreen() {
   const { permission, position, areaStatus, distanceToAreaM } = useUserLocation();
 
   // Dataset POI (PB04 repository)
-  const [pois, setPois] = useState<Poi[]>(() => getPois());
+  const [allPois, setPois] = useState<Poi[]>(() => getPois());
+  const halalOnly = useAppStore((s) => s.preferences.halalOnly);
+  // Marker, carousel, dan Mode Jelajah mengikuti preferensi halal.
+  const pois = useMemo(() => filterByHalalPreference(allPois, halalOnly), [allPois, halalOnly]);
   const [selectedPoi, setSelectedPoi] = useState<Poi | null>(null);
   const visitedPoiIds = useVisitedPoiIds();
 

@@ -10,7 +10,7 @@ import areaJson from '@/data/area.json';
 import { WalkModeService } from '@/features/audio';
 import { NotificationService } from '@/features/notifications';
 import { PreferenceRepository } from '@/features/onboarding';
-import { getPoiById, getPois } from '@/features/poi';
+import { filterByHalalPreference, getPoiById, getPois } from '@/features/poi';
 import { buildExitRecommendation, ExitRecommendationStore } from '@/features/recommendation/exit';
 import {
   completeTrailStep,
@@ -98,6 +98,8 @@ async function runSideEffects(e: GeofenceEvent, pos: UserPosition): Promise<void
     case 'PROXIMITY': {
       const poi = getPoiById(e.poiId);
       if (!poi) return;
+      const prefs = await PreferenceRepository.get();
+      if (filterByHalalPreference([poi], prefs.ok && prefs.data.halalOnly).length === 0) return;
       await vibrate();
       const { autoPlayed } = await WalkModeService.handleProximityAudioTrigger(poi);
       await NotificationService.notifyNearbyPoi(poi, e.distanceM, { autoPlaying: autoPlayed });

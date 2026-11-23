@@ -99,6 +99,12 @@ export function isOpenAt(poi: Pick<PoiRecord, 'openingHours'>, date: Date): bool
 
 /** Versi sinkron untuk komponen peta lama. POI tidak valid sudah disembunyikan. */
 export const getPois = (): Poi[] => build().dataset.pois;
+
+/** Preferensi "hanya halal" aktif → sisakan tenant yang terverifikasi halal (isHalal === true). */
+export function filterByHalalPreference<T extends Pick<PoiRecord, 'isHalal'>>(pois: T[], halalOnly: boolean): T[] {
+  return halalOnly ? pois.filter((p) => p.isHalal === true) : pois;
+}
+
 export const getPoiById = (id: string): Poi | undefined => getPois().find((p) => p.id === id);
 
 // F05 — filter per menu: tampilkan daftar menu dulu, lalu buka tenant lewat menu.poiId.

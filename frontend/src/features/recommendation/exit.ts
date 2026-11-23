@@ -5,6 +5,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AppState } from 'react-native';
 import pairingsJson from '@/data/taste-pairings.json';
+import { filterByHalalPreference } from '@/features/poi';
 import { doneTrailSteps, remainingTrailBudget, type TrailSession } from '@/features/trail';
 import type { LatLng } from '@/lib/geo';
 import { load, save } from '@/storage';
@@ -56,7 +57,7 @@ export function buildExitRecommendation(input: ExitRecommendationInput): ExitRec
 
   const items = getRecommendations({
     userPosition: position,
-    pois: halalOnly ? pois.filter((p) => p.isHalal === true) : pois,
+    pois: filterByHalalPreference(pois, halalOnly),
     visitedPoiIds: visited,
     activePoiId: exitedPoi.id,
     lastVisitedTaste: pairingTasteOf(exitedPoi, pairings),

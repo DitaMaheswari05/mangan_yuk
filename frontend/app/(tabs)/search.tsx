@@ -16,8 +16,9 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { colors, fontFamily } from '@/constants/theme';
 import { CONTENT_ASSETS } from '@/data/assets';
 import { useUserLocation } from '@/features/location';
-import { getPois } from '@/features/poi';
+import { filterByHalalPreference, getPois } from '@/features/poi';
 import { searchPois, type SearchResultItem } from '@/features/search';
+import { useAppStore } from '@/store/useAppStore';
 import type { FoodType, PriceBucket, TasteTag } from '@/types/content';
 
 function formatRupiah(val: number): string {
@@ -61,7 +62,14 @@ export default function SearchScreen() {
   const [openNowOnly, setOpenNowOnly] = useState(false);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
 
-  const pois = useMemo(() => getPois(), []);
+  const halalOnly = useAppStore((s) => s.preferences.halalOnly);
+  const pois = useMemo(() => filterByHalalPreference(getPois(), halalOnly), [halalOnly]);
+  // Chip "Non-Halal" tidak relevan saat preferensi hanya halal aktif.
+  const categoryChips = useMemo(
+    () => (halalOnly ? CATEGORY_CHIPS.filter((c) => c.id !== 'non-halal') : CATEGORY_CHIPS),
+    [halalOnly],
+  );
+  const activeCategory = halalOnly && selectedCategory === 'non-halal' ? 'semua' : selectedCategory;
 
   // Eksekusi mesin pencari toleran typo (Fuse.js) & filter
   const searchResponse = useMemo(() => {
@@ -77,7 +85,7 @@ export default function SearchScreen() {
 
   // Filter kategori horizontal chip
   const filteredResults = useMemo(() => {
-    if (selectedCategory === 'semua') {
+    if (activeCategory === 'semua') {
       return searchResponse.results;
     }
 
@@ -87,7 +95,7 @@ export default function SearchScreen() {
       const dishCats = poi.menu.map((m) => (m.dishCategory || '').toLowerCase());
       const ptype = poi.type;
 
-      switch (selectedCategory) {
+      switch (activeCategory) {
         case 'mie':
           return (
             cl.includes('mie') ||
@@ -156,10 +164,10 @@ export default function SearchScreen() {
           return true;
       }
     });
-  }, [searchResponse.results, selectedCategory]);
+  }, [searchResponse.results, activeCategory]);
 
   const activeFilterCount =
-    (selectedCategory !== 'semua' ? 1 : 0) +
+    (activeCategory !== 'semua' ? 1 : 0) +
     selectedTastes.length +
     (selectedPriceBucket ? 1 : 0) +
     (openNowOnly ? 1 : 0);
@@ -277,8 +285,8 @@ export default function SearchScreen() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categoryChipsScroll}
         >
-          {CATEGORY_CHIPS.map((cat) => {
-            const active = selectedCategory === cat.id;
+          {categoryChips.map((cat) => {
+            const active = activeCategory === cat.id;
             return (
               <Pressable
                 key={cat.id}
