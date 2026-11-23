@@ -99,6 +99,15 @@ export default function LocationScreen() {
           </View>
         ))}
       </View>
+
+      <View style={styles.privacyNote}>
+        <Text style={styles.privacyTitle}>Privasi lokasimu</Text>
+        <Text style={styles.privacyText}>
+          Lokasimu diproses di HP dan tidak dikirim maupun disimpan di server Mangan Yuk. Saat
+          navigasi ke tenant, posisimu dikirim ke layanan rute OpenStreetMap (OSRM) untuk
+          menghitung rute jalan kaki.
+        </Text>
+      </View>
     </OnboardingScaffold>
   );
 }
@@ -148,6 +157,21 @@ const styles = StyleSheet.create({
     color: colors.onSurface,
   },
   reasonDetail: {
+    ...typography.textXsRegular,
+    color: colors.onSurfaceVariant,
+  },
+  privacyNote: {
+    marginTop: 12,
+    borderRadius: 12,
+    padding: 12,
+    backgroundColor: colors.surfaceContainerLow,
+    gap: 4,
+  },
+  privacyTitle: {
+    ...typography.textSmSemibold,
+    color: colors.onSurface,
+  },
+  privacyText: {
     ...typography.textXsRegular,
     color: colors.onSurfaceVariant,
   },
