@@ -1,0 +1,24 @@
+% Bab 8: Kesimpulan dan Tindak Lanjut
+\chapter{Kesimpulan dan Tindak Lanjut}
+\label{bab:kesimpulan-dan-tindak-lanjut}
+
+\section{Ringkasan Hasil Pengujian Sementara (24 November 2026)}
+
+\begin{enumerate}
+  \item \textbf{Pengujian Otomatis (Unit Test \& Static Test) pada branch \texttt{refactor/trail} (commit \texttt{7371e28}):}
+  \begin{itemize}
+    \item \textbf{Frontend Unit Test (Jest):} 26/26 suite lolos (259/259 test).
+    \item \textbf{Backend Unit Test (Vitest):} 2/2 file lolos (37/37 test).
+    \item \textbf{Frontend Typecheck (\texttt{tsc --noEmit}):} Gagal 3 error \texttt{TS2307} (\texttt{DF-01}) karena modul \texttt{expo-image-picker}, \texttt{react-native-view-shot}, dan \texttt{expo-sharing} belum terpasang di \texttt{frontend/node\_modules} lokal.
+  \end{itemize}
+  \item \textbf{Status Alpha Testing (51 Test Case):} Sebanyak \textbf{21 dari 51 TC (41,2\%)} telah terverifikasi lolos pada level logika, dataset 31 POI, dan API (\texttt{F03} sebagian, \texttt{F05} sebagian, \texttt{F07}, \texttt{F08}, \texttt{F10}, \texttt{F11}, \texttt{F12}). Sebanyak \textbf{30 TC lainnya} (yang memerlukan GPS nyata, kompas fisik, notifikasi lock screen, stopwatch layar, dan log proxy HTTPS) masih menunggu eksekusi lapangan pada perangkat \textbf{Samsung Galaxy A26} di Sudirman Street Food.
+  \item \textbf{Status Beta Testing (UAT):} Belum dilaksanakan; instrumen tugas (\texttt{T1--T5}) dan kuesioner skala Likert (\texttt{KS1--KP3}) siap digunakan pada sesi UAT bersama responden.
+\end{enumerate}
+
+\section{Tindak Lanjut}
+
+\begin{enumerate}
+  \item Menjalankan \texttt{npm ci} pada direktori \texttt{frontend/} dan mengulang \texttt{npm run typecheck} untuk menutup defect \texttt{DF-01} sebelum membuat build APK pengujian lapangan.
+  \item Melaksanakan 30 test case lapangan (\texttt{F01}, \texttt{F02}, \texttt{F03-2/4}, \texttt{F04}, \texttt{F05-4}, \texttt{F06}, \texttt{F09}) di Sudirman Street Day and Night Market menggunakan Samsung Galaxy A26, lengkap dengan dokumentasi screenshot dan log proxy HTTPS.
+  \item Melaksanakan Beta Testing (UAT) dengan minimal 2 responden di luar tim pengembang, lalu menghitung Indeks Penerimaan pada Tabel 7.3.
+\end{enumerate}

@@ -1,0 +1,49 @@
+% Bab 3: Skenario Pengujian
+\chapter{Skenario Pengujian}
+\label{bab:skenario-pengujian}
+
+\begin{longtable}{|C{0.09}|C{0.09}|L{0.48}|C{0.11}|C{0.13}|C{0.10}|}
+\caption{Daftar Skenario Pengujian}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{SC ID} & \cellcolor[HTML]{D9EAF7}\textbf{UC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Skenario Pengujian} & \cellcolor[HTML]{D9EAF7}\textbf{Tipe} & \cellcolor[HTML]{D9EAF7}\textbf{Teknik} & \cellcolor[HTML]{D9EAF7}\textbf{Jumlah TC} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{SC ID} & \cellcolor[HTML]{D9EAF7}\textbf{UC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Skenario Pengujian} & \cellcolor[HTML]{D9EAF7}\textbf{Tipe} & \cellcolor[HTML]{D9EAF7}\textbf{Teknik} & \cellcolor[HTML]{D9EAF7}\textbf{Jumlah TC} \\ \hline
+\endhead
+SC-01 & UC-01 & Pengguna menyelesaikan onboarding; penjelasan privasi (termasuk layanan rute OSRM) tampil sebelum dialog izin sistem; izin lokasi dan notifikasi diberikan & Positif & Black box & 1 \\ \hline
+SC-02 & UC-01 & Pengguna menolak izin lokasi & Negatif & Black box & 1 \\ \hline
+SC-03 & UC-02 & Posisi pengguna tampil di peta MapLibre dan diperbarui saat berjalan & Positif & Black box & 2 \\ \hline
+SC-04 & UC-02 & Status di dalam/di luar area berubah saat pengguna melewati batas kawasan & Positif & Black box & 1 \\ \hline
+SC-05 & UC-02 & Pengguna berada di luar kawasan: status ``Di luar area'' dan tidak ada notifikasi entry & Negatif & Black box & 1 \\ \hline
+SC-06 & UC-03 & Mode Jelajah aktif dan notifikasi entry muncul saat pengguna memasuki radius 100 m (termasuk saat background/layar terkunci) & Positif & Black box & 1 \\ \hline
+SC-07 & UC-03 & Pembacaan lokasi dengan akurasi >30 m diabaikan & Negatif & Black box & 1 \\ \hline
+SC-08 & UC-04 & Pengguna memasuki radius 10 m POI dan kartu POI tampil & Positif & Black box & 1 \\ \hline
+SC-09 & UC-04 & Pengguna tetap berada di area POI; trigger tidak muncul berulang & Negatif & Black box & 1 \\ \hline
+SC-10 & UC-05 & Pengguna berada \(\ge\)3 menit di tenant dan kunjungan tercatat & Positif & Black box & 1 \\ \hline
+SC-11 & UC-05 & Pengguna hanya lewat (<3 menit) sehingga kunjungan tidak tercatat & Negatif & Black box & 1 \\ \hline
+SC-12 & UC-06 & Kartu POI menampilkan konten lengkap dan terbuka cepat untuk seluruh 31 POI & Positif & Black box & 3 \\ \hline
+SC-13 & UC-06 & Tanpa koneksi internet, audio dan konten tetap dapat diakses & Negatif & Black box & 1 \\ \hline
+SC-14 & UC-07 & Pengguna memutar narasi dari notifikasi lock screen, mendengar narasi di Mode Jalan, dan mengikuti panduan audio navigasi & Positif & Black box & 4 \\ \hline
+SC-15 & UC-07 & Pengguna menekan Lewati pada notifikasi trigger & Negatif & Black box & 1 \\ \hline
+SC-16 & UC-08 & Pencarian cepat secara offline dan toleran typo & Positif & Black box & 2 \\ \hline
+SC-17 & UC-08 & Kombinasi filter menghasilkan daftar yang sesuai & Positif & Black box & 1 \\ \hline
+SC-18 & UC-08 & Tenant dipilih sebagai tujuan dan langsung masuk ke mode navigasi & Positif & Black box & 1 \\ \hline
+SC-19 & UC-08 & Kata kunci tidak ditemukan & Negatif & Black box & 1 \\ \hline
+SC-20 & UC-09 & Navigasi di dalam kawasan: jarak diperbarui dan panah menunjuk arah tujuan & Positif & Black box & 2 \\ \hline
+SC-21 & UC-09 & Kedatangan terdeteksi saat jarak \(\le\)10 m & Positif & Black box & 1 \\ \hline
+SC-22 & UC-09 & Navigasi dapat dilakukan ke seluruh 31 POI & Positif & Black box & 1 \\ \hline
+SC-23 & UC-09 & Rute jalan kaki OSRM dapat dibuat dari luar kawasan dan fallback garis lurus berjalan saat offline & Positif & Black box & 2 \\ \hline
+SC-24 & UC-09 & Izin lokasi ditolak: navigasi tidak tersedia & Negatif & Black box & 1 \\ \hline
+SC-25 & UC-10 & Rekomendasi muncul cepat setelah exit event dan disertai alasan & Positif & Black box & 1 \\ \hline
+SC-26 & UC-10 & Rekomendasi tidak memuat tenant yang tutup atau sudah dikunjungi & Negatif & Black box & 1 \\ \hline
+SC-27 & UC-10 & Input yang sama menghasilkan rekomendasi yang sama & Positif & Black box & 1 \\ \hline
+SC-28 & UC-11 & Trail 60 menit dengan budget Rp50.000 menghasilkan itinerary yang valid & Positif & Black box & 2 \\ \hline
+SC-29 & UC-11 & Progres trail dan pengingat sisa waktu diperbarui otomatis & Positif & Black box & 2 \\ \hline
+SC-30 & UC-11 & Pengguna melewati tenant pada trail dan trail disusun ulang & Negatif & Black box & 1 \\ \hline
+SC-31 & UC-12 & Pengguna menekan Selesai Jelajah: pelacakan berhenti dan notifikasi permanen hilang & Positif & Black box & 1 \\ \hline
+SC-32 & UC-12 & Setelah Mode Jelajah dimatikan, memasuki radius POI tidak memicu trigger & Negatif & Black box & 1 \\ \hline
+SC-33 & UC-12 & Audit jaringan HTTPS: tidak ada koordinat ke backend Mangan Yuk; koordinat ke OSRM hanya saat navigasi aktif & Positif & Black box & 1 \\ \hline
+SC-34 & UC-13 & Pengguna memberi ulasan, memperoleh stempel tanpa duplikasi, membuka badge, dan data tersimpan saat offline & Positif & Black box & 3 \\ \hline
+SC-35 & UC-14 & Pengguna mendaftar/masuk akun lokal, sesi bertahan setelah restart, dan sesi terhapus saat keluar & Positif & Black box & 2 \\ \hline
+SC-36 & UC-15 & Preferensi ``Hanya tenant halal'' menyaring tenant non-halal pada peta, pencarian, trail, rekomendasi, dan proximity trigger & Positif & Black box & 2 \\ \hline
+\end{longtable}

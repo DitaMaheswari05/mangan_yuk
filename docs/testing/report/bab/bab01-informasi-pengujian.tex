@@ -1,0 +1,96 @@
+% Bab 1: Informasi Pengujian
+\chapter{Informasi Pengujian}
+\label{bab:informasi-pengujian}
+
+\section{Tujuan dan Ruang Lingkup}
+
+\begin{longtable}{|L{0.28}|L{0.72}|}
+\caption{Tujuan dan Ruang Lingkup Pengujian}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Komponen} & \cellcolor[HTML]{D9EAF7}\textbf{Keterangan} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Komponen} & \cellcolor[HTML]{D9EAF7}\textbf{Keterangan} \\ \hline
+\endhead
+\textbf{Nama produk} & \textbf{ManganYuk!}, aplikasi \textit{location-based culinary \& local culture explorer} untuk kawasan Sudirman Street Food, Bandung. Aplikasi mobile Android (React Native + Expo). \\ \hline
+\textbf{Versi / build yang diuji} & Branch \texttt{refactor/trail} (commit \texttt{7371e28}) \\ \hline
+\textbf{Requirement dalam lingkup} &
+\textbf{Requirement Utama (F01--F09):}
+\begin{itemize}
+  \item F01 Location Awareness
+  \item F02 Location-Based Trigger (Geofence)
+  \item F03 Multimodal Exploration
+  \item F04 Eyes-Free Interaction
+  \item F05 Search \& Destination
+  \item F06 Navigation
+  \item F07 Contextual Recommendation
+  \item F08 Domain-Specific Innovative Feature: Smart Culinary Trail Planner
+  \item F09 Location Privacy \& Consent
+\end{itemize}
+\textbf{Requirement Tambahan / Opsional (F10--F12):}
+\begin{itemize}
+  \item F10 Paspor Kuliner \& Ulasan Tenant (Gamification)
+  \item F11 Akun Pengguna Lokal
+  \item F12 Preferensi Halal
+\end{itemize} \\ \hline
+\textbf{Di luar lingkup} &
+\begin{itemize}
+  \item Sistem pemesanan makanan online (\textit{online food ordering}) dan pembayaran digital (\textit{payment gateway}) (NG01).
+  \item Fitur AI/LLM untuk sistem rekomendasi atau chatbot (NG02).
+  \item Pembaruan stok menu atau antrean secara \textit{real-time} dari pihak tenant (NG03).
+  \item Area kuliner lain di Kota Bandung selain \textit{pilot project} Sudirman Street Food (NG04).
+  \item Reservasi tempat duduk atau meja secara langsung (NG05).
+  \item Platform selain Android (iOS).
+\end{itemize} \\ \hline
+\textbf{Periode pengujian} & Sprint 5 (Week 14), 18 -- 24 November 2026 (Unit/Static Test: 24 November 2026; Uji Lapangan \& Beta: menyusul) \\ \hline
+\textbf{Lokasi pengujian lapangan} & Sudirman Street Day and Night Market, Bandung \\ \hline
+\end{longtable}
+
+\section{Metode Pengujian}
+
+\begin{longtable}{|L{0.17}|L{0.17}|L{0.26}|L{0.20}|L{0.20}|}
+\caption{Metode Pengujian}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Jenis} & \cellcolor[HTML]{D9EAF7}\textbf{Pelaksana} & \cellcolor[HTML]{D9EAF7}\textbf{Tujuan} & \cellcolor[HTML]{D9EAF7}\textbf{Teknik} & \cellcolor[HTML]{D9EAF7}\textbf{Output} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Jenis} & \cellcolor[HTML]{D9EAF7}\textbf{Pelaksana} & \cellcolor[HTML]{D9EAF7}\textbf{Tujuan} & \cellcolor[HTML]{D9EAF7}\textbf{Teknik} & \cellcolor[HTML]{D9EAF7}\textbf{Output} \\ \hline
+\endhead
+Alpha testing & Tim pengembang & Memastikan setiap fungsi berjalan sesuai \textit{acceptance criteria} & \textit{Black box}, berbasis \textit{test case} & Tabel hasil \textit{test case}, daftar \textit{defect} \\ \hline
+Retest / regression & Tim pengembang & Memastikan perbaikan \textit{defect} berhasil dan tidak merusak fungsi lain & Menjalankan ulang \textit{test case} terkait & Hasil retest \\ \hline
+Beta testing (UAT) & Calon pengguna (target user PRD) & Mengukur tingkat penerimaan pengguna & Tugas penggunaan + kuesioner skala Likert 1--5 & Indeks penerimaan per aspek \\ \hline
+\end{longtable}
+
+\section{Lingkungan Pengujian}
+
+\begin{longtable}{|L{0.28}|L{0.72}|}
+\caption{Lingkungan Pengujian}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Komponen} & \cellcolor[HTML]{D9EAF7}\textbf{Spesifikasi} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Komponen} & \cellcolor[HTML]{D9EAF7}\textbf{Spesifikasi} \\ \hline
+\endhead
+Perangkat uji 1 & Samsung Galaxy A26, Android 15, GPS aktif \\ \hline
+Versi aplikasi & Branch \texttt{refactor/trail} (commit \texttt{7371e28}); lingkungan uji otomatis: Node.js + Jest (frontend) \& Vitest (backend) \\ \hline
+Backend / sumber data & Dataset lokal \texttt{frontend/src/data/pois.json} (31 POI dibundel di dalam APK); tile peta OpenStreetMap (MapLibre); layanan rute jalan kaki OSRM publik; serta backend Mangan Yuk (Supabase) untuk sinkronisasi Paspor Kuliner dan ulasan (F10) \\ \hline
+Teknologi pemicu lokasi & GPS / geofencing (background \textit{foreground service}, akurasi tinggi) \\ \hline
+Kondisi lapangan & Outdoor di area Sudirman Street Food, pukul 10.00 WIB (atau jam operasional tenant) dengan kondisi sinyal baik \\ \hline
+\end{longtable}
+
+\section{Tim Penguji}
+
+\begin{longtable}{|C{0.08}|L{0.34}|C{0.18}|L{0.40}|}
+\caption{Tim Penguji}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{No} & \cellcolor[HTML]{D9EAF7}\textbf{Nama} & \cellcolor[HTML]{D9EAF7}\textbf{NIM} & \cellcolor[HTML]{D9EAF7}\textbf{Peran dalam Pengujian} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{No} & \cellcolor[HTML]{D9EAF7}\textbf{Nama} & \cellcolor[HTML]{D9EAF7}\textbf{NIM} & \cellcolor[HTML]{D9EAF7}\textbf{Peran dalam Pengujian} \\ \hline
+\endhead
+1 & Dita Maheswari             & 13523125 & [isi peran] \\ \hline
+2 & Samantha Laqueenna Ginting & 13523138 & [isi peran] \\ \hline
+3 & Anggita Najmi Layali       & 18223122 & [isi peran] \\ \hline
+4 & Theresia Ivana M. S        & 18223126 & [isi peran] \\ \hline
+5 & Raka Adhitya Nugraha       & 18223013 & Beta Testing \\ \hline
+\end{longtable}

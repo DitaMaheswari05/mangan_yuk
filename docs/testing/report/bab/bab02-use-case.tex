@@ -1,0 +1,381 @@
+% Bab 2: Use Case
+\chapter{Use Case}
+\label{bab:use-case}
+
+\section{Diagram Use Case}
+
+Diagram use case berikut memodelkan interaksi antara aktor utama (\textbf{Pengunjung}) dan sistem eksternal (\textbf{Layanan Rute OSRM} serta \textbf{Backend Mangan Yuk}) terhadap 15 use case pada aplikasi \textbf{ManganYuk!}, konsisten dengan \textit{user flow} pada PRD Bagian 2.
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\sffamily\footnotesize,
+  uc/.style={ellipse, draw=black!75, fill=blue!6, thick, minimum width=4.6cm, minimum height=0.82cm, align=center, inner sep=2pt},
+  ucopt/.style={ellipse, draw=black!75, dashed, fill=teal!6, thick, minimum width=4.6cm, minimum height=0.82cm, align=center, inner sep=2pt},
+  actor/.style={align=center},
+  assoc/.style={-, thick, draw=black!65},
+  ext/.style={->, dashed, thick, draw=black!55}
+]
+
+% Use cases - Kolom Kiri (Core Onboarding, Geofence, Eksplorasi)
+\node[uc] (uc01) at (0, 11.2) {\textbf{UC-01} Onboarding \& Izin Lokasi};
+\node[uc] (uc02) at (0, 9.9)  {\textbf{UC-02} Posisi \& Status Area};
+\node[uc] (uc03) at (0, 8.6)  {\textbf{UC-03} Mode Jelajah \& Entry Event};
+\node[uc] (uc04) at (0, 7.3)  {\textbf{UC-04} Kartu POI Proximity (10 m)};
+\node[uc] (uc05) at (0, 6.0)  {\textbf{UC-05} Catat Kunjungan (Dwell/Exit)};
+\node[uc] (uc06) at (0, 4.7)  {\textbf{UC-06} Kartu POI Multimodal};
+\node[uc] (uc07) at (0, 3.4)  {\textbf{UC-07} Narasi Eyes-Free};
+\node[uc] (uc12) at (0, 2.1)  {\textbf{UC-12} Matikan Mode Jelajah \& Privasi};
+
+% Use cases - Kolom Kanan (Search, Nav, Rec, Trail, Optional)
+\node[uc] (uc08) at (5.8, 11.2) {\textbf{UC-08} Cari Tenant \& Tujuan};
+\node[uc] (uc09) at (5.8, 9.9)  {\textbf{UC-09} Navigasi Dalam Aplikasi};
+\node[uc] (uc10) at (5.8, 8.6)  {\textbf{UC-10} Rekomendasi Berikutnya};
+\node[uc] (uc11) at (5.8, 7.3)  {\textbf{UC-11} Smart Culinary Trail};
+\node[ucopt] (uc13) at (5.8, 5.4) {\textbf{UC-13} Paspor Kuliner \& Ulasan (F10)};
+\node[ucopt] (uc14) at (5.8, 4.1) {\textbf{UC-14} Akun Pengguna Lokal (F11)};
+\node[ucopt] (uc15) at (5.8, 2.8) {\textbf{UC-15} Preferensi Halal (F12)};
+
+% System Boundary
+\begin{scope}[on background layer]
+  \node[draw=black!80, thick, rounded corners=6pt, fill=gray!4,
+        fit=(uc01)(uc12)(uc08)(uc15), inner sep=14pt,
+        label={[font=\sffamily\bfseries\small, yshift=-14pt]north:Sistem Aplikasi ManganYuk! (Android)}] (sysbox) {};
+\end{scope}
+
+% Stick Figure Macro
+\newcommand{\stickman}[3]{% name, x, y
+  \begin{scope}[shift={(#2,#3)}]
+    \draw[thick] (0,0.45) circle (0.18);
+    \draw[thick] (0,0.27) -- (0,-0.25);
+    \draw[thick] (-0.25,0.10) -- (0.25,0.10);
+    \draw[thick] (0,-0.25) -- (-0.20,-0.62);
+    \draw[thick] (0,-0.25) -- (0.20,-0.62);
+    \node[below=0.70cm, align=center, font=\sffamily\bfseries\footnotesize] (#1) at (0,0) {#1};
+  \end{scope}
+}
+
+% Aktor Kiri: Pengunjung
+\begin{scope}[shift={(-4.6,6.8)}]
+  \draw[thick] (0,0.45) circle (0.18);
+  \draw[thick] (0,0.27) -- (0,-0.25);
+  \draw[thick] (-0.25,0.10) -- (0.25,0.10);
+  \draw[thick] (0,-0.25) -- (-0.20,-0.62);
+  \draw[thick] (0,-0.25) -- (0.20,-0.62);
+  \node[align=center, font=\sffamily\bfseries\footnotesize] at (0,-0.88) {Pengunjung};
+  \coordinate (pengunjung) at (0.35, 0);
+\end{scope}
+
+% Aktor Kanan 1: Layanan Rute OSRM
+\begin{scope}[shift={(10.4,9.9)}]
+  \node[draw=black!75, thick, fill=orange!10, rounded corners=3pt, minimum width=2.4cm, minimum height=1.0cm, align=center, font=\sffamily\bfseries\footnotesize] (osrm) {<<system>>\\Layanan Rute\\OSRM};
+\end{scope}
+
+% Aktor Kanan 2: Backend Mangan Yuk
+\begin{scope}[shift={(10.4,5.4)}]
+  \node[draw=black!75, thick, fill=orange!10, rounded corners=3pt, minimum width=2.4cm, minimum height=1.0cm, align=center, font=\sffamily\bfseries\footnotesize] (backend) {<<system>>\\Backend\\Mangan Yuk};
+\end{scope}
+
+% Asosiasi Pengunjung -> UC kiri
+\foreach \u in {uc01,uc02,uc03,uc04,uc05,uc06,uc07,uc12} {
+  \draw[assoc] (pengunjung) -- (\u.west);
+}
+
+% Asosiasi Pengunjung -> UC kanan (jalur rapi via sisi atas/bawah)
+\foreach \u in {uc08,uc09,uc10,uc11,uc13,uc14,uc15} {
+  \draw[assoc] (pengunjung) -- (\u.west);
+}
+
+% Asosiasi Aktor Eksternal
+\draw[assoc] (uc09.east) -- (osrm.west);
+\draw[assoc] (uc13.east) -- (backend.west);
+
+% Legenda singkat di bawah
+\node[anchor=north west, font=\sffamily\scriptsize] at ([yshift=-6pt]sysbox.south west)
+  {Keterangan: Garis solid = Requirement Utama (F01--F09); Garis putus-putus = Requirement Tambahan/Opsional (F10--F12).};
+
+\end{tikzpicture}%
+}
+\caption{Diagram Use Case Aplikasi ManganYuk!}
+\label{fig:use-case-diagram}
+\end{figure}
+
+\section{Daftar Use Case}
+
+\begin{longtable}{|C{0.10}|L{0.25}|L{0.14}|L{0.13}|L{0.38}|}
+\caption{Daftar Use Case}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{UC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Nama Use Case} & \cellcolor[HTML]{D9EAF7}\textbf{Aktor} & \cellcolor[HTML]{D9EAF7}\textbf{Related Req.} & \cellcolor[HTML]{D9EAF7}\textbf{Deskripsi Singkat} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{UC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Nama Use Case} & \cellcolor[HTML]{D9EAF7}\textbf{Aktor} & \cellcolor[HTML]{D9EAF7}\textbf{Related Req.} & \cellcolor[HTML]{D9EAF7}\textbf{Deskripsi Singkat} \\ \hline
+\endhead
+UC-01 & Melakukan onboarding dan memberi izin lokasi/notifikasi & Pengunjung & F09, F01, F12 & Pengguna membaca penjelasan privasi lokasi, memberi izin lokasi dan notifikasi, lalu memilih preferensi rasa, jenis kuliner, serta opsi halal. \\ \hline
+UC-02 & Melihat posisi dan status di dalam/di luar area & Pengunjung & F01 & Aplikasi menampilkan posisi pengguna di peta MapLibre beserta status di dalam/di luar area dan jarak ke Sudirman Street Food. \\ \hline
+UC-03 & Mengaktifkan Mode Jelajah dan menerima notifikasi entry & Pengunjung & F02, F09 & Pengguna mengaktifkan Mode Jelajah dan menerima notifikasi sambutan saat memasuki radius 100 m kawasan. \\ \hline
+UC-04 & Menerima kartu POI saat mendekati tenant & Pengunjung & F02, F12 & Aplikasi menampilkan kartu POI dan tawaran audio saat pengguna memasuki radius 10 m tenant, tanpa terpicu berulang. \\ \hline
+UC-05 & Mencatat kunjungan otomatis (dwell dan exit event) & Pengunjung & F02 & Aplikasi mencatat kunjungan otomatis bila pengguna berada \(\ge\)3 menit di geofence tenant, dan mencatat exit event saat keluar (> radius + 10 m). \\ \hline
+UC-06 & Melihat kartu POI multimodal & Pengunjung & F03 & Pengguna membuka kartu POI berisi foto (jika tersedia), cerita budaya, menu \& harga, jam buka, serta audio narasi dan transkrip. \\ \hline
+UC-07 & Mendengarkan narasi tanpa melihat layar (eyes-free) & Pengunjung & F04 & Pengguna mendengarkan prompt dan narasi tenant, serta panduan audio, tanpa harus membuka atau melihat layar. \\ \hline
+UC-08 & Mencari tenant dan menetapkan tujuan & Pengunjung & F05, F12 & Pengguna mencari tenant berdasarkan nama/menu/kategori (toleran typo), memakai filter (termasuk opsi halal), dan menetapkan tenant sebagai tujuan. \\ \hline
+UC-09 & Navigasi menuju kawasan dan tenant & Pengunjung, Layanan Rute OSRM & F06, F01 & Pengguna dipandu di dalam aplikasi menuju tenant (peta MapLibre, rute jalan kaki OSRM atau fallback garis lurus, jarak, panah kompas, audio), termasuk dari luar kawasan. \\ \hline
+UC-10 & Menerima rekomendasi tenant berikutnya & Pengunjung & F07, F12 & Setelah keluar dari tenant yang dikunjungi, aplikasi menampilkan 3 pilihan tenant berikutnya beserta alasannya. \\ \hline
+UC-11 & Membuat dan menjalankan Smart Culinary Trail & Pengunjung & F08, F02, F12 & Pengguna mengisi durasi, budget, dan rasa; aplikasi menyusun itinerary trail dan memantau progres secara otomatis. \\ \hline
+UC-12 & Mematikan Mode Jelajah dan menjaga privasi lokasi & Pengunjung & F09 & Pengguna dapat mematikan Mode Jelajah kapan saja; pelacakan berhenti dan koordinat tidak dikirim ke backend Mangan Yuk. \\ \hline
+UC-13 & Mengumpulkan stempel Paspor Kuliner dan memberi ulasan & Pengunjung, Backend Mangan Yuk & F10 & Pengguna memberi ulasan tenant (rating, menu, teks/foto) untuk memperoleh stempel digital dan membuka badge trail tematik. \\ \hline
+UC-14 & Mengelola akun pengguna lokal & Pengunjung & F11 & Pengguna masuk atau mendaftar akun lokal, menyimpan sesi di perangkat, mengubah preferensi pada Profil, dan keluar akun. \\ \hline
+UC-15 & Mengatur preferensi tenant halal & Pengunjung & F12 & Pengguna mengaktifkan atau menonaktifkan opsi ``Hanya tenant halal'' agar peta, pencarian, trail, rekomendasi, dan trigger menyaring tenant non-halal. \\ \hline
+\end{longtable}
+
+\section{Spesifikasi Use Case}
+
+\newcommand{\ucspec}[9]{%
+\begin{longtable}{|L{0.26}|L{0.74}|}
+\caption{Spesifikasi Use Case #1}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Atribut} & \cellcolor[HTML]{D9EAF7}\textbf{Detail} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Atribut} & \cellcolor[HTML]{D9EAF7}\textbf{Detail} \\ \hline
+\endhead
+\textbf{Use Case ID} & #1 \\ \hline
+\textbf{Nama Use Case} & #2 \\ \hline
+\textbf{Aktor} & #3 \\ \hline
+\textbf{Related Requirement} & #4 \\ \hline
+\textbf{Deskripsi} & #5 \\ \hline
+\textbf{Pre-condition} & #6 \\ \hline
+\textbf{Trigger} & #7 \\ \hline
+\textbf{Alur utama} & #8 \\ \hline
+\textbf{Alur alternatif / eksepsi} & #9 \\ \hline
+\end{longtable}
+}
+
+% UC-01
+\ucspec{UC-01}
+{Melakukan onboarding dan memberi izin lokasi/notifikasi}
+{Pengunjung}
+{F09 Location Privacy \& Consent; F01 Location Awareness; F12 Preferensi Halal}
+{Pengguna membaca penjelasan privasi lokasi, memberi izin lokasi dan notifikasi, lalu memilih preferensi kuliner dan opsi halal.}
+{Aplikasi baru dipasang (data aplikasi bersih); pengguna telah melewati layar login/registrasi (F11); izin lokasi dan notifikasi belum diberikan.}
+{Pengguna masuk ke halaman onboarding untuk pertama kali.}
+{1. Sistem menampilkan halaman onboarding (jelajah kuliner, cerita budaya, culinary trail).\newline
+2. Pengguna menekan tombol Lanjut.\newline
+3. Sistem menampilkan penjelasan penggunaan lokasi (alasan, kapan lokasi dibaca, riwayat lokasi tidak dikirim ke backend Mangan Yuk, koordinat hanya dipakai layanan rute OSRM saat navigasi) dan tombol ``Izinkan Lokasi''.\newline
+4. Pengguna menekan ``Izinkan Lokasi'', lalu memilih ``Izinkan'' pada dialog sistem.\newline
+5. Sistem meminta izin notifikasi; pengguna mengizinkan.\newline
+6. Sistem meminta preferensi rasa, jenis kuliner, dan opsi ``Hanya tenant halal'' (dengan opsi Lewati); pengguna memilih lalu menekan Mulai.\newline
+7. Sistem menyimpan preferensi secara lokal dan menampilkan Beranda.}
+{4a. Pengguna menekan ``Tolak'' pada dialog izin lokasi: sistem menampilkan penjelasan bahwa trigger otomatis dan navigasi tidak tersedia, dengan tombol Buka Pengaturan dan Lanjut tanpa Lokasi.\newline
+4b. Pengguna menekan ``Lanjut tanpa Lokasi'': sistem menampilkan peta tanpa posisi pengguna dan daftar tenant; kartu POI dan audio dapat dibuka manual.\newline
+6a. Pengguna menekan Lewati pada preferensi: sistem melanjutkan ke Beranda.\newline\textbf{Post-condition:} Preferensi tersimpan secara lokal; Beranda tampil (mode dengan lokasi atau mode tanpa lokasi).}
+
+% UC-02
+\ucspec{UC-02}
+{Melihat posisi dan status di dalam/di luar area}
+{Pengunjung}
+{F01 Location Awareness}
+{Aplikasi menampilkan posisi pengguna di peta MapLibre beserta status di dalam/di luar area dan jarak ke Sudirman Street Food.}
+{Aplikasi terbuka di Beranda; izin lokasi diberikan; GPS aktif.}
+{Pengguna membuka Beranda atau berpindah posisi.}
+{1. Sistem membaca posisi pengguna (pembaruan tiap \(\pm\)3 detik atau perpindahan \(\ge\)5 m).\newline
+2. Sistem menampilkan titik biru dengan lingkaran akurasi pada peta MapLibre (tile OpenStreetMap) dan denah kawasan.\newline
+3. Sistem menampilkan status ``Di dalam/Di luar area Sudirman Street Food''.\newline
+4. Sistem memperbarui posisi dan status saat pengguna berjalan.}
+{3a. Pengguna berada di luar kawasan: sistem menampilkan status ``Di luar area'' dan jarak ke Sudirman Street Food; pengguna tetap dapat memilih tenant untuk memulai navigasi rute OSRM dari luar kawasan (lihat UC-09).\newline\textbf{Post-condition:} Posisi dan status area tampil sesuai kondisi aktual pengguna.}
+
+% UC-03
+\ucspec{UC-03}
+{Mengaktifkan Mode Jelajah dan menerima notifikasi entry}
+{Pengunjung}
+{F02 Location-Based Trigger (Geofence); F09 Location Privacy \& Consent}
+{Pengguna mengaktifkan Mode Jelajah dan menerima notifikasi sambutan saat memasuki radius 100 m kawasan.}
+{Onboarding selesai; izin lokasi dan notifikasi diberikan; pengguna menuju kawasan.}
+{Pengguna mengaktifkan Mode Jelajah dan memasuki radius 100 m kawasan.}
+{1. Pengguna mengaktifkan Mode Jelajah.\newline
+2. Sistem mengaktifkan pelacakan lokasi di background (\textit{foreground service}) dan menampilkan notifikasi permanen ``Mangan Yuk! sedang memandu''.\newline
+3. Pengguna memasuki radius 100 m kawasan.\newline
+4. Sistem memeriksa akurasi pembacaan lokasi (\(\le\)30 m).\newline
+5. Sistem menampilkan notifikasi entry dan audio sambutan (``Selamat datang di Sudirman Street Food!'').\newline
+6. Sistem menawarkan pilihan Rencanakan Trail atau Jelajah Bebas.}
+{4a. Akurasi >30 m: sistem mengabaikan pembacaan, menampilkan banner ``Sinyal GPS lemah, trigger otomatis ditunda''; pengguna dapat membuka kartu POI manual dari daftar ``Tenant di sekitar''; trigger otomatis berlanjut setelah akurasi \(\le\)30 m.\newline
+6a. Pengguna memilih Jelajah Bebas: peta menampilkan seluruh marker tenant sesuai preferensi halal tanpa tujuan tertentu dan proximity event tetap aktif.\newline\textbf{Post-condition:} Mode Jelajah aktif; kedatangan di kawasan terdeteksi.}
+
+% UC-04
+\ucspec{UC-04}
+{Menerima kartu POI saat mendekati tenant}
+{Pengunjung}
+{F02 Location-Based Trigger (Geofence); F12 Preferensi Halal}
+{Aplikasi menampilkan kartu POI dan tawaran audio saat pengguna memasuki radius 10 m tenant, tanpa terpicu berulang.}
+{Mode Jelajah aktif; izin lokasi diberikan; data 31 POI termuat dari \texttt{pois.json}.}
+{Posisi pengguna masuk ke radius proximity tenant (10 m).}
+{1. Sistem membaca posisi pengguna dari pembaruan lokasi background.\newline
+2. Sistem menghitung jarak ke setiap POI (haversine) dan mengenali POI terdekat.\newline
+3. Sistem memeriksa pengguna berada dalam radius 10 m, akurasi \(\le\)30 m, preferensi halal terpenuhi (jika F12 aktif), dan POI belum terpicu/tidak dalam cooldown.\newline
+4. Sistem menampilkan kartu POI, getar singkat, dan tawaran audio (``Kamu mendekati [tenant]. Mau dengar ceritanya?'').\newline
+5. Pengguna membuka detail tenant atau mendengarkan narasi.}
+{3a. POI sudah pernah terpicu dan pengguna masih di area yang sama, atau POI dalam cooldown 30 menit: sistem tidak menampilkan notifikasi ulang.\newline
+3b. Akurasi lokasi >30 m: pembacaan diabaikan dan trigger ditunda (lihat UC-03).\newline
+3c. Opsi ``Hanya tenant halal'' aktif dan POI berstatus non-halal/belum diverifikasi: proximity event tidak dipicu.\newline\textbf{Post-condition:} POI tercatat sebagai sudah terpicu (cooldown 30 menit); kartu POI tampil.}
+
+% UC-05
+\ucspec{UC-05}
+{Mencatat kunjungan otomatis (dwell dan exit event)}
+{Pengunjung}
+{F02 Location-Based Trigger (Geofence)}
+{Aplikasi mencatat kunjungan otomatis bila pengguna berada \(\ge\)3 menit di geofence tenant dan mencatat exit event saat keluar.}
+{Mode Jelajah aktif; pengguna berada di dalam geofence tenant (radius 10 m).}
+{Pengguna berada di dalam geofence tenant.}
+{1. Sistem menghitung durasi pengguna di dalam geofence tenant.\newline
+2. Setelah \(\ge\)3 menit, sistem mencatat kunjungan (\textit{dwell event}) di perangkat dan menandai tenant sudah dikunjungi.\newline
+3. Bila trail aktif, sistem menandai tenant pada trail sebagai selesai.\newline
+4. Saat pengguna keluar dari geofence (jarak > radius + 10 m, yakni >20 m), sistem mencatat \textit{exit event}.}
+{2a. Pengguna keluar dari geofence sebelum 3 menit (hanya lewat): kunjungan tidak tercatat.\newline\textbf{Post-condition:} Kunjungan tercatat pada riwayat lokal perangkat.}
+
+% UC-06
+\ucspec{UC-06}
+{Melihat kartu POI multimodal}
+{Pengunjung}
+{F03 Multimodal Exploration}
+{Pengguna membuka kartu POI berisi foto (jika tersedia), cerita budaya, menu \& harga, jam buka, serta audio narasi dan transkrip.}
+{Aplikasi terbuka; data 31 POI dibundel di dalam APK.}
+{Pengguna memilih tenant dari peta/daftar atau kartu POI muncul dari trigger.}
+{1. Pengguna memilih tenant dari peta/daftar atau menerima kartu POI dari trigger.\newline
+2. Sistem membuka kartu POI (foto makanan/tenant jika tersedia, kategori dan profil rasa, menu \& harga, jam buka).\newline
+3. Pengguna memutar audio narasi TTS (45--90 detik) yang memuat cerita kuliner/budaya; audio dapat dijeda dan dilanjutkan.\newline
+4. Pengguna membuka transkrip audio.}
+{3a. Tidak ada koneksi internet: seluruh konten dataset, foto lokal, dan audio tetap dapat diakses karena dibundel di APK.\newline\textbf{Post-condition:} Informasi tenant ditampilkan secara lengkap.}
+
+% UC-07
+\ucspec{UC-07}
+{Mendengarkan narasi tanpa melihat layar (eyes-free)}
+{Pengunjung}
+{F04 Eyes-Free Interaction}
+{Pengguna mendengarkan prompt dan narasi tenant, serta panduan audio, tanpa harus membuka atau melihat layar.}
+{Mode Jelajah aktif; izin lokasi dan notifikasi diberikan; layar terkunci atau HP di saku.}
+{Proximity event pada tenant tujuan atau tenant yang dilewati.}
+{1. Sistem memutar prompt suara (``Kamu mendekati [tenant]. Mau dengar ceritanya?'') dan HP bergetar.\newline
+2. Notifikasi menampilkan tombol aksi Dengar/Lewati, termasuk pada lock screen.\newline
+3. Pengguna menekan Dengar.\newline
+4. Sistem memutar audio narasi tanpa membuka aplikasi.\newline
+5. Pada Mode Jalan, narasi diputar otomatis; navigasi memberi panduan audio tiap pengurangan jarak 20 m dan saat tiba.}
+{3a. Pengguna menekan Lewati: prompt ditutup, tenant masuk daftar ``Terlewati'', dan tidak dipicu ulang selama cooldown 30 menit.\newline\textbf{Post-condition:} Narasi terdengar (atau dilewati) tanpa pengguna membuka aplikasi.}
+
+% UC-08
+\ucspec{UC-08}
+{Mencari tenant dan menetapkan tujuan}
+{Pengunjung}
+{F05 Search \& Destination; F12 Preferensi Halal}
+{Pengguna mencari tenant berdasarkan nama/menu/kategori (toleran typo), memakai filter, dan menetapkan tenant sebagai tujuan.}
+{Aplikasi terbuka; data 31 POI tersedia secara offline.}
+{Pengguna menekan kolom pencarian.}
+{1. Pengguna menekan kolom pencarian dan mengetik kata kunci.\newline
+2. Sistem menampilkan hasil pencarian toleran typo, diurutkan berdasarkan jarak.\newline
+3. Pengguna menerapkan filter (rentang harga, rasa, jenis, status buka).\newline
+4. Sistem memperbarui daftar sesuai kombinasi filter (dan menyembunyikan tenant non-halal jika F12 aktif).\newline
+5. Pengguna memilih tenant dan menekan tombol Jadikan Tujuan.\newline
+6. Sistem masuk ke mode navigasi menuju tenant yang dipilih.}
+{2a. Tidak ada tenant yang sesuai dengan kata kunci/filter: sistem menampilkan daftar kosong/pesan tidak ditemukan tanpa crash.\newline\textbf{Post-condition:} Tenant tujuan ditetapkan dan mode navigasi aktif.}
+
+% UC-09
+\ucspec{UC-09}
+{Navigasi menuju kawasan dan tenant}
+{Pengunjung, Layanan Rute OSRM}
+{F06 Navigation; F01 Location Awareness}
+{Pengguna dipandu di dalam aplikasi menuju tenant tujuan (peta MapLibre, rute jalan kaki OSRM atau fallback garis lurus, jarak, panah kompas, audio), termasuk saat memulai dari luar kawasan.}
+{Izin lokasi diberikan; tujuan ditetapkan.}
+{Pengguna menekan Jadikan Tujuan atau Mulai Trail.}
+{1. Pengguna menetapkan tenant tujuan (dari dalam maupun luar kawasan).\newline
+2. Sistem menampilkan rute jalan kaki OSRM di peta MapLibre dari posisi pengguna ke tenant, jarak dalam meter, dan panah arah berbasis kompas.\newline
+3. Jika pengguna keluar >25 m dari rute, sistem menghitung ulang rute OSRM.\newline
+4. Sistem memberi panduan audio setiap jarak berkurang 20 m.\newline
+5. Saat jarak \(\le\)10 m, sistem memutar ``Kamu sudah sampai!'' dan membuka kartu POI tenant tujuan.}
+{2a. Layanan OSRM gagal atau tidak ada koneksi internet: sistem menampilkan garis lurus ke tenant tujuan dan navigasi tetap berjalan.\newline
+1a. Izin lokasi ditolak: navigasi tidak aktif (mode tanpa lokasi).\newline\textbf{Post-condition:} Pengguna tiba di tenant tujuan dan kartu POI terbuka.}
+
+% UC-10
+\ucspec{UC-10}
+{Menerima rekomendasi tenant berikutnya}
+{Pengunjung}
+{F07 Contextual Recommendation; F12 Preferensi Halal}
+{Setelah keluar dari tenant yang dikunjungi, aplikasi menampilkan 3 pilihan tenant berikutnya beserta alasannya.}
+{Mode Jelajah aktif; minimal satu tenant sudah dikunjungi (dwell tercatat); preferensi tersimpan.}
+{Exit event dari geofence tenant yang sudah dikunjungi (jarak >20 m).}
+{1. Pengguna berjalan keluar dari geofence tenant yang sudah dikunjungi.\newline
+2. Sistem menghitung skor \textit{rule-based} (jarak, status buka, kecocokan rasa, sisa budget trail, preferensi halal, status kunjungan, aturan pasangan rasa).\newline
+3. Sistem menampilkan ``3 pilihan berikutnya'' beserta alasan masing-masing.\newline
+4. Pengguna memilih tenant dan masuk ke mode navigasi.}
+{2a. Tenant tutup, sudah dikunjungi, atau non-halal saat F12 aktif: tenant dikeluarkan dari kandidat rekomendasi.\newline\textbf{Post-condition:} Rekomendasi tampil; pengguna dapat memilih tujuan berikutnya.}
+
+% UC-11
+\ucspec{UC-11}
+{Membuat dan menjalankan Smart Culinary Trail}
+{Pengunjung}
+{F08 Smart Culinary Trail Planner; F02 Location-Based Trigger (Geofence); F12 Preferensi Halal}
+{Pengguna mengisi durasi, budget, dan rasa; aplikasi menyusun itinerary trail dan memantau progres secara otomatis.}
+{Mode Jelajah aktif; pengguna berada di dalam kawasan; preferensi tersimpan.}
+{Pengguna memilih Rencanakan Trail.}
+{1. Pengguna memilih Rencanakan Trail (dari notifikasi entry atau Beranda).\newline
+2. Sistem menampilkan form trail: durasi (30/60/90 menit), budget, preferensi rasa (terisi otomatis dari onboarding).\newline
+3. Pengguna memilih durasi 60 menit, budget Rp50.000, lalu menekan Buat Trail.\newline
+4. Sistem menampilkan itinerary tenant berurutan (\textit{nearest neighbor}, dengan status halal jika F12 aktif) beserta estimasi total biaya, estimasi waktu, dan rute di peta.\newline
+5. Pengguna menekan Mulai Trail; sistem masuk mode navigasi tenant pertama.\newline
+6. Setiap dwell event menandai tenant selesai; sistem mengirim pengingat sisa waktu bila dwell melebihi alokasi + 5 menit; di akhir ditampilkan ringkasan trail.}
+{6a. Tenant tutup atau pengguna menekan Lewati Tenant: sistem menandai tenant dilewati dan menyusun ulang sisa trail dari posisi pengguna sesuai sisa waktu dan sisa budget (tenant yang sudah selesai/dilewati tidak dipilih lagi).\newline\textbf{Post-condition:} Progres trail tersimpan; ringkasan trail (jumlah tenant, estimasi belanja, durasi, jarak) tampil.}
+
+% UC-12
+\ucspec{UC-12}
+{Mematikan Mode Jelajah dan menjaga privasi lokasi}
+{Pengunjung}
+{F09 Location Privacy \& Consent}
+{Pengguna dapat mematikan Mode Jelajah kapan saja; pelacakan berhenti dan koordinat tidak dikirim ke backend Mangan Yuk.}
+{Mode Jelajah aktif.}
+{Pengguna menekan Selesai Jelajah.}
+{1. Pengguna menekan tombol Selesai Jelajah.\newline
+2. Sistem menghentikan pelacakan lokasi di background.\newline
+3. Sistem menghapus notifikasi permanen.\newline
+4. Sistem kembali ke Beranda.}
+{Selama aplikasi digunakan, tidak ada request ke backend Mangan Yuk yang membawa koordinat pengguna; koordinat hanya dikirim ke layanan rute OSRM saat layar navigasi aktif.\newline\textbf{Post-condition:} Pelacakan background berhenti dan tidak ada koordinat pengguna yang dikirim ke backend Mangan Yuk.}
+
+% UC-13
+\ucspec{UC-13}
+{Mengumpulkan stempel Paspor Kuliner dan memberi ulasan}
+{Pengunjung, Backend Mangan Yuk}
+{F10 Paspor Kuliner \& Ulasan Tenant (Gamification)}
+{Pengguna memberi ulasan tenant untuk memperoleh stempel digital pada trail tematik dan membuka badge.}
+{Pengguna sudah masuk akun lokal (F11); halaman Paspor Kuliner atau detail tenant terbuka.}
+{Pengguna menekan Tambah Ulasan.}
+{1. Pengguna membuka Paspor Kuliner dari Profil atau menekan Tambah Ulasan pada detail tenant.\newline
+2. Pengguna memilih tenant, memberi rating 1--5, memilih menu yang dimakan (milik tenant tersebut), serta mengisi teks ulasan dan foto (opsional).\newline
+3. Sistem menyimpan ulasan, mencatat stempel digital untuk tenant tersebut, dan memperbarui progres trail tematik (``Jejak Kuliner Nusantara'' atau ``Manis-manis Bandung'').\newline
+4. Sistem menyinkronkan data ke backend Mangan Yuk (\texttt{/v1/passport} dan \texttt{/v1/reviews}).\newline
+5. Saat seluruh 5 tenant pada satu trail berstempel, sistem membuka badge trail tersebut.}
+{3a. Pengguna memberi ulasan kedua pada tenant yang sama: ulasan baru tersimpan tanpa menambah stempel ganda.\newline
+4a. Backend tidak dapat dihubungi: ulasan dan stempel tetap tersimpan di perangkat (AsyncStorage).\newline\textbf{Post-condition:} Ulasan, stempel, dan progres trail tersimpan dan bertahan setelah aplikasi ditutup ulang.}
+
+% UC-14
+\ucspec{UC-14}
+{Mengelola akun pengguna lokal}
+{Pengunjung}
+{F11 Akun Pengguna Lokal}
+{Pengguna mendaftar atau masuk ke akun lokal, menyimpan sesi secara lokal di perangkat, dan mengelola profil.}
+{Aplikasi terpasang di perangkat.}
+{Pengguna membuka aplikasi tanpa sesi aktif atau membuka halaman Profil.}
+{1. Sistem mengarahkan pengguna yang belum masuk ke halaman login.\newline
+2. Pengguna mendaftar atau masuk dengan email, nama pengguna, dan kata sandi (opsional mengaktifkan ``Ingat Saya'').\newline
+3. Sistem menyimpan sesi di perangkat melalui SecureStore (tanpa mengirim ke server) dan mengarahkan ke onboarding atau Beranda.\newline
+4. Pada halaman Profil, pengguna dapat melihat data akun, ringkasan paspor, mengubah preferensi, atau menekan Keluar.}
+{4a. Pengguna menekan Keluar: sistem menghapus sesi dari perangkat dan mengarahkan ke halaman login.\newline\textbf{Post-condition:} Sesi akun lokal tersimpan atau terhapus sesuai aksi pengguna.}
+
+% UC-15
+\ucspec{UC-15}
+{Mengatur preferensi tenant halal}
+{Pengunjung}
+{F12 Preferensi Halal}
+{Pengguna mengaktifkan atau menonaktifkan opsi ``Hanya tenant halal'' dari onboarding atau Profil.}
+{Pengguna berada di halaman onboarding atau Profil.}
+{Pengguna mengubah toggle ``Hanya tenant halal''.}
+{1. Pengguna mengaktifkan opsi ``Hanya tenant halal''.\newline
+2. Sistem menyaring marker dan carousel peta, hasil pencarian (F05), pilihan Smart Culinary Trail (F08), rekomendasi (F07), serta proximity event (F02) agar hanya memproses tenant berstatus halal.\newline
+3. Pengguna dapat menonaktifkan kembali opsi tersebut dari halaman Profil untuk menampilkan seluruh tenant.}
+{1a. Tenant berstatus non-halal atau belum diverifikasi: disembunyikan dari peta, pencarian, trail, dan rekomendasi serta tidak memicu notifikasi proximity saat opsi aktif.\newline\textbf{Post-condition:} Seluruh fitur terkait mematuhi status preferensi halal pengguna.}

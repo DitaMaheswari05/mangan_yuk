@@ -1,0 +1,124 @@
+% =====================================================================
+%  Dokumen Pengujian Perangkat Lunak (Software Testing Report)
+%  ManganYuk! - Kelompok 6 - II4011 Transformasi Digital
+%
+%  Kompilasi:  pdflatex main.tex  (jalankan 2x agar daftar isi terisi)
+%              atau latexmk -pdf main.tex
+% =====================================================================
+\documentclass[11pt,letterpaper,oneside]{report}
+
+% ---------- Bahasa & font ----------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{textcomp}
+
+% ---------- Tata letak ----------
+\usepackage[letterpaper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% ---------- Tabel ----------
+\usepackage{array}
+\usepackage{longtable}
+\IfFileExists{colortbl.sty}{\usepackage[table]{xcolor}}{%
+  \usepackage{xcolor}\newcommand{\cellcolor}[2][]{}\newcommand{\rowcolor}[2][]{}}
+\usepackage{enumitem}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{\dimexpr#1\linewidth-2\tabcolsep-1.5\arrayrulewidth\relax}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{\dimexpr#1\linewidth-2\tabcolsep-1.5\arrayrulewidth\relax}}
+\renewcommand{\arraystretch}{1.25}
+\setlist{nosep}
+\setlist[itemize]{leftmargin=1.2em}
+\AtBeginEnvironment{longtable}{\small\sloppy}
+
+% ---------- Gambar ----------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, positioning, fit, backgrounds}
+\graphicspath{{images/}}
+
+% ---------- Judul bab, header & footer ----------
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]{\Large\bfseries}{\thechapter.}{0.6em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{12pt}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\footnotesize\textit{Dokumen Pengujian Perangkat Lunak -- ManganYuk! (Kelompok 6)}}
+\fancyfoot[R]{\footnotesize\thepage}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[L]{\footnotesize\textit{Dokumen Pengujian Perangkat Lunak -- ManganYuk! (Kelompok 6)}}\fancyfoot[R]{\footnotesize\thepage}}
+
+% ---------- Caption & tautan ----------
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{etoolbox}
+
+\hypersetup{
+  pdftitle={Dokumen Pengujian Perangkat Lunak ManganYuk! - Kelompok 6},
+  pdfsubject={II4011 Transformasi Digital},
+}
+
+% ---------- Simbol kotak centang untuk status test case ----------
+\newcommand{\statusbox}{\(\square\) Pass \quad \(\square\) Fail \quad \(\square\) Blocked}
+\newcommand{\passbox}{\(\boxtimes\) Pass \quad \(\square\) Fail \quad \(\square\) Blocked}
+\newcommand{\statuscol}{\(\square\) Pass\newline \(\square\) Fail\newline \(\square\) Blocked}
+\newcommand{\passcol}{\(\boxtimes\) Pass\newline \(\square\) Fail\newline \(\square\) Blocked}
+
+% ---------- Halaman landscape (kertas diputar, isi tetap tegak) ----------
+\makeatletter
+\newlength{\PortraitPaperW}\newlength{\PortraitPaperH}
+\newlength{\PortraitTextW}\newlength{\PortraitTextH}
+\AtBeginDocument{%
+  \setlength{\PortraitPaperW}{\paperwidth}\setlength{\PortraitPaperH}{\paperheight}%
+  \setlength{\PortraitTextW}{\textwidth}\setlength{\PortraitTextH}{\textheight}}
+\newcommand{\@setpagelayout}[4]{% paperW, paperH, textW, textH
+  \setlength{\paperwidth}{#1}\setlength{\paperheight}{#2}%
+  \ifdefined\pdfpagewidth \pdfpagewidth=#1 \pdfpageheight=#2 \fi
+  \setlength{\textwidth}{#3}\setlength{\textheight}{#4}%
+  \setlength{\hsize}{\textwidth}\setlength{\columnwidth}{\textwidth}%
+  \setlength{\linewidth}{\textwidth}\setlength{\headwidth}{\textwidth}%
+  \global\@colht\textheight\global\@colroom\textheight\global\vsize\textheight}
+\newenvironment{landscapepage}{%
+  \clearpage
+  \@setpagelayout{\PortraitPaperH}{\PortraitPaperW}%
+    {\dimexpr\PortraitTextW+\PortraitPaperH-\PortraitPaperW\relax}%
+    {\dimexpr\PortraitTextH-\PortraitPaperH+\PortraitPaperW\relax}%
+}{%
+  \clearpage
+  \@setpagelayout{\PortraitPaperW}{\PortraitPaperH}{\PortraitTextW}{\PortraitTextH}%
+}
+\makeatother
+
+\begin{document}
+
+% ===================== Bagian awal =====================
+\pagenumbering{roman}
+\input{frontmatter/cover}
+\input{frontmatter/daftar-isi}
+
+% ===================== Isi (per bab) =====================
+\clearpage
+\pagenumbering{arabic}
+\input{bab/bab01-informasi-pengujian}
+\input{bab/bab02-use-case}
+\input{bab/bab03-skenario-pengujian}
+\input{bab/bab04-test-case-alpha}
+\input{bab/bab05-defect-dan-retest}
+\input{bab/bab06-rekapitulasi-alpha}
+\input{bab/bab07-beta-testing}
+\input{bab/bab08-kesimpulan-dan-tindak-lanjut}
+
+% ===================== Lampiran & Referensi =====================
+\appendix
+\input{lampiran/lampiran}
+
+\end{document}

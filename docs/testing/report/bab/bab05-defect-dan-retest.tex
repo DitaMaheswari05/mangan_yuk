@@ -1,0 +1,16 @@
+% Bab 5: Pencatatan Defect dan Retest
+\chapter{Pencatatan Defect dan Retest}
+\label{bab:defect-dan-retest}
+
+\begin{longtable}{|C{0.08}|C{0.10}|L{0.26}|C{0.10}|L{0.22}|C{0.11}|L{0.13}|}
+\caption{Pencatatan Defect dan Hasil Retest}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{DF ID} & \cellcolor[HTML]{D9EAF7}\textbf{TC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Deskripsi Defect} & \cellcolor[HTML]{D9EAF7}\textbf{Severity} & \cellcolor[HTML]{D9EAF7}\textbf{Perbaikan} & \cellcolor[HTML]{D9EAF7}\textbf{Status} & \cellcolor[HTML]{D9EAF7}\textbf{Hasil Retest} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{DF ID} & \cellcolor[HTML]{D9EAF7}\textbf{TC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Deskripsi Defect} & \cellcolor[HTML]{D9EAF7}\textbf{Severity} & \cellcolor[HTML]{D9EAF7}\textbf{Perbaikan} & \cellcolor[HTML]{D9EAF7}\textbf{Status} & \cellcolor[HTML]{D9EAF7}\textbf{Hasil Retest} \\ \hline
+\endhead
+DF-01 & Static (\texttt{tsc}) & \texttt{npm run typecheck} di \texttt{frontend/} gagal dengan 3 error \texttt{TS2307}: modul \texttt{expo-image-picker}, \texttt{react-native-view-shot}, dan \texttt{expo-sharing} tidak ditemukan pada \texttt{CreateReviewModal.tsx} dan \texttt{ReviewDetailModal.tsx}. & Sedang & Jalankan \texttt{npm ci} / \texttt{npm install} di \texttt{frontend/} agar dependensi terbaru pada branch \texttt{refactor/trail} terpasang. & Open & Menunggu \texttt{npm ci} \& retest \texttt{tsc} \\ \hline
+ & & & & & & \\ \hline
+ & & & & & & \\ \hline
+\end{longtable}

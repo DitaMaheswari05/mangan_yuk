@@ -1,0 +1,782 @@
+% Bab 4: Test Case dan Hasil Pengujian (Alpha Testing)
+\chapter{Test Case dan Hasil Pengujian (Alpha Testing)}
+\label{bab:test-case-alpha}
+
+\newcommand{\tcspec}[9]{%
+\par\noindent\textbf{Spesifikasi Test Case #1}\par
+\begin{longtable}{|L{0.28}|L{0.72}|}
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Test Case ID} & \cellcolor[HTML]{D9EAF7}\textbf{#1} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Test Case ID} & \cellcolor[HTML]{D9EAF7}\textbf{#1} \\ \hline
+\endhead
+\textbf{Skenario / Use Case} & #2 \\ \hline
+\textbf{Requirement} & #3 \\ \hline
+\textbf{Acceptance criteria (PRD)} & #4 \\ \hline
+\textbf{Prioritas} & #5 \\ \hline
+\textbf{Pre-condition} & #6 \\ \hline
+\textbf{Data uji} & #7 \\ \hline
+\textbf{Langkah pengujian} & #8 \\ \hline
+\textbf{Hasil yang diharapkan} & #9 \\ \hline
+\textbf{Hasil aktual} & \\ \hline
+\textbf{Status} & \statusbox \\ \hline
+\textbf{Bukti} & \\ \hline
+\textbf{Penguji / tanggal / perangkat} & \\ \hline
+\textbf{Defect ID} & \\ \hline
+\end{longtable}
+}
+
+\section{Spesifikasi Test Case}
+
+\subsection*{UC-01 Melakukan onboarding dan memberi izin lokasi/notifikasi}
+
+\tcspec{TC-01-01}
+{SC-01 / UC-01}
+{F09 Location Privacy \& Consent; F01 Location Awareness; F12 Preferensi Halal}
+{(F09-1) Penjelasan tampil sebelum permintaan izin sistem dan menyebut pemakaian layanan rute saat navigasi.}
+{Tinggi}
+{Aplikasi baru dipasang atau data aplikasi dihapus; pengguna telah melewati login lokal; izin lokasi dan notifikasi belum diberikan.}
+{Preferensi rasa: pedas dan gurih.}
+{1. Buka aplikasi dan masuk hingga halaman onboarding.\newline
+2. Tekan Lanjut pada halaman onboarding.\newline
+3. Amati layar penjelasan lokasi sebelum dialog izin sistem muncul.\newline
+4. Tekan ``Izinkan Lokasi'', pilih ``Izinkan''; izinkan notifikasi.\newline
+5. Pilih preferensi pedas dan gurih, tekan Mulai.}
+{Layar penjelasan lokasi (alasan, kapan lokasi dibaca, riwayat lokasi tidak dikirim ke backend Mangan Yuk, dan pengecualian layanan rute OSRM saat navigasi) tampil sebelum dialog izin sistem. Setelah izin diberikan, preferensi tersimpan dan Beranda menampilkan peta MapLibre dengan posisi pengguna.}
+
+\tcspec{TC-02-01}
+{SC-02 / UC-01}
+{F01 Location Awareness}
+{(F01-4) Jika izin ditolak, muncul layar penjelasan dan konten tenant tetap dapat dibuka manual dari peta atau daftar.}
+{Tinggi}
+{Aplikasi baru dipasang atau data aplikasi dihapus; izin lokasi belum diberikan.}
+{Tenant uji: P01 Traditional Fried Food from West Borneo.}
+{1. Buka aplikasi sampai layar penjelasan lokasi.\newline
+2. Tekan ``Izinkan Lokasi'', lalu pilih ``Tolak'' pada dialog sistem.\newline
+3. Amati layar yang muncul, lalu tekan ``Lanjut tanpa Lokasi''.\newline
+4. Ketuk tenant P01 pada peta atau daftar.\newline
+5. Coba gunakan trigger otomatis dan navigasi.}
+{Muncul penjelasan bahwa trigger otomatis dan navigasi tidak tersedia, dengan tombol Buka Pengaturan dan Lanjut tanpa Lokasi. Peta tampil tanpa posisi pengguna beserta daftar tenant. Kartu POI P01 dan tombol audio dapat dibuka manual; trigger otomatis dan navigasi tidak aktif.}
+
+\subsection*{UC-02 Melihat posisi dan status di dalam/di luar area}
+
+\tcspec{TC-03-01}
+{SC-03 / UC-02}
+{F01 Location Awareness}
+{(F01-1) Posisi tampil di peta \(\le\)10 detik setelah aplikasi dibuka dengan GPS aktif.}
+{Tinggi}
+{Izin lokasi aktif; GPS aktif; aplikasi ditutup sepenuhnya; pengguna di area terbuka.}
+{Stopwatch.}
+{1. Pastikan GPS aktif dan aplikasi ditutup sepenuhnya.\newline
+2. Buka aplikasi dan mulai stopwatch.\newline
+3. Hentikan stopwatch saat titik biru muncul di peta.}
+{Titik biru dengan lingkaran akurasi tampil di peta MapLibre \(\le\)10 detik setelah aplikasi dibuka.}
+
+\tcspec{TC-03-02}
+{SC-03 / UC-02}
+{F01 Location Awareness}
+{(F01-2) Posisi diperbarui saat pengguna berjalan \(\ge\)5 m.}
+{Tinggi}
+{Aplikasi terbuka di Beranda; posisi pengguna sudah tampil.}
+{Jarak tempuh \(\ge\)5 m (diukur dengan meteran atau aplikasi pengukur jarak).}
+{1. Catat posisi titik biru saat ini.\newline
+2. Berjalan lurus \(\ge\)5 m.\newline
+3. Amati perubahan posisi titik biru pada peta.}
+{Titik biru berpindah mengikuti pergerakan pengguna (pembaruan tiap \(\pm\)3 detik atau perpindahan \(\ge\)5 m).}
+
+\tcspec{TC-04-01}
+{SC-04 / UC-02}
+{F01 Location Awareness}
+{(F01-3) Status di dalam/di luar area berubah dengan benar saat pengguna melewati batas area.}
+{Tinggi}
+{Aplikasi terbuka di Beranda; pengguna berada di luar area dekat batas kawasan.}
+{Batas kawasan Sudirman Street Food (pusat \(-6.92089, 107.60057\), radius 100 m).}
+{1. Amati status saat berada di luar area.\newline
+2. Berjalan melewati batas kawasan menuju ke dalam; amati status.\newline
+3. Berjalan kembali keluar batas kawasan; amati status.}
+{Status ``Di luar area'' berubah menjadi ``Di dalam area'' saat pengguna melewati batas ke dalam, dan kembali menjadi ``Di luar area'' saat pengguna keluar.}
+
+\tcspec{TC-05-01}
+{SC-05 / UC-02}
+{F01 Location Awareness; F02 Location-Based Trigger (Geofence)}
+{(F01-3) Status di dalam/di luar area berubah dengan benar; (F02-1) notifikasi entry hanya muncul setelah pengguna masuk area.}
+{Tinggi}
+{Mode Jelajah aktif; pengguna berada >100 m dari kawasan.}
+{Jarak ke kawasan >100 m.}
+{1. Aktifkan Mode Jelajah dari luar kawasan.\newline
+2. Tunggu \(\pm\)1 menit sambil tetap berada di luar radius 100 m.\newline
+3. Amati status area, jarak ke kawasan, dan notifikasi.}
+{Status ``Di luar area'' dan jarak ke Sudirman Street Food tampil; tidak ada notifikasi entry maupun kartu POI.}
+
+\subsection*{UC-03 Mengaktifkan Mode Jelajah dan menerima notifikasi entry}
+
+\tcspec{TC-06-01}
+{SC-06 / UC-03}
+{F02 Location-Based Trigger (Geofence)}
+{(F02-1) Notifikasi entry muncul \(\le\)15 detik setelah pengguna masuk area, termasuk saat aplikasi di background atau layar terkunci.}
+{Tinggi}
+{Izin lokasi dan notifikasi aktif; pengguna berada >100 m dari kawasan.}
+{Geofence kawasan radius 100 m; stopwatch.}
+{1. Dari luar radius 100 m, aktifkan Mode Jelajah dan pastikan notifikasi permanen muncul.\newline
+2. Kunci layar (atau pindahkan aplikasi ke background).\newline
+3. Berjalan masuk ke radius 100 m kawasan; mulai stopwatch saat melewati batas.\newline
+4. Hentikan stopwatch saat notifikasi entry muncul.}
+{Notifikasi entry beserta audio sambutan muncul \(\le\)15 detik setelah masuk area, juga saat layar terkunci/background, dan menawarkan pilihan Rencanakan Trail atau Jelajah Bebas.}
+
+\tcspec{TC-07-01}
+{SC-07 / UC-03}
+{F02 Location-Based Trigger (Geofence)}
+{(F02-5) Pembacaan lokasi dengan akurasi >30 m tidak memicu trigger.}
+{Tinggi}
+{Mode Jelajah aktif; data 31 POI termuat.}
+{Android Emulator dengan mock location (accuracy >30 m) atau kondisi sinyal lemah di lapangan; POI uji P02 Swike Asli JTW.}
+{1. Aktifkan Mode Jelajah.\newline
+2. Simulasikan akurasi lokasi >30 m (mock location atau area sinyal lemah).\newline
+3. Pindahkan posisi ke dalam radius 10 m POI P02.\newline
+4. Amati notifikasi, banner, dan kartu POI.\newline
+5. Pulihkan akurasi \(\le\)30 m dan amati kembali.}
+{Tidak ada trigger saat akurasi >30 m; banner ``Sinyal GPS lemah, trigger otomatis ditunda'' tampil; kartu POI dapat dibuka manual dari ``Tenant di sekitar''; trigger otomatis berlanjut setelah akurasi kembali \(\le\)30 m.}
+
+\subsection*{UC-04 Menerima kartu POI saat mendekati tenant}
+
+\tcspec{TC-08-01}
+{SC-08 / UC-04}
+{F02 Location-Based Trigger (Geofence)}
+{(F02-2) Kartu POI muncul \(\le\)10 detik saat pengguna masuk radius POI, berhasil minimal 8 dari 10 percobaan lapangan.}
+{Tinggi}
+{Mode Jelajah aktif; izin lokasi aktif; pengguna berada >25 m dari tenant uji.}
+{POI P01--P31 (mis. P01 Traditional Fried Food from West Borneo); radius proximity 10 m (\texttt{triggerRadiusM}); 10 percobaan; stopwatch.}
+{1. Berdiri >25 m dari tenant uji dengan Mode Jelajah aktif.\newline
+2. Berjalan masuk ke radius proximity 10 m tenant; mulai stopwatch saat melewati batas radius.\newline
+3. Hentikan stopwatch saat kartu POI muncul; catat waktunya.\newline
+4. Ulangi hingga 10 percobaan (gunakan POI berbeda atau reset cooldown di antara percobaan); catat tiap percobaan pada log.}
+{Kartu POI (nama, foto jika tersedia, menu \& harga, tombol audio) muncul \(\le\)10 detik pada minimal 8 dari 10 percobaan.}
+
+\tcspec{TC-09-01}
+{SC-09 / UC-04}
+{F02 Location-Based Trigger (Geofence)}
+{(F02-3) Trigger tidak muncul berulang selama pengguna tetap di area POI.}
+{Tinggi}
+{Mode Jelajah aktif; pengguna berada >25 m dari P02.}
+{POI P02 Swike Asli JTW; durasi berada di area 2 menit.}
+{1. Masuk ke radius 10 m P02 dan tunggu notifikasi/kartu POI muncul.\newline
+2. Tutup kartu POI.\newline
+3. Tetap berada di area P02 (bergerak kecil) selama 2 menit.\newline
+4. Hitung berapa kali notifikasi/kartu P02 muncul.}
+{Notifikasi/kartu P02 hanya muncul satu kali; tidak muncul ulang selama pengguna tetap di area (cooldown 30 menit per POI, hysteresis exit pada jarak > radius + 10 m, yakni >20 m).}
+
+\subsection*{UC-05 Mencatat kunjungan otomatis (dwell dan exit event)}
+
+\tcspec{TC-10-01}
+{SC-10 / UC-05}
+{F02 Location-Based Trigger (Geofence)}
+{(F02-4) Kunjungan tercatat setelah pengguna berada \(\ge\)3 menit di geofence tenant.}
+{Tinggi}
+{Mode Jelajah aktif; belum ada riwayat kunjungan P03.}
+{POI P03 Bebek Gober Bumbu Hitam; stopwatch.}
+{1. Masuk ke geofence 10 m P03.\newline
+2. Tetap berada di dalam geofence minimal 3 menit (stopwatch).\newline
+3. Periksa riwayat kunjungan/penanda kunjungan P03 pada aplikasi (atau log).}
+{Kunjungan P03 tercatat setelah \(\ge\)3 menit di perangkat (AsyncStorage) dan tenant ditandai sudah dikunjungi.}
+
+\tcspec{TC-11-01}
+{SC-11 / UC-05}
+{F02 Location-Based Trigger (Geofence)}
+{(F02-4) Pengguna yang hanya lewat (<3 menit) tidak tercatat berkunjung.}
+{Tinggi}
+{Mode Jelajah aktif; belum ada riwayat kunjungan P03.}
+{POI P03 Bebek Gober Bumbu Hitam; durasi di dalam geofence \(\pm\)1 menit.}
+{1. Masuk ke geofence 10 m P03.\newline
+2. Berada di dalam geofence \(\pm\)1 menit, lalu berjalan keluar hingga jarak >20 m (radius + 10 m).\newline
+3. Periksa riwayat kunjungan/penanda kunjungan P03.}
+{Kunjungan P03 tidak tercatat dan tenant tidak ditandai sudah dikunjungi.}
+
+\subsection*{UC-06 Melihat kartu POI multimodal}
+
+\tcspec{TC-12-01}
+{SC-12 / UC-06}
+{F03 Multimodal Exploration}
+{(F03-1) 31/31 POI memiliki menu/harga, jam buka, serta audio narasi beserta transkrip.}
+{Tinggi}
+{Aplikasi terbuka; data POI P01--P31 termuat dari \texttt{pois.json}.}
+{POI P01--P31 (PRD Bagian 4.1).}
+{1. Buka kartu POI untuk P01 hingga P31 satu per satu.\newline
+2. Pada tiap kartu, periksa: foto tenant/makanan (jika tersedia pada dataset), kategori dan profil rasa, menu \& harga, jam buka, serta audio narasi 45--90 detik (TTS) dan transkrip.\newline
+3. Catat hasil pemeriksaan tiap POI pada log.}
+{31 dari 31 POI memiliki menu/harga, jam buka, serta audio narasi dan transkrip (dan foto pada POI yang memilikinya).}
+
+\tcspec{TC-12-02}
+{SC-12 / UC-06}
+{F03 Multimodal Exploration}
+{(F03-4) Konten POI terbuka \(\le\)2 detik.}
+{Tinggi}
+{Aplikasi terbuka di Beranda.}
+{Minimal 3 POI berbeda; stopwatch atau perekaman layar.}
+{1. Ketuk tenant pada peta/daftar dan mulai stopwatch.\newline
+2. Hentikan stopwatch saat konten kartu POI tampil.\newline
+3. Ulangi untuk minimal 3 POI berbeda.}
+{Konten POI terbuka \(\le\)2 detik pada setiap percobaan.}
+
+\tcspec{TC-12-03}
+{SC-12 / UC-06}
+{F03 Multimodal Exploration}
+{(F03-3) Transkrip audio tersedia untuk setiap narasi.}
+{Tinggi}
+{Aplikasi terbuka; data 31 POI termuat.}
+{POI P01--P31.}
+{1. Buka kartu POI untuk P01 hingga P31.\newline
+2. Buka transkrip pada tiap narasi audio.\newline
+3. Bandingkan transkrip dengan isi narasi.}
+{Transkrip tersedia untuk 31/31 narasi dan sesuai dengan isi audio.}
+
+\tcspec{TC-13-01}
+{SC-13 / UC-06}
+{F03 Multimodal Exploration}
+{(F03-2) Audio dapat diputar, dijeda, dan dilanjutkan tanpa koneksi internet.}
+{Tinggi}
+{Data seluler dan Wi-Fi dimatikan (GPS tetap aktif); aplikasi terbuka.}
+{POI P01 Traditional Fried Food from West Borneo (narasi 56 detik).}
+{1. Matikan data seluler dan Wi-Fi.\newline
+2. Buka kartu POI P01.\newline
+3. Tekan putar pada audio narasi, tunggu beberapa detik, lalu tekan jeda.\newline
+4. Tekan lanjutkan.}
+{Audio terputar, dapat dijeda, dan dilanjutkan dari posisi terakhir; seluruh konten kartu P01 yang dibundel di APK tetap tampil tanpa internet.}
+
+\subsection*{UC-07 Mendengarkan narasi tanpa melihat layar (eyes-free)}
+
+\tcspec{TC-14-01}
+{SC-14 / UC-07}
+{F04 Eyes-Free Interaction}
+{(F04-1) Pengguna dapat memutar narasi dari notifikasi lock screen tanpa membuka aplikasi.}
+{Tinggi}
+{Mode Jelajah aktif; layar terkunci; notifikasi aktif.}
+{POI P08 Dapur Sotoku.}
+{1. Aktifkan Mode Jelajah, lalu kunci layar.\newline
+2. Berjalan masuk ke radius 10 m P08.\newline
+3. Amati prompt suara dan getar.\newline
+4. Tekan tombol Dengar pada notifikasi di lock screen.}
+{HP memutar prompt suara dan bergetar; notifikasi menampilkan tombol Dengar/Lewati di lock screen; narasi P08 diputar tanpa membuka aplikasi.}
+
+\tcspec{TC-14-02}
+{SC-14 / UC-07}
+{F04 Eyes-Free Interaction}
+{(F04-2) Dalam Mode Jalan, narasi mulai \(\le\)3 detik setelah trigger.}
+{Tinggi}
+{Mode Jalan aktif; pengguna berada >25 m dari tenant uji.}
+{POI P18 Jazz Coffee (narasi otomatis pada Mode Jalan); stopwatch/perekaman layar dan audio.}
+{1. Aktifkan Mode Jalan.\newline
+2. Berjalan masuk ke radius 10 m P18.\newline
+3. Mulai stopwatch saat trigger terdeteksi (kartu/notifikasi muncul).\newline
+4. Hentikan stopwatch saat narasi mulai terdengar.}
+{Narasi P18 mulai diputar otomatis \(\le\)3 detik setelah trigger.}
+
+\tcspec{TC-14-03}
+{SC-14 / UC-07}
+{F04 Eyes-Free Interaction}
+{(F04-3) Panduan audio navigasi berbunyi minimal setiap pengurangan jarak 20 m dan saat tiba.}
+{Tinggi}
+{Mode Jelajah aktif; tujuan navigasi ditetapkan pada tenant yang berjarak \(\ge\)60 m.}
+{Tenant tujuan P11 Hong Nam (atau P19 Nasi Campur Kencana99); HP di saku.}
+{1. Tetapkan tenant tujuan yang berjarak \(\ge\)60 m dan mulai navigasi.\newline
+2. Masukkan HP ke saku dan berjalan mengikuti arahan audio.\newline
+3. Catat setiap panduan audio beserta jarak yang disebutkan.\newline
+4. Tiba di tenant dan dengarkan pengumuman kedatangan.}
+{Panduan audio berbunyi minimal setiap jarak berkurang 20 m (mis. ``Tenant tujuan 60 meter di depan'') dan pengumuman ``Kamu sudah sampai!'' terdengar saat tiba.}
+
+\tcspec{TC-14-04}
+{SC-14 / UC-07}
+{F04 Eyes-Free Interaction}
+{(F04-4) Dalam usability test, minimal 4 dari 5 penguji dapat menyelesaikan satu kunjungan POI (navigasi, trigger, dan narasi) tanpa melihat layar.}
+{Tinggi}
+{Lima penguji dari target pengguna; Mode Jelajah/Mode Jalan aktif; HP di saku.}
+{Tenant tujuan P02 Swike Asli JTW; 5 penguji.}
+{1. Penguji menetapkan P02 sebagai tujuan dan memasukkan HP ke saku.\newline
+2. Penguji mengikuti panduan audio hingga tiba di tenant.\newline
+3. Penguji mendengarkan narasi saat trigger terjadi, tanpa melihat layar.\newline
+4. Pengamat mencatat apakah penguji berhasil tanpa melihat layar.}
+{Minimal 4 dari 5 penguji berhasil menyelesaikan satu kunjungan POI (navigasi, trigger, dan narasi) tanpa melihat layar.}
+
+\tcspec{TC-15-01}
+{SC-15 / UC-07}
+{F04 Eyes-Free Interaction; F02 Location-Based Trigger (Geofence)}
+{(F04-1, F02-3) Respons Dengar/Lewati dari notifikasi; trigger tidak berulang (Skenario Alternatif 5 PRD Bagian 2.1).}
+{Sedang}
+{Mode Jelajah aktif; P12 belum terpicu.}
+{POI P12 Pandu Baso Goreng Tenggiri; waktu pengamatan 30 menit.}
+{1. Masuk ke radius 10 m P12 hingga notifikasi trigger muncul.\newline
+2. Tekan tombol Lewati pada notifikasi.\newline
+3. Tetap di area atau keluar (>20 m) dan masuk kembali ke radius P12 dalam 30 menit.\newline
+4. Periksa daftar ``Terlewati'' dan amati apakah trigger muncul lagi.}
+{Prompt audio ditutup, P12 masuk daftar ``Terlewati'', dan tidak dipicu ulang selama cooldown 30 menit.}
+
+\subsection*{UC-08 Mencari tenant dan menetapkan tujuan}
+
+\tcspec{TC-16-01}
+{SC-16 / UC-08}
+{F05 Search \& Destination}
+{(F05-1) Hasil pencarian muncul \(\le\)1 detik secara offline.}
+{Tinggi}
+{Data seluler dan Wi-Fi dimatikan; aplikasi terbuka.}
+{Kata kunci ``sate'' atau ``kwetiau''; stopwatch.}
+{1. Matikan data seluler dan Wi-Fi.\newline
+2. Ketik kata kunci pada kolom pencarian dan mulai stopwatch pada ketukan terakhir.\newline
+3. Hentikan stopwatch saat daftar hasil tampil.}
+{Hasil pencarian tampil \(\le\)1 detik tanpa koneksi internet.}
+
+\tcspec{TC-16-02}
+{SC-16 / UC-08}
+{F05 Search \& Destination}
+{(F05-2) Pencarian toleran typo menampilkan tenant yang sama.}
+{Tinggi}
+{Aplikasi terbuka; dataset 31 POI termuat.}
+{Kata kunci ``kwetiau'' dan typo ``kwetau'' (atau ``batagor''/``batagr'' bila tersedia pada menu 31 POI).}
+{1. Ketik kata kunci benar pada kolom pencarian dan catat hasil.\newline
+2. Hapus, lalu ketik versi typo dan catat hasil.\newline
+3. Bandingkan kedua hasil.}
+{Kedua kata kunci menampilkan tenant yang relevan dan sama (mis. P05 Awin Kwetiau Siantar / P20 Kuwali Kwetiaw Bakar), diurutkan berdasarkan jarak.}
+
+\tcspec{TC-17-01}
+{SC-17 / UC-08}
+{F05 Search \& Destination}
+{(F05-3) Kombinasi filter menghasilkan daftar yang sesuai.}
+{Tinggi}
+{Aplikasi terbuka; data menu, harga, rasa, dan jam buka termuat.}
+{Filter harga <Rp15rb, rasa gurih, jenis jajanan, status buka.}
+{1. Terapkan filter harga <Rp15rb dan catat daftar.\newline
+2. Tambahkan filter rasa gurih, lalu jenis jajanan, lalu status buka; catat daftar tiap langkah.\newline
+3. Bandingkan hasil akhir dengan dataset POI.}
+{Daftar hanya memuat tenant yang memenuhi seluruh filter yang dipilih, diurutkan berdasarkan jarak.}
+
+\tcspec{TC-18-01}
+{SC-18 / UC-08}
+{F05 Search \& Destination}
+{(F05-4) Tenant dapat dipilih sebagai tujuan dan langsung masuk ke mode navigasi.}
+{Tinggi}
+{Mode Jelajah aktif; izin lokasi aktif; pengguna di dalam kawasan.}
+{Tenant hasil pencarian (mis. P03 Bebek Gober Bumbu Hitam).}
+{1. Cari tenant, lalu pilih salah satu hasil.\newline
+2. Tekan tombol Jadikan Tujuan.\newline
+3. Amati tampilan layar.}
+{Aplikasi langsung masuk mode navigasi menuju tenant yang dipilih (rute jalan kaki OSRM pada peta MapLibre, jarak dalam meter, panah kompas).}
+
+\tcspec{TC-19-01}
+{SC-19 / UC-08}
+{F05 Search \& Destination}
+{Aplikasi menangani pencarian tanpa hasil secara aman (tidak crash).}
+{Sedang}
+{Aplikasi terbuka; data 31 POI termuat.}
+{Kata kunci ``xyzqwk''.}
+{1. Ketik kata kunci ``xyzqwk'' pada kolom pencarian.\newline
+2. Amati daftar hasil dan perilaku aplikasi.}
+{Tidak ada tenant yang ditampilkan (daftar kosong/pesan hasil tidak ditemukan) dan aplikasi tidak mengalami crash.}
+
+\subsection*{UC-09 Navigasi menuju kawasan dan tenant}
+
+\tcspec{TC-20-01}
+{SC-20 / UC-09}
+{F06 Navigation}
+{(F06-1) Jarak ke tujuan diperbarui saat pengguna berjalan.}
+{Tinggi}
+{Mode Jelajah aktif; tujuan ditetapkan; pengguna berjarak \(\ge\)30 m dari tujuan.}
+{Tenant tujuan P07 Gou Cheng Hiang.}
+{1. Tetapkan P07 sebagai tujuan dan catat jarak awal.\newline
+2. Berjalan menuju P07 sambil mengamati jarak.\newline
+3. Catat jarak pada tiap \(\pm\)10 m perjalanan.}
+{Jarak (meter) ke tujuan berkurang mengikuti pergerakan pengguna dan diperbarui selama berjalan.}
+
+\tcspec{TC-20-02}
+{SC-20 / UC-09}
+{F06 Navigation}
+{(F06-2) Panah menunjuk arah tujuan dengan deviasi \(\le\)30\textdegree{}.}
+{Tinggi}
+{Mode navigasi aktif; kompas perangkat berfungsi.}
+{Tenant tujuan P30 Sate Babi Wibisana; minimal 3 titik pengamatan; kompas referensi arah.}
+{1. Tetapkan P30 sebagai tujuan.\newline
+2. Pada minimal 3 titik berbeda, putar badan ke arah tenant sebenarnya.\newline
+3. Bandingkan arah panah dengan arah sebenarnya menuju tenant (ukur selisih sudut).}
+{Deviasi arah panah terhadap arah tenant sebenarnya \(\le\)30\textdegree{} pada seluruh titik pengamatan.}
+
+\tcspec{TC-21-01}
+{SC-21 / UC-09}
+{F06 Navigation}
+{(F06-3) Notifikasi kedatangan muncul saat pengguna berada \(\le\)10 m dari tenant, dan kartu POI tenant tersebut terbuka.}
+{Tinggi}
+{Mode navigasi aktif menuju tenant tujuan.}
+{Tenant tujuan P19 Nasi Campur Kencana99.}
+{1. Tetapkan P19 sebagai tujuan dan berjalan mendekat.\newline
+2. Berhenti pada jarak \(\le\)10 m dari P19.\newline
+3. Amati pengumuman, notifikasi, dan layar.}
+{Pengumuman ``Kamu sudah sampai!'' diputar, notifikasi kedatangan muncul saat jarak \(\le\)10 m, dan kartu POI P19 terbuka.}
+
+\tcspec{TC-22-01}
+{SC-22 / UC-09}
+{F06 Navigation}
+{(F06-4) Navigasi dapat dilakukan ke 31/31 POI.}
+{Tinggi}
+{Mode Jelajah aktif; pengguna di dalam kawasan.}
+{POI P01--P31.}
+{1. Untuk tiap POI P01 hingga P31, tetapkan sebagai tujuan.\newline
+2. Verifikasi rute jalan kaki OSRM/garis lurus, jarak, panah kompas, dan deteksi kedatangan.\newline
+3. Catat berhasil/gagal untuk tiap POI.}
+{Navigasi berhasil diarahkan menuju 31 dari 31 POI hingga kedatangan terdeteksi.}
+
+\tcspec{TC-23-01}
+{SC-23 / UC-09}
+{F06 Navigation}
+{(F06-5) Rute OSRM tetap dapat dibuat ketika pengguna memulai navigasi dari luar kawasan.}
+{Tinggi}
+{Pengguna berada di luar kawasan (>100 m dari Sudirman Street Food); koneksi internet aktif.}
+{Tenant tujuan P01 Traditional Fried Food from West Borneo.}
+{1. Dari Beranda (status ``Di luar area''), pilih tenant P01 dan tekan Jadikan Tujuan.\newline
+2. Amati peta MapLibre dan rute yang digambar.}
+{Aplikasi menampilkan rute jalan kaki OSRM dari posisi pengguna di luar kawasan menuju tenant P01 di dalam aplikasi tanpa membuka aplikasi peta eksternal.}
+
+\tcspec{TC-23-02}
+{SC-23 / UC-09}
+{F06 Navigation}
+{(F06-6) Tanpa koneksi internet, navigasi tetap berjalan dengan garis lurus ke tujuan.}
+{Tinggi}
+{Data seluler dan Wi-Fi dimatikan; GPS aktif; izin lokasi aktif.}
+{Tenant tujuan P03 Bebek Gober Bumbu Hitam.}
+{1. Matikan data seluler dan Wi-Fi.\newline
+2. Pilih tenant P03 dan tekan Jadikan Tujuan.\newline
+3. Berjalan menuju P03 sambil mengamati peta, jarak, dan panah kompas.}
+{Aplikasi menampilkan garis lurus ke P03 sebagai fallback OSRM; jarak dan panah kompas tetap diperbarui hingga tiba.}
+
+\tcspec{TC-24-01}
+{SC-24 / UC-09}
+{F06 Navigation; F01 Location Awareness}
+{(F01-4) Jika izin ditolak, trigger otomatis dan navigasi tidak aktif; konten tenant tetap dapat dibuka manual.}
+{Sedang}
+{Izin lokasi ditolak (mode tanpa lokasi).}
+{Tenant uji: P03 Bebek Gober Bumbu Hitam.}
+{1. Buka aplikasi dalam mode tanpa lokasi.\newline
+2. Buka kartu POI P03 dari daftar.\newline
+3. Cari tombol Jadikan Tujuan/mode navigasi dan Mode Jelajah.}
+{Navigasi dan trigger otomatis tidak aktif; kartu POI P03 tetap dapat dibuka manual dari peta/daftar.}
+
+\subsection*{UC-10 Menerima rekomendasi tenant berikutnya}
+
+\tcspec{TC-25-01}
+{SC-25 / UC-10}
+{F07 Contextual Recommendation}
+{(F07-2) Setiap rekomendasi menampilkan alasannya; (F07-3) rekomendasi muncul \(\le\)1 detik setelah exit event.}
+{Tinggi}
+{Mode Jelajah aktif; preferensi rasa pedas dan gurih; P02 sudah dikunjungi (dwell tercatat).}
+{Tenant yang dikunjungi: P02 Swike Asli JTW; stopwatch.}
+{1. Berada di dalam radius 10 m P02 \(\ge\)3 menit hingga kunjungan tercatat.\newline
+2. Berjalan keluar hingga exit event terdeteksi (jarak >20 m); mulai stopwatch.\newline
+3. Hentikan stopwatch saat rekomendasi tampil.\newline
+4. Periksa jumlah rekomendasi dan alasan masing-masing.}
+{Rekomendasi tampil \(\le\)1 detik setelah exit event; terdapat 3 pilihan tenant, masing-masing disertai alasan (mis. jarak, kecocokan rasa, atau pasangan rasa).}
+
+\tcspec{TC-26-01}
+{SC-26 / UC-10}
+{F07 Contextual Recommendation}
+{(F07-1) Rekomendasi tidak pernah memuat tenant yang tutup atau sudah dikunjungi.}
+{Tinggi}
+{Mode Jelajah aktif; P02 sudah dikunjungi; satu tenant lain berstatus tutup pada jam uji.}
+{Tenant sudah dikunjungi: P02; tenant tutup: [isi tenant uji].}
+{1. Pastikan P02 tercatat sudah dikunjungi dan satu tenant uji berstatus tutup.\newline
+2. Keluar dari geofence P02 (>20 m) hingga rekomendasi tampil.\newline
+3. Periksa daftar rekomendasi.}
+{Daftar rekomendasi tidak memuat P02 (sudah dikunjungi) maupun tenant yang sedang tutup.}
+
+\tcspec{TC-27-01}
+{SC-27 / UC-10}
+{F07 Contextual Recommendation}
+{(F07-4) Input yang sama selalu menghasilkan rekomendasi yang sama (deterministik).}
+{Tinggi}
+{Kondisi uji dapat diulang (posisi, waktu, budget, preferensi, status halal, dan riwayat kunjungan sama), mis. dengan Android Emulator.}
+{Posisi exit dari P02; preferensi pedas dan gurih; riwayat kunjungan P02.}
+{1. Jalankan skenario exit event dengan kondisi uji tertentu dan catat 3 rekomendasi beserta urutan dan alasannya.\newline
+2. Reset ke kondisi awal yang sama.\newline
+3. Ulangi skenario dan bandingkan hasil.}
+{Tenant, urutan, dan alasan rekomendasi identik pada setiap pengulangan.}
+
+\subsection*{UC-11 Membuat dan menjalankan Smart Culinary Trail}
+
+\tcspec{TC-28-01}
+{SC-28 / UC-11}
+{F08 Smart Culinary Trail Planner}
+{(F08-1) Untuk input 60 menit dan Rp50.000, aplikasi menghasilkan itinerary minimal 2 tenant dengan estimasi biaya \(\le\) budget dan waktu \(\le\) durasi.}
+{Tinggi}
+{Mode Jelajah aktif; pengguna di dalam kawasan; preferensi pedas dan gurih tersimpan.}
+{Durasi 60 menit; budget Rp50.000; preferensi pedas dan gurih.}
+{1. Pilih Rencanakan Trail.\newline
+2. Isi durasi 60 menit, budget Rp50.000, preferensi pedas dan gurih; tekan Buat Trail.\newline
+3. Periksa jumlah tenant, estimasi total biaya, dan estimasi waktu pada itinerary.}
+{Itinerary berisi minimal 2 tenant dengan estimasi total biaya \(\le\) Rp50.000 dan estimasi waktu \(\le\) 60 menit, beserta rute di peta.}
+
+\tcspec{TC-28-02}
+{SC-28 / UC-11}
+{F08 Smart Culinary Trail Planner}
+{(F08-2) Urutan rute tidak bolak-balik (setiap langkah menuju tenant terdekat berikutnya).}
+{Tinggi}
+{Itinerary trail sudah dibuat.}
+{Koordinat tenant dari PRD Bagian 4.1; posisi awal pengguna.}
+{1. Catat urutan tenant pada itinerary.\newline
+2. Hitung/amati jarak dari posisi awal ke tiap tenant kandidat, lalu dari tenant ke tenant.\newline
+3. Periksa apakah tiap langkah menuju tenant terdekat berikutnya dan rute tidak kembali ke area yang sama.}
+{Setiap langkah rute menuju tenant terdekat berikutnya (\textit{nearest neighbor}) dan rute tidak bolak-balik.}
+
+\tcspec{TC-29-01}
+{SC-29 / UC-11}
+{F08 Smart Culinary Trail Planner}
+{(F08-3) Tenant pada trail otomatis ditandai selesai setelah dwell event tercatat.}
+{Tinggi}
+{Trail aktif; pengguna sudah menekan Mulai Trail.}
+{Tenant pertama pada itinerary.}
+{1. Ikuti navigasi ke tenant pertama pada trail.\newline
+2. Berada di tenant \(\ge\)3 menit hingga dwell tercatat.\newline
+3. Amati status tenant pada trail.}
+{Tenant pertama otomatis ditandai selesai setelah dwell event tercatat, dan trail beralih ke tenant berikutnya.}
+
+\tcspec{TC-29-02}
+{SC-29 / UC-11}
+{F08 Smart Culinary Trail Planner}
+{(F08-4) Notifikasi sisa waktu muncul saat dwell melebihi alokasi + 5 menit.}
+{Tinggi}
+{Trail aktif; pengguna berada di tenant pada trail.}
+{Alokasi waktu tenant sesuai itinerary; stopwatch.}
+{1. Berada di tenant pada trail dan catat alokasi waktunya.\newline
+2. Tetap berada di tenant melebihi alokasi waktu + 5 menit.\newline
+3. Amati kapan notifikasi sisa waktu muncul (mis. ``Sisa waktumu 25 menit, masih ada 2 tenant'').}
+{Notifikasi sisa waktu muncul saat dwell melebihi alokasi + 5 menit dan menyebut sisa waktu serta sisa tenant.}
+
+\tcspec{TC-30-01}
+{SC-30 / UC-11}
+{F08 Smart Culinary Trail Planner}
+{(F08-5) Pengguna dapat melewati tenant; sisa trail disusun ulang sesuai sisa waktu dan sisa budget.}
+{Tinggi}
+{Trail aktif dan sedang dalam mode navigasi; masih ada sisa waktu dan budget.}
+{Tenant yang dilewati: tenant pertama pada itinerary.}
+{1. Pada mode navigasi, tekan tombol Lewati Tenant.\newline
+2. Amati itinerary baru dan rute di peta.\newline
+3. Periksa tenant pengganti (tidak memilih tenant yang sudah selesai/dilewati), sisa waktu, dan sisa budget.}
+{Tenant ditandai dilewati, lalu sisa trail disusun ulang dari posisi pengguna sesuai sisa waktu dan sisa budget dengan rute baru ditampilkan di peta.}
+
+\subsection*{UC-12 Mematikan Mode Jelajah dan menjaga privasi lokasi}
+
+\tcspec{TC-31-01}
+{SC-31 / UC-12}
+{F09 Location Privacy \& Consent}
+{(F09-2) Pelacakan background berhenti saat Mode Jelajah dimatikan (notifikasi foreground hilang).}
+{Tinggi}
+{Mode Jelajah aktif; notifikasi permanen ``Mangan Yuk! sedang memandu'' tampil.}
+{-}
+{1. Pastikan notifikasi permanen tampil dan ikon lokasi aktif.\newline
+2. Tekan Selesai Jelajah.\newline
+3. Amati notifikasi, indikator lokasi pada status bar, dan layar yang tampil.}
+{Notifikasi permanen hilang, pelacakan lokasi background berhenti, dan aplikasi kembali ke Beranda.}
+
+\tcspec{TC-32-01}
+{SC-32 / UC-12}
+{F09 Location Privacy \& Consent; F02 Location-Based Trigger (Geofence)}
+{(F09-2) Pelacakan background berhenti saat Mode Jelajah dimatikan.}
+{Sedang}
+{Mode Jelajah baru dimatikan.}
+{POI P01 Traditional Fried Food from West Borneo.}
+{1. Matikan Mode Jelajah (Selesai Jelajah).\newline
+2. Berjalan masuk ke radius 10 m P01.\newline
+3. Amati notifikasi dan kartu POI selama \(\pm\)1 menit.}
+{Tidak ada notifikasi, prompt audio, maupun kartu POI yang muncul karena pelacakan background berhenti.}
+
+\tcspec{TC-33-01}
+{SC-33 / UC-12}
+{F09 Location Privacy \& Consent}
+{(F09-3) Tidak ada request ke backend Mangan Yuk yang membawa koordinat pengguna, dan koordinat pengguna hanya dikirim ke layanan rute OSRM selama layar navigasi aktif (diverifikasi lewat log proxy HTTPS).}
+{Tinggi}
+{Alat pemantau jaringan / proxy HTTPS aktif pada Perangkat uji 1.}
+{Log proxy HTTPS selama alur utama: login, onboarding, Mode Jelajah, trail, navigasi aktif, pencarian, Paspor Kuliner, dan Selesai Jelajah.}
+{1. Aktifkan proxy HTTPS pada perangkat uji.\newline
+2. Jalankan alur utama (termasuk navigasi aktif dan sinkronisasi ulasan Paspor Kuliner).\newline
+3. Periksa seluruh request ke backend Mangan Yuk dan ke layanan rute OSRM pada log proxy.}
+{Tidak ada request ke backend Mangan Yuk yang membawa koordinat pengguna; koordinat asal--tujuan hanya dikirim ke layanan rute OSRM saat layar navigasi aktif (tanpa identitas pengguna).}
+
+\subsection*{UC-13 Mengumpulkan stempel Paspor Kuliner dan memberi ulasan (F10)}
+
+\tcspec{TC-34-01}
+{SC-34 / UC-13}
+{F10 Paspor Kuliner \& Ulasan Tenant}
+{(F10-1, F10-2) Stempel tercatat setelah ulasan tersimpan dan tidak terduplikasi pada tenant yang sama; progres trail tampil.}
+{Sedang}
+{Pengguna sudah masuk akun lokal; koneksi internet aktif.}
+{Trail tematik ``Jejak Kuliner Nusantara''; tenant uji P03 Bebek Gober Bumbu Hitam; rating 5.}
+{1. Buka Paspor Kuliner dari Profil dan catat progres awal (mis. 0/5).\newline
+2. Tekan Tambah Ulasan, pilih P03, beri rating 5, pilih menu, isi teks ulasan, lalu simpan.\newline
+3. Amati progres trail dan status stempel P03.\newline
+4. Tambahkan ulasan kedua untuk P03, lalu periksa kembali jumlah stempel dan progres.}
+{Ulasan pertama mencatat 1 stempel digital untuk P03 dan progres bertambah (1/5); ulasan kedua tersimpan tanpa menambah stempel ganda (progres tetap 1/5).}
+
+\tcspec{TC-34-02}
+{SC-34 / UC-13}
+{F10 Paspor Kuliner \& Ulasan Tenant}
+{(F10-3, F10-4) Badge terbuka saat trail selesai; data tetap ada setelah aplikasi ditutup dan dibuka kembali.}
+{Sedang}
+{4 dari 5 tenant pada satu trail tematik sudah berstempel.}
+{Trail tematik ``Manis-manis Bandung'' (tenant ke-5 belum berstempel).}
+{1. Beri ulasan untuk tenant ke-5 pada trail ``Manis-manis Bandung''.\newline
+2. Amati perubahan status badge trail.\newline
+3. Tutup aplikasi sepenuhnya, lalu buka kembali dan masuk ke Paspor Kuliner.}
+{Badge trail terbuka setelah 5/5 tenant berstempel, dan progres beserta badge tetap tersimpan setelah aplikasi dibuka ulang.}
+
+\tcspec{TC-34-03}
+{SC-34 / UC-13}
+{F10 Paspor Kuliner \& Ulasan Tenant}
+{(F10-5) Ulasan tetap tersimpan di perangkat saat backend tidak dapat dihubungi.}
+{Sedang}
+{Data seluler dan Wi-Fi dimatikan (offline).}
+{Tenant uji P01; rating 4.}
+{1. Matikan koneksi internet.\newline
+2. Buka Tambah Ulasan, isi ulasan untuk P01, dan simpan.\newline
+3. Tutup dan buka kembali aplikasi, lalu periksa ulasan dan stempel P01.}
+{Ulasan dan stempel tersimpan di perangkat (AsyncStorage) tanpa error yang menghentikan alur pengguna.}
+
+\subsection*{UC-14 Mengelola akun pengguna lokal (F11)}
+
+\tcspec{TC-35-01}
+{SC-35 / UC-14}
+{F11 Akun Pengguna Lokal}
+{(F11-1, F11-2, F11-3) Pengguna belum masuk diarahkan ke login; setelah masuk lanjut ke onboarding/Beranda; sesi tetap tersimpan setelah aplikasi dibuka ulang.}
+{Sedang}
+{Data aplikasi bersih (belum ada sesi login).}
+{Nama pengguna, email, dan kata sandi uji; opsi ``Ingat Saya'' aktif.}
+{1. Buka aplikasi dan amati halaman awal.\newline
+2. Daftar akun baru dengan opsi ``Ingat Saya'' aktif.\newline
+3. Selesaikan onboarding hingga masuk Beranda.\newline
+4. Tutup aplikasi sepenuhnya, lalu buka kembali.}
+{Aplikasi mengarahkan ke halaman login; setelah mendaftar pengguna lanjut ke onboarding dan Beranda; saat dibuka ulang sesi tetap aktif (tersimpan di SecureStore).}
+
+\tcspec{TC-35-02}
+{SC-35 / UC-14}
+{F11 Akun Pengguna Lokal}
+{(F11-4) Keluar akun menghapus sesi dari perangkat.}
+{Sedang}
+{Pengguna sedang masuk dengan sesi aktif.}
+{-}
+{1. Buka halaman Profil.\newline
+2. Tekan tombol Keluar.\newline
+3. Tutup dan buka kembali aplikasi.}
+{Sesi terhapus dari perangkat dan pengguna diarahkan kembali ke halaman login.}
+
+\subsection*{UC-15 Mengatur preferensi tenant halal (F12)}
+
+\tcspec{TC-36-01}
+{SC-36 / UC-15}
+{F12 Preferensi Halal}
+{(F12-1, F12-2) Opsi halal dapat diaktifkan/dinonaktifkan dari onboarding maupun Profil; saat aktif, tenant non-halal dan belum diverifikasi tidak muncul di peta, pencarian, trail, dan rekomendasi.}
+{Sedang}
+{Pengguna berada di Beranda/Profil; dataset memuat tenant halal dan non-halal (mis. P30 Sate Babi Wibisana).}
+{Toggle ``Hanya tenant halal''.}
+{1. Aktifkan ``Hanya tenant halal'' dari Profil.\newline
+2. Periksa marker peta, hasil pencarian ``sate'', itinerary trail baru, dan daftar rekomendasi.\newline
+3. Nonaktifkan kembali opsi halal dan periksa ulang.}
+{Saat aktif, tenant non-halal/belum diverifikasi (seperti P30) tidak muncul di peta, pencarian, trail, dan rekomendasi; saat dinonaktifkan, seluruh tenant tampil kembali.}
+
+\tcspec{TC-36-02}
+{SC-36 / UC-15}
+{F12 Preferensi Halal}
+{(F12-3) Saat opsi aktif, tenant non-halal tidak memicu notifikasi proximity.}
+{Sedang}
+{Mode Jelajah aktif; opsi ``Hanya tenant halal'' aktif.}
+{Tenant non-halal uji (mis. P30 Sate Babi Wibisana).}
+{1. Pastikan opsi ``Hanya tenant halal'' dan Mode Jelajah aktif.\newline
+2. Berjalan masuk ke radius 10 m tenant non-halal P30.\newline
+3. Amati notifikasi dan prompt audio selama \(\pm\)30 detik.}
+{Tidak ada notifikasi proximity maupun prompt audio yang dipicu oleh tenant non-halal.}
+
+\section{Tabel Hasil Pengujian}
+
+\newcommand{\resulthead}[1]{%
+\begin{longtable}{|C{0.10}|L{0.23}|L{0.29}|L{0.25}|L{0.13}|}
+\caption{Hasil Pengujian Alpha: #1}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{TC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Test Case} & \cellcolor[HTML]{D9EAF7}\textbf{Hasil yang Diharapkan} & \cellcolor[HTML]{D9EAF7}\textbf{Hasil Aktual} & \cellcolor[HTML]{D9EAF7}\textbf{Status} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{TC ID} & \cellcolor[HTML]{D9EAF7}\textbf{Test Case} & \cellcolor[HTML]{D9EAF7}\textbf{Hasil yang Diharapkan} & \cellcolor[HTML]{D9EAF7}\textbf{Hasil Aktual} & \cellcolor[HTML]{D9EAF7}\textbf{Status} \\ \hline
+\endhead
+}
+
+\resulthead{F01 Location Awareness}
+TC-02-01 & Penolakan izin lokasi (mode tanpa lokasi) & Penjelasan tampil; peta \& daftar tampil tanpa posisi; konten dibuka manual; navigasi/trigger nonaktif. & Logika izin (\texttt{10-onboarding}) lolos; menunggu uji UI perangkat fisik & \statuscol \\ \hline
+TC-03-01 & Posisi tampil \(\le\)10 detik setelah aplikasi dibuka & Titik biru dengan lingkaran akurasi tampil di peta MapLibre \(\le\)10 detik. & Menunggu uji GPS perangkat fisik & \statuscol \\ \hline
+TC-03-02 & Posisi diperbarui saat pengguna berjalan \(\ge\)5 m & Titik biru berpindah mengikuti pergerakan pengguna (\(\pm\)3 detik / \(\ge\)5 m). & Logika jarak (\texttt{01-geofence}) lolos; menunggu uji jalan lapangan & \statuscol \\ \hline
+TC-04-01 & Perubahan status area saat melewati batas kawasan & Status berubah antara ``Di luar area'' dan ``Di dalam area'' sesuai batas kawasan. & Logika boundary (\texttt{01-geofence}) lolos; menunggu uji lapangan & \statuscol \\ \hline
+TC-05-01 & Pengguna di luar kawasan tidak memicu entry event & Status ``Di luar area'' dan jarak tampil; tidak ada notifikasi entry/kartu POI. & Logika luar area (\texttt{01-geofence}) lolos; menunggu uji lapangan & \statuscol \\ \hline
+\end{longtable}
+
+\resulthead{F02 Location-Based Trigger (Geofence)}
+TC-06-01 & Notifikasi entry \(\le\)15 detik (background/layar terkunci) & Notifikasi entry \& audio sambutan muncul \(\le\)15 detik, juga saat layar terkunci. & Logika entry (\texttt{01-geofence}) lolos; menunggu uji lock screen HP & \statuscol \\ \hline
+TC-07-01 & Akurasi lokasi >30 m tidak memicu trigger & Tidak ada trigger saat akurasi >30 m; banner GPS lemah tampil; trigger lanjut saat \(\le\)30 m. & Filter akurasi >30 m lolos (\texttt{01-geofence}); menunggu uji banner UI & \statuscol \\ \hline
+TC-08-01 & Kartu POI muncul \(\le\)10 detik saat masuk radius 10 m (10 percobaan) & Kartu POI muncul \(\le\)10 detik pada minimal 8 dari 10 percobaan. & Logika proximity 10 m lolos (\texttt{01-geofence}); menunggu 10x uji lapangan & \statuscol \\ \hline
+TC-09-01 & Trigger tidak berulang selama di area POI & Notifikasi/kartu hanya muncul sekali (cooldown 30 menit, exit >20 m). & Cooldown \& hysteresis lolos (\texttt{01-geofence}); menunggu uji lapangan & \statuscol \\ \hline
+TC-10-01 & Kunjungan tercatat setelah \(\ge\)3 menit di geofence tenant & Kunjungan P03 tercatat di perangkat dan ditandai sudah dikunjungi. & Logika dwell \(\ge\)3 mnt lolos (\texttt{01-geofence}); menunggu uji lapangan & \statuscol \\ \hline
+TC-11-01 & Pengguna hanya lewat (<3 menit) tidak tercatat berkunjung & Kunjungan P03 tidak tercatat dan tidak ditandai sudah dikunjungi. & Logika dwell <3 mnt lolos (\texttt{01-geofence}); menunggu uji lapangan & \statuscol \\ \hline
+\end{longtable}
+
+\resulthead{F03 Multimodal Exploration}
+TC-12-01 & Kelengkapan konten 31/31 POI & 31/31 POI memiliki menu/harga, jam buka, audio narasi, transkrip, dan foto (jika tersedia). & Lolos via \texttt{02-poi-dataset} (21/21) \& \texttt{03-multimodal} (12/12) & \passcol \\ \hline
+TC-12-02 & Waktu buka konten POI \(\le\)2 detik & Konten POI terbuka \(\le\)2 detik pada setiap percobaan. & Menunggu stopwatch UI perangkat fisik & \statuscol \\ \hline
+TC-12-03 & Transkrip audio tersedia untuk setiap narasi & Transkrip tersedia untuk 31/31 narasi dan sesuai isi audio. & Lolos via \texttt{02-poi-dataset} (21/21) \& \texttt{03-multimodal} (12/12) & \passcol \\ \hline
+TC-13-01 & Audio dapat diputar, dijeda, dan dilanjutkan tanpa internet & Audio dan seluruh konten lokal tetap berfungsi tanpa internet. & Resolusi aset offline lolos (\texttt{03-multimodal}); menunggu uji pemutaran HP & \statuscol \\ \hline
+\end{longtable}
+
+\resulthead{F04 Eyes-Free Interaction}
+TC-14-01 & Memutar narasi dari notifikasi lock screen & Prompt suara \& getar; tombol Dengar/Lewati di lock screen; narasi diputar tanpa buka aplikasi. & Aksi notifikasi lolos (\texttt{actions.test}); menunggu uji lock screen HP & \statuscol \\ \hline
+TC-14-02 & Narasi mulai \(\le\)3 detik setelah trigger pada Mode Jalan & Narasi mulai diputar otomatis \(\le\)3 detik setelah trigger. & Auto-play Mode Jalan lolos (\texttt{walkMode.test}); menunggu stopwatch HP & \statuscol \\ \hline
+TC-14-03 & Panduan audio navigasi tiap pengurangan 20 m dan saat tiba & Panduan audio berbunyi tiap pengurangan 20 m dan pengumuman tiba terdengar. & Audio cue 20 m lolos (\texttt{07-navigation}); menunggu uji HP di saku & \statuscol \\ \hline
+TC-14-04 & Satu kunjungan POI tanpa melihat layar (5 penguji) & Minimal 4 dari 5 penguji menyelesaikan kunjungan tanpa melihat layar. & Menunggu usability test 5 penguji di lapangan & \statuscol \\ \hline
+TC-15-01 & Tombol Lewati menutup prompt \& mencegah trigger ulang & Prompt ditutup, masuk daftar ``Terlewati'', tidak dipicu ulang 30 menit. & Aksi Lewati lolos (\texttt{actions.test}); menunggu uji notifikasi HP & \statuscol \\ \hline
+\end{longtable}
+
+\resulthead{F05 Search \& Destination}
+TC-16-01 & Hasil pencarian muncul \(\le\)1 detik secara offline & Hasil pencarian tampil \(\le\)1 detik tanpa koneksi internet. & Lolos via \texttt{04-search} (18/18) \& \texttt{search.test} (10/10) & \passcol \\ \hline
+TC-16-02 & Pencarian toleran typo & Kata kunci benar dan typo menampilkan tenant relevan yang sama. & Lolos via \texttt{04-search} (18/18) \& \texttt{search.test} (10/10) & \passcol \\ \hline
+TC-17-01 & Kombinasi filter harga, rasa, jenis, dan status buka & Daftar hanya memuat tenant yang memenuhi seluruh filter, urut jarak. & Lolos via \texttt{04-search} (18/18) \& \texttt{search.test} (10/10) & \passcol \\ \hline
+TC-18-01 & Menjadikan tenant hasil pencarian sebagai tujuan & Aplikasi langsung masuk mode navigasi menuju tenant yang dipilih. & Menunggu uji alur UI perangkat fisik & \statuscol \\ \hline
+TC-19-01 & Pencarian kata kunci yang tidak ada & Daftar kosong/pesan tidak ditemukan tampil tanpa crash. & Lolos via \texttt{04-search} (18/18) \& \texttt{search.test} (10/10) & \passcol \\ \hline
+\end{longtable}
+
+\resulthead{F06 Navigation}
+TC-20-01 & Jarak ke tujuan diperbarui saat pengguna berjalan & Jarak (meter) berkurang mengikuti pergerakan pengguna. & Logika jarak lolos (\texttt{07-navigation}); menunggu uji jalan lapangan & \statuscol \\ \hline
+TC-20-02 & Panah menunjuk arah tujuan dengan deviasi \(\le\)30\textdegree{} & Deviasi arah panah \(\le\)30\textdegree{} pada seluruh titik pengamatan. & Bearing/heading lolos (\texttt{07-navigation}); menunggu kompas fisik & \statuscol \\ \hline
+TC-21-01 & Notifikasi kedatangan dan kartu POI saat \(\le\)10 m & Pengumuman tiba diputar, notifikasi muncul, kartu POI terbuka. & Deteksi tiba \(\le\)10 m lolos (\texttt{07-navigation}); menunggu uji HP & \statuscol \\ \hline
+TC-22-01 & Navigasi berhasil ke 31/31 POI & Navigasi berhasil menuju 31 dari 31 POI hingga tiba. & Geometri 31 POI valid (\texttt{02-poi-dataset}); menunggu uji lapangan & \statuscol \\ \hline
+TC-23-01 & Rute jalan kaki OSRM dari luar kawasan & Rute OSRM tergambar di peta MapLibre saat navigasi dimulai dari luar kawasan. & Logika \texttt{fetchWalkingRoute} lolos (\texttt{routing.test}); menunggu uji lapangan & \statuscol \\ \hline
+TC-23-02 & Fallback garis lurus saat offline & Tanpa internet, navigasi berjalan memakai garis lurus ke tujuan. & Logika fallback rute lolos (\texttt{routing.test}); menunggu uji offline HP & \statuscol \\ \hline
+TC-24-01 & Navigasi tidak aktif pada mode tanpa lokasi & Navigasi dan trigger nonaktif; kartu POI dibuka manual. & Menunggu uji UI mode tanpa lokasi di HP & \statuscol \\ \hline
+\end{longtable}
+
+\resulthead{F07 Contextual Recommendation}
+TC-25-01 & Rekomendasi \(\le\)1 detik setelah exit event dengan alasan & 3 pilihan tenant tampil \(\le\)1 detik dengan alasan masing-masing. & Lolos via \texttt{05-recommendation} (10/10) \& \texttt{exit.test} & \passcol \\ \hline
+TC-26-01 & Rekomendasi mengecualikan tenant tutup \& sudah dikunjungi & Daftar tidak memuat tenant tutup maupun yang sudah dikunjungi. & Lolos via \texttt{05-recommendation} (10/10) \& \texttt{recommendation.test} (10/10) & \passcol \\ \hline
+TC-27-01 & Rekomendasi bersifat deterministik & Tenant, urutan, dan alasan identik pada input yang sama. & Lolos via \texttt{05-recommendation} (10/10) \& \texttt{recommendation.test} (10/10) & \passcol \\ \hline
+\end{longtable}
+
+\resulthead{F08 Smart Culinary Trail Planner}
+TC-28-01 & Itinerary valid untuk 60 menit dan Rp50.000 & Minimal 2 tenant dengan estimasi biaya \(\le\) Rp50.000 dan waktu \(\le\) 60 menit. & Lolos via \texttt{06-trail} (8/8) \& \texttt{trail.test} (9/9) & \passcol \\ \hline
+TC-28-02 & Urutan rute tidak bolak-balik (nearest neighbor) & Setiap langkah menuju tenant terdekat berikutnya. & Lolos via \texttt{06-trail} (8/8) \& \texttt{trail.test} (9/9) & \passcol \\ \hline
+TC-29-01 & Tenant pada trail ditandai selesai setelah dwell & Tenant selesai otomatis setelah dwell \(\ge\)3 menit dan lanjut ke berikutnya. & Lolos via \texttt{progress.test} (17/17) \& \texttt{runtime-trail} (3/3) & \passcol \\ \hline
+TC-29-02 & Notifikasi sisa waktu saat dwell > alokasi + 5 menit & Notifikasi sisa waktu dan sisa tenant muncul tepat waktu. & Lolos via \texttt{progress.test} (17/17) \& \texttt{runtime-trail} (3/3) & \passcol \\ \hline
+TC-30-01 & Melewati tenant dan menyusun ulang trail & Sisa trail disusun ulang sesuai sisa waktu dan sisa budget tanpa tenant yang dilewati. & Lolos via \texttt{progress.test} (17/17) \& \texttt{06-trail} (8/8) & \passcol \\ \hline
+\end{longtable}
+
+\resulthead{F09 Location Privacy \& Consent}
+TC-01-01 & Onboarding dan penjelasan privasi sebelum izin sistem & Penjelasan lokasi (termasuk pengecualian OSRM) tampil sebelum dialog izin sistem. & Alur privasi lolos (\texttt{08-privacy}, \texttt{10-onboarding}); menunggu uji HP & \statuscol \\ \hline
+TC-31-01 & Pelacakan background berhenti saat Mode Jelajah dimatikan & Notifikasi permanen hilang dan pelacakan background berhenti. & Teardown sesi lolos (\texttt{01-geofence}); menunggu uji foreground service HP & \statuscol \\ \hline
+TC-32-01 & Tidak ada trigger setelah Mode Jelajah dimatikan & Tidak ada notifikasi, audio, atau kartu POI saat masuk radius POI. & Teardown sesi lolos (\texttt{01-geofence}); menunggu uji lapangan & \statuscol \\ \hline
+TC-33-01 & Audit log proxy HTTPS: privasi koordinat & Tidak ada koordinat ke backend Mangan Yuk; OSRM hanya saat navigasi aktif. & Zero-location payload lolos (\texttt{08-privacy}); menunggu log proxy HTTPS HP & \statuscol \\ \hline
+\end{longtable}
+
+\resulthead{F10--F12 Additional Requirements (Paspor Kuliner, Akun Lokal, Preferensi Halal)}
+TC-34-01 & Ulasan mencatat stempel tanpa duplikasi \& perbarui progres & Stempel tercatat 1x per tenant dan progres trail tematik bertambah. & Lolos via \texttt{09-passport} (10/10), \texttt{passport.test} (10/10), \texttt{reviews.test} (16/16) & \passcol \\ \hline
+TC-34-02 & Badge terbuka saat trail selesai \& bertahan setelah restart & Badge terbuka saat 5/5 tenant berstempel dan data bertahan setelah restart. & Lolos via \texttt{09-passport} (10/10) \& \texttt{passport.test} (10/10) & \passcol \\ \hline
+TC-34-03 & Ulasan \& stempel tersimpan lokal saat offline & Ulasan dan stempel tersimpan di AsyncStorage saat backend tidak terjangkau. & Lolos via \texttt{09-passport} (10/10) \& \texttt{passport.test} (10/10) & \passcol \\ \hline
+TC-35-01 & Login/daftar akun lokal \& sesi bertahan setelah restart & Sesi tersimpan di SecureStore dan bertahan setelah aplikasi dibuka ulang. & Lolos via \texttt{auth.test} (21/21) \& \texttt{10-onboarding} (9/9) & \passcol \\ \hline
+TC-35-02 & Keluar akun menghapus sesi perangkat & Sesi terhapus dan aplikasi mengarahkan kembali ke login. & Lolos via \texttt{auth.test} (21/21) \& \texttt{10-onboarding} (9/9) & \passcol \\ \hline
+TC-36-01 & Opsi ``Hanya tenant halal'' menyaring peta, cari, trail, rekomendasi & Tenant non-halal/belum diverifikasi tidak muncul saat opsi aktif. & Lolos via \texttt{halal.test.ts} & \passcol \\ \hline
+TC-36-02 & Opsi ``Hanya tenant halal'' mencegah proximity trigger non-halal & Tenant non-halal tidak memicu notifikasi proximity saat opsi aktif. & Lolos via \texttt{halal.test.ts} & \passcol \\ \hline
+\end{longtable}
