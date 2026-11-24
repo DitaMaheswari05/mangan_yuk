@@ -8,6 +8,7 @@
 import { AppState } from 'react-native';
 import areaJson from '@/data/area.json';
 import { WalkModeService } from '@/features/audio';
+import { NavigationSession } from '@/features/navigation/session';
 import { NotificationService } from '@/features/notifications';
 import { PreferenceRepository } from '@/features/onboarding';
 import { filterByHalalPreference, getPoiById, getPois } from '@/features/poi';
@@ -100,6 +101,13 @@ async function runSideEffects(e: GeofenceEvent, pos: UserPosition): Promise<void
       if (!poi) return;
       const prefs = await PreferenceRepository.get();
       if (filterByHalalPreference([poi], prefs.ok && prefs.data.halalOnly).length === 0) return;
+      // Tujuan navigasi: layar navigasi yang mengumumkan kedatangan dan memutar narasinya.
+      if (NavigationSession.isDestination(poi.id, e.at)) return;
+      // Sedang navigasi: jangan bersuara, layar navigasi menawarkan tombol "Dengar cerita".
+      if (NavigationSession.isNavigating()) {
+        if (AppState.currentState !== 'active') await NotificationService.notifyNearbyPoi(poi, e.distanceM);
+        return;
+      }
       await vibrate();
       const { autoPlayed } = await WalkModeService.handleProximityAudioTrigger(poi);
       await NotificationService.notifyNearbyPoi(poi, e.distanceM, { autoPlaying: autoPlayed });

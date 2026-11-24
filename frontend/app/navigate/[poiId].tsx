@@ -13,7 +13,9 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { OsmMap } from '@/components/map/OsmMap';
 import { colors, fontFamily } from '@/constants/theme';
+import { announceArrival, AudioQueue } from '@/features/audio';
 import { TtsService } from '@/features/audio/tts';
+import { GeofenceRuntime } from '@/features/geofence';
 import { useUserLocation } from '@/features/location';
 import {
   computeNavigationStatus,
@@ -23,11 +25,13 @@ import {
   useCompassHeading,
   useWalkingRoute,
 } from '@/features/navigation';
+import { NavigationSession } from '@/features/navigation/session';
 import { getPoiById } from '@/features/poi';
 import { sanitizePoiId } from '@/lib/validation';
 import { useVisitedPoiIds, VisitRepository } from '@/features/visits';
 import { completeTrailStep, TrailSessionStore, useTrailSession } from '@/features/trail';
 import type { LatLng } from '@/lib/geo';
+import type { Poi } from '@/types/content';
 
 export default function NavigateScreen() {
   const { poiId } = useLocalSearchParams<{ poiId: string }>();
@@ -47,6 +51,10 @@ export default function NavigateScreen() {
   const prevDistanceRef = useRef<number | null>(null);
   const hasSpokenArrivalRef = useRef(false);
 
+  // Tenant yang dilewati selama navigasi: audionya hanya diputar bila pengguna menekan tombol.
+  const [passingPoi, setPassingPoi] = useState<Poi | null>(null);
+  const [playingPoiId, setPlayingPoiId] = useState<string | null>(null);
+
   // Animasi rotasi panah kompas
   const rotateAnim = useRef(new Animated.Value(0)).current;
 
@@ -55,6 +63,50 @@ export default function NavigateScreen() {
       targetPoi ? { latitude: targetPoi.latitude, longitude: targetPoi.longitude } : null,
     [targetPoi],
   );
+
+  useEffect(() => {
+    if (!targetPoi) return;
+    NavigationSession.start(targetPoi.id);
+    return () => NavigationSession.end(targetPoi.id);
+  }, [targetPoi]);
+
+  useEffect(() => {
+    if (!targetPoi) return;
+    const unsubscribeGeofence = GeofenceRuntime.subscribe((e) => {
+      if (e.type === 'PROXIMITY' && e.poiId !== targetPoi.id) {
+        const poi = getPoiById(e.poiId);
+        if (poi) setPassingPoi(poi);
+      } else if (e.type === 'EXIT') {
+        setPassingPoi((prev) => (prev?.id === e.poiId ? null : prev));
+      }
+    });
+    const unsubscribeQueue = AudioQueue.subscribe((st) => {
+      setPlayingPoiId(st.currentItem?.type === 'narration' ? (st.currentItem.poi?.id ?? null) : null);
+    });
+    return () => {
+      unsubscribeGeofence();
+      unsubscribeQueue();
+    };
+  }, [targetPoi]);
+
+  const handleListenPassing = useCallback(() => {
+    if (!passingPoi) return;
+    if (playingPoiId === passingPoi.id) {
+      void AudioQueue.stop();
+      return;
+    }
+    void AudioQueue.enqueue({
+      id: `narration-${passingPoi.id}-${Date.now()}`,
+      type: 'narration',
+      title: passingPoi.name,
+      poi: passingPoi,
+    });
+  }, [passingPoi, playingPoiId]);
+
+  const handleDismissPassing = useCallback(() => {
+    if (passingPoi && playingPoiId === passingPoi.id) void AudioQueue.stop();
+    setPassingPoi(null);
+  }, [passingPoi, playingPoiId]);
 
   // Rute jalan kaki mengikuti jalan (OSRM); null → fallback garis lurus.
   const { route: walkingRoute } = useWalkingRoute(position?.coordinate ?? null, targetCoord);
@@ -133,7 +185,8 @@ export default function NavigateScreen() {
     if (navStatus.hasArrived && !hasSpokenArrivalRef.current) {
       hasSpokenArrivalRef.current = true;
       setHasArrivedState(true);
-      void TtsService.speakArrivalCue(targetPoi.name);
+      NavigationSession.markArrived(targetPoi.id);
+      void announceArrival(targetPoi);
       // Catat kunjungan dan selesaikan step di trail session jika sedang aktif
       void VisitRepository.markVisited(targetPoi.id);
       void TrailSessionStore.update((s) => completeTrailStep(s, targetPoi.id, Date.now()));
@@ -153,7 +206,9 @@ export default function NavigateScreen() {
         if (navStatus.deviationDeg > 20) dirText = 'kanan';
         else if (navStatus.deviationDeg < -20) dirText = 'kiri';
 
-        void TtsService.speakNavigationCue(currentDist, dirText);
+        void AudioQueue.interruptWith((opts) =>
+          TtsService.speakNavigationCue(currentDist, dirText, opts),
+        );
       }
     }
 
@@ -239,6 +294,42 @@ export default function NavigateScreen() {
           <Text style={styles.gpsWarningText}>
             Sinyal GPS lemah (akurasi ~{Math.round(position.accuracyM)}m). Menunggu sinyal lebih presisi...
           </Text>
+        </View>
+      ) : null}
+
+      {passingPoi && !hasArrivedState ? (
+        <View style={[styles.passingCard, { bottom: Math.max(insets.bottom, 16) + 196 }]}>
+          <MaterialCommunityIcons name="storefront-outline" size={20} color="#FF8316" />
+          <Text style={styles.passingText} numberOfLines={1}>
+            Dekat {passingPoi.name}
+          </Text>
+          <Pressable
+            style={styles.passingListenBtn}
+            onPress={handleListenPassing}
+            accessibilityRole="button"
+            accessibilityLabel={
+              playingPoiId === passingPoi.id
+                ? `Hentikan cerita ${passingPoi.name}`
+                : `Dengar cerita ${passingPoi.name}`
+            }
+          >
+            <Ionicons
+              name={playingPoiId === passingPoi.id ? 'stop' : 'volume-high'}
+              size={16}
+              color="#FFFFFF"
+            />
+            <Text style={styles.passingListenText}>
+              {playingPoiId === passingPoi.id ? 'Stop' : 'Dengar cerita'}
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={handleDismissPassing}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Tutup"
+          >
+            <Ionicons name="close" size={20} color="#5A5A5A" />
+          </Pressable>
         </View>
       ) : null}
 
@@ -411,6 +502,44 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.medium,
     fontSize: 12,
     color: '#BA1A1A',
+  },
+  passingCard: {
+    position: 'absolute',
+    left: 16,
+    right: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    zIndex: 10,
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+  },
+  passingText: {
+    flex: 1,
+    fontFamily: fontFamily.medium,
+    fontSize: 14,
+    color: '#1E1E1E',
+  },
+  passingListenBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#FF8316',
+    borderRadius: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  passingListenText: {
+    fontFamily: fontFamily.medium,
+    fontSize: 13,
+    color: '#FFFFFF',
   },
   bottomCardWrapper: {
     position: 'absolute',

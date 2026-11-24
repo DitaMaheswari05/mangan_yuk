@@ -2,8 +2,11 @@
 // Mengelola antrean narasi POI, prompt suara eyes-free, dan instruksi navigasi secara teratur.
 
 import type { Poi } from '@/types/content';
-import { playNarration, stopNarration } from './index';
-import { speakText, stopSpeaking } from './tts';
+import { pauseNarration, playNarration, resumeNarration, stopNarration } from './index';
+import { speakArrivalCue, speakText, stopSpeaking, type SpeakOptions } from './tts';
+
+// Jeda antara "Kamu sudah sampai" dan narasi tenant tujuan.
+export const ARRIVAL_NARRATION_DELAY_MS = 2000;
 
 export type QueueItemType = 'narration' | 'prompt' | 'navigation' | 'tts';
 
@@ -28,6 +31,7 @@ class AudioQueueService {
   private queue: AudioQueueItem[] = [];
   private currentItem: AudioQueueItem | null = null;
   private isProcessing = false;
+  private pendingTimers = new Set<ReturnType<typeof setTimeout>>();
   private listeners = new Set<QueueListener>();
 
   public getStatus(): AudioQueueStatus {
@@ -80,6 +84,28 @@ class AudioQueueService {
     await this.processQueue();
   }
 
+  /** Seperti enqueue, tapi setelah jeda. Dibatalkan oleh stop(). */
+  public enqueueAfter(item: AudioQueueItem, delayMs: number): void {
+    const timer = setTimeout(() => {
+      this.pendingTimers.delete(timer);
+      void this.enqueue(item);
+    }, delayMs);
+    this.pendingTimers.add(timer);
+  }
+
+  /**
+   * Instruksi navigasi didahulukan: narasi rekaman dijeda lalu dilanjutkan setelahnya.
+   * Narasi TTS tidak bisa dilanjutkan dari tengah, jadi dihentikan.
+   */
+  public async interruptWith(speak: (options: SpeakOptions) => Promise<void>): Promise<void> {
+    if (pauseNarration()) {
+      await speak({ onDone: resumeNarration, onStopped: resumeNarration, onError: resumeNarration });
+      return;
+    }
+    if (this.currentItem?.type === 'narration') await this.stopCurrent();
+    await speak({});
+  }
+
   /**
    * Menghentikan item yang sedang aktif tanpa menghapus sisa antrean.
    */
@@ -103,6 +129,8 @@ class AudioQueueService {
    * Menghentikan semua pemutaran dan mengosongkan seluruh antrean.
    */
   public async stop(): Promise<void> {
+    this.pendingTimers.forEach(clearTimeout);
+    this.pendingTimers.clear();
     this.queue = [];
     await this.stopCurrent();
   }
@@ -171,3 +199,19 @@ class AudioQueueService {
 }
 
 export const AudioQueue = new AudioQueueService();
+
+/**
+ * Kedatangan di tujuan: hentikan audio lain, ucapkan "Kamu sudah sampai", lalu narasi tenant
+ * menyusul setelah ARRIVAL_NARRATION_DELAY_MS.
+ */
+export async function announceArrival(
+  poi: NonNullable<AudioQueueItem['poi']>,
+): Promise<void> {
+  await AudioQueue.stop();
+  const narrateLater = () =>
+    AudioQueue.enqueueAfter(
+      { id: `narration-${poi.id}-${Date.now()}`, type: 'narration', title: poi.name, priority: 'high', poi },
+      ARRIVAL_NARRATION_DELAY_MS,
+    );
+  await speakArrivalCue(poi.name, { onDone: narrateLater, onError: narrateLater });
+}

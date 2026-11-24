@@ -1,3 +1,5 @@
+import { WalkModeService } from '@/features/audio';
+import { NavigationSession } from '@/features/navigation/session';
 import { NotificationService } from '@/features/notifications';
 import { INITIAL_PASSPORT_STATE, PassportClient } from '@/features/passport';
 import { getPois } from '@/features/poi';
@@ -41,6 +43,7 @@ const step = (poi: typeof first, n: number): TrailStep => ({
 
 beforeEach(async () => {
   GeofenceRuntime.__reset();
+  NavigationSession.__reset();
   TrailSessionStore.__reset();
   await ExitRecommendationStore.clear();
   await PassportClient.saveLocalPassport(INITIAL_PASSPORT_STATE);
@@ -109,4 +112,32 @@ it('tanpa trail aktif tidak ada pengingat', async () => {
   await GeofenceRuntime.processPosition(atFirst(T0));
   await GeofenceRuntime.processPosition(atFirst(T0 + 30 * MIN));
   expect(NotificationService.notifyTrailOverstay).not.toHaveBeenCalled();
+});
+
+it('selama navigasi, proximity tidak memutar audio', async () => {
+  NavigationSession.start(second.id);
+  await GeofenceRuntime.processPosition(atFirst(T0));
+  expect(WalkModeService.handleProximityAudioTrigger).not.toHaveBeenCalled();
+});
+
+it('tujuan yang baru dicapai tidak memicu audio maupun notifikasi proximity', async () => {
+  NavigationSession.start(first.id);
+  NavigationSession.markArrived(first.id, T0);
+  NavigationSession.end(first.id);
+  await GeofenceRuntime.processPosition(atFirst(T0 + 1000));
+  expect(WalkModeService.handleProximityAudioTrigger).not.toHaveBeenCalledWith(
+    expect.objectContaining({ id: first.id }),
+  );
+  expect(NotificationService.notifyNearbyPoi).not.toHaveBeenCalledWith(
+    expect.objectContaining({ id: first.id }),
+    expect.anything(),
+    expect.anything(),
+  );
+});
+
+it('tanpa navigasi, proximity tetap memutar audio', async () => {
+  await GeofenceRuntime.processPosition(atFirst(T0));
+  expect(WalkModeService.handleProximityAudioTrigger).toHaveBeenCalledWith(
+    expect.objectContaining({ id: first.id }),
+  );
 });

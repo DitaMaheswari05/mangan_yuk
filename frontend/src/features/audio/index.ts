@@ -11,6 +11,7 @@ import {
 import { useCallback, useEffect } from 'react';
 import { CONTENT_ASSETS } from '@/data/assets';
 import type { Poi } from '@/types/content';
+import { AudioQueue } from './queue';
 
 /** assetKey ('poi-audio/P01.mp3') → modul aset bundel; null jika file belum diekspor. */
 export function resolveAsset(assetKey: string | null | undefined): number | null {
@@ -80,8 +81,13 @@ export function useNarration(poi: Pick<Poi, 'name' | 'audio'> | null | undefined
 
   const toggle = useCallback(() => {
     if (!available) return;
-    if (status.playing) player.pause();
-    else player.play();
+    if (status.playing) {
+      player.pause();
+      return;
+    }
+    // Narasi dari antrean (mis. setelah kedatangan) jangan sampai berbunyi bersamaan.
+    void AudioQueue.stop();
+    player.play();
   }, [available, player, status.playing]);
 
   const seekTo = useCallback(
@@ -105,6 +111,7 @@ export function useNarration(poi: Pick<Poi, 'name' | 'audio'> | null | undefined
 // background task) saat UI kartu POI tidak terbuka. Hanya satu narasi aktif dalam satu waktu.
 let detachedPlayer: AudioPlayer | null = null;
 let detachedSub: { remove: () => void } | null = null;
+let interruptedPlayer: AudioPlayer | null = null;
 
 export function stopNarration(): void {
   detachedSub?.remove();
@@ -123,6 +130,21 @@ export function stopNarration(): void {
   } catch {
     // abaikan
   }
+}
+
+/** Jeda narasi tanpa UI yang sedang berbunyi. false jika tidak ada yang diputar. */
+export function pauseNarration(): boolean {
+  if (!detachedPlayer?.playing) return false;
+  detachedPlayer.pause();
+  interruptedPlayer = detachedPlayer;
+  return true;
+}
+
+/** Lanjutkan narasi yang dijeda pauseNarration, kecuali sudah dihentikan atau diganti. */
+export function resumeNarration(): void {
+  const player = interruptedPlayer;
+  interruptedPlayer = null;
+  if (player && player === detachedPlayer) player.play();
 }
 
 /** Putar narasi POI tanpa UI. false jika POI belum punya audio di bundel. */

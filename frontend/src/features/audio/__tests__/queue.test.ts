@@ -1,6 +1,6 @@
-import { AudioQueue } from '../queue';
-import { playNarration, stopNarration } from '../index';
-import { speakText, stopSpeaking } from '../tts';
+import { announceArrival, ARRIVAL_NARRATION_DELAY_MS, AudioQueue } from '../queue';
+import { pauseNarration, playNarration, resumeNarration, stopNarration } from '../index';
+import { speakArrivalCue, speakText, stopSpeaking } from '../tts';
 
 jest.mock('../index', () => ({
   playNarration: jest.fn(async (_poi, onFinish) => {
@@ -9,6 +9,8 @@ jest.mock('../index', () => ({
     return true;
   }),
   stopNarration: jest.fn(),
+  pauseNarration: jest.fn(() => false),
+  resumeNarration: jest.fn(),
 }));
 
 jest.mock('../tts', () => ({
@@ -16,6 +18,9 @@ jest.mock('../tts', () => ({
     setTimeout(() => opts?.onDone?.(), 10);
   }),
   stopSpeaking: jest.fn(async () => {}),
+  speakArrivalCue: jest.fn(async (_name, opts) => {
+    setTimeout(() => opts?.onDone?.(), 10);
+  }),
 }));
 
 describe('F04 AudioQueue Service', () => {
@@ -111,5 +116,55 @@ describe('F04 AudioQueue Service', () => {
     await AudioQueue.skip();
 
     expect(AudioQueue.getStatus().currentItem?.id).toBe('item-2');
+  });
+
+  it('announceArrival: ucapan kedatangan dulu, narasi tujuan menyusul setelah jeda', async () => {
+    jest.useFakeTimers();
+    try {
+      const poi = { id: 'P01', name: 'Baso Goreng Pandu', audio: null, culturalStory: '', description: '' };
+      await announceArrival(poi as never);
+      expect(speakArrivalCue).toHaveBeenCalledWith('Baso Goreng Pandu', expect.anything());
+
+      jest.advanceTimersByTime(10);
+      expect(playNarration).not.toHaveBeenCalled();
+
+      jest.advanceTimersByTime(ARRIVAL_NARRATION_DELAY_MS);
+      await Promise.resolve();
+      expect(playNarration).toHaveBeenCalledWith(poi, expect.any(Function));
+    } finally {
+      await AudioQueue.stop();
+      jest.useRealTimers();
+    }
+  });
+
+  it('stop() membatalkan narasi yang masih menunggu jeda', async () => {
+    jest.useFakeTimers();
+    try {
+      AudioQueue.enqueueAfter({ id: 'late', type: 'tts', title: 'x', text: 'x' }, 1000);
+      await AudioQueue.stop();
+      jest.advanceTimersByTime(1000);
+      await Promise.resolve();
+      expect(speakText).not.toHaveBeenCalled();
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it('interruptWith: narasi rekaman dijeda selama instruksi lalu dilanjutkan', async () => {
+    (pauseNarration as jest.Mock).mockReturnValueOnce(true);
+    const speak = jest.fn(async (opts: { onDone?: () => void }) => opts.onDone?.());
+    await AudioQueue.interruptWith(speak);
+    expect(speak).toHaveBeenCalled();
+    expect(resumeNarration).toHaveBeenCalledTimes(1);
+  });
+
+  it('interruptWith: narasi TTS dihentikan sebelum instruksi', async () => {
+    (playNarration as jest.Mock).mockResolvedValueOnce(false);
+    await AudioQueue.enqueue({ id: 'n1', type: 'narration', title: 'x', poi: { id: 'P01', name: 'x', audio: null, culturalStory: 'cerita', description: '' } as never });
+    const speak = jest.fn(async () => {});
+    await AudioQueue.interruptWith(speak);
+    expect(stopSpeaking).toHaveBeenCalled();
+    expect(speak).toHaveBeenCalledWith({});
+    expect(resumeNarration).not.toHaveBeenCalled();
   });
 });
