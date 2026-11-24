@@ -7,6 +7,7 @@ import '@/tasks/backgroundLocation';
 import '@/tasks/notificationActions';
 import { RecommendationSheet } from '@/components/recommendation/RecommendationSheet';
 import { handleNotificationResponse } from '@/features/notifications/actions';
+import { ensureNotificationSetup } from '@/features/notifications';
 import { isValidInternalRoute } from '@/lib/validation';
 
 export default function RootLayout() {
@@ -53,6 +54,7 @@ export default function RootLayout() {
       }
     };
     try {
+      void ensureNotificationSetup();
       // Respons terakhir saat cold start: aksi tombol sudah ditangani background task, jadi
       // hanya ketukan biasa yang diteruskan (mencegah narasi terputar ulang saat app dibuka).
       void handle(Notifications.getLastNotificationResponse(), false);
