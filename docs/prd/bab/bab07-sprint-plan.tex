@@ -20,7 +20,7 @@
 \addcontentsline{toc}{section}{Sprint 1 - Week 10}
 
 \textbf{Periode:} 23 Februari -- 1 Maret 2026\\
-\textbf{Sprint Goal:} Membangun fondasi arsitektur aplikasi, menyelesaikan onboarding dan edukasi privasi lokasi, menampilkan posisi GPS pengguna di peta OSM secara real-time, serta membundel dataset POI Sudirman Street Food.\\
+\textbf{Sprint Goal:} Membangun fondasi arsitektur aplikasi, menyelesaikan onboarding dan edukasi privasi lokasi, menampilkan posisi GPS pengguna di peta MapLibre secara real-time, serta membundel dataset POI Sudirman Street Food.\\
 \textbf{Target Increment:} Aplikasi dapat dijalankan di perangkat uji, onboarding dan izin lokasi berjalan, posisi pengguna dan status di dalam/di luar area tampil di peta, dan marker POI terbaca dari dataset lokal.\\
 \textbf{Backlog:} PB01, PB02, PB03, PB04 (estimasi 48 jam tim)
 
@@ -28,7 +28,7 @@
 SB-1.1 & Inisialisasi project React Native Expo (TypeScript), struktur folder modular, konfigurasi ESLint, Prettier, dan navigasi stack/tab. & 8 & PB01 & Samantha \\ \hline
 SB-1.2 & Perancangan UI onboarding, dialog transparansi privasi lokasi (F09), dan penanganan penolakan izin lokasi. & 8 & PB02 & Anggita \\ \hline
 SB-1.3 & Implementasi alur permintaan izin lokasi foreground dan notifikasi dengan fallback mode tanpa lokasi. & 6 & PB02 & Samantha \\ \hline
-SB-1.4 & Integrasi peta (MapLibre) dengan tile OpenStreetMap dan poligon batas kawasan Sudirman Street Food. & 10 & PB03 & Samantha \\ \hline
+SB-1.4 & Integrasi peta MapLibre dan poligon batas kawasan Sudirman Street Food. & 10 & PB03 & Samantha \\ \hline
 SB-1.5 & Implementasi pembacaan GPS akurasi tinggi (\texttt{watchPositionAsync}), titik biru pengguna, dan kalkulasi status di dalam/di luar area. & 8 & PB03 & Dita \\ \hline
 SB-1.6 & Survei, kurasi, dan penyusunan JSON dataset POI tenant kuliner (nama, koordinat, menu, harga, kategori, rasa). & 8 & PB04 & Theresia, Anggita \\ \hline
 \end{sprinttable}
@@ -72,8 +72,8 @@ SB-3.6 & Integrasi alur inti eksplorasi (lokasi \(\rightarrow\) geofence \(\righ
 
 \textbf{Periode:} 16 -- 22 Maret 2026\\
 \textbf{Sprint Goal:} Menyelesaikan Smart Culinary Trail Planner (nearest neighbor), rekomendasi kontekstual berbasis aturan, dan Paspor Kuliner. Feature Freeze pada akhir Week 13.\\
-\textbf{Target Increment:} Trail planner menghasilkan itinerary sesuai durasi dan budget, rekomendasi muncul saat exit event, dan stempel paspor tercatat dari dwell event.\\
-\textbf{Backlog:} PB13, PB14, PB15, PB16 (estimasi 50 jam tim)
+\textbf{Target Increment:} Trail planner menghasilkan itinerary sesuai durasi dan budget, rekomendasi muncul saat exit event, dan stempel paspor tercatat dari ulasan tenant.\\
+\textbf{Backlog:} PB13, PB14, PB15, PB16, PB19 (estimasi 50 jam tim)
 
 \begin{sprinttable}{Sprint Backlog 4 - Week 13}
 SB-4.1 & Implementasi form Trail Planner (durasi 30/60/90 menit, budget, preferensi rasa) dan validasi input. & 8 & PB14 & Samantha \\ \hline
@@ -81,7 +81,7 @@ SB-4.2 & Implementasi algoritma rute nearest neighbor berbasis budget, rata-rata
 SB-4.3 & Implementasi progres trail (tandai selesai lewat dwell event) dan pengingat sisa waktu. & 8 & PB15 & Dita, Theresia \\ \hline
 SB-4.4 & Implementasi fitur Lewati Tenant dan susun ulang itinerary jika tenant tutup atau dilewati. & 6 & PB15 & Samantha, Theresia \\ \hline
 SB-4.5 & Implementasi rekomendasi kontekstual berbasis aturan saat exit event (jarak, sisa budget, pasangan rasa). & 8 & PB13 & Theresia \\ \hline
-SB-4.6 & Implementasi Paspor Kuliner: stempel digital otomatis setelah dwell event, trail tematik, dan penyimpanan badge lokal. & 8 & PB16 & Samantha, Anggita \\ \hline
+SB-4.6 & Implementasi Paspor Kuliner dan ulasan tenant: stempel digital dari ulasan, trail tematik, badge, serta API backend dengan fallback penyimpanan lokal. & 8 & PB16 & Samantha, Anggita \\ \hline
 \end{sprinttable}
 
 \section*{Sprint 5 - Week 14}
@@ -95,7 +95,7 @@ SB-4.6 & Implementasi Paspor Kuliner: stempel digital otomatis setelah dwell eve
 \begin{sprinttable}{Sprint Backlog 5 - Week 14}
 SB-5.1 & Uji lapangan di Sudirman Street Food: evaluasi akurasi proximity trigger pada tenant kuliner. & 10 & PB17 & Semua \\ \hline
 SB-5.2 & Usability test interaksi eyes-free bersama 5 responden di area studi kasus. & 8 & PB17 & Anggita, Raka \\ \hline
-SB-5.3 & Audit log jaringan (network inspector) untuk memastikan koordinat hanya dikirim ke layanan rute OSRM saat navigasi dan tidak ke server lain (F09). & 6 & PB17 & Dita \\ \hline
+SB-5.3 & Audit log jaringan (network inspector) untuk memastikan koordinat hanya dikirim ke layanan rute OSRM saat navigasi, dan request ke backend Mangan Yuk hanya berisi data paspor dan ulasan (F09). & 6 & PB17 & Dita \\ \hline
 SB-5.4 & Perbaikan defect hasil uji lapangan: penyesuaian threshold hysteresis dan kompensasi sinyal GPS di bawah kanopi lorong. & 8 & PB18 & Dita, Samantha \\ \hline
 SB-5.5 & Optimasi performa: audit memori, pencegahan frame drop, dan waktu buka aplikasi (cold start \textless{}2 detik). & 6 & PB18 & Theresia \\ \hline
 SB-5.6 & Build APK rilis final via EAS Build, uji instalasi mandiri, dan penyusunan berkas deliverable. & 6 & PB18 & Samantha, Raka \\ \hline

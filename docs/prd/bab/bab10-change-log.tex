@@ -12,12 +12,18 @@
 \cellcolor[HTML]{D9EAF7}\textbf{Version} & \cellcolor[HTML]{D9EAF7}\textbf{Date} & \cellcolor[HTML]{D9EAF7}\textbf{Requirement / Backlog} & \cellcolor[HTML]{D9EAF7}\textbf{Change} & \cellcolor[HTML]{D9EAF7}\textbf{Reason} & \cellcolor[HTML]{D9EAF7}\textbf{Approval} \\ \hline
 \endhead
 1.0 & Week 9 & Initial Baseline & Initial PRD &  &  \\ \hline
-1.1 & W11 & F02 / PB05 & Trigger radius diubah dari 5 m menjadi 10 m & Pengujian awal menunjukkan GPS indoor tidak stabil pada radius 5 m & Disetujui PMO \ \hline
-1.2 & W14 & F03, F06 / PB04, PB08, PB11 & Dataset diperluas dari 10 menjadi 31 POI; acceptance criteria disesuaikan (31/31 POI) & Kurasi lapangan mencakup seluruh tenant aktif di kawasan &  \ \hline
-1.3 & W14 & F06, F09 / PB11, PB17 & Navigasi memakai rute jalan kaki OSRM (fallback garis lurus); F09 mengizinkan koordinat asal--tujuan dikirim ke layanan rute saat navigasi, tidak ke backend Mangan Yuk; onboarding menyebut pengecualian ini & Garis lurus tidak mengikuti lorong kawasan sehingga membingungkan pengguna &  \ \hline
-1.4 & W14 & F10 / PB16 & Stempel paspor dicatat dari dwell event, bukan scan QR & Tenant tidak memasang QR; dwell event sudah tersedia dari F02 &  \ \hline
-1.5 & W14 & F11 (baru) / PB02 & Ditambah akun pengguna lokal (login/registrasi, profil) & Personalisasi preferensi dan halaman profil per pengguna &  \ \hline
-1.6 & W14 & Bab 8 & Peta beralih dari react-native-maps ke MapLibre; ditambah backend content pipeline (Supabase) & Penyesuaian dengan implementasi di repositori &  \ \hline
+1.1 & W11 & F02 / PB05 & Trigger radius diubah dari 5 m menjadi 10 m & Pengujian awal menunjukkan GPS indoor tidak stabil pada radius 5 m & Disetujui PMO \\ \hline
+1.2 & W14 & F03, F06 / PB04, PB08, PB11 & Dataset diperluas dari 10 menjadi 31 POI; acceptance criteria disesuaikan (31/31 POI) & Kurasi lapangan mencakup seluruh tenant aktif di kawasan &  \\ \hline
+1.3 & W14 & F06, F09 / PB11, PB17 & Navigasi memakai rute jalan kaki OSRM (fallback garis lurus); F09 mengizinkan koordinat asal--tujuan dikirim ke layanan rute saat navigasi, tidak ke backend Mangan Yuk; onboarding menyebut pengecualian ini & Garis lurus tidak mengikuti lorong kawasan sehingga membingungkan pengguna &  \\ \hline
+1.4 & W14 & F10 / PB16 & Stempel paspor dicatat dari dwell event, bukan scan QR & Tenant tidak memasang QR; dwell event sudah tersedia dari F02 &  \\ \hline
+1.5 & W14 & F11 (baru) / PB02 & Ditambah akun pengguna lokal (login/registrasi, profil) & Personalisasi preferensi dan halaman profil per pengguna &  \\ \hline
+1.6 & W14 & Bab 8 & Peta beralih dari react-native-maps ke MapLibre; ditambah backend content pipeline (Supabase) & Penyesuaian dengan implementasi di repositori &  \\ \hline
+1.7 & W14 & F06 / PB11 & Tombol ``Buka di Google Maps'' dihapus; seluruh navigasi memakai peta MapLibre dan rute OSRM di dalam aplikasi & Pengguna tidak perlu berpindah ke aplikasi lain dan tidak bergantung pada layanan Google &  \\ \hline
+1.8 & W14 & F10 / PB16 & Stempel paspor dicatat dari ulasan tenant (rating, menu yang dimakan, teks, foto), menggantikan stempel dari dwell event (v1.4); trail tematik menjadi ``Jejak Kuliner Nusantara'' dan ``Manis-manis Bandung'' & Ulasan memberi data menu populer dan rating per tenant; stempel tidak lagi tercatat hanya karena pengguna lewat atau menunggu di dekat tenant &  \\ \hline
+1.9 & W14 & F09, F10 / PB16, PB17, Bab 8 & Paspor dan ulasan disinkronkan ke backend Mangan Yuk dengan fallback lokal; audit jaringan F09 disesuaikan (backend hanya menerima data paspor dan ulasan, tanpa koordinat) & Ulasan perlu dibagikan antarpengguna agar rating dan menu populer bermakna &  \\ \hline
+1.10 & W14 & F08 / PB14, PB15 & Jam buka tidak lagi membatasi trail planner; tenant tutup dilewati secara manual & Data jam buka belum selalu akurat sehingga tenant yang sebenarnya buka ikut tersaring &  \\ \hline
+1.11 & W14 & F12 (baru) / PB19 & Ditambah preferensi ``Hanya tenant halal'' yang berlaku di peta, pencarian, trail, rekomendasi, dan proximity trigger & Sebagian tenant di kawasan menyajikan menu non-halal &  \\ \hline
+1.12 & W14 & G04, F07 & Faktor jam ramai dan estimasi antrean dihapus & Data observasi jam ramai per tenant tidak tersedia &  \\ \hline
  &  &  &  &  &  \\ \hline
  &  &  &  &  &  \\ \hline
 \end{longtable}

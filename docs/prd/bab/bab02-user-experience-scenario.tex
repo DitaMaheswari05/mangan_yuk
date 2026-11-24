@@ -21,12 +21,12 @@ Menekan tombol Lanjut &  \\ \hline
 Menekan tombol Izinkan Lokasi, lalu memilih ``Izinkan'' pada dialog sistem &  \\ \hline
  & Meminta izin notifikasi \\ \hline
 Mengizinkan notifikasi &  \\ \hline
- & Meminta preferensi rasa (pedas/manis/gurih) dan jenis kuliner (makanan/minuman/jajanan), dengan opsi Lewati \\ \hline
+ & Meminta preferensi rasa (pedas/manis/gurih), jenis kuliner (makanan/minuman/jajanan), dan opsi ``Hanya tenant halal'', dengan opsi Lewati \\ \hline
 Memilih preferensi pedas dan gurih, lalu menekan tombol Mulai &  \\ \hline
- & Menyimpan preferensi secara lokal, menampilkan Beranda (peta OSM + denah kawasan, posisi pengguna, status ``Di luar area'', jarak ke Sudirman Street Food, tombol Buka di Google Maps, Rencanakan Trail, dan Mode Jelajah) \\ \hline
-Menekan tombol Buka di Google Maps &  \\ \hline
- & Membuka Google Maps dengan tujuan koordinat kawasan Sudirman Street Food \\ \hline
-Menuju kawasan, kembali ke aplikasi, lalu mengaktifkan Mode Jelajah &  \\ \hline
+ & Menyimpan preferensi secara lokal, menampilkan Beranda (peta MapLibre + denah kawasan, posisi pengguna, status ``Di luar area'', jarak ke Sudirman Street Food, Rencanakan Trail, dan Mode Jelajah) \\ \hline
+Berjalan menuju kawasan sambil memantau Beranda &  \\ \hline
+ & Memperbarui posisi pengguna, jarak ke Sudirman Street Food, dan status area secara real-time \\ \hline
+Tiba di sekitar kawasan, lalu mengaktifkan Mode Jelajah &  \\ \hline
  & Mengaktifkan pelacakan lokasi di background dan menampilkan notifikasi permanen ``Mangan Yuk! sedang memandu'' \\ \hline
 Memasuki radius 100 m kawasan &  \\ \hline
  & Entry event: menampilkan notifikasi dan audio sambutan (``Selamat datang di Sudirman Street Food!''), menawarkan pilihan Rencanakan Trail atau Jelajah Bebas \\ \hline
@@ -85,23 +85,21 @@ Mengetuk daftar ``Tenant di sekitar'' atau marker tenant di peta &  \\ \hline
  & Menampilkan kartu POI dan audio narasi secara manual, lalu melanjutkan trigger otomatis setelah akurasi GPS kembali \(\le\)30 m \\ \hline
 \multicolumn{2}{|L{1.000}|}{\textbf{Skenario Alternatif 4: Tenant pada trail tutup atau ingin dilewati}} \\ \hline
 Menekan tombol Lewati Tenant pada mode navigasi &  \\ \hline
- & Menyusun ulang trail dengan tenant pengganti yang sedang buka, sesuai sisa waktu dan sisa budget, lalu menampilkan rute baru \\ \hline
+ & Menandai tenant sebagai dilewati, lalu menyusun ulang sisa trail dari posisi pengguna sesuai sisa waktu dan sisa budget (tenant yang sudah selesai atau dilewati tidak dipilih lagi). Jam buka tidak membatasi pemilihan tenant, sehingga tenant yang tutup dilewati secara manual oleh pengguna \\ \hline
 \multicolumn{2}{|L{1.000}|}{\textbf{Skenario Alternatif 5: Pengguna menolak cerita saat proximity event}} \\ \hline
 Menekan tombol Lewati pada notifikasi trigger &  \\ \hline
  & Menutup prompt audio, menyimpan tenant ke daftar ``Terlewati'', dan tidak memicu ulang tenant tersebut selama cooldown 30 menit \\ \hline
-\multicolumn{2}{|L{1.000}|}{\textbf{Skenario Alternatif 6 (Optional): Pengguna mengumpulkan stempel Paspor Kuliner}} \\ \hline
-Membuka menu Paspor Kuliner di Beranda &  \\ \hline
- & Menampilkan daftar trail tematik (misalnya ``Jejak Jajanan Sunda'' dan ``Manis-manis Bandung'') beserta progres masing-masing (misalnya 0/5) \\ \hline
-Memilih trail ``Jejak Jajanan Sunda'' &  \\ \hline
- & Menampilkan daftar tenant yang termasuk trail tersebut dan menandainya di peta \\ \hline
-Mengunjungi salah satu tenant pada trail dan berada di sana \(\ge\)3 menit &  \\ \hline
- & Dwell event: mencatat stempel digital untuk tenant tersebut, memutar efek suara singkat, dan memperbarui progres (1/5) \\ \hline
-Mengunjungi tenant yang sama untuk kedua kalinya &  \\ \hline
- & Tidak mencatat stempel ganda; progres tetap 1/5 \\ \hline
+\multicolumn{2}{|L{1.000}|}{\textbf{Skenario Alternatif 6 (Optional): Pengguna mengumpulkan stempel Paspor Kuliner lewat ulasan}} \\ \hline
+Membuka menu Paspor Kuliner dari halaman Profil &  \\ \hline
+ & Menampilkan daftar trail tematik (``Jejak Kuliner Nusantara'' dan ``Manis-manis Bandung'') beserta progres masing-masing (misalnya 0/5), daftar tenant tiap trail, dan badge yang masih terkunci \\ \hline
+Menekan tombol Tambah Ulasan, memilih tenant, memberi rating 1--5, memilih menu yang dimakan, lalu (opsional) menulis ulasan dan mengunggah foto &  \\ \hline
+ & Menyimpan ulasan dan mencatat stempel digital untuk tenant tersebut, lalu memperbarui progres trail yang memuat tenant itu (1/5). Ulasan dikirim ke backend Mangan Yuk; jika backend tidak dapat dihubungi, ulasan dan stempel disimpan di perangkat \\ \hline
+Menulis ulasan kedua untuk tenant yang sama &  \\ \hline
+ & Menyimpan ulasan baru tanpa menambah stempel ganda; progres tetap 1/5 \\ \hline
 Menutup aplikasi, lalu membukanya kembali di hari lain &  \\ \hline
  & Menampilkan progres paspor yang tersimpan (1/5) \\ \hline
-Mengunjungi seluruh tenant pada trail hingga dwell tenant terakhir tercatat &  \\ \hline
- & Menampilkan badge ``Jejak Jajanan Sunda'' beserta audio ucapan selamat, dan menyimpan badge ke halaman Paspor Kuliner \\ \hline
+Memberi ulasan untuk seluruh tenant pada satu trail &  \\ \hline
+ & Membuka badge trail tersebut (misalnya ``Pemburu Manis Bandung'') dan menampilkannya di halaman Paspor Kuliner \\ \hline
 \end{longtable}
 
 \section{Main User Flow}
