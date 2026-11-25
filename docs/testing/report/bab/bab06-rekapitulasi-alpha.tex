@@ -2,7 +2,7 @@
 \chapter{Rekapitulasi Alpha Testing per Requirement}
 \label{bab:rekapitulasi-alpha}
 
-\textit{Catatan: Kolom \textbf{Pass} di bawah ini mencatat test case yang telah terverifikasi langsung melalui pengujian otomatis (Jest 259/259 dan Vitest 37/37 pada 24 November 2026). Test case yang membutuhkan perangkat Android fisik (\texttt{Samsung Galaxy A26}) dan kondisi lapangan Sudirman Street Food masih berstatus menunggu uji lapangan.}
+\textit{Catatan: Kolom \textbf{Pass} di bawah ini mencatat test case yang telah terverifikasi langsung melalui pengujian otomatis (Jest 288/288 pada 29 suite dan Vitest 37/37 pada 2 file per 25 November 2026). Test case yang membutuhkan perangkat Android fisik (\texttt{Samsung Galaxy A26}) dan kondisi lapangan Sudirman Street Food masih berstatus menunggu uji lapangan.}
 
 \begin{landscapepage}
 {\footnotesize
@@ -17,14 +17,14 @@
 F01 & Location Awareness & 5 & 0 & 0 & 0\% & Menunggu Uji Lapangan & Unit logika (\texttt{01-geofence}, \texttt{10-onboarding}) lolos; uji GPS/UI di perangkat fisik menyusul \\ \hline
 F02 & Location-Based Trigger (Geofence) & 6 & 0 & 0 & 0\% & Menunggu Uji Lapangan & Unit logika (\texttt{01-geofence} 27/27) lolos; uji radius 10 m, background, \& stopwatch di lapangan menyusul \\ \hline
 F03 & Multimodal Exploration & 4 & 2 & 0 & 50\% & Sebagian (Unit) & \texttt{TC-12-01}, \texttt{TC-12-03} lolos via \texttt{02-poi-dataset} (21/21) \& \texttt{03-multimodal} (12/12); \texttt{TC-12-02}, \texttt{TC-13-01} menunggu perangkat fisik \\ \hline
-F04 & Eyes-Free Interaction & 5 & 0 & 0 & 0\% & Menunggu Uji Lapangan & Unit audio/notifikasi (\texttt{tts}, \texttt{queue}, \texttt{walkMode}, \texttt{actions}) lolos; uji lock screen \& 5 penguji menyusul \\ \hline
+F04 & Eyes-Free Interaction & 5 & 0 & 0 & 0\% & Menunggu Uji Lapangan & Unit audio/notifikasi (\texttt{tts}, \texttt{queue}, \texttt{walkMode}, \texttt{actions}, \texttt{service}) lolos; uji lock screen \& 5 penguji menyusul \\ \hline
 F05 & Search \& Destination & 5 & 4 & 0 & 80\% & Sebagian (Unit) & \texttt{TC-16-01}, \texttt{TC-16-02}, \texttt{TC-17-01}, \texttt{TC-19-01} lolos via \texttt{04-search} (18/18) \& \texttt{search.test} (10/10); \texttt{TC-18-01} menunggu UI \\ \hline
-F06 & Navigation & 7 & 0 & 0 & 0\% & Menunggu Uji Lapangan & Unit navigasi/OSRM (\texttt{07-navigation}, \texttt{routing}) lolos; uji kompas, rute OSRM, \& 31 POI di lapangan menyusul \\ \hline
-F07 & Contextual Recommendation & 3 & 3 & 0 & 100\% & Pass (Unit) & \texttt{TC-25-01}, \texttt{TC-26-01}, \texttt{TC-27-01} lolos via \texttt{05-recommendation} (10/10), \texttt{recommendation.test} (10/10), \texttt{exit.test} \\ \hline
-F08 & Smart Culinary Trail Planner & 5 & 5 & 0 & 100\% & Pass (Unit) & \texttt{TC-28-01} s.d. \texttt{TC-30-01} lolos via \texttt{06-trail} (8/8), \texttt{trail.test} (9/9), \texttt{progress.test} (17/17), \texttt{runtime-trail} (3/3) \\ \hline
+F06 & Navigation & 7 & 0 & 0 & 0\% & Menunggu Uji Lapangan & Unit navigasi/OSRM (\texttt{07-navigation}, \texttt{routing}, \texttt{session}) lolos; uji kompas, rute OSRM, \& 31 POI di lapangan menyusul \\ \hline
+F07 & Contextual Recommendation & 3 & 3 & 0 & 100\% & Pass (Unit) & \texttt{TC-25-01}, \texttt{TC-26-01}, \texttt{TC-27-01} lolos via \texttt{05-recommendation} (10/10), \texttt{recommendation.test} (10/10), \texttt{exit.test} (6/6) \\ \hline
+F08 & Smart Culinary Trail Planner & 5 & 5 & 0 & 100\% & Pass (Unit) & \texttt{TC-28-01} s.d. \texttt{TC-30-01} lolos via \texttt{06-trail} (8/8), \texttt{trail.test} (12/12), \texttt{progress.test} (17/17), \texttt{runtime-trail} (8/8) \\ \hline
 F09 & Location Privacy \& Consent & 4 & 0 & 0 & 0\% & Menunggu Uji Lapangan & Unit privasi (\texttt{08-privacy} 3/3) lolos; verifikasi log proxy HTTPS \& notifikasi foreground di HP menyusul \\ \hline
-\multicolumn{2}{|r|}{\textbf{Subtotal Requirement Utama (F01--F09)}} & \textbf{44} & \textbf{14} & \textbf{0} & \textbf{31,8\%} & \textbf{Sebagian (Unit)} & \textbf{259/259 Jest unit tests lolos; 30 TC menunggu uji lapangan} \\ \hline
-F10 & Paspor Kuliner \& Ulasan Tenant (Optional) & 3 & 3 & 0 & 100\% & Pass (Unit \& API) & \texttt{TC-34-01} s.d. \texttt{TC-34-03} lolos via \texttt{09-passport} (10/10), \texttt{passport.test} (10/10), \texttt{reviews.test} (16/16) \\ \hline
+\multicolumn{2}{|r|}{\textbf{Subtotal Requirement Utama (F01--F09)}} & \textbf{44} & \textbf{14} & \textbf{0} & \textbf{31,8\%} & \textbf{Sebagian (Unit)} & \textbf{288/288 Jest unit tests lolos; 30 TC menunggu uji lapangan} \\ \hline
+F10 & Paspor Kuliner \& Ulasan Tenant (Optional) & 3 & 3 & 0 & 100\% & Pass (Unit \& API) & \texttt{TC-34-01} s.d. \texttt{TC-34-03} lolos via \texttt{09-passport} (10/10), \texttt{passport.test} (10/10), \texttt{api.test} (7/7), \texttt{reviews.test} (16/16) \\ \hline
 F11 & Akun Pengguna Lokal (Optional) & 2 & 2 & 0 & 100\% & Pass (Unit \& API) & \texttt{TC-35-01}, \texttt{TC-35-02} lolos via \texttt{auth.test} (21/21) \& \texttt{10-onboarding} (9/9) \\ \hline
 F12 & Preferensi Halal (Optional) & 2 & 2 & 0 & 100\% & Pass (Unit) & \texttt{TC-36-01}, \texttt{TC-36-02} lolos via \texttt{halal.test.ts} \\ \hline
 \multicolumn{2}{|r|}{\textbf{Total Keseluruhan (F01--F12)}} & \textbf{51} & \textbf{21} & \textbf{0} & \textbf{41,2\%} & \textbf{Sebagian (Unit)} & \textbf{21 TC terverifikasi otomatis; 30 TC menunggu uji lapangan} \\ \hline
