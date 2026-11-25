@@ -4,92 +4,85 @@
 
 \section{Diagram Use Case}
 
-Diagram use case berikut memodelkan interaksi antara aktor utama (\textbf{Pengunjung}) dan sistem eksternal (\textbf{Layanan Rute OSRM} serta \textbf{Backend Mangan Yuk}) terhadap 15 use case pada aplikasi \textbf{ManganYuk!}, konsisten dengan \textit{user flow} pada PRD Bagian 2.
+Diagram use case berikut memodelkan interaksi antara aktor utama (\textbf{Pengunjung}) dan dua sistem eksternal (\textbf{Layanan Rute OSRM} dan \textbf{Backend Mangan Yuk}) terhadap 15 use case pada aplikasi \textbf{ManganYuk!}, konsisten dengan \textit{user flow} pada PRD Bagian 2. Pengunjung terhubung langsung dengan use case yang dimulainya sendiri. Use case lain dijangkau melalui relasi \mbox{\guillemotleft include\guillemotright} (selalu dijalankan sebagai bagian dari use case dasar) atau \mbox{\guillemotleft extend\guillemotright} (hanya dijalankan bila kondisinya terpenuhi). Panah \mbox{\guillemotleft include\guillemotright} menunjuk ke use case yang disertakan, sedangkan panah \mbox{\guillemotleft extend\guillemotright} menunjuk ke use case dasar yang diperluas.
 
 \begin{figure}[H]
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
   font=\sffamily\footnotesize,
-  uc/.style={ellipse, draw=black!75, fill=blue!6, thick, minimum width=4.6cm, minimum height=0.82cm, align=center, inner sep=2pt},
-  ucopt/.style={ellipse, draw=black!75, dashed, fill=teal!6, thick, minimum width=4.6cm, minimum height=0.82cm, align=center, inner sep=2pt},
-  actor/.style={align=center},
+  uc/.style={ellipse, draw=black!75, fill=blue!6, thick, minimum width=4.3cm, minimum height=1.05cm, align=center, inner sep=1pt},
   assoc/.style={-, thick, draw=black!65},
-  ext/.style={->, dashed, thick, draw=black!55}
+  rel/.style={-{Stealth[open, length=2.6mm, width=2.2mm]}, dashed, thick, draw=black!60},
+  lbl/.style={font=\sffamily\scriptsize\itshape, fill=gray!4, inner sep=1pt}
 ]
 
-% Use cases - Kolom Kiri (Core Onboarding, Geofence, Eksplorasi)
-\node[uc] (uc01) at (0, 11.2) {\textbf{UC-01} Onboarding \& Izin Lokasi};
-\node[uc] (uc02) at (0, 9.9)  {\textbf{UC-02} Posisi \& Status Area};
-\node[uc] (uc03) at (0, 8.6)  {\textbf{UC-03} Mode Jelajah \& Entry Event};
-\node[uc] (uc04) at (0, 7.3)  {\textbf{UC-04} Kartu POI Proximity (10 m)};
-\node[uc] (uc05) at (0, 6.0)  {\textbf{UC-05} Catat Kunjungan (Dwell/Exit)};
-\node[uc] (uc06) at (0, 4.7)  {\textbf{UC-06} Kartu POI Multimodal};
-\node[uc] (uc07) at (0, 3.4)  {\textbf{UC-07} Narasi Eyes-Free};
-\node[uc] (uc12) at (0, 2.1)  {\textbf{UC-12} Matikan Mode Jelajah \& Privasi};
+% Kolom A: use case yang diinisiasi langsung oleh Pengunjung
+\node[uc] (uc14) at (0, 13.6) {\textbf{UC-14}\\Akun Pengguna Lokal};
+\node[uc] (uc01) at (0, 11.6) {\textbf{UC-01}\\Onboarding \& Izin Lokasi};
+\node[uc] (uc02) at (0, 10.2) {\textbf{UC-02}\\Posisi \& Status Area};
+\node[uc] (uc13) at (0, 8.8)  {\textbf{UC-13}\\Paspor Kuliner \& Ulasan};
+\node[uc] (uc06) at (0, 7.0)  {\textbf{UC-06}\\Kartu POI Multimodal};
+\node[uc] (uc03) at (0, 5.4)  {\textbf{UC-03}\\Mode Jelajah \& Entry Event};
+\node[uc] (uc11) at (0, 3.2)  {\textbf{UC-11}\\Smart Culinary Trail};
+\node[uc] (uc08) at (0, 1.4)  {\textbf{UC-08}\\Cari Tenant \& Tujuan};
+\node[uc] (uc12) at (0, 0.0)  {\textbf{UC-12}\\Matikan Mode Jelajah \& Privasi};
 
-% Use cases - Kolom Kanan (Search, Nav, Rec, Trail, Passport, Auth, Halal)
-\node[uc] (uc08) at (5.8, 11.2) {\textbf{UC-08} Cari Tenant \& Tujuan};
-\node[uc] (uc09) at (5.8, 9.9)  {\textbf{UC-09} Navigasi Dalam Aplikasi};
-\node[uc] (uc10) at (5.8, 8.6)  {\textbf{UC-10} Rekomendasi Berikutnya};
-\node[uc] (uc11) at (5.8, 7.3)  {\textbf{UC-11} Smart Culinary Trail};
-\node[uc] (uc13) at (5.8, 5.4)  {\textbf{UC-13} Paspor Kuliner \& Ulasan (F10)};
-\node[uc] (uc14) at (5.8, 4.1)  {\textbf{UC-14} Akun Pengguna Lokal (F11)};
-\node[uc] (uc15) at (5.8, 2.8)  {\textbf{UC-15} Preferensi Halal (F12)};
+% Kolom B
+\node[uc] (uc15) at (6.4, 12.6) {\textbf{UC-15}\\Preferensi Halal};
+\node[uc] (uc04) at (6.4, 6.2)  {\textbf{UC-04}\\Kartu POI Proximity (10 m)};
+\node[uc] (uc05) at (6.4, 4.3)  {\textbf{UC-05}\\Catat Kunjungan (Dwell/Exit)};
+\node[uc] (uc09) at (6.4, 2.3)  {\textbf{UC-09}\\Navigasi Dalam Aplikasi};
 
-% System Boundary
+% Kolom C
+\node[uc] (uc07) at (12.8, 6.2) {\textbf{UC-07}\\Narasi Eyes-Free};
+\node[uc] (uc10) at (12.8, 4.3) {\textbf{UC-10}\\Rekomendasi Berikutnya};
+
+% Batas sistem
 \begin{scope}[on background layer]
   \node[draw=black!80, thick, rounded corners=6pt, fill=gray!4,
-        fit=(uc01)(uc12)(uc08)(uc15), inner sep=14pt,
-        label={[font=\sffamily\bfseries\small, yshift=-14pt]north:Sistem Aplikasi ManganYuk! (Android)}] (sysbox) {};
+        fit=(uc14)(uc12)(uc07)(uc10)(uc15), inner xsep=12pt, inner ysep=14pt,
+        label={[font=\sffamily\bfseries\small, yshift=-15pt]north:Sistem Aplikasi ManganYuk! (Android)}] (sysbox) {};
 \end{scope}
 
-% Stick Figure Macro
-\newcommand{\stickman}[3]{% name, x, y
-  \begin{scope}[shift={(#2,#3)}]
-    \draw[thick] (0,0.45) circle (0.18);
-    \draw[thick] (0,0.27) -- (0,-0.25);
-    \draw[thick] (-0.25,0.10) -- (0.25,0.10);
-    \draw[thick] (0,-0.25) -- (-0.20,-0.62);
-    \draw[thick] (0,-0.25) -- (0.20,-0.62);
-    \node[below=0.70cm, align=center, font=\sffamily\bfseries\footnotesize] (#1) at (0,0) {#1};
-  \end{scope}
-}
-
-% Aktor Kiri: Pengunjung
-\begin{scope}[shift={(-4.6,6.8)}]
+% Aktor: Pengunjung
+\begin{scope}[shift={(-4.8,6.8)}]
   \draw[thick] (0,0.45) circle (0.18);
   \draw[thick] (0,0.27) -- (0,-0.25);
   \draw[thick] (-0.25,0.10) -- (0.25,0.10);
   \draw[thick] (0,-0.25) -- (-0.20,-0.62);
   \draw[thick] (0,-0.25) -- (0.20,-0.62);
-  \node[align=center, font=\sffamily\bfseries\footnotesize] at (0,-0.88) {Pengunjung};
+  \node[anchor=east, font=\sffamily\bfseries\footnotesize] at (-0.35,-0.1) {Pengunjung};
   \coordinate (pengunjung) at (0.35, 0);
 \end{scope}
 
-% Aktor Kanan 1: Layanan Rute OSRM
-\begin{scope}[shift={(10.4,9.9)}]
-  \node[draw=black!75, thick, fill=orange!10, rounded corners=3pt, minimum width=2.4cm, minimum height=1.0cm, align=center, font=\sffamily\bfseries\footnotesize] (osrm) {<<system>>\\Layanan Rute\\OSRM};
-\end{scope}
+% Aktor sistem eksternal
+\node[draw=black!75, thick, fill=orange!10, rounded corners=3pt, minimum width=2.4cm, minimum height=1.0cm, align=center, font=\sffamily\bfseries\footnotesize] (osrm) at (17.6, 2.3) {\guillemotleft system\guillemotright\\Layanan Rute\\OSRM};
+\node[draw=black!75, thick, fill=orange!10, rounded corners=3pt, minimum width=2.4cm, minimum height=1.0cm, align=center, font=\sffamily\bfseries\footnotesize] (backend) at (17.6, 8.8) {\guillemotleft system\guillemotright\\Backend\\Mangan Yuk};
 
-% Aktor Kanan 2: Backend Mangan Yuk
-\begin{scope}[shift={(10.4,5.4)}]
-  \node[draw=black!75, thick, fill=orange!10, rounded corners=3pt, minimum width=2.4cm, minimum height=1.0cm, align=center, font=\sffamily\bfseries\footnotesize] (backend) {<<system>>\\Backend\\Mangan Yuk};
-\end{scope}
-
-% Asosiasi Pengunjung -> UC kiri
-\foreach \u in {uc01,uc02,uc03,uc04,uc05,uc06,uc07,uc12} {
+% Asosiasi aktor
+\foreach \u in {uc14,uc01,uc02,uc13,uc06,uc03,uc11,uc08,uc12} {
   \draw[assoc] (pengunjung) -- (\u.west);
 }
-
-% Asosiasi Pengunjung -> UC kanan (jalur rapi via sisi atas/bawah)
-\foreach \u in {uc08,uc09,uc10,uc11,uc13,uc14,uc15} {
-  \draw[assoc] (pengunjung) -- (\u.west);
-}
-
-% Asosiasi Aktor Eksternal
 \draw[assoc] (uc09.east) -- (osrm.west);
 \draw[assoc] (uc13.east) -- (backend.west);
+
+% Include (base -> included)
+\draw[rel] (uc04.west) -- node[lbl, sloped, above] {\guillemotleft include\guillemotright} (uc06.south east);
+\draw[rel] (uc11.north east) -- node[lbl, sloped, below] {\guillemotleft include\guillemotright} (uc05.south west);
+\draw[rel] (uc11.south east) -- node[lbl, sloped, above] {\guillemotleft include\guillemotright} (uc09.west);
+\draw[rel] (uc08.east) -- node[lbl, sloped, below] {\guillemotleft include\guillemotright} (uc09.south west);
+
+% Extend (extension -> base)
+\draw[rel] (uc15.west) -- node[lbl, sloped, above] {\guillemotleft extend\guillemotright} (uc14.east);
+\draw[rel] (uc15.south west) -- node[lbl, sloped, below] {\guillemotleft extend\guillemotright} (uc01.east);
+\draw[rel] (uc13.south) -- node[lbl, right] {\guillemotleft extend\guillemotright} (uc06.north);
+\draw[rel] (uc04.south west) -- node[lbl, sloped, below] {\guillemotleft extend\guillemotright} (uc03.north east);
+\draw[rel] (uc05.west) -- node[lbl, sloped, below] {\guillemotleft extend\guillemotright} (uc03.south east);
+\draw[rel] (uc11.north) -- node[lbl, right] {\guillemotleft extend\guillemotright} (uc03.south);
+\draw[rel] (uc07.west) -- node[lbl, above] {\guillemotleft extend\guillemotright} (uc04.east);
+\draw[rel] (uc10.west) -- node[lbl, above] {\guillemotleft extend\guillemotright} (uc05.east);
+\draw[rel] (uc09.north east) -- node[lbl, sloped, below] {\guillemotleft extend\guillemotright} (uc10.south west);
 
 \end{tikzpicture}%
 }
@@ -97,6 +90,35 @@ Diagram use case berikut memodelkan interaksi antara aktor utama (\textbf{Pengun
 \label{fig:use-case-diagram}
 \end{figure}
 
+\section{Relasi Include dan Extend}
+
+Setiap relasi pada diagram diturunkan dari alur utama, alur alternatif, atau pre-condition pada spesifikasi use case (Bagian~\ref{sec:spesifikasi-use-case}).
+
+\begin{longtable}{|C{0.11}|L{0.19}|L{0.19}|L{0.51}|}
+\caption{Relasi Include dan Extend antar Use Case}\\
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Relasi} & \cellcolor[HTML]{D9EAF7}\textbf{Use case dasar} & \cellcolor[HTML]{D9EAF7}\textbf{Use case terkait} & \cellcolor[HTML]{D9EAF7}\textbf{Dasar relasi} \\ \hline
+\endfirsthead
+\hline
+\cellcolor[HTML]{D9EAF7}\textbf{Relasi} & \cellcolor[HTML]{D9EAF7}\textbf{Use case dasar} & \cellcolor[HTML]{D9EAF7}\textbf{Use case terkait} & \cellcolor[HTML]{D9EAF7}\textbf{Dasar relasi} \\ \hline
+\endhead
+Include & UC-04 Kartu POI Proximity & UC-06 Kartu POI Multimodal & Kartu POI yang muncul saat proximity selalu memuat konten tenant (UC-04 langkah 4). \\ \hline
+Include & UC-08 Cari Tenant \& Tujuan & UC-09 Navigasi & Menekan Jadikan Tujuan langsung membuka mode navigasi (UC-08 langkah 5--6). \\ \hline
+Include & UC-11 Smart Culinary Trail & UC-09 Navigasi & Mulai Trail membuka navigasi ke tenant pertama (UC-11 langkah 5). \\ \hline
+Include & UC-11 Smart Culinary Trail & UC-05 Catat Kunjungan & Progres trail ditandai dari dwell event (UC-11 langkah 6, UC-05 langkah 3). \\ \hline
+Extend & UC-03 Mode Jelajah & UC-04 Kartu POI Proximity & Berjalan bila pengguna masuk radius 10 m tenant saat Mode Jelajah aktif. \\ \hline
+Extend & UC-03 Mode Jelajah & UC-05 Catat Kunjungan & Berjalan bila pengguna berada di geofence tenant saat Mode Jelajah aktif. \\ \hline
+Extend & UC-03 Mode Jelajah & UC-11 Smart Culinary Trail & Berjalan bila pengguna memilih Rencanakan Trail dari notifikasi entry (UC-03 langkah 6). \\ \hline
+Extend & UC-04 Kartu POI Proximity & UC-07 Narasi Eyes-Free & Berjalan bila layar terkunci atau HP di saku, lalu pengguna menekan Dengar (UC-07 langkah 1--4). \\ \hline
+Extend & UC-05 Catat Kunjungan & UC-10 Rekomendasi & Berjalan saat exit event dari tenant yang sudah dikunjungi (trigger UC-10). \\ \hline
+Extend & UC-10 Rekomendasi & UC-09 Navigasi & Berjalan bila pengguna memilih salah satu tenant rekomendasi (UC-10 langkah 4). \\ \hline
+Extend & UC-06 Kartu POI Multimodal & UC-13 Paspor Kuliner \& Ulasan & Berjalan bila pengguna menekan Tambah Ulasan pada detail tenant (UC-13 langkah 1). \\ \hline
+Extend & UC-01 Onboarding & UC-15 Preferensi Halal & Berjalan bila pengguna memilih opsi Hanya tenant halal saat onboarding (UC-01 langkah 6; dapat dilewati). \\ \hline
+Extend & UC-14 Akun Pengguna Lokal & UC-15 Preferensi Halal & Berjalan bila pengguna mengubah preferensi dari halaman Profil (UC-14 langkah 4). \\ \hline
+\end{longtable}
+
+
+\clearpage
 \section{Daftar Use Case}
 
 \begin{longtable}{|C{0.10}|L{0.25}|L{0.14}|L{0.13}|L{0.38}|}
@@ -125,6 +147,7 @@ UC-15 & Mengatur preferensi tenant halal & Pengunjung & F12 & Pengguna mengaktif
 \end{longtable}
 
 \section{Spesifikasi Use Case}
+\label{sec:spesifikasi-use-case}
 
 \newcommand{\ucspec}[9]{%
 \begin{longtable}{|L{0.26}|L{0.74}|}
