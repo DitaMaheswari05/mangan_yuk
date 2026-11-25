@@ -1,19 +1,19 @@
 # Unit Test & Static Test — ManganYuk!
 
-Hasil per 18 November 2026, branch `test` (commit `ba52a3e` + perbaikan test lewati tenant).
+Hasil per 25 November 2026, branch `test` (setelah merge `main` `442bab4` + tambahan unit test di commit `b7d46d9`).
 
 ## Ringkasan
 
 | Pemeriksaan | Perintah | Hasil |
 |---|---|---|
-| Unit test frontend (Jest) | `cd frontend && npm test` | **242/242 lolos**, 23 file |
+| Unit test frontend (Jest) | `cd frontend && npm test` | **288/288 lolos**, 29 file |
 | Unit test backend (Vitest) | `cd backend && npm test` | **37/37 lolos**, 2 file |
 | Typecheck frontend | `cd frontend && npm run typecheck` | Lolos, 0 error |
 | Typecheck backend | `cd backend && npm run typecheck` | Lolos, 0 error (setelah `prisma generate`) |
-| Lint frontend (ESLint) | `cd frontend && npm run lint` | 0 error, 62 warning |
+| Lint frontend (ESLint) | `cd frontend && npm run lint` | 0 error, 65 warning |
 | Validasi skema Prisma | `cd backend && npx prisma validate` | Valid |
 | Lint migration Supabase | `cd backend && supabase db start && supabase db lint --fail-on error` | Hanya jalan di CI (butuh Docker) |
-| Coverage baris frontend | `npx jest --coverage` | 48% baris, 39% cabang |
+| Coverage baris frontend | `npx jest --coverage` | 66,94% baris (65,62% stmt, 58,44% cabang) |
 
 ## Cara menjalankan
 
@@ -70,21 +70,21 @@ Keduanya ikut jalan lewat `npm test` karena `jest.config.js` memakai `roots: ['<
 | Kebutuhan | File | Test | Yang diuji |
 |---|---|---|---|
 | F01, F02 Lokasi & geofence | `unit-test/01-geofence-and-location` | 27 | Haversine, filter jitter >30 m, entry/exit kawasan + hysteresis, proximity, cooldown 30 menit, dwell ≥3 menit, exit tenant, teardown sesi |
-| F02 + F08 Runtime geofence ↔ trail | `src/features/geofence/__tests__/runtime-trail` | 3 | Dwell menandai step trail selesai, pengingat overstay sekali per tenant, tanpa trail aktif tidak ada pengingat |
-| F03 Dataset POI | `unit-test/02-poi-dataset-and-validator` | 21 | Aturan validasi V1–V7 pada `pois.json`, rentang harga, jam buka lintas tengah malam, `PoiRepository` |
+| F02 + F08 Runtime geofence ↔ trail | `src/features/geofence/__tests__/runtime-trail` | 8 | Dwell menandai step trail selesai, overstay sekali, rekomendasi exit, redam audio saat navigasi/tiba |
+| F03 Dataset POI & Halal | `unit-test/02-poi-dataset-and-validator`, `src/features/poi/__tests__/halal` | 21 + 2 | Aturan validasi V1–V7 pada `pois.json`, rentang harga, jam buka lintas tengah malam, `filterByHalalPreference` |
 | F03, F04 Multimodal & audio | `unit-test/03-multimodal-and-audio` | 12 | Resolusi aset offline, format durasi, mode audio background, fallback |
-| F04 Audio & eyes-free | `src/features/audio/__tests__/{queue,tts,walkMode}` | 14 | Antrian audio, TTS fallback, auto-play Mode Jalan |
-| F04 Aksi notifikasi | `src/features/notifications/__tests__/actions` | 5 | Tombol Dengar / Lewati, aksi tidak terputar dua kali, ketukan membuka kartu POI |
+| F04 Audio & eyes-free | `src/features/audio/__tests__/{queue,tts,walkMode}` | 16 | Antrian audio, `interruptWith`, `clear()`, prioritas high, TTS fallback, auto-play Mode Jalan |
+| F04 Notifikasi & aksi | `src/features/notifications/__tests__/{actions,service}` | 5 + 5 | Tombol Dengar/Lewati, channel heads-up & lock screen (`MAX`/`PUBLIC`), izin, pesan overstay & exit |
 | F05 Pencarian | `unit-test/04-typo-tolerant-search-and-filter`, `src/features/search/__tests__/search` | 18 + 10 | Typo ("batagr"), threshold Fuse.js tanpa false positive, multi-filter harga/rasa/tipe/buka, urut jarak, waktu ≤1 detik |
-| F06 Navigasi | `unit-test/07-navigation-and-compass`, `src/features/navigation/__tests__/navigation` | 16 + 16 | Bearing, deviasi heading, kedatangan ≤10 m, audio cue tiap 20 m |
+| F06 Navigasi & sesi | `unit-test/07-navigation-and-compass`, `src/features/navigation/__tests__/{navigation,session}` | 16 + 16 + 4 | Bearing, deviasi heading, kedatangan ≤10 m, audio cue tiap 20 m, `NavigationSession` & masa tenggang 60 detik |
 | F06 Rute jalan kaki | `src/features/navigation/__tests__/routing` | 8 | Geometri rute, sisa rute, `fetchWalkingRoute` |
-| F07 Rekomendasi | `unit-test/05-contextual-recommendation-engine`, `src/features/recommendation/__tests__/recommendation` | 10 + 10 | Deterministik, eksklusi tenant tutup/dikunjungi, pasangan rasa |
-| F08 Trail planner | `unit-test/06-smart-culinary-trail-planner`, `src/features/trail/__tests__/trail` | 8 + 9 | Validasi input, Nearest Neighbor tanpa bolak-balik, batas budget & waktu, dwell alert, fallback jam buka |
+| F07 Rekomendasi & exit | `unit-test/05-contextual-recommendation-engine`, `src/features/recommendation/__tests__/{recommendation,exit}` | 10 + 10 + 6 | Deterministik, eksklusi tenant tutup/dikunjungi, pasangan rasa, `buildExitRecommendation` & TTL 15 menit |
+| F08 Trail planner | `unit-test/06-smart-culinary-trail-planner`, `src/features/trail/__tests__/trail` | 8 + 12 | Validasi input, Nearest Neighbor, batas budget/waktu/maks 5 stop, tenant tutup tetap bisa direncanakan, prioritas rasa |
 | F08 Progres trail | `src/features/trail/__tests__/progress` | 17 | Selesai via dwell, overstay alokasi + 5 menit, lewati & susun ulang sesuai sisa waktu/budget, batal lewati, penyimpanan sesi |
 | F09 Privasi | `unit-test/08-privacy-and-security-nfr` | 3 | Modul cerdas jalan tanpa HTTP request, tidak ada koordinat di payload jaringan, penjelasan privasi sebelum izin lokasi |
-| F10 Paspor | `unit-test/09-passport-and-gamification`, `src/features/passport/__tests__/passport` | 10 + 10 | Stempel idempoten, progres trail tematik, badge |
+| F10 Paspor & API ulasan | `unit-test/09-passport-and-gamification`, `src/features/passport/__tests__/{passport,api}` | 10 + 10 + 7 | Stempel idempoten, progres trail tematik, badge, `PassportReviewApi` (mode offline/tamu, validasi, error HTTP) |
 | PB-01, PB-02 Onboarding | `unit-test/10-onboarding-and-permissions` | 9 | Alur langkah, penyimpanan status, preferensi, `PermissionService` |
-| Keamanan input | `src/lib/__tests__/validation` | 6 | ID POI, rute internal (tolak open redirect & traversal), sanitasi angka & rasa (OWASP M4) |
+| Keamanan & utilitas waktu | `src/lib/__tests__/{validation,time}` | 6 + 3 | ID POI, rute internal (tolak open redirect & traversal), sanitasi angka & rasa (OWASP M4), format waktu lokal |
 
 Test rekomendasi, navigasi, dan paspor di `unit-test/` isinya sama dengan versi di `src/features/**/__tests__/` (nama grup dan jumlah test identik). Kalau ada perubahan, keduanya perlu diubah, atau salah satunya dihapus.
 
@@ -92,18 +92,18 @@ Test rekomendasi, navigasi, dan paspor di `unit-test/` isinya sama dengan versi 
 
 | Modul | Coverage | Catatan |
 |---|---|---|
-| `features/trail` | 92% | |
-| `features/recommendation` | 95% | |
+| `features/trail` | 92% | `planner.ts` & `progress.ts` 100% |
+| `features/recommendation` | 76% | `index.ts` 100%, `exit.ts` 56% |
 | `lib/validation`, `lib/geo` | 96–100% | |
 | `features/search` | 83% | |
-| `features/poi` | 79% | |
+| `features/poi` | 82% | `index.ts` 94% |
 | `features/onboarding` | 69% | |
-| `features/geofence` | 56% | `ExploreModeController` (watch lokasi, timer dwell) belum dites |
-| `features/audio` | 53% | |
-| `features/navigation` | 52% | `compass.ts` (sensor) belum dites |
-| `features/visits` | 46% | |
-| `features/notifications` | 38% | Penjadwalan notifikasi belum dites |
-| `features/passport` | 13% | Klien API review (`api.ts`) belum dites |
+| `features/geofence` | 59% | `ExploreModeController` (watch lokasi, timer dwell) belum dites |
+| `features/audio` | 57% | `queue.ts` 89% |
+| `features/navigation` | 56% | `session.ts` 100%; `compass.ts` (sensor) belum dites |
+| `features/visits` | 57% | |
+| `features/notifications` | 94% | `actions.ts` 96%, `index.ts` 93% |
+| `features/passport` | 59% | `index.ts` 100%, `api.ts` 45% (sisa fungsi update/delete & photo upload) |
 | `features/location` | 6% | Bergantung pada `expo-location`, belum di-mock |
 | `features/auth`, `storage/secure`, `store/useAppStore` | 0–7% | Belum ada test |
 | `components/*`, layar `app/*` | 0% | Belum ada test UI (render) |
