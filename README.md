@@ -102,8 +102,6 @@ npx prisma validate
 npm test
 ```
 
-Ringkasan lengkap cakupan dan hasil pengujian tersedia di [docs/testing/unit-and-static-testing.md](docs/testing/unit-and-static-testing.md).
-
 ## Peta folder
 
 | Path                                   | Keterangan                                                    |
