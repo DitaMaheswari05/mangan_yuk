@@ -55,4 +55,9 @@ npm --prefix frontend test -- 01-geofence
 npm --prefix frontend test -- 04-typo-tolerant
 npm --prefix frontend test -- 05-contextual
 npm --prefix frontend test -- 06-smart-culinary
+
+# Menjalankan unit test backend (Vitest)
+npm --prefix backend test
 ```
+
+Selain suite di `unit-test/`, pengujian unit per fitur juga berada di `frontend/src/features/**/__tests__/` (mencakup `NavigationSession`, `NotificationService`, `PassportReviewApi`, `AudioQueue`, `ExitRecommendation`, `halal`, dan `runtime-trail`). Laporan lengkap dan metrik coverage tersedia di [docs/testing/unit-and-static-testing.md](../docs/testing/unit-and-static-testing.md).

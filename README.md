@@ -10,6 +10,7 @@ Repo ini berbentuk **monorepo**:
 | `frontend/`   | 📱 Aplikasi mobile — Expo + TypeScript + expo-router        | FE       |
 | `backend/`    | 🗄️ Proyek Supabase — skema DB, seed, storage, skrip ekspor | BE + DB  |
 | `content/`    | 🎨 Bahan mentah: foto, audio, transkrip POI                 | Konten   |
+| `unit-test/`  | 🧪 Suite unit test per kebutuhan PRD (F01–F10)              | QA / FE  |
 | `docs/`       | 📄 PRD, desain, pengujian, compliance matrix, log AI        | Semua    |
 | `.github/`    | ⚙️ CI: lint/typecheck/test FE, cek migration BE             | —        |
 
@@ -84,14 +85,24 @@ npm start
   npx expo run:android        # atau: npx eas build --profile development
   ```
 
-### 4. Cek kualitas kode (sama seperti CI)
+### 4. Cek kualitas kode & pengujian (static & unit test)
 
 ```bash
+# Frontend (lint, typecheck, Jest: src/**/__tests__ + unit-test/)
 cd frontend
 npm run lint
 npm run typecheck
 npm test
+
+# Backend (Vitest, typecheck, validasi Prisma)
+cd ../backend
+npx prisma generate
+npm run typecheck
+npx prisma validate
+npm test
 ```
+
+Ringkasan lengkap cakupan dan hasil pengujian tersedia di [docs/testing/unit-and-static-testing.md](docs/testing/unit-and-static-testing.md).
 
 ## Peta folder
 
