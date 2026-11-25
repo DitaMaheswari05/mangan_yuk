@@ -10,7 +10,7 @@ Repo ini berbentuk **monorepo**:
 | `frontend/`   | 📱 Aplikasi mobile — Expo + TypeScript + expo-router        | FE       |
 | `backend/`    | 🗄️ Proyek Supabase — skema DB, seed, storage, skrip ekspor | BE + DB  |
 | `content/`    | 🎨 Bahan mentah: foto, audio, transkrip POI                 | Konten   |
-| `unit-test/`  | 🧪 Suite unit test per kebutuhan PRD (F01–F10)              | QA / FE  |
+| `unit-test/`  | 🧪 Suite unit test per kebutuhan PRD (F01–F10)              | QA / FE / BE |
 | `docs/`       | 📄 PRD, desain, pengujian, compliance matrix, log AI        | Semua    |
 | `.github/`    | ⚙️ CI: lint/typecheck/test FE, cek migration BE             | —        |
 
