@@ -173,4 +173,53 @@ describe('Kategori 5: Jam Operasional Tidak Membatasi Rute', () => {
     expect(plan.isValid).toBe(true);
     expect(plan.steps.length).toBeGreaterThanOrEqual(1);
   });
+
+  it('membatasi maksimal 5 tenant per trail walau waktu dan budget berlebih', () => {
+    const manyPois = [1, 2, 3, 4, 5, 6, 7].map((n) => makeTestPoi(n, n * 10, 5000, 5, ['gurih']));
+    const plan = planTrail({
+      userPosition: startPos,
+      pois: manyPois,
+      durationMin: 240,
+      budget: 500000,
+    });
+
+    expect(plan.isValid).toBe(true);
+    expect(plan.steps).toHaveLength(5);
+  });
+
+  it('memprioritaskan tenant dengan preferredTastes (diskon jarak 0.7x) saat jarak bersaing', () => {
+    const nonMatch = makeTestPoi(1, 25, 10000, 10, ['gurih']);
+    const match = makeTestPoi(2, 30, 10000, 10, ['pedas']); // 30 * 0.7 = 21 < 25
+
+    const plan = planTrail({
+      userPosition: startPos,
+      pois: [nonMatch, match],
+      durationMin: 60,
+      budget: 50000,
+      preferredTastes: ['pedas'],
+    });
+
+    expect(plan.isValid).toBe(true);
+    expect(plan.steps[0].poi.id).toBe('P02');
+  });
+
+  it('mengembalikan isValid false jika budget di bawah harga tenant termurah atau waktu terlalu singkat', () => {
+    const tooCheap = planTrail({
+      userPosition: startPos,
+      pois,
+      durationMin: 60,
+      budget: 1000,
+    });
+    expect(tooCheap.isValid).toBe(false);
+    expect(tooCheap.steps).toEqual([]);
+
+    const tooShort = planTrail({
+      userPosition: startPos,
+      pois,
+      durationMin: 5,
+      budget: 100000,
+    });
+    expect(tooShort.isValid).toBe(false);
+    expect(tooShort.steps).toEqual([]);
+  });
 });

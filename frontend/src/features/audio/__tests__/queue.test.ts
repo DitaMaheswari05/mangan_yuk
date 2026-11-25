@@ -167,4 +167,39 @@ describe('F04 AudioQueue Service', () => {
     expect(speak).toHaveBeenCalledWith({});
     expect(resumeNarration).not.toHaveBeenCalled();
   });
+
+  it('clear() mengosongkan sisa antrean tanpa menghentikan item yang sedang berbunyi', async () => {
+    await AudioQueue.enqueue({ id: 'c1', type: 'prompt', title: 'P1', text: 'Satu' });
+    await AudioQueue.enqueue({ id: 'c2', type: 'prompt', title: 'P2', text: 'Dua' });
+    expect(AudioQueue.getStatus().queue).toHaveLength(1);
+
+    AudioQueue.clear();
+
+    expect(AudioQueue.getStatus().isPlaying).toBe(true);
+    expect(AudioQueue.getStatus().currentItem?.id).toBe('c1');
+    expect(AudioQueue.getStatus().queue).toEqual([]);
+  });
+
+  it('item high priority kedua tidak memotong item high priority yang sedang diputar', async () => {
+    await AudioQueue.enqueue({
+      id: 'high-1',
+      type: 'prompt',
+      title: 'High 1',
+      text: 'Satu',
+      priority: 'high',
+    });
+    jest.clearAllMocks();
+
+    await AudioQueue.enqueue({
+      id: 'high-2',
+      type: 'prompt',
+      title: 'High 2',
+      text: 'Dua',
+      priority: 'high',
+    });
+
+    expect(stopSpeaking).not.toHaveBeenCalled();
+    expect(AudioQueue.getStatus().currentItem?.id).toBe('high-1');
+    expect(AudioQueue.getStatus().queue.map((q) => q.id)).toEqual(['high-2']);
+  });
 });
