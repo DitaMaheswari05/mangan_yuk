@@ -28,14 +28,14 @@ Diagram use case berikut memodelkan interaksi antara aktor utama (\textbf{Pengun
 \node[uc] (uc07) at (0, 3.4)  {\textbf{UC-07} Narasi Eyes-Free};
 \node[uc] (uc12) at (0, 2.1)  {\textbf{UC-12} Matikan Mode Jelajah \& Privasi};
 
-% Use cases - Kolom Kanan (Search, Nav, Rec, Trail, Optional)
+% Use cases - Kolom Kanan (Search, Nav, Rec, Trail, Passport, Auth, Halal)
 \node[uc] (uc08) at (5.8, 11.2) {\textbf{UC-08} Cari Tenant \& Tujuan};
 \node[uc] (uc09) at (5.8, 9.9)  {\textbf{UC-09} Navigasi Dalam Aplikasi};
 \node[uc] (uc10) at (5.8, 8.6)  {\textbf{UC-10} Rekomendasi Berikutnya};
 \node[uc] (uc11) at (5.8, 7.3)  {\textbf{UC-11} Smart Culinary Trail};
-\node[ucopt] (uc13) at (5.8, 5.4) {\textbf{UC-13} Paspor Kuliner \& Ulasan (F10)};
-\node[ucopt] (uc14) at (5.8, 4.1) {\textbf{UC-14} Akun Pengguna Lokal (F11)};
-\node[ucopt] (uc15) at (5.8, 2.8) {\textbf{UC-15} Preferensi Halal (F12)};
+\node[uc] (uc13) at (5.8, 5.4)  {\textbf{UC-13} Paspor Kuliner \& Ulasan (F10)};
+\node[uc] (uc14) at (5.8, 4.1)  {\textbf{UC-14} Akun Pengguna Lokal (F11)};
+\node[uc] (uc15) at (5.8, 2.8)  {\textbf{UC-15} Preferensi Halal (F12)};
 
 % System Boundary
 \begin{scope}[on background layer]
@@ -90,10 +90,6 @@ Diagram use case berikut memodelkan interaksi antara aktor utama (\textbf{Pengun
 % Asosiasi Aktor Eksternal
 \draw[assoc] (uc09.east) -- (osrm.west);
 \draw[assoc] (uc13.east) -- (backend.west);
-
-% Legenda singkat di bawah
-\node[anchor=north west, font=\sffamily\scriptsize] at ([yshift=-6pt]sysbox.south west)
-  {Keterangan: Garis solid = Requirement Utama (F01--F09); Garis putus-putus = Requirement Tambahan/Opsional (F10--F12).};
 
 \end{tikzpicture}%
 }

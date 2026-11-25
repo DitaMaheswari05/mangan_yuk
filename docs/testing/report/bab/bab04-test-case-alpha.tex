@@ -771,7 +771,7 @@ TC-32-01 & Tidak ada trigger setelah Mode Jelajah dimatikan & Tidak ada notifika
 TC-33-01 & Audit log proxy HTTPS: privasi koordinat & Tidak ada koordinat ke backend Mangan Yuk; OSRM hanya saat navigasi aktif. & Zero-location payload lolos (\texttt{08-privacy}); menunggu log proxy HTTPS HP & \statuscol \\ \hline
 \end{longtable}
 
-\resulthead{F10--F12 Additional Requirements (Paspor Kuliner, Akun Lokal, Preferensi Halal)}
+\resulthead{F10--F12 Paspor Kuliner, Akun Lokal, dan Preferensi Halal}
 TC-34-01 & Ulasan mencatat stempel tanpa duplikasi \& perbarui progres & Stempel tercatat 1x per tenant dan progres trail tematik bertambah. & Lolos via \texttt{09-passport} (10/10), \texttt{passport.test} (10/10), \texttt{reviews.test} (16/16) & \passcol \\ \hline
 TC-34-02 & Badge terbuka saat trail selesai \& bertahan setelah restart & Badge terbuka saat 5/5 tenant berstempel dan data bertahan setelah restart. & Lolos via \texttt{09-passport} (10/10) \& \texttt{passport.test} (10/10) & \passcol \\ \hline
 TC-34-03 & Ulasan \& stempel tersimpan lokal saat offline & Ulasan dan stempel tersimpan di AsyncStorage saat backend tidak terjangkau. & Lolos via \texttt{09-passport} (10/10) \& \texttt{passport.test} (10/10) & \passcol \\ \hline
