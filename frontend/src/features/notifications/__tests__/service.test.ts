@@ -61,7 +61,7 @@ describe('NotificationService', () => {
     expect(mockSetNotificationHandler).toHaveBeenCalledTimes(1);
     const handlerArg = mockSetNotificationHandler.mock.calls[0][0] as {
       handleNotification: (n: { request: { content: { data?: { type?: string } } } }) => Promise<{
-        shouldShowAlert: boolean;
+        shouldShowBanner: boolean;
         shouldPlaySound: boolean;
       }>;
     };
@@ -75,7 +75,8 @@ describe('NotificationService', () => {
       request: { content: { data: { type: 'poi-geofence-enter' } } },
     });
     expect(alertBehavior.shouldPlaySound).toBe(true);
-    expect(alertBehavior.shouldShowAlert).toBe(true);
+    expect(alertBehavior.shouldShowBanner).toBe(true);
+    expect(alertBehavior).not.toHaveProperty('shouldShowAlert');
 
     expect(mockSetNotificationChannelAsync).toHaveBeenCalledWith(
       EXPLORE_CHANNEL_ID,
@@ -89,11 +90,15 @@ describe('NotificationService', () => {
       GEOFENCE_CHANNEL_ID,
       expect.objectContaining({
         importance: 5,
-        sound: 'default',
         enableVibrate: true,
         lockscreenVisibility: 1,
       }),
     );
+    // Tanpa key `sound` → suara default sistem; string 'default' dianggap file custom di Android.
+    const geofenceChannel = mockSetNotificationChannelAsync.mock.calls.find(
+      (c) => c[0] === GEOFENCE_CHANNEL_ID,
+    )?.[1] as Record<string, unknown>;
+    expect(geofenceChannel).not.toHaveProperty('sound');
     expect(mockSetNotificationCategoryAsync).toHaveBeenCalledWith(
       POI_PROXIMITY_CATEGORY,
       expect.arrayContaining([

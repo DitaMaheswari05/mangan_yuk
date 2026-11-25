@@ -3,7 +3,10 @@ import { Platform } from 'react-native';
 import type { Poi } from '@/types/content';
 
 export const EXPLORE_CHANNEL_ID = 'manganyuk-explore-mode-v2';
+// Jangan ganti ID channel tanpa alasan kuat: OEM seperti vivo menyimpan izin pop-up (banner)
+// per channel dan mematikannya untuk channel baru, jadi heads-up hilang sampai diaktifkan manual.
 export const GEOFENCE_CHANNEL_ID = 'manganyuk-geofence-poi-v2';
+const LEGACY_CHANNEL_IDS = ['manganyuk-geofence-poi-v3'];
 export const EXPLORE_NOTIFICATION_ID = 'manganyuk-explore-active-notification';
 
 // F04 – Notifikasi proximity punya tombol aksi agar bisa direspons dari lock screen.
@@ -37,7 +40,6 @@ export async function ensureNotificationSetup(): Promise<void> {
           const isPersistent =
             notification.request.content.data?.type === 'explore-mode-persistent';
           return {
-            shouldShowAlert: true,
             shouldPlaySound: !isPersistent,
             shouldSetBadge: false,
             shouldShowBanner: true,
@@ -62,13 +64,18 @@ export async function ensureNotificationSetup(): Promise<void> {
         lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
       });
 
+      for (const id of LEGACY_CHANNEL_IDS) {
+        await Notifications.deleteNotificationChannelAsync?.(id);
+      }
+
       // MAX + sound + vibrate wajib di banyak perangkat Android agar muncul sebagai pop-up (heads-up)
       // sekaligus tampil penuh di lock screen dan panel notifikasi.
+      // `sound` sengaja tidak diisi: di channel Android itu berarti suara notifikasi default sistem,
+      // sedangkan string apa pun (termasuk 'default') dicari sebagai file suara custom.
       await Notifications.setNotificationChannelAsync(GEOFENCE_CHANNEL_ID, {
         name: 'Kuliner Terdekat',
         description: 'Notifikasi saat kamu berada di dekat tenant kuliner Sudirman Street Food',
         importance: Notifications.AndroidImportance.MAX,
-        sound: 'default',
         enableVibrate: true,
         vibrationPattern: [0, 250, 250, 250],
         lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
