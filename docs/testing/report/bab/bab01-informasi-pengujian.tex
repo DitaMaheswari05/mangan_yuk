@@ -13,7 +13,7 @@
 \cellcolor[HTML]{D9EAF7}\textbf{Komponen} & \cellcolor[HTML]{D9EAF7}\textbf{Keterangan} \\ \hline
 \endhead
 \textbf{Nama produk} & \textbf{ManganYuk!}, aplikasi \textit{location-based culinary \& local culture explorer} untuk kawasan Sudirman Street Food, Bandung. Aplikasi mobile Android (React Native + Expo). \\ \hline
-\textbf{Versi / build yang diuji} & Branch \texttt{test} (merge \texttt{main} \texttt{442bab4} + unit test \texttt{b7d46d9}) \\ \hline
+\textbf{Versi / build yang diuji} & Branch \texttt{main} (Release v.x) \\ \hline
 \textbf{Requirement dalam lingkup} &
 \textbf{Requirement Fungsional (F01--F12):}
 \begin{itemize}
@@ -39,7 +39,7 @@
   \item Reservasi tempat duduk atau meja secara langsung (NG05).
   \item Platform selain Android (iOS).
 \end{itemize} \\ \hline
-\textbf{Periode pengujian} & Sprint 5 (Week 14), 18 -- 25 November 2026 (Unit/Static Test: 25 November 2026; Uji Lapangan \& Beta: menyusul) \\ \hline
+\textbf{Periode pengujian} & Sprint 5 (Week 14), 18 -- 25 November 2026 (Alpha Testing Android: 24 November 2026; Unit/Static Test: 25 November 2026; Beta Testing: menyusul) \\ \hline
 \textbf{Lokasi pengujian lapangan} & Sudirman Street Day and Night Market, Bandung \\ \hline
 \end{longtable}
 
@@ -68,8 +68,8 @@ Beta testing (UAT) & Calon pengguna (target user PRD) & Mengukur tingkat penerim
 \hline
 \cellcolor[HTML]{D9EAF7}\textbf{Komponen} & \cellcolor[HTML]{D9EAF7}\textbf{Spesifikasi} \\ \hline
 \endhead
-Perangkat uji 1 & Samsung Galaxy A26, Android 15, GPS aktif \\ \hline
-Versi aplikasi & Branch \texttt{test} (berbasis \texttt{main} \texttt{442bab4}, unit test \texttt{b7d46d9}); lingkungan uji otomatis: Node.js + Jest (frontend) \& Vitest (backend) \\ \hline
+Perangkat uji & Android, GPS aktif \\ \hline
+Versi aplikasi & Branch \texttt{main} (Release v.x); lingkungan uji otomatis: Node.js + Jest (frontend) \& Vitest (backend) \\ \hline
 Backend / sumber data & Dataset lokal \texttt{frontend/src/data/pois.json} (31 POI dibundel di dalam APK); tile peta OpenStreetMap (MapLibre); layanan rute jalan kaki OSRM publik; serta backend Mangan Yuk (Supabase) untuk sinkronisasi Paspor Kuliner dan ulasan (F10) \\ \hline
 Teknologi pemicu lokasi & GPS / geofencing (background \textit{foreground service}, akurasi tinggi) \\ \hline
 Kondisi lapangan & Outdoor di area Sudirman Street Food, pukul 10.00 WIB (atau jam operasional tenant) dengan kondisi sinyal baik \\ \hline
@@ -85,9 +85,9 @@ Kondisi lapangan & Outdoor di area Sudirman Street Food, pukul 10.00 WIB (atau j
 \hline
 \cellcolor[HTML]{D9EAF7}\textbf{No} & \cellcolor[HTML]{D9EAF7}\textbf{Nama} & \cellcolor[HTML]{D9EAF7}\textbf{NIM} & \cellcolor[HTML]{D9EAF7}\textbf{Peran dalam Pengujian} \\ \hline
 \endhead
-1 & Dita Maheswari             & 13523125 & [isi peran] \\ \hline
-2 & Samantha Laqueenna Ginting & 13523138 & [isi peran] \\ \hline
-3 & Anggita Najmi Layali       & 18223122 & [isi peran] \\ \hline
-4 & Theresia Ivana M. S        & 18223126 & [isi peran] \\ \hline
-5 & Raka Adhitya Nugraha       & 18223013 & Beta Testing \\ \hline
+1 & Dita Maheswari             & 13523125 & Alpha Testing \\ \hline
+2 & Samantha Laqueenna Ginting & 13523138 & Alpha Testing \\ \hline
+3 & Anggita Najmi Layali       & 18223122 & Alpha Testing \\ \hline
+4 & Theresia Ivana M. S        & 18223126 & Alpha Testing \\ \hline
+5 & Raka Adhitya Nugraha       & 18223013 & Alpha Testing \\ \hline
 \end{longtable}
