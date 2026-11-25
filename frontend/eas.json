@@ -7,6 +7,10 @@
       "android": {
         "buildType": "app-bundle"
       }
+    },
+    "production-apk": {
+      "environment": "production",
+      "android": { "buildType": "apk" }
     }
   }
 }
